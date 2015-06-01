@@ -1,5 +1,6 @@
 
 <!-- Connection with DB executed many times, which has to be optimized -->
+<!-- No session control yet -->
 
 <html>
 <head>
@@ -25,8 +26,8 @@
 							<fieldset>
 								<div class="row">
 									<div class="center-block">
-										<img class="logo-img"
-											src="img/logo-schneider-electric.png" alt="">
+										<img style="padding:20px auto 20px auto" class="logo-img img-responsive"
+											src="img/logo-schneider-electric.png" alt="Logo Schneider">
 									</div>
 								</div>
 								<div class="row">
