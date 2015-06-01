@@ -121,6 +121,25 @@ GROUP BY [defau].[nom]";
 			default:
 				break;
 		}
+		
+		
+		
+		
+		if($jour == 'Sun')
+			return 'Dim';
+		if($jour == 'Mon')
+			return 'Lun';
+		if($jour == 'Tue')
+			return 'Mar';
+		if($jour == 'Wed')
+			return 'Mer';
+		if($jour == 'Thu')
+			return 'Jeu';
+		if($jour == 'Fri')
+			return 'Ven';
+		if($jour == 'Sat')
+			return 'Sam';
+
 	}
 	
 	
