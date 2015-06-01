@@ -27,15 +27,15 @@ $this->conninfo = $this->con->Condb();
 
         if(sqlsrv_num_rows($result) != 1) { 
 
-        	echo "authentification incorrecte";
+        echo "authentification incorrecte";
 
          }   
 
         else {
 
-        	$row = sqlsrv_fetch_array($result);
-        	$this->id=$row[0];
-        	$this->utilisateur=$row[1];
+        $row = sqlsrv_fetch_array($result);
+        $this->id=$row[0];
+        $this->utilisateur=$row[1];
 
         
 		

@@ -1,9 +1,6 @@
 <?php
 require_once '/pers.php';
 
-// No user check yet
-// No sql inject protect yet
-
 if(isset($_POST['submit'])){
 
 	$name=$_POST['user'];

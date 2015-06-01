@@ -34,7 +34,7 @@ class bdd {
 		
 	
 	
-	public function __destruct()
+	public function __destruct ()
 	{
 	$this->closedb = sqlsrv_close($this->connect);	
 	}	

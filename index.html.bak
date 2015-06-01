@@ -1,6 +1,5 @@
 
 <!-- Connection with DB executed many times, which has to be optimized -->
-<!-- No session control yet -->
 
 <html>
 <head>
