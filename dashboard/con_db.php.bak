@@ -4,8 +4,9 @@ function connexion_db() {
 	
 	//$serverName = "RDITS-MDC"; 
 	//$connectionInfo = array("UID"=>"bdd_user", "PWD"=>"user_bdd", "Database"=>"ping2");
-	$serverName = "SAMUEL-PC"; 
-	$connectionInfo = array("UID"=>"bdd_user", "PWD"=>"user_bdd", "Database"=>"ping2");
+	$serverName = "SAMUEL-PC";
+	$connectionInfo = array("UID"=>"localhost", "PWD"=>"", "Database"=>"ping2");
+	//$connectionInfo = array("UID"=>"bdd_user", "PWD"=>"user_bdd", "Database"=>"ping2");
 	$conn = sqlsrv_connect( $serverName, $connectionInfo);
 	
 	if( $conn == false) {
@@ -16,6 +17,7 @@ function connexion_db() {
 		//echo "connection established!";
 		return $conn;
 	}
+	
 }
 
 ?>

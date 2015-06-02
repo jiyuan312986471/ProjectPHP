@@ -4,7 +4,7 @@ function connexion_db() {
 	
 	//$serverName = "RDITS-MDC"; 
 	//$connectionInfo = array("UID"=>"bdd_user", "PWD"=>"user_bdd", "Database"=>"ping2");
-	$serverName = "SAMUEL-PC"; 
+	$serverName = "SAMUEL-PC";
 	$connectionInfo = array("UID"=>"bdd_user", "PWD"=>"user_bdd", "Database"=>"ping2");
 	$conn = sqlsrv_connect( $serverName, $connectionInfo);
 	

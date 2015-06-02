@@ -18,10 +18,12 @@ class bdd {
 	}
 		
 	public function Condb() {
-		$connectionInfo = array("UID"=>$this->userdb, "PWD"=>$this->passdb, "Database" =>$this->database);
+		$connectionInfo = array("UID" => $this->userdb, "PWD" => $this->passdb, "Database" => $this->database);
 		$this->connect = sqlsrv_connect( $this->hostname, $connectionInfo);
+		echo "Con:".$this->connect."<br/>";
 		if(!$this->connect) {
-			echo "Errrrooor";	
+			echo "Errrrooor<br/>";	
+			die( print_r( sqlsrv_errors(), true));
 		}
 		else {
 			return $this->connect;

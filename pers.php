@@ -13,7 +13,7 @@ class personne{
 
 
 	public function __construct(){
-		$this->con=new bdd("RDITS-MDC","bdd_user","user_bdd","ping2");
+		$this->con = new bdd("SAMUEL-PC","bdd_user","user_bdd","ping2");
 		$this->conninfo = $this->con->Condb();
 	}
 	

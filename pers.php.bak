@@ -13,12 +13,12 @@ class personne{
 
 
 	public function __construct(){
-		$this->con=new bdd("RDITS-MDC","bdd_user","user_bdd","ping2");
+		$this->con = new bdd("SAMUEL-PC\MSSQLSERVER","bdd_user","user_bdd","ping2");
 		$this->conninfo = $this->con->Condb();
 	}
 	
 	public function login($login, $pass) {
-		$select = " SELECT * FROM [ping2].[dbo].[personne] WHERE [utilisateur] = '%s' AND [passe] = '%s'";
+		$select = "SELECT * FROM [ping2].[dbo].[personne] WHERE [utilisateur] = '%s' AND [passe] = '%s'";
 		$fixedlogin = $login;
 		$fixedpass  = $pass;
 		$query = sprintf($select, $fixedlogin, $fixedpass);
