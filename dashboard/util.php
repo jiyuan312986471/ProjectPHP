@@ -99,25 +99,18 @@ GROUP BY [defau].[nom]";
 		switch($jour) {
 			case 'Sun':
 				return 'Dim';
-				break;
 			case 'Mon':
 				return 'Lun';
-				break;
 			case 'Tue':
 				return 'Mar';
-				break;
 			case 'Wed':
 				return 'Mer';
-				break;
 			case 'Thu':
 				return 'Jeu';
-				break;
 			case 'Fri':
 				return 'Ven';
-				break;
 			case 'Sat':
 				return 'Sam';
-				break;
 			default:
 				break;
 		}
