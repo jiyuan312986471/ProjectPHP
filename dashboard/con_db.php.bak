@@ -16,7 +16,6 @@ function connexion_db() {
 		//echo "connection established!";
 		return $conn;
 	}
-	
 }
 
 ?>
