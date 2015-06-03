@@ -15,7 +15,7 @@
 			<?php
 				if(isset($listeAlerte)) {
 					for($i=0;$i<count($listeAlerte);$i++) {
-						?>
+			?>
 						<li>
 							<a href="#">
 								<div>
@@ -24,7 +24,7 @@
 							</a>
 						</li>
 						<li class="divider"></li>
-						<?php
+			<?php
 					}
 				}
 				else {

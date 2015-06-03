@@ -14,7 +14,7 @@
 		<ul class="dropdown-menu dropdown-alerts">
 			<?php
 				if(isset($listeAlerte)) {
-					for($i=0;$i<count($listeAlerte);$i++) {
+					for($i = 0; $i < count($listeAlerte); $i++) {
 			?>
 						<li>
 							<a href="#">
