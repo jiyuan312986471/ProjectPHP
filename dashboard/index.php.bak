@@ -1,4 +1,7 @@
 <?php
+
+	session_start();
+
 	require_once('con_db.php');
 	include 'util.php';
 	
@@ -117,7 +120,6 @@ JOIN  `dbo.tesysk_auto` AS defec ON defau.code = defec.code order by date desc l
 	    <div id="wrapper">
 	
 	        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: auto">
-	        	<div class="container-fluid">
 	            <?php
 	            	// Logo Schneider
 	            	include('divs/logo.php');
@@ -126,7 +128,6 @@ JOIN  `dbo.tesysk_auto` AS defec ON defau.code = defec.code order by date desc l
 	          		// Menu
 	          		include('divs/menu.php');
 	          	?>
-	          </div>
 	        </nav>
 	
 	        <!-- contenu -->

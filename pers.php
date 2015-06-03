@@ -1,40 +1,24 @@
 <?php
 
-require_once '/bdd.php';
-
-
-class personne{
-	
-	public $con;
+class Personne{
 	public $id;
 	public $utilisateur;
 	public $passe;
-	public $conninfo;
 
 
-	public function __construct(){
-		$this->con = new bdd("SAMUEL-PC","bdd_user","user_bdd","ping2");
-		$this->conninfo = $this->con->Condb();
+	public function __construct($id, $utilisateur, $passe){
+		$this->id = $id;
+		$this->utilisateur = $utilisateur;
+		$this->passe = $passe;
 	}
 	
-	public function login($login, $pass) {
+	public static function login($login, $pass, $connInfo) {
 		$select = "SELECT * FROM [ping2].[dbo].[personne] WHERE [utilisateur] = '%s' AND [passe] = '%s'";
-		$fixedlogin = $login;
-		$fixedpass  = $pass;
-		$query = sprintf($select, $fixedlogin, $fixedpass);
+		$query = sprintf($select, $login, $pass);
+		$result = sqlsrv_query($connInfo, $query, array(), array("Scrollable"=>"buffered"));
 		
-		$result = sqlsrv_query($this->conninfo,$query, array(), array("Scrollable"=>"buffered"));
-	
-	  if(sqlsrv_num_rows($result) != 1) {
-	  	echo "authentification incorrecte";
-	  }   
-		else {
-			$row = sqlsrv_fetch_array($result);
-			$this->id=$row[0];
-			$this->utilisateur=$row[1];     
-		}
+		return $result;
 	}
-	
 }
 
 ?>
