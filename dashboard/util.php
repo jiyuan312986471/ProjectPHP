@@ -3,9 +3,10 @@
 	/* Les fonctions utilisés dans les fichiers php */
 	/************************************************/
 	
+	
 	/* Fonction qui permet de compter le numéro journalier des produit mauvais pour la machine sélectionnée */
-	/*Entre  : jour d'aujourd'hui, machine sélectionnée														*/
-	/*Sortie : nombre des défauts pour cette machine pendant la journée										*/
+	/* Entre  : jour d'aujourd'hui, machine sélectionnée																										*/
+	/* Sortie : nombre des défauts pour cette machine pendant la journée																		*/
 	function nb_defaut_m ($jour,$machine,$conn) {
 		$nb = 0;
 		$req = "SELECT MAX(nb) AS nb FROM [ping2].[dbo].[graf] WHERE jour =  '$jour' AND  machine =  '$machine'";
@@ -16,9 +17,9 @@
 	}
 	
 	
-	/*Fonction qui permet de compter le numéro journalier des produit mauvais pour toutes les machines	*/
-	/*Entre  : jour d'aujourd'hui																		*/
-	/*Sortie : nombre des défauts pour toutes les machines pendant la journée							*/
+	/* Fonction qui permet de compter le numéro journalier des produit mauvais pour toutes les machines			*/
+	/* Entre  : jour d'aujourd'hui																																					*/
+	/* Sortie : nombre des défauts pour toutes les machines pendant la journée															*/
 	function nb_defaut ($jour,$conn) {
 		$nb = 0;
 		$req = "SELECT max(nb) as nb FROM [ping2].[dbo].[graftotal] where jour = '$jour' ";
@@ -29,9 +30,9 @@
 	}
 	
 	
-	/*Fonction permettante de calculer le paréto d'un défaut pour la machine séletionnée*/
-	/*Entre  : defaut, machine sélectionné, nombre des défauts pour cette machine		*/
-	/*Sortie : pourcetage pour ce défaut												*/
+	/* Fonction permettante de calculer le paréto d'un défaut pour la machine séletionnée										*/
+	/* Entre  : defaut, machine sélectionné, nombre des défauts pour cette machine													*/
+	/* Sortie : pourcetage pour ce défaut																																		*/
 	function pareto_m($defaut,$machine,$nombre,$conn) {
 		$type = 0;
 		
@@ -77,9 +78,9 @@
 	}
 	
 	
-	/*Fonction permettante de calculer le paréto d'un défaut pour la machine séletionnée*/
-	/*Entre  : defaut, nombre des défauts pour toutes les machines						*/
-	/*Sortie : pourcetage pour ce défaut journalier										*/
+	/* Fonction permettante de calculer le paréto d'un défaut pour la machine séletionnée										*/
+	/* Entre  : defaut, nombre des défauts pour toutes les machines																					*/
+	/* Sortie : pourcetage pour ce défaut journalier																												*/
 	function pareto($defaut,$nombre,$conn) {
 		$type = 0;
     $req = "SELECT COUNT ([nom]) AS nb
@@ -96,7 +97,9 @@
 		return $type;
 	}
 	
-	
+	/* Fonction permettante de convertir le jour en anglais vers le jour en français												*/
+	/* Entre	: le jour en anglais																																					*/
+	/* Sortie	:	le jour en français																																					*/
 	function convert_j($jour) {
 		switch($jour) {
 			case 'Sun':
@@ -118,7 +121,9 @@
 		}
 	}
 	
-	
+	/* Fonction																																															*/
+	/* Entre	:																																															*/
+	/* Sortie	:																																															*/
 	function nbdefaut($conn,$machine) {
 		$row = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT TOP 1 QuelleMachine,[Date],CodeDefaut,NumEnr,NumPal from [ping2].[dbo].[TeSysK_Auto]",array(), array("Scrollable"=>"buffered")));
 		$count = 0;
@@ -192,11 +197,5 @@
 		file_put_contents('graph_'.$machine.'.dat', $donne);
 		return $nb_total.' '.$pourcentage;
 		
-	}
-	
-
-	
-	
-	
-	
+	}	
 ?>
