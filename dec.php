@@ -1,9 +1,10 @@
 <?php
 
-	session_unset ();
-	session_destroy ();
+	session_start();
+	session_unset();
+	session_destroy();
 	
 	echo"<center><img src=\"img/loading.gif\" /></center>";
-	echo "<meta http-equiv=\"refresh\" content=\"3;index.html\" />";
+	echo "<meta http-equiv=\"refresh\" content=\"1;index.html\" />";
 
 ?>

@@ -9,12 +9,12 @@
 	echo'<META HTTP-EQUIV="Refresh" CONTENT="8; URL=index.php">';
 	
 	//Enregistrer des données dans le graph.bat
-	$graph = array ("jour" 	=> array("","","","","","",""), "pourc"	=> array(0,0,0,0,0,0,0) );
+	$graph = array ("jour" 	=> array("","","","","","",""), "pourc"	=> array(0,0,0,0,0,0,0));
 	
 	$donne = file_get_contents('graph.dat');
 	$n = sscanf($donne,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s",
-						$graph['pourc'][0], $graph['pourc'][1], $graph['pourc'][2], $graph['pourc'][3], $graph['pourc'][4], $graph['pourc'][5], $graph['pourc'][6],
-						$graph['jour'][0],  $graph['jour'][1],  $graph['jour'][2],  $graph['jour'][3],  $graph['jour'][4],  $graph['jour'][5],  $graph['jour'][6] );
+						  $graph['pourc'][0], $graph['pourc'][1], $graph['pourc'][2], $graph['pourc'][3], $graph['pourc'][4], $graph['pourc'][5], $graph['pourc'][6],
+						  $graph['jour'][0],  $graph['jour'][1],  $graph['jour'][2],  $graph['jour'][3],  $graph['jour'][4],  $graph['jour'][5],  $graph['jour'][6] );
 
 	if($graph['jour'][6] != date('D')) {
 		// algo with foreach
@@ -62,7 +62,12 @@
 		//echo $sumdefaut.'---'.$sum.'</br>';
 	}
 	
-	$nombre = round($sumdefaut/$sum,2);
+	if($sum == 0) {
+		$nombre = 0;
+	}
+	else {
+		$nombre = round($sumdefaut/$sum,2);
+	}
 	
 	//GraphTotal
   if($graph['pourc'][6]!= $nombre) {
