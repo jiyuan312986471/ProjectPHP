@@ -56,8 +56,8 @@
 	
 	$sum = 0;
 	$sumdefaut = 0;
-	for ($i = 0; $i < 6; $i++) {
-		$sum = $paraMachine['nb'][$i]+$sum;
+	for ($i = 0; $i < count($paraMachine['nb']); $i++) {
+		$sum = $paraMachine['nb'][$i] + $sum;
 		$sumdefaut = $paraMachine['nb'][$i] * $paraMachine['pourc'][$i] + $sumdefaut;
 		//echo $sumdefaut.'---'.$sum.'</br>';
 	}
@@ -72,7 +72,7 @@
 	//GraphTotal
   if($graph['pourc'][6]!= $nombre) {
   	$graph['pourc'][6] = $nombre;
-
+	}
         /* alerte 
         $Nbalert=$nombre-$ck;
         $reqAlert="SELECT defau.nom
@@ -86,25 +86,12 @@ JOIN  `dbo.tesysk_auto` AS defec ON defau.code = defec.code order by date desc l
                         $listeAlerte[$index]=$row['nom'];
                         $index += 1;       
                                     }*/
-  }
+  
   
 	//Enregistrer des données dans le graph.bat
 	$donne = sprintf("%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s", 
-					$graph['pourc'][0],
-					$graph['pourc'][1],
-					$graph['pourc'][2],
-					$graph['pourc'][3],
-					$graph['pourc'][4],
-					$graph['pourc'][5],
-					$graph['pourc'][6],
-					$graph['jour'][0],
-					$graph['jour'][1],
-					$graph['jour'][2],
-					$graph['jour'][3],
-					$graph['jour'][4],
-					$graph['jour'][5],
-					$graph['jour'][6]);
-	
+										$graph['pourc'][0],$graph['pourc'][1],$graph['pourc'][2],$graph['pourc'][3],$graph['pourc'][4],$graph['pourc'][5],$graph['pourc'][6],
+										$graph['jour'][0], $graph['jour'][1], $graph['jour'][2], $graph['jour'][3], $graph['jour'][4], $graph['jour'][5], $graph['jour'][6] );
 	file_put_contents('graph.dat', $donne);
 ?>
 
@@ -117,7 +104,7 @@ JOIN  `dbo.tesysk_auto` AS defec ON defau.code = defec.code order by date desc l
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <meta name="description" content="">
 	    <meta name="author" content="">
-	    <title>Schneider application</title>
+	    <title>Schneider Application</title>
 	    <link href="css/bootstrap.min.css" rel="stylesheet">
 	    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
 	    <link href="css/plugins/timeline.css" rel="stylesheet">
@@ -129,14 +116,16 @@ JOIN  `dbo.tesysk_auto` AS defec ON defau.code = defec.code order by date desc l
 	<body>
 	    <div id="wrapper">
 	
-	        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+	        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: auto">
+	        	<div class="container-fluid">
 	            <?php
 	            	 include('divs/logo.php');
 	            	 // notification et logout
 	             	 include('divs/barre.php');
-	             	 // Menu
-	             	 include('divs/menu.php');
-	            ?>
+	          		 // Menu
+	          		 include('divs/menu.php');
+	          ?>
+	          </div>
 	        </nav>
 	
 	        <!-- contenu -->
@@ -250,12 +239,10 @@ JOIN  `dbo.tesysk_auto` AS defec ON defau.code = defec.code order by date desc l
 	                <!-- notifications-->
 	
 	            </div>
-	            <!-- /.col-lg-4 -->
+	            <!-- corps -->
 	        </div>
-	        <!-- corps -->
+	        <!-- contenu -->
 	    </div>
-	    <!-- contenu -->
-	    
 	    <!-- /#wrapper -->
 	    
 	    <!-- jQuery -->

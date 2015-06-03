@@ -28,7 +28,7 @@
 					}
 				}
 				else {
-					echo "<center>Aucune notification pour l'instant !</center>";
+					echo "<center> Aucune notification pour l'instant !</center>";
 				}
 			?>
 		</ul>
