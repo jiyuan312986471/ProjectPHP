@@ -14,7 +14,7 @@ if(isset($_POST['submit'])){
 		
 		// Redirection
 		echo"<center><img src=\"img/loading.gif\" /></center>";
-		echo "<meta http-equiv=\"refresh\" content=\"3;dashboard/index.php\" />";
+		echo "<meta http-equiv=\"refresh\" content=\"1;dashboard/index.php\" />";
 	}
 }
 
