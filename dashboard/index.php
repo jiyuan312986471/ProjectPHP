@@ -47,7 +47,7 @@
 	// Chercher des nb total et taux de defaut pour chaque machine
 	$paraMachine = array( "nb" 	=> array(0,0,0,0,0,0), "pourc"	=> array(0,0,0,0,0,0) );
 	
-	sscanf(nbdefaut($conn,'AK'),"%d %f",$paraMachine['nb'][0],$paraMachine['pourc'][0]);
+	sscanf(nbdefaut($conn,'AK'), "%d %f",$paraMachine['nb'][0],$paraMachine['pourc'][0]);
 	sscanf(nbdefaut($conn,'SAK'),"%d %f",$paraMachine['nb'][1],$paraMachine['pourc'][1]);
 	sscanf(nbdefaut($conn,'DT1'),"%d %f",$paraMachine['nb'][2],$paraMachine['pourc'][2]);
 	sscanf(nbdefaut($conn,'DT2'),"%d %f",$paraMachine['nb'][3],$paraMachine['pourc'][3]);

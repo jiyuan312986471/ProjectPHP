@@ -19,9 +19,9 @@
 	if($graph['jour'][6] != date('D')) {
 		// algo with foreach
 		// not sure if it works
-		foreach($graph['pourc'] as $value) {
-			$value = next($graph['pourc']);
-		}
+//		foreach($graph['pourc'] as $value) {
+//			$value = next($graph['pourc']);
+//		}
 		
 		// algo with count. sure it works
 		for($i = 0; $i < count($graph['pourc']); $i++) {
@@ -29,9 +29,9 @@
 		}
 		
 		// original algo
-		for($i = 0; $i < 6; $i++) {
-			$graph['pourc'][$i] = $graph['pourc'][$i+1];
-		}
+//		for($i = 0; $i < 6; $i++) {
+//			$graph['pourc'][$i] = $graph['pourc'][$i+1];
+//		}
 		$graph['pourc'][6] = 0;
 		
 		

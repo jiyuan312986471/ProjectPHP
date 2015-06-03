@@ -119,12 +119,12 @@ GROUP BY [defau].[nom]";
 	
 	function nbdefaut($conn,$machine)
 	{
-		$row = sqlsrv_fetch_array(sqlsrv_query($conn, "select top 1 QuelleMachine,[Date],CodeDefaut,NumEnr,NumPal from [ping2].[dbo].[TeSysK_Auto]",array(), array("Scrollable"=>"buffered")));
+		$row = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT TOP 1 QuelleMachine,[Date],CodeDefaut,NumEnr,NumPal from [ping2].[dbo].[TeSysK_Auto]",array(), array("Scrollable"=>"buffered")));
 		$count = 0;
 		$graph = array
 				(
-					"jour" 	=> array("","","","","","",""),
-					"nb"	=> array(0,0,0,0,0,0,0)
+					"jour" => array("","","","","","",""),
+					"nb"	 => array(0, 0, 0, 0, 0, 0, 0)
 				);
 	
 		$donne=file_get_contents('graph_'.$machine.'.dat');
