@@ -119,15 +119,13 @@ JOIN  `dbo.tesysk_auto` AS defec ON defau.code = defec.code order by date desc l
 	        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: auto">
 	        	<div class="container-fluid">
 	            <?php
-	            	 include('divs/logo.php');
-	            	 // notification et logout
-	             	 include('divs/barre.php');
-	            ?>
-	          
-	          <?php
-	          	// Menu
-	          	include('divs/menu.php');
-	          ?>
+	            	// Logo Schneider
+	            	include('divs/logo.php');
+	            	// Notification et Logout
+	             	include('divs/barre.php');
+	          		// Menu
+	          		include('divs/menu.php');
+	          	?>
 	          </div>
 	        </nav>
 	
