@@ -16,7 +16,7 @@
   $machine = $_GET['machine'];
   
   // refresh
-  echo'<META HTTP-EQUIV="Refresh" CONTENT="8; URL=machine.php?machine='.$machine.'">';
+  echo '<META HTTP-EQUIV="Refresh" CONTENT="8; URL=machine.php?machine='.$machine.'">';
   
   
   /*******************************************
@@ -29,7 +29,7 @@
 	$donne = file_get_contents('graph_'.$machine.'.dat');
 	$n = sscanf($donne,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s",
 							$graph['pourc'][0], $graph['pourc'][1], $graph['pourc'][2], $graph['pourc'][3], $graph['pourc'][4], $graph['pourc'][5], $graph['pourc'][6],
-							$graph['jour'][0],	$graph['jour'][1],	$graph['jour'][2],	$graph['jour'][3],	$graph['jour'][4],	$graph['jour'][5],	$graph['jour'][6]  );
+							$graph['jour'] [0],	$graph['jour'] [1],	$graph['jour'] [2],	$graph['jour'] [3],	$graph['jour'] [4],	$graph['jour'] [5],	$graph['jour'] [6]);
 	
 	
 	
@@ -298,7 +298,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div id="poucDefaut"></div>
+                            <div id="pourcDefaut"></div>
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -357,17 +357,17 @@
     <script type="text/javascript">
 	    new Morris.Line({
 			  // ID of the element in which to draw the chart.
-			  element: 'poucDefaut',
+			  element: 'pourcDefaut',
 			  
 			  // Chart data records -- each entry in this array corresponds to a point on the chart.
 			  data: [
-			    { nbr: '<?php echo convert_j($graph['jour'][0]);?>', valeur: <?php if(isset($graph['pourc'][0])) { echo $graph['pourc'][0];} else {echo 0;} ?> },
-			    { nbr: '<?php echo convert_j($graph['jour'][1]);?>', valeur: <?php if(isset($graph['pourc'][1])) { echo $graph['pourc'][1];} else {echo 0;} ?> },
-			    { nbr: '<?php echo convert_j($graph['jour'][2]);?>', valeur: <?php if(isset($graph['pourc'][2])) { echo $graph['pourc'][2];} else {echo 0;} ?> },
-			    { nbr: '<?php echo convert_j($graph['jour'][3]);?>', valeur: <?php if(isset($graph['pourc'][3])) { echo $graph['pourc'][3];} else {echo 0;} ?> },
-			    { nbr: '<?php echo convert_j($graph['jour'][4]);?>', valeur: <?php if(isset($graph['pourc'][4])) { echo $graph['pourc'][4];} else {echo 0;} ?> },
-			    { nbr: '<?php echo convert_j($graph['jour'][5]);?>', valeur: <?php if(isset($graph['pourc'][5])) { echo $graph['pourc'][5];} else {echo 0;} ?> },
-			    { nbr: '<?php echo convert_j($graph['jour'][6]);?>', valeur: <?php if(isset($graph['pourc'][6])) { echo $graph['pourc'][6];} else {echo 0;} ?> },
+			    { nbr: '<?php echo convert_j($graph['jour'][0]);?>', valeur: <?php if(isset($graph['pourc'][0])) { echo $graph['pourc'][0];} else { echo 0; } ?> },
+			    { nbr: '<?php echo convert_j($graph['jour'][1]);?>', valeur: <?php if(isset($graph['pourc'][1])) { echo $graph['pourc'][1];} else { echo 0; } ?> },
+			    { nbr: '<?php echo convert_j($graph['jour'][2]);?>', valeur: <?php if(isset($graph['pourc'][2])) { echo $graph['pourc'][2];} else { echo 0; } ?> },
+			    { nbr: '<?php echo convert_j($graph['jour'][3]);?>', valeur: <?php if(isset($graph['pourc'][3])) { echo $graph['pourc'][3];} else { echo 0; } ?> },
+			    { nbr: '<?php echo convert_j($graph['jour'][4]);?>', valeur: <?php if(isset($graph['pourc'][4])) { echo $graph['pourc'][4];} else { echo 0; } ?> },
+			    { nbr: '<?php echo convert_j($graph['jour'][5]);?>', valeur: <?php if(isset($graph['pourc'][5])) { echo $graph['pourc'][5];} else { echo 0; } ?> },
+			    { nbr: '<?php echo convert_j($graph['jour'][6]);?>', valeur: <?php if(isset($graph['pourc'][6])) { echo $graph['pourc'][6];} else { echo 0; } ?> },
 			  ],
 			  
 			  // The name of the data record attribute that contains x-values.
@@ -390,16 +390,16 @@
 			  
 			  // Chart data records -- each entry in this array corresponds to a point on the chart.
 			  data: [
-			    { pourcentage: '<?php echo $defaut1 ?>',  value: <?php if(isset($type1))  { echo $type1;  } else { echo 0;} ?> },
-			    { pourcentage: '<?php echo $defaut2 ?>',  value: <?php if(isset($type2))  { echo $type2;  } else { echo 0;} ?> },
-			    { pourcentage: '<?php echo $defaut3 ?>',  value: <?php if(isset($type3))  { echo $type3;  } else { echo 0;} ?> },
-			    { pourcentage: '<?php echo $defaut4 ?>',  value: <?php if(isset($type4))  { echo $type4;  } else { echo 0;} ?> },
-			    { pourcentage: '<?php echo $defaut5 ?>',  value: <?php if(isset($type5))  { echo $type5;  } else { echo 0;} ?> },
-			    { pourcentage: '<?php echo $defaut6 ?>',  value: <?php if(isset($type6))  { echo $type6;  } else { echo 0;} ?> },
-			    { pourcentage: '<?php echo $defaut7 ?>',  value: <?php if(isset($type7))  { echo $type7;  } else { echo 0;} ?> },
-			    { pourcentage: '<?php echo $defaut8 ?>',  value: <?php if(isset($type8))  { echo $type8;  } else { echo 0;} ?> },
-			    { pourcentage: '<?php echo $defaut9 ?>',  value: <?php if(isset($type9))  { echo $type9;  } else { echo 0;} ?> },
-			    { pourcentage: '<?php echo $defaut10 ?>', value: <?php if(isset($type10)) { echo $type10; } else { echo 0;} ?> },
+			    { pourcentage: '<?php echo $defaut1 ?>',  value: <?php if(isset($type1))  { echo $type1;  } else { echo 0; } ?> },
+			    { pourcentage: '<?php echo $defaut2 ?>',  value: <?php if(isset($type2))  { echo $type2;  } else { echo 0; } ?> },
+			    { pourcentage: '<?php echo $defaut3 ?>',  value: <?php if(isset($type3))  { echo $type3;  } else { echo 0; } ?> },
+			    { pourcentage: '<?php echo $defaut4 ?>',  value: <?php if(isset($type4))  { echo $type4;  } else { echo 0; } ?> },
+			    { pourcentage: '<?php echo $defaut5 ?>',  value: <?php if(isset($type5))  { echo $type5;  } else { echo 0; } ?> },
+			    { pourcentage: '<?php echo $defaut6 ?>',  value: <?php if(isset($type6))  { echo $type6;  } else { echo 0; } ?> },
+			    { pourcentage: '<?php echo $defaut7 ?>',  value: <?php if(isset($type7))  { echo $type7;  } else { echo 0; } ?> },
+			    { pourcentage: '<?php echo $defaut8 ?>',  value: <?php if(isset($type8))  { echo $type8;  } else { echo 0; } ?> },
+			    { pourcentage: '<?php echo $defaut9 ?>',  value: <?php if(isset($type9))  { echo $type9;  } else { echo 0; } ?> },
+			    { pourcentage: '<?php echo $defaut10 ?>', value: <?php if(isset($type10)) { echo $type10; } else { echo 0; } ?> },
 			  ],
 			  // The name of the data record attribute that contains x-values.
 			  xkey: 'pourcentage',

@@ -18,11 +18,14 @@
   // refresh in order to get datas always
 	echo '<META HTTP-EQUIV="Refresh" CONTENT="8; URL=index.php">';
 	
-	//Enregistrer des données dans le graph.bat
+	// declare the pourcentage graph
 	$graph = array ("jour" 	=> array("","","","","","",""), "pourc"	=> array(0,0,0,0,0,0,0));
 	
 	// get data from graph.bat
 	$donne = file_get_contents('graph.dat');
+	$n = sscanf($donne,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s",
+						  $graph['pourc'][0], $graph['pourc'][1], $graph['pourc'][2], $graph['pourc'][3], $graph['pourc'][4], $graph['pourc'][5], $graph['pourc'][6],
+						  $graph['jour'][0],  $graph['jour'][1],  $graph['jour'][2],  $graph['jour'][3],  $graph['jour'][4],  $graph['jour'][5],  $graph['jour'][6] );
 
 	// set date format
 	if($graph['jour'][6] != date('D')) {		
@@ -30,10 +33,10 @@
 		for($i = 0; $i < count($graph['pourc'])-1; $i++) {
 			$graph['pourc'][$i] = $graph['pourc'][$i+1];
 		}
+		
 		$graph['pourc'][6] = 0;
 		
-		$graph['jour'][6] = date('D');
-		
+		$graph['jour'][6] = date('D');	
 		$date = new DateTime();
 		for($i = 0; $i < 6; $i++) {
 			$date->add(new DateInterval('P1D'));
