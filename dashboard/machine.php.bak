@@ -387,7 +387,7 @@
 	
 	    new Morris.Bar({
 			  // ID of the element in which to draw the chart.
-			  element: 'test2',
+			  element: 'paretoDefaut',
 			  
 			  // Chart data records -- each entry in this array corresponds to a point on the chart.
 			  data: [

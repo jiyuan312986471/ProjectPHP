@@ -2,7 +2,6 @@
 	
 	include 'util.php';
   require_once('../bdd.php');
-  require_once('mail.php');
 
   // DB connection
 	$db = new bdd("SAMUEL-PC","bdd_user","user_bdd","ping2");
