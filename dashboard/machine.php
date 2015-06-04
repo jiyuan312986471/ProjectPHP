@@ -238,107 +238,7 @@
 			break;
 	}
 	
-//	if( $machine == 'AK' || $machine == 'SAK')
-//	{
-//		/* ressort */
-//		$defaut1 = 'ressort'; 
-//		
-//		/* 2 circuit mobile */
-//		$defaut2 = '2 circ';
-//		        
-//		/* contact */
-//		$defaut3 = 'contact';
-//		        
-//		/* contacteur bruyant */
-//		$defaut4 = 'bruy';
-//		 
-//		/* ecrasement */
-//		$defaut5 = 'ecras';
-//		      
-//		/* etiquette */
-//		$defaut6 = 'etiq';
-//		    
-//		/* montée retombée */
-//		$defaut7 = 'mont';
-//		   
-//		/* motorisation */
-//		$defaut8 = 'motori';
-//		
-//    	/* position doigt */
-//		$defaut9 = 'doigt';
-//		        
-//		/* course */
-//		$defaut10 = 'course';
-//		
-//	}
-//	
-//	if( $machine == 'DT1' || $machine == 'DT2'|| $machine == 'SAD')
-//	{
-//		/* battement */
-//		$defaut1 = 'bat';    
-//		
-//		/* impédance */
-//		$defaut2 = 'impé';
-//		        
-//		/* fiabilité */
-//		$defaut3 = 'fiabil';
-//		        
-//		/* temps de fermeture DC BD */
-//		$defaut4 = 'ferm';
-//		 
-//		/* Course/ecrasement */
-//		$defaut5 = 'Course/ecras';
-//		      
-//		/* tension de montée */
-//		$defaut6 = 'mont';
-//		    
-//		/* tension de retombée */
-//		$defaut7 = 'retomb';
-//		   
-//		/* consommation */
-//		$defaut8 = 'conso';
-//		
-//    	/* schéma*/
-//		$defaut9 = 'schéma';
-//		        
-//		/* Présence transil sur Cde sans transil */
-//		$defaut10 = 'transil';
-//	}
-//	
-//	if( $machine == 'DT3')
-//	{
-//		/* battement */
-//		$defaut1 = 'bat';    
-//		
-//		/* course/ecrasement */
-//		$defaut2 = 'course/e';
-//		        
-//		/* tension de montée */
-//		$defaut3 = 'mont';
-//		        
-//		/* consommation  */
-//		$defaut4 = 'conso';
-//		 
-//		/* tension de retombée */
-//		$defaut5 = 'retomb';
-//		      
-//		/* schéma */
-//		$defaut6 = 'schéma';
-//		    
-//		/* Défaut appel maintien */
-//		$defaut7 = 'Défaut appel';
-//		   
-//		/* Fiabilité */
-//		$defaut8 = 'Fiabil';
-//		
-//    	/* contact appel/maintien produit */
-//		$defaut9 = 'appel/maintien';
-//		        
-//		/* Courant appel trop long */
-//		$defaut10 = 'appel trop long';
-//	}
-	
-	
+	// calculate paretos of each type
 	$type1  = pareto_m($defaut1, $machine, $nombre, $conn);
 	$type2  = pareto_m($defaut2, $machine, $nombre, $conn);
 	$type3  = pareto_m($defaut3, $machine, $nombre, $conn);
@@ -395,11 +295,11 @@
                     <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Pourcentage défauts <?php echo $machine; ?>
+                            Pourcentage Défauts <?php echo $machine; ?>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div id="test"></div>
+                            <div id="poucDefaut"></div>
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -415,11 +315,11 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Pareto des défauts <?php echo $machine; ?>
+                            Pareto des Défauts <?php echo $machine; ?>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div id="test2"></div>
+                            <div id="paretoDefaut"></div>
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -456,69 +356,61 @@
 
     <script src="js/sb-admin-2.js"></script>
     <script type="text/javascript">
-    new Morris.Line({
-  // ID of the element in which to draw the chart.
-  element: 'test',
-  // Chart data records -- each entry in this array corresponds to a point on
-  // the chart.
-
-  data: [ 
-  
-    { nbr: '<?php echo convert_j($graph['jour'][0]);?>', valeur: <?php if(isset($graph['pourc'][0])) { echo $graph['pourc'][0];} else {echo 0;} ?> },
-    { nbr: '<?php echo convert_j($graph['jour'][1]);?>', valeur: <?php if(isset($graph['pourc'][1])) { echo $graph['pourc'][1];} else {echo 0;} ?> },
-    { nbr: '<?php echo convert_j($graph['jour'][2]);?>', valeur: <?php if(isset($graph['pourc'][2])) { echo $graph['pourc'][2];} else {echo 0;} ?> },
-    { nbr: '<?php echo convert_j($graph['jour'][3]);?>', valeur: <?php if(isset($graph['pourc'][3])) { echo $graph['pourc'][3];} else {echo 0;} ?> },
-    { nbr: '<?php echo convert_j($graph['jour'][4]);?>', valeur: <?php if(isset($graph['pourc'][4])) { echo $graph['pourc'][4];} else {echo 0;} ?> },
-    { nbr: '<?php echo convert_j($graph['jour'][5]);?>', valeur: <?php if(isset($graph['pourc'][5])) { echo $graph['pourc'][5];} else {echo 0;} ?> },
-    { nbr: '<?php echo convert_j($graph['jour'][6]);?>', valeur: <?php if(isset($graph['pourc'][6])) { echo $graph['pourc'][6];} else {echo 0;} ?> },
-  
-
-  ],
-  // The name of the data record attribute that contains x-values.
-  xkey: 'nbr',
-  // A list of names of data record attributes that contain y-values.
-  ykeys: ['valeur'],
-  // Labels for the ykeys -- will be displayed when you hover over the
-  // chart.
-  labels: ['Pourcentage'],
-
- pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4','#09DCB4','#046351','#E16351','#4C221C'],
-   parseTime: false,
-   hideHover: false,
-
-});
-      </script>
-         <script>
-    new Morris.Bar({
-  // ID of the element in which to draw the chart.
-  element: 'test2',
-  // Chart data records -- each entry in this array corresponds to a point on
-  // the chart.
-  data: [
-
-    { pourcentage: '<?php echo $defaut1 ?>', value: <?php if(isset($type1)) {echo $type1;} else { echo 0;} ?> },
-    { pourcentage: '<?php echo $defaut2 ?>', value: <?php if(isset($type2)) {echo $type2;} else { echo 0;} ?> },
-    { pourcentage: '<?php echo $defaut3 ?>', value: <?php if(isset($type3)) {echo $type3;} else { echo 0;} ?> },
-    { pourcentage: '<?php echo $defaut4 ?>', value: <?php if(isset($type4)) {echo $type4;} else { echo 0;} ?> },
-    { pourcentage: '<?php echo $defaut5 ?>', value: <?php if(isset($type5)) {echo $type5;} else { echo 0;} ?> },
-    { pourcentage: '<?php echo $defaut6 ?>', value: <?php if(isset($type6)) {echo $type6;} else { echo 0;} ?> },
-    { pourcentage: '<?php echo $defaut7 ?>', value: <?php if(isset($type7)) {echo $type7;} else { echo 0;} ?> },
-    { pourcentage: '<?php echo $defaut8 ?>', value: <?php if(isset($type8)) {echo $type8;} else { echo 0;} ?> },
-    { pourcentage: '<?php echo $defaut9 ?>', value: <?php if(isset($type9)) {echo $type9;} else { echo 0;} ?> },
-    { pourcentage: '<?php echo $defaut10 ?>', value: <?php if(isset($type10)) {echo $type10;} else { echo 0;} ?> },
-    
-  ],
-  // The name of the data record attribute that contains x-values.
-  xkey: 'pourcentage',
-  // A list of names of data record attributes that contain y-values.
-  ykeys: ['value'],
-  // Labels for the ykeys -- will be displayed when you hover over the
-  // chart.
-  labels: ['Pourcentage'],
-
-
-});
-
+	    new Morris.Line({
+			  // ID of the element in which to draw the chart.
+			  element: 'poucDefaut',
+			  
+			  // Chart data records -- each entry in this array corresponds to a point on the chart.
+			  data: [
+			    { nbr: '<?php echo convert_j($graph['jour'][0]);?>', valeur: <?php if(isset($graph['pourc'][0])) { echo $graph['pourc'][0];} else {echo 0;} ?> },
+			    { nbr: '<?php echo convert_j($graph['jour'][1]);?>', valeur: <?php if(isset($graph['pourc'][1])) { echo $graph['pourc'][1];} else {echo 0;} ?> },
+			    { nbr: '<?php echo convert_j($graph['jour'][2]);?>', valeur: <?php if(isset($graph['pourc'][2])) { echo $graph['pourc'][2];} else {echo 0;} ?> },
+			    { nbr: '<?php echo convert_j($graph['jour'][3]);?>', valeur: <?php if(isset($graph['pourc'][3])) { echo $graph['pourc'][3];} else {echo 0;} ?> },
+			    { nbr: '<?php echo convert_j($graph['jour'][4]);?>', valeur: <?php if(isset($graph['pourc'][4])) { echo $graph['pourc'][4];} else {echo 0;} ?> },
+			    { nbr: '<?php echo convert_j($graph['jour'][5]);?>', valeur: <?php if(isset($graph['pourc'][5])) { echo $graph['pourc'][5];} else {echo 0;} ?> },
+			    { nbr: '<?php echo convert_j($graph['jour'][6]);?>', valeur: <?php if(isset($graph['pourc'][6])) { echo $graph['pourc'][6];} else {echo 0;} ?> },
+			  ],
+			  
+			  // The name of the data record attribute that contains x-values.
+			  xkey: 'nbr',
+			  
+			  // A list of names of data record attributes that contain y-values.
+			  ykeys: ['valeur'],
+			  
+			  // Labels for the ykeys -- will be displayed when you hover over the chart.
+			  labels: ['Pourcentage'],
+			
+			 	pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4','#09DCB4','#046351','#E16351','#4C221C'],
+			  parseTime: false,
+			  hideHover: false,
+			});
+	
+	    new Morris.Bar({
+			  // ID of the element in which to draw the chart.
+			  element: 'paretoDefaut',
+			  
+			  // Chart data records -- each entry in this array corresponds to a point on the chart.
+			  data: [
+			    { pourcentage: '<?php echo $defaut1 ?>',  value: <?php if(isset($type1))  { echo $type1;  } else { echo 0;} ?> },
+			    { pourcentage: '<?php echo $defaut2 ?>',  value: <?php if(isset($type2))  { echo $type2;  } else { echo 0;} ?> },
+			    { pourcentage: '<?php echo $defaut3 ?>',  value: <?php if(isset($type3))  { echo $type3;  } else { echo 0;} ?> },
+			    { pourcentage: '<?php echo $defaut4 ?>',  value: <?php if(isset($type4))  { echo $type4;  } else { echo 0;} ?> },
+			    { pourcentage: '<?php echo $defaut5 ?>',  value: <?php if(isset($type5))  { echo $type5;  } else { echo 0;} ?> },
+			    { pourcentage: '<?php echo $defaut6 ?>',  value: <?php if(isset($type6))  { echo $type6;  } else { echo 0;} ?> },
+			    { pourcentage: '<?php echo $defaut7 ?>',  value: <?php if(isset($type7))  { echo $type7;  } else { echo 0;} ?> },
+			    { pourcentage: '<?php echo $defaut8 ?>',  value: <?php if(isset($type8))  { echo $type8;  } else { echo 0;} ?> },
+			    { pourcentage: '<?php echo $defaut9 ?>',  value: <?php if(isset($type9))  { echo $type9;  } else { echo 0;} ?> },
+			    { pourcentage: '<?php echo $defaut10 ?>', value: <?php if(isset($type10)) { echo $type10; } else { echo 0;} ?> },
+			  ],
+			  // The name of the data record attribute that contains x-values.
+			  xkey: 'pourcentage',
+			  
+			  // A list of names of data record attributes that contain y-values.
+			  ykeys: ['value'],
+			  
+			  // Labels for the ykeys -- will be displayed when you hover over the chart.
+			  labels: ['Pourcentage'],
+			});
     </script>
 
 </body>
