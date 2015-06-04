@@ -15,8 +15,8 @@ if(isset($_POST['submit'])){
 	$connInfo = $db->getConn();
 	
 	// store DB and its connection into session
-	$_SESSION['db'] = $db;
-	$_SESSION['connInfo'] = $connInfo;
+	$_SESSION["db"] = $db;
+	$_SESSION["connInfo"] = $connInfo;
 	
 	// login attempt
 	$result = Personne::login($name, $pass, $connInfo);
@@ -46,11 +46,11 @@ if(isset($_POST['submit'])){
 		$validUser = new Personne($id, $name, $pass);
 		
 		// store user into session
-		$_SESSION['utilisateur'] = $validUser;
+		$_SESSION["utilisateur"] = $validUser;
 		
 		// redirection
+		header("refresh:3;url=dashboard/index.php");
 		echo "<center><img src=\"img/loading.gif\" /></center>";
-		echo "<meta http-equiv=\"refresh\" content=\"1;dashboard/index.php\" />";
 	}
 }
 

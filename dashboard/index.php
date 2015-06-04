@@ -1,15 +1,20 @@
 <?php
-
+	
 	session_start();
 
-	require_once('con_db.php');
+	//require_once('con_db.php');
 	include 'util.php';
+	include_once '../pers.php';
+	include_once '../bdd.php';
 	
-  $conn  = connexion_db();
+  $conn  = $_SESSION["connInfo"];
+  echo "ConnInfo: ".$conn."<br/>";
   $date  = date('Y-m-d');
   $heure = date('H:i');
   $jour  = date('D');
-	echo'<META HTTP-EQUIV="Refresh" CONTENT="8; URL=index.php">';
+  
+  // refresh in order to get datas always
+	echo '<META HTTP-EQUIV="Refresh" CONTENT="8; URL=index.php">';
 	
 	//Enregistrer des données dans le graph.bat
 	$graph = array ("jour" 	=> array("","","","","","",""), "pourc"	=> array(0,0,0,0,0,0,0));
@@ -27,7 +32,7 @@
 //		}
 		
 		// algo with count. sure it works
-		for($i = 0; $i < count($graph['pourc']); $i++) {
+		for($i = 0; $i < count($graph['pourc'])-1; $i++) {
 			$graph['pourc'][$i] = $graph['pourc'][$i+1];
 		}
 		
