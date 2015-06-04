@@ -27,7 +27,7 @@
 						  $graph['jour'][0],  $graph['jour'][1],  $graph['jour'][2],  $graph['jour'][3],  $graph['jour'][4],  $graph['jour'][5],  $graph['jour'][6] );
 
 	if($graph['jour'][6] != date('D')) {		
-		// algo with count. sure it works
+		// algo with count
 		for($i = 0; $i < count($graph['pourc'])-1; $i++) {
 			$graph['pourc'][$i] = $graph['pourc'][$i+1];
 		}
