@@ -1,5 +1,5 @@
 <?php
-	$machine=$_GET['machine'];
+	
 	include 'util.php';
   require_once('../bdd.php');
   require_once('mail.php');
@@ -9,151 +9,348 @@
 	$conn = $db->getConn();
   
   // get time
-  $date=date('Y-m-d');
-  $heure=date('H:i');
-  $jour=date('D');
-  echo'<META HTTP-EQUIV="Refresh" CONTENT="8; URL=machine.php?machine='.$machine.'">'; 
+  $date = date('Y-m-d');
+  $heure = date('H:i');
+  $jour = date('D');
+  
+  // get machine
+  $machine = $_GET['machine'];
+  
+  // refresh
+  echo'<META HTTP-EQUIV="Refresh" CONTENT="8; URL=machine.php?machine='.$machine.'">';
+  
+  
+  /*******************************************
+  				Pourcentage defauts graph
+  ********************************************/
+  // declare the percentage graph
+	$graph = array("jour" => array("","","","","","",""), "pourc"	=> array(0,0,0,0,0,0,0));
 	
-	$graph = array
-	(
-		"jour" 	=> array("","","","","","",""),
-		"pourc"	=> array(0,0,0,0,0,0,0)
-	);
-	
-	$donne=file_get_contents('graph_'.$machine.'.dat');
+	// get machine data
+	$donne = file_get_contents('graph_'.$machine.'.dat');
 	$n = sscanf($donne,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s",
-				$graph['pourc'][0],  $graph['pourc'][1],  $graph['pourc'][2],  $graph['pourc'][3],  $graph['pourc'][4],  $graph['pourc'][5],  $graph['pourc'][6],
-				$graph['jour'][0],$graph['jour'][1],$graph['jour'][2],$graph['jour'][3],$graph['jour'][4],$graph['jour'][5],$graph['jour'][6]
-				);
-      
-
+							$graph['pourc'][0], $graph['pourc'][1], $graph['pourc'][2], $graph['pourc'][3], $graph['pourc'][4], $graph['pourc'][5], $graph['pourc'][6],
+							$graph['jour'][0],	$graph['jour'][1],	$graph['jour'][2],	$graph['jour'][3],	$graph['jour'][4],	$graph['jour'][5],	$graph['jour'][6]  );
 	
 	
-    /*  pourcentage defecteux */
-	$nombre=file_get_contents("macdef/".$machine.".dat");
 	
+  /*******************************************
+  				Pareto des defauts graph
+  ********************************************/
+  // get machine data
+	$nombre = file_get_contents("macdef/".$machine.".dat");
 	
-	if( $machine == 'AK' || $machine == 'SAK')
-	{
-		/* ressort */
-		$defaut1 = 'ressort'; 
+	// identify machine
+	switch($machine) {
+		case 'AK':
+			/* ressort */
+			$defaut1 = 'ressort'; 
+			
+			/* 2 circuit mobile */
+			$defaut2 = '2 circ';
+			        
+			/* contact */
+			$defaut3 = 'contact';
+			        
+			/* contacteur bruyant */
+			$defaut4 = 'bruy';
+			 
+			/* ecrasement */
+			$defaut5 = 'ecras';
+			      
+			/* etiquette */
+			$defaut6 = 'etiq';
+			    
+			/* montée retombée */
+			$defaut7 = 'mont';
+			   
+			/* motorisation */
+			$defaut8 = 'motori';
+			
+	    	/* position doigt */
+			$defaut9 = 'doigt';
+			        
+			/* course */
+			$defaut10 = 'course';
+			break;
 		
-		/* 2 circuit mobile */
-		$defaut2 = '2 circ';
-		        
-		/* contact */
-		$defaut3 = 'contact';
-		        
-		/* contacteur bruyant */
-		$defaut4 = 'bruy';
-		 
-		/* ecrasement */
-		$defaut5 = 'ecras';
-		      
-		/* etiquette */
-		$defaut6 = 'etiq';
-		    
-		/* montée retombée */
-		$defaut7 = 'mont';
-		   
-		/* motorisation */
-		$defaut8 = 'motori';
+		case 'SAK':
+			/* ressort */
+			$defaut1 = 'ressort'; 
+			
+			/* 2 circuit mobile */
+			$defaut2 = '2 circ';
+			        
+			/* contact */
+			$defaut3 = 'contact';
+			        
+			/* contacteur bruyant */
+			$defaut4 = 'bruy';
+			 
+			/* ecrasement */
+			$defaut5 = 'ecras';
+			      
+			/* etiquette */
+			$defaut6 = 'etiq';
+			    
+			/* montée retombée */
+			$defaut7 = 'mont';
+			   
+			/* motorisation */
+			$defaut8 = 'motori';
+			
+	    	/* position doigt */
+			$defaut9 = 'doigt';
+			        
+			/* course */
+			$defaut10 = 'course';
+			break;
 		
-    	/* position doigt */
-		$defaut9 = 'doigt';
-		        
-		/* course */
-		$defaut10 = 'course';
+		case 'DT1':
+			/* battement */
+			$defaut1 = 'bat';    
+			
+			/* impédance */
+			$defaut2 = 'impé';
+			        
+			/* fiabilité */
+			$defaut3 = 'fiabil';
+			        
+			/* temps de fermeture DC BD */
+			$defaut4 = 'ferm';
+			 
+			/* Course/ecrasement */
+			$defaut5 = 'Course/ecras';
+			      
+			/* tension de montée */
+			$defaut6 = 'mont';
+			    
+			/* tension de retombée */
+			$defaut7 = 'retomb';
+			   
+			/* consommation */
+			$defaut8 = 'conso';
+			
+	    	/* schéma*/
+			$defaut9 = 'schéma';
+			        
+			/* Présence transil sur Cde sans transil */
+			$defaut10 = 'transil';
+			break;
 		
+		case 'DT2':
+			/* battement */
+			$defaut1 = 'bat';    
+			
+			/* impédance */
+			$defaut2 = 'impé';
+			        
+			/* fiabilité */
+			$defaut3 = 'fiabil';
+			        
+			/* temps de fermeture DC BD */
+			$defaut4 = 'ferm';
+			 
+			/* Course/ecrasement */
+			$defaut5 = 'Course/ecras';
+			      
+			/* tension de montée */
+			$defaut6 = 'mont';
+			    
+			/* tension de retombée */
+			$defaut7 = 'retomb';
+			   
+			/* consommation */
+			$defaut8 = 'conso';
+			
+	    	/* schéma*/
+			$defaut9 = 'schéma';
+			        
+			/* Présence transil sur Cde sans transil */
+			$defaut10 = 'transil';
+			break;
+		
+		case 'SAD':
+			/* battement */
+			$defaut1 = 'bat';    
+			
+			/* impédance */
+			$defaut2 = 'impé';
+			        
+			/* fiabilité */
+			$defaut3 = 'fiabil';
+			        
+			/* temps de fermeture DC BD */
+			$defaut4 = 'ferm';
+			 
+			/* Course/ecrasement */
+			$defaut5 = 'Course/ecras';
+			      
+			/* tension de montée */
+			$defaut6 = 'mont';
+			    
+			/* tension de retombée */
+			$defaut7 = 'retomb';
+			   
+			/* consommation */
+			$defaut8 = 'conso';
+			
+	    	/* schéma*/
+			$defaut9 = 'schéma';
+			        
+			/* Présence transil sur Cde sans transil */
+			$defaut10 = 'transil';
+			break;
+		
+		case 'DT3':
+			/* battement */
+			$defaut1 = 'bat';    
+			
+			/* course/ecrasement */
+			$defaut2 = 'course/e';
+			        
+			/* tension de montée */
+			$defaut3 = 'mont';
+			        
+			/* consommation  */
+			$defaut4 = 'conso';
+			 
+			/* tension de retombée */
+			$defaut5 = 'retomb';
+			      
+			/* schéma */
+			$defaut6 = 'schéma';
+			    
+			/* Défaut appel maintien */
+			$defaut7 = 'Défaut appel';
+			   
+			/* Fiabilité */
+			$defaut8 = 'Fiabil';
+			
+	    	/* contact appel/maintien produit */
+			$defaut9 = 'appel/maintien';
+			        
+			/* Courant appel trop long */
+			$defaut10 = 'appel trop long';
+			break;
+		
+		default:
+			break;
 	}
 	
-	if( $machine == 'DT1' || $machine == 'DT2'|| $machine == 'SAD')
-	{
-		/* battement */
-		$defaut1 = 'bat';    
-		
-		/* impédance */
-		$defaut2 = 'impé';
-		        
-		/* fiabilité */
-		$defaut3 = 'fiabil';
-		        
-		/* temps de fermeture DC BD */
-		$defaut4 = 'ferm';
-		 
-		/* Course/ecrasement */
-		$defaut5 = 'Course/ecras';
-		      
-		/* tension de montée */
-		$defaut6 = 'mont';
-		    
-		/* tension de retombée */
-		$defaut7 = 'retomb';
-		   
-		/* consommation */
-		$defaut8 = 'conso';
-		
-    	/* schéma*/
-		$defaut9 = 'schéma';
-		        
-		/* Présence transil sur Cde sans transil */
-		$defaut10 = 'transil';
-	}
+//	if( $machine == 'AK' || $machine == 'SAK')
+//	{
+//		/* ressort */
+//		$defaut1 = 'ressort'; 
+//		
+//		/* 2 circuit mobile */
+//		$defaut2 = '2 circ';
+//		        
+//		/* contact */
+//		$defaut3 = 'contact';
+//		        
+//		/* contacteur bruyant */
+//		$defaut4 = 'bruy';
+//		 
+//		/* ecrasement */
+//		$defaut5 = 'ecras';
+//		      
+//		/* etiquette */
+//		$defaut6 = 'etiq';
+//		    
+//		/* montée retombée */
+//		$defaut7 = 'mont';
+//		   
+//		/* motorisation */
+//		$defaut8 = 'motori';
+//		
+//    	/* position doigt */
+//		$defaut9 = 'doigt';
+//		        
+//		/* course */
+//		$defaut10 = 'course';
+//		
+//	}
+//	
+//	if( $machine == 'DT1' || $machine == 'DT2'|| $machine == 'SAD')
+//	{
+//		/* battement */
+//		$defaut1 = 'bat';    
+//		
+//		/* impédance */
+//		$defaut2 = 'impé';
+//		        
+//		/* fiabilité */
+//		$defaut3 = 'fiabil';
+//		        
+//		/* temps de fermeture DC BD */
+//		$defaut4 = 'ferm';
+//		 
+//		/* Course/ecrasement */
+//		$defaut5 = 'Course/ecras';
+//		      
+//		/* tension de montée */
+//		$defaut6 = 'mont';
+//		    
+//		/* tension de retombée */
+//		$defaut7 = 'retomb';
+//		   
+//		/* consommation */
+//		$defaut8 = 'conso';
+//		
+//    	/* schéma*/
+//		$defaut9 = 'schéma';
+//		        
+//		/* Présence transil sur Cde sans transil */
+//		$defaut10 = 'transil';
+//	}
+//	
+//	if( $machine == 'DT3')
+//	{
+//		/* battement */
+//		$defaut1 = 'bat';    
+//		
+//		/* course/ecrasement */
+//		$defaut2 = 'course/e';
+//		        
+//		/* tension de montée */
+//		$defaut3 = 'mont';
+//		        
+//		/* consommation  */
+//		$defaut4 = 'conso';
+//		 
+//		/* tension de retombée */
+//		$defaut5 = 'retomb';
+//		      
+//		/* schéma */
+//		$defaut6 = 'schéma';
+//		    
+//		/* Défaut appel maintien */
+//		$defaut7 = 'Défaut appel';
+//		   
+//		/* Fiabilité */
+//		$defaut8 = 'Fiabil';
+//		
+//    	/* contact appel/maintien produit */
+//		$defaut9 = 'appel/maintien';
+//		        
+//		/* Courant appel trop long */
+//		$defaut10 = 'appel trop long';
+//	}
 	
-	if( $machine == 'DT3')
-	{
-		/* battement */
-		$defaut1 = 'bat';    
-		
-		/* course/ecrasement */
-		$defaut2 = 'course/e';
-		        
-		/* tension de montée */
-		$defaut3 = 'mont';
-		        
-		/* consommation  */
-		$defaut4 = 'conso';
-		 
-		/* tension de retombée */
-		$defaut5 = 'retomb';
-		      
-		/* schéma */
-		$defaut6 = 'schéma';
-		    
-		/* Défaut appel maintien */
-		$defaut7 = 'Défaut appel';
-		   
-		/* Fiabilité */
-		$defaut8 = 'Fiabil';
-		
-    	/* contact appel/maintien produit */
-		$defaut9 = 'appel/maintien';
-		        
-		/* Courant appel trop long */
-		$defaut10 = 'appel trop long';
-	}
 	
-	$type1 = pareto_m($defaut1,$machine,$nombre,$conn);
-	$type2 = pareto_m($defaut2,$machine,$nombre,$conn);
-	$type3 = pareto_m($defaut3,$machine,$nombre,$conn);
-	$type4 = pareto_m($defaut4,$machine,$nombre,$conn);
-	$type5 = pareto_m($defaut5,$machine,$nombre,$conn);
-	$type6 = pareto_m($defaut6,$machine,$nombre,$conn);
-	$type7 = pareto_m($defaut7,$machine,$nombre,$conn);
-	$type8 = pareto_m($defaut8,$machine,$nombre,$conn);
-	$type9 = pareto_m($defaut9,$machine,$nombre,$conn);
-	$type10 = pareto_m($defaut10,$machine,$nombre,$conn);
-		/*$kk=(int)file_get_contents('mail/mail.txt');
-        if($type1>= 3 && $type1>$kk) 
-		{
-            send_mail($machine,'ressort');
-			file_put_contents('mail/mail.txt', $type1);
-		}*/
+	$type1  = pareto_m($defaut1, $machine, $nombre, $conn);
+	$type2  = pareto_m($defaut2, $machine, $nombre, $conn);
+	$type3  = pareto_m($defaut3, $machine, $nombre, $conn);
+	$type4  = pareto_m($defaut4, $machine, $nombre, $conn);
+	$type5  = pareto_m($defaut5, $machine, $nombre, $conn);
+	$type6  = pareto_m($defaut6, $machine, $nombre, $conn);
+	$type7  = pareto_m($defaut7, $machine, $nombre, $conn);
+	$type8  = pareto_m($defaut8, $machine, $nombre, $conn);
+	$type9  = pareto_m($defaut9, $machine, $nombre, $conn);
+	$type10 = pareto_m($defaut10,$machine, $nombre, $conn);
 	
-
-    
-   
-    ?>
+?>
 
 
 <!DOCTYPE html>

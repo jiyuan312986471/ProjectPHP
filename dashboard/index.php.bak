@@ -249,7 +249,7 @@
 	    <script type="text/javascript">
 		    new Morris.Line({
 		  		// ID of the element in which to draw the chart.
-		  		element: 'test',
+		  		element: 'pourcUsine',
 				  // Chart data records -- each entry in this array corresponds to a point on
 				  // the chart.
 				  
