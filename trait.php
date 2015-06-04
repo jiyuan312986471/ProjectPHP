@@ -14,10 +14,6 @@ if(isset($_POST['submit'])){
 	$db = new bdd("SAMUEL-PC","bdd_user","user_bdd","ping2");
 	$connInfo = $db->getConn();
 	
-	// store DB and its connection into session
-	$_SESSION["db"] = $db;
-	$_SESSION["connInfo"] = $connInfo;
-	
 	// login attempt
 	$result = Personne::login($name, $pass, $connInfo);
 	
@@ -51,6 +47,10 @@ if(isset($_POST['submit'])){
 		// redirection
 		header("refresh:3;url=dashboard/index.php");
 		echo "<center><img src=\"img/loading.gif\" /></center>";
+		
+		// disconnect DB
+		unset($connInfo);
+		unset($db);
 	}
 }
 

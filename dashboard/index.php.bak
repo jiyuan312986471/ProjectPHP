@@ -2,14 +2,15 @@
 	
 	session_start();
 
-	//require_once('con_db.php');
 	include 'util.php';
 	include_once '../pers.php';
 	include_once '../bdd.php';
 	
-  $conn  = $_SESSION["connInfo"];
-  var_dump($_SESSION);
-  echo "ConnInfo: ".$conn."<br/>";
+	// DB connection
+	$db = new bdd("SAMUEL-PC","bdd_user","user_bdd","ping2");
+	$conn = $db->getConn();
+	
+	// get time
   $date  = date('Y-m-d');
   $heure = date('H:i');
   $jour  = date('D');
@@ -25,22 +26,11 @@
 						  $graph['pourc'][0], $graph['pourc'][1], $graph['pourc'][2], $graph['pourc'][3], $graph['pourc'][4], $graph['pourc'][5], $graph['pourc'][6],
 						  $graph['jour'][0],  $graph['jour'][1],  $graph['jour'][2],  $graph['jour'][3],  $graph['jour'][4],  $graph['jour'][5],  $graph['jour'][6] );
 
-	if($graph['jour'][6] != date('D')) {
-		// algo with foreach
-		// not sure if it works
-//		foreach($graph['pourc'] as $value) {
-//			$value = next($graph['pourc']);
-//		}
-		
+	if($graph['jour'][6] != date('D')) {		
 		// algo with count. sure it works
 		for($i = 0; $i < count($graph['pourc'])-1; $i++) {
 			$graph['pourc'][$i] = $graph['pourc'][$i+1];
 		}
-		
-		// original algo
-//		for($i = 0; $i < 6; $i++) {
-//			$graph['pourc'][$i] = $graph['pourc'][$i+1];
-//		}
 		$graph['pourc'][6] = 0;
 		
 		
