@@ -18,6 +18,12 @@
   // declare 6 machines
   $listMachine = array("AK","SAK","DT1","DT2","SAD","DT3");
   
+  // declare graph pourcentage
+  $graphPourc = array();
+  
+  // declare graph pareto
+  $graphPareto = array();
+  
   
   /***********************************************************
   *																													 *
@@ -36,16 +42,23 @@
 		$dataPareto = file_get_contents("macdef/".$machine.".dat");
 		
 		// declare pareto array
-		$listPareto = array(0,0,0,0,0,0,0,0,0,0);
+		$listPareto = array();
 		
-		// calculate pareto
+		// set value of pareto array
 		for($i = 0; $i < 10; $i++) {
-			$listPareto[$i] = pareto_m($listDefaut[$i], $machine, $dataPareto, $conn);
+			// calculate pareto
+			$pareto = pareto_m($listDefaut[$i], $machine, $dataPareto, $conn);
+			
+			// add pareto into array
+			array_push($listPareto, $pareto);
 		}
 		
-		// combine pareto array with defaut array
-		
+		// combine pareto array(value) with defaut array(key)
+		$graphPareto = array_combine($listDefaut, $listPareto);
   	
+  	/*********************************
+  	*					POURC GRAPH					 *
+  	*********************************/
   	// declare the percentage array
 		$listPourc = array("pourc" => array(0,0,0,0,0,0,0), "jour" => array("","","","","","",""));
   }
