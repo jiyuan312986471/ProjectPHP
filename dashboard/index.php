@@ -59,7 +59,6 @@
 	for ($i = 0; $i < count($paraMachine['nb']); $i++) {
 		$sum = $paraMachine['nb'][$i] + $sum;
 		$sumdefaut = $paraMachine['nb'][$i] * $paraMachine['pourc'][$i] + $sumdefaut;
-		//echo $sumdefaut.'---'.$sum.'</br>';
 	}
 	
 	if($sum == 0) {
@@ -209,11 +208,11 @@
 	            		<div class="col-lg-12">
 	            				<div class="panel panel-default">
 	                        <div class="panel-heading">
-	                            Pourcentage défauts usine
+	                            Pourcentage Défauts Usine
 	                        </div>
 	                        <!-- /.panel-heading -->
 	                        <div class="panel-body">
-	                            <div id="test"></div>
+	                            <div id="pourcUsine"></div>
 	                        </div>
 	                        <!-- /.panel-body -->
 	                    </div>
@@ -250,7 +249,7 @@
 	    <script type="text/javascript">
 		    new Morris.Line({
 		  		// ID of the element in which to draw the chart.
-		  		element: 'test',
+		  		element: 'pourcUsine',
 				  // Chart data records -- each entry in this array corresponds to a point on
 				  // the chart.
 				  
