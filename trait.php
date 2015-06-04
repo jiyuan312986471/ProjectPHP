@@ -44,13 +44,13 @@ if(isset($_POST['submit'])){
 		// store user into session
 		$_SESSION["utilisateur"] = $validUser;
 		
-		// redirection
-		header("refresh:3;url=dashboard/index.php");
-		echo "<center><img src=\"img/loading.gif\" /></center>";
-		
 		// disconnect DB
 		unset($connInfo);
 		unset($db);
+		
+		// redirection
+		header("refresh:1;url=dashboard/index.php");
+		echo "<center><img src=\"img/loading.gif\" /></center>";
 	}
 }
 
