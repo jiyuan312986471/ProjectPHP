@@ -253,17 +253,16 @@
 		    new Morris.Line({
 		  		// ID of the element in which to draw the chart.
 		  		element: 'pourcUsine',
-				  // Chart data records -- each entry in this array corresponds to a point on
-				  // the chart.
-				  
+		  		
+				  // Chart data records -- each entry in this array corresponds to a point on the chart.
 				  data: [
-				    { nbr: '<?php echo convert_j($graph['jour'][0]);?>', valeur: <?php if(isset($graph['pourc'][0])) { echo $graph['pourc'][0];} else {echo 0;} ?> },
-				    { nbr: '<?php echo convert_j($graph['jour'][1]);?>', valeur: <?php if(isset($graph['pourc'][1])) { echo $graph['pourc'][1];} else {echo 0;} ?> },
-				    { nbr: '<?php echo convert_j($graph['jour'][2]);?>', valeur: <?php if(isset($graph['pourc'][2])) { echo $graph['pourc'][2];} else {echo 0;} ?> },
-				    { nbr: '<?php echo convert_j($graph['jour'][3]);?>', valeur: <?php if(isset($graph['pourc'][3])) { echo $graph['pourc'][3];} else {echo 0;} ?> },
-				    { nbr: '<?php echo convert_j($graph['jour'][4]);?>', valeur: <?php if(isset($graph['pourc'][4])) { echo $graph['pourc'][4];} else {echo 0;} ?> },
-				    { nbr: '<?php echo convert_j($graph['jour'][5]);?>', valeur: <?php if(isset($graph['pourc'][5])) { echo $graph['pourc'][5];} else {echo 0;} ?> },
-				    { nbr: '<?php echo convert_j($graph['jour'][6]);?>', valeur: <?php if(isset($graph['pourc'][6])) { echo $graph['pourc'][6];} else {echo 0;} ?> },
+				    { nbr: '<?php echo convert_j($graph['jour'][0]);?>', valeur: <?php if(isset($graph['pourc'][0])) { echo $graph['pourc'][0]; } else { echo 0; } ?> },
+				    { nbr: '<?php echo convert_j($graph['jour'][1]);?>', valeur: <?php if(isset($graph['pourc'][1])) { echo $graph['pourc'][1]; } else { echo 0; } ?> },
+				    { nbr: '<?php echo convert_j($graph['jour'][2]);?>', valeur: <?php if(isset($graph['pourc'][2])) { echo $graph['pourc'][2]; } else { echo 0; } ?> },
+				    { nbr: '<?php echo convert_j($graph['jour'][3]);?>', valeur: <?php if(isset($graph['pourc'][3])) { echo $graph['pourc'][3]; } else { echo 0; } ?> },
+				    { nbr: '<?php echo convert_j($graph['jour'][4]);?>', valeur: <?php if(isset($graph['pourc'][4])) { echo $graph['pourc'][4]; } else { echo 0; } ?> },
+				    { nbr: '<?php echo convert_j($graph['jour'][5]);?>', valeur: <?php if(isset($graph['pourc'][5])) { echo $graph['pourc'][5]; } else { echo 0; } ?> },
+				    { nbr: '<?php echo convert_j($graph['jour'][6]);?>', valeur: <?php if(isset($graph['pourc'][6])) { echo $graph['pourc'][6]; } else { echo 0; } ?> },
 				  ],
 				  
 				  // The name of the data record attribute that contains x-values.
@@ -276,10 +275,9 @@
 				  // chart.
 				  labels: ['Pourcentage'],
 				
-				 pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4'],
-				   parseTime: false,
-				   hideHover: false,
-				
+				 	pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4'],
+				  parseTime: false,
+				  hideHover: false,
 				});
 	    </script>
 	

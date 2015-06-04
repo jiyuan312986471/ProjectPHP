@@ -13,13 +13,10 @@
   $jour = date('D');
   
   // refresh
-  echo'<META HTTP-EQUIV="Refresh" CONTENT="8; URL=machine.php?machine='.$machine.'">';
+  echo '<META HTTP-EQUIV="Refresh" CONTENT="8; URL=machineAll.php">';
   
   // declare 6 machines
   $listMachine = array("AK","SAK","DT1","DT2","SAD","DT3");
-  
-  // declare 6 pourcentage graphs
-  $listGraphPourc = array();
   
   
   /***********************************************************
@@ -29,6 +26,27 @@
   ***********************************************************/
   foreach($listMachine as $machine) {
   	
+  	/*********************************
+  	*					PARETO GRAPH					 *
+  	*********************************/		
+  	// identify machine and get corresponding defauts
+  	$listDefaut = identifyMachine($machine);
+  	
+  	// get pareto data
+		$dataPareto = file_get_contents("macdef/".$machine.".dat");
+		
+		// declare pareto array
+		$listPareto = array(0,0,0,0,0,0,0,0,0,0);
+		
+		// calculate pareto
+		for($i = 0; $i < 10; $i++) {
+			$listPareto[$i] = pareto_m($listDefaut[$i], $machine, $dataPareto, $conn);
+		}
+		
+		// combine pareto array with defaut array
+  	
+  	// declare the percentage array
+		$listPourc = array("pourc" => array(0,0,0,0,0,0,0), "jour" => array("","","","","","",""));
   }
 
 ?>

@@ -197,5 +197,213 @@
 		file_put_contents('graph_'.$machine.'.dat', $donne);
 		return $nb_total.' '.$pourcentage;
 		
-	}	
+	}
+	
+	/* Fonction permettante d'identifier la machine																													*/
+	/* Entre	:	le type de machine																																					*/
+	/* Sortie	:	array des defauts correspondants																														*/
+	function identifyMachine($machine) {
+		// identify machine
+		switch($machine) {
+			case 'AK':
+				/* ressort */
+				$defaut1 = 'ressort'; 
+				
+				/* 2 circuit mobile */
+				$defaut2 = '2 circ';
+				        
+				/* contact */
+				$defaut3 = 'contact';
+				        
+				/* contacteur bruyant */
+				$defaut4 = 'bruy';
+				 
+				/* ecrasement */
+				$defaut5 = 'ecras';
+				      
+				/* etiquette */
+				$defaut6 = 'etiq';
+				    
+				/* montée retombée */
+				$defaut7 = 'mont';
+				   
+				/* motorisation */
+				$defaut8 = 'motori';
+				
+		    	/* position doigt */
+				$defaut9 = 'doigt';
+				        
+				/* course */
+				$defaut10 = 'course';
+				break;
+			
+			case 'SAK':
+				/* ressort */
+				$defaut1 = 'ressort'; 
+				
+				/* 2 circuit mobile */
+				$defaut2 = '2 circ';
+				        
+				/* contact */
+				$defaut3 = 'contact';
+				        
+				/* contacteur bruyant */
+				$defaut4 = 'bruy';
+				 
+				/* ecrasement */
+				$defaut5 = 'ecras';
+				      
+				/* etiquette */
+				$defaut6 = 'etiq';
+				    
+				/* montée retombée */
+				$defaut7 = 'mont';
+				   
+				/* motorisation */
+				$defaut8 = 'motori';
+				
+		    	/* position doigt */
+				$defaut9 = 'doigt';
+				        
+				/* course */
+				$defaut10 = 'course';
+				break;
+			
+			case 'DT1':
+				/* battement */
+				$defaut1 = 'bat';    
+				
+				/* impédance */
+				$defaut2 = 'impé';
+				        
+				/* fiabilité */
+				$defaut3 = 'fiabil';
+				        
+				/* temps de fermeture DC BD */
+				$defaut4 = 'ferm';
+				 
+				/* Course/ecrasement */
+				$defaut5 = 'Course/ecras';
+				      
+				/* tension de montée */
+				$defaut6 = 'mont';
+				    
+				/* tension de retombée */
+				$defaut7 = 'retomb';
+				   
+				/* consommation */
+				$defaut8 = 'conso';
+				
+		    	/* schéma*/
+				$defaut9 = 'schéma';
+				        
+				/* Présence transil sur Cde sans transil */
+				$defaut10 = 'transil';
+				break;
+			
+			case 'DT2':
+				/* battement */
+				$defaut1 = 'bat';    
+				
+				/* impédance */
+				$defaut2 = 'impé';
+				        
+				/* fiabilité */
+				$defaut3 = 'fiabil';
+				        
+				/* temps de fermeture DC BD */
+				$defaut4 = 'ferm';
+				 
+				/* Course/ecrasement */
+				$defaut5 = 'Course/ecras';
+				      
+				/* tension de montée */
+				$defaut6 = 'mont';
+				    
+				/* tension de retombée */
+				$defaut7 = 'retomb';
+				   
+				/* consommation */
+				$defaut8 = 'conso';
+				
+		    	/* schéma*/
+				$defaut9 = 'schéma';
+				        
+				/* Présence transil sur Cde sans transil */
+				$defaut10 = 'transil';
+				break;
+			
+			case 'SAD':
+				/* battement */
+				$defaut1 = 'bat';    
+				
+				/* impédance */
+				$defaut2 = 'impé';
+				        
+				/* fiabilité */
+				$defaut3 = 'fiabil';
+				        
+				/* temps de fermeture DC BD */
+				$defaut4 = 'ferm';
+				 
+				/* Course/ecrasement */
+				$defaut5 = 'Course/ecras';
+				      
+				/* tension de montée */
+				$defaut6 = 'mont';
+				    
+				/* tension de retombée */
+				$defaut7 = 'retomb';
+				   
+				/* consommation */
+				$defaut8 = 'conso';
+				
+		    	/* schéma*/
+				$defaut9 = 'schéma';
+				        
+				/* Présence transil sur Cde sans transil */
+				$defaut10 = 'transil';
+				break;
+			
+			case 'DT3':
+				/* battement */
+				$defaut1 = 'bat';    
+				
+				/* course/ecrasement */
+				$defaut2 = 'course/e';
+				        
+				/* tension de montée */
+				$defaut3 = 'mont';
+				        
+				/* consommation  */
+				$defaut4 = 'conso';
+				 
+				/* tension de retombée */
+				$defaut5 = 'retomb';
+				      
+				/* schéma */
+				$defaut6 = 'schéma';
+				    
+				/* Défaut appel maintien */
+				$defaut7 = 'Défaut appel';
+				   
+				/* Fiabilité */
+				$defaut8 = 'Fiabil';
+				
+		    	/* contact appel/maintien produit */
+				$defaut9 = 'appel/maintien';
+				        
+				/* Courant appel trop long */
+				$defaut10 = 'appel trop long';
+				break;
+			
+			default:
+				break;
+		}
+		
+		// create array
+		$listDefaut = array($defaut1, $defaut2, $defaut3, $defaut4, $defaut5, $defaut6, $defaut7, $defaut8, $defaut9, $defaut10);
+		
+		return $listDefaut;
+	}
 ?>
