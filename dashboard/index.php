@@ -2,7 +2,7 @@
 	
 	session_start();
 
-	include 'util.php';
+	include_once 'util.php';
 	include_once '../pers.php';
 	include_once '../bdd.php';
 	
@@ -43,6 +43,7 @@
 			}
 		}
 	}
+	
 	// Chercher des nb total et taux de defaut pour chaque machine
 	$paraMachine = array( "nb" 	=> array(0,0,0,0,0,0), "pourc"	=> array(0,0,0,0,0,0) );
 	
