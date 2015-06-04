@@ -72,21 +72,7 @@
   if($graph['pourc'][6]!= $nombre) {
   	$graph['pourc'][6] = $nombre;
 	}
-        /* alerte 
-        $Nbalert=$nombre-$ck;
-        $reqAlert="SELECT defau.nom
-FROM defaut AS defau
-JOIN  `dbo.tesysk_auto` AS defec ON defau.code = defec.code order by date desc limit 0,".$Nbalert."";
-        $rsltAlert=sqlsrv_query($reqAlert);
-        $index = 0; 
-         while($row=sqlsrv_fetch_array($rsltAlert)) {
-
-
-                        $listeAlerte[$index]=$row['nom'];
-                        $index += 1;       
-                                    }*/
-  
-  
+	
 	//Enregistrer des données dans le graph.bat
 	$donne = sprintf("%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s", 
 										$graph['pourc'][0],$graph['pourc'][1],$graph['pourc'][2],$graph['pourc'][3],$graph['pourc'][4],$graph['pourc'][5],$graph['pourc'][6],
