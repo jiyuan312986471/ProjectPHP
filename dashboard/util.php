@@ -32,7 +32,7 @@
 	
 	/* Fonction permettante de calculer le paréto d'un défaut pour la machine séletionnée										*/
 	/* Entre  : defaut, machine sélectionné, nombre des défauts pour cette machine													*/
-	/* Sortie : pourcetage pour ce défaut																																		*/
+	/* Sortie : pourcentage pour ce défaut																																		*/
 	function pareto_m($defaut,$machine,$nombre,$conn) {
 		$type = 0;
 		
