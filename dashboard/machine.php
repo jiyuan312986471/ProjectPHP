@@ -271,14 +271,14 @@
 <body>
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-       <?php include('divs/logo.php');     ?>
-
-            <!--  notification et logout  -->
-             <?php include('divs/barre.php');     ?>
-
-            <!-- Menu -->
-            <?php include('divs/menu.php');     ?>
-          </nav>
+       		<?php
+       			include('divs/logo.php');
+       			//notification et logout
+            include('divs/barre.php');
+            //Menu
+            include('divs/menu.php');
+          ?>
+        </nav>
 
         <!-- contenu -->
         <div id="page-wrapper">
