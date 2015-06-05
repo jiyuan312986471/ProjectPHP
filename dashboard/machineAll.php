@@ -57,7 +57,7 @@
 		$graphPareto = array_combine($listDefaut, $listPareto);
   	
   	/*********************************
-  	*					POURC GRAPH					 *
+  	*					POURC GRAPH						 *
   	*********************************/
   	// declare the percentage array
 		$listPourc = array("pourc" => array(0,0,0,0,0,0,0), "jour" => array("","","","","","",""));
