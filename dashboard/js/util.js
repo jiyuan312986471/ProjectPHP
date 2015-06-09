@@ -103,16 +103,16 @@ function createXMLHttpRequest() {
 function start(machine, option, graphPourc, listDefaut, listPareto){
 	var xmlHttp = createXMLHttpRequest();
 	var url = "ajaxController.php?machine=" + machine + "&option=" + option;
-	xmlHttp.onreadystatechange = function(){ callback(xmlHttp, machine, graphPourc, listDefaut, listPareto) };
+	xmlHttp.onreadystatechange = function(){ callback(xmlHttp, machine, graphPourc, listDefaut, listPareto, option) };
 	xmlHttp.open("GET",url,true);
 	xmlHttp.send(null);
 };
 
-function callback(xmlHttp, machine, graphPourc, listDefaut, listPareto) {
+function callback(xmlHttp, machine, graphPourc, listDefaut, listPareto, option) {
 	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
 		document.getElementById("graphMachine"+machine).innerHTML = xmlHttp.responseText;
 		drawGraph(machine, graphPourc, listDefaut, listPareto);
 		
-		//setTimeout("start()",3600000);
+		setTimeout(function(){ start(machine, option, graphPourc, listDefaut, listPareto);},2000);
 	}
 };
