@@ -7,7 +7,6 @@
   ***********************************************************/
 	
 	include 'util.php';
-	include ("JSON.php");
   require_once('../bdd.php');
 
   // DB connection
@@ -33,9 +32,6 @@
   
   // get display option
   $option = $_GET['option'];
-  
-  // JSON tool
-  $json = new Services_JSON();
   
 ?>
 
@@ -99,30 +95,6 @@
         		<div class="col-lg-12">
         			<h1 class="page-header">
         				Machines
-        				<div class="btn-group" data-toggle="buttons">
-        					<?php 
-        						if($option == "pareto") {
-        					?>
-										  <label class="btn btn-primary btn-lg" id="Pourcentage">
-										    <input type="radio" name="options" autocomplete="off"> Pourcentage
-										  </label>
-										  <label class="btn btn-primary btn-lg active" id="Pareto">
-										    <input type="radio" name="options" autocomplete="off"> Pareto
-										  </label>
-									<?php
-										}
-										else {
-									?>
-											<label class="btn btn-primary btn-lg active" id="Pourcentage">
-										    <input type="radio" name="options" autocomplete="off"> Pourcentage
-										  </label>
-										  <label class="btn btn-primary btn-lg" id="Pareto">
-										    <input type="radio" name="options" autocomplete="off"> Pareto
-										  </label>
-									<?php
-										}
-									?>
-								</div>
         			</h1>
         		</div>
           </div>
@@ -186,68 +158,24 @@
 								$graphPourc['jour'] [4], 
 								$graphPourc['jour'] [5],	
 								$graphPourc['jour'] [6] );
-  	
+								
 ?>
 
 <!------------------------------------ DRAW GRAPH OF EACH MACHINE ------------------------------------>
         	
 	        	<!-- panel for machine -->
 	        	<div class="col-lg-6">
-		        	<div class="panel panel-success">
-		        		<!-- machine name -->
-		        		<div class="panel-heading">
-		        			Machine <?php echo $machine; ?>
-		        		</div>
-		        		
-		        		<!-- graphs -->
-		        		<div class="panel-body">
-		        			<div class="row">
-		        				
-		        				<?php 
-		        					if($option == "pourc") {
-		        				?>
-				        				<!-- graphPourc -->
-				        				<div class="col-lg-12">
-						        			<div class="panel panel-default">
-						        				<div class="panel-heading">
-						        					Pourcentage Defauts <?php echo $machine; ?>
-						        				</div>
-						        				<div class="panel-body">
-						        					<div id="pourcDefaut<?php echo $machine ?>"></div>
-						        				</div>
-						        			</div>
-					        			</div>
-					        	<?php
-					        		}
-					        		else if($option == "pareto") {
-					        	?>
-					        			<!-- graphPareto -->
-				        				<div class="col-lg-12">
-						        			<div class="panel panel-default">
-						        				<div class="panel-heading">
-						        					Pareto des Defauts <?php echo $machine; ?>
-						        				</div>
-						        				<div class="panel-body">
-						        					<div id="paretoDefaut<?php echo $machine ?>"></div>
-						        				</div>
-						        			</div>
-					        			</div>
-					        	<?php
-					        		}
-					        	?>
-			        			
-			        		</div>
-			        	</div>
-			        </div>
+		        	<div class="panel panel-success" id="graphMachine"></div>
 			      </div>
 		
 		<!-- Draw Chosen Graph -->
     <script language="javascript">
-    	drawGraph(
-    		<?php echo $json -> encodeUnsafe($machine); 		?>,
-    		<?php echo $json -> encodeUnsafe($graphPourc); 	?>,
-    		<?php echo $json -> encodeUnsafe($graphPareto); ?>,
-    		<?php echo $json -> encodeUnsafe($listDefaut); 	?>
+    	start(
+    		<?php echo json_encode($machine); ?>,
+    		<?php echo json_encode($option); ?>,
+    		<?php echo json_encode($graphPourc); ?>,
+    		<?php echo json_encode($listDefaut); ?>,
+    		<?php echo json_encode($listPareto); ?>
     	);
     </script>
 
@@ -255,44 +183,13 @@
   } // end foreach machine
 ?>
 
-	</div>
-	</div>
-	</div>
+					</div>
+				</div>
+		</div>
 
 <!------------------------------------------ PAGE STRUCTURE ------------------------------------------>
 
 	<script language="javascript">
-		// auto refresh
-    var xmlHttp;
-		function createXMLHttpRequest() {
-			xmlHttp = null;
-			if (window.XMLHttpRequest) {// code for all new browsers
-			  xmlHttp = new XMLHttpRequest();
-			}
-			else if (window.ActiveXObject) {// code for IE5 and IE6
-			  xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-		}
-		
-		function start(option){
-		 createXMLHttpRequest();
-		 var url = "machineAll.php?option=" + option;
-		 xmlHttp.onreadystatechange = callback;
-		 xmlHttp.open("GET",url,true);
-		 xmlHttp.send(null);
-		}
-		
-		function callback() {
-			if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
-				$('body').innerHTML = xmlHttp.responseText;
-				//document.getElementById("wrapper").innerHTML = xmlHttp.responseText;
-				    
-				//alert(xmlHttp.responseText);
-				    
-				setTimeout("start()",3600000);
-			}
-		}
-		
 		// click to refresh
     $('.btn-group #Pourcentage').click(function () {
     		//start("pourc")
