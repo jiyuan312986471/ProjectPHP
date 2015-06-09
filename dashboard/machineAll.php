@@ -160,7 +160,7 @@
 		}
 		
 		// combine pareto array(value) with defaut array(key)
-		$graphPareto = array_combine($listDefaut, $listPareto);
+		//$graphPareto = array_combine($listDefaut, $listPareto);
   	
   	/*********************************
   	*					POURC GRAPH						 *
@@ -246,8 +246,8 @@
     	drawGraph(
     		<?php echo $json -> encodeUnsafe($machine); 		?>,
     		<?php echo $json -> encodeUnsafe($graphPourc); 	?>,
-    		<?php echo $json -> encodeUnsafe($graphPareto); ?>,
-    		<?php echo $json -> encodeUnsafe($listDefaut); 	?>
+    		<?php echo $json -> encodeUnsafe($listDefaut); ?>,
+    		<?php echo $json -> encodeUnsafe($listPareto); 	?>
     	);
     </script>
 
@@ -274,35 +274,33 @@
 			}
 		}
 		
-		function start(){
+		function start(option){
 		 createXMLHttpRequest();
-		 var url = "machineAll.php?option=<?php echo $option; ?>";
+		 var url = "machineAll.php?option=" + option;
 		 xmlHttp.onreadystatechange = callback;
 		 xmlHttp.open("GET",url,true);
 		 xmlHttp.send(null);
 		}
 		
 		function callback() {
-			if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {// 4 = "loaded"  200 = OK
-			  document.getElementById("wrapper").innerHTML = xmlHttp.responseText;
-			    
-			  alert(xmlHttp.responseText);
-			    
-			  setTimeout("start()",3600000);
-			}
-			else {
-			  alert("Connection error or page not found.");
+			if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
+				$('body').innerHTML = xmlHttp.responseText;
+				//document.getElementById("wrapper").innerHTML = xmlHttp.responseText;
+				    
+				//alert(xmlHttp.responseText);
+				    
+				setTimeout("start()",3600000);
 			}
 		}
 		
 		// click to refresh
     $('.btn-group #Pourcentage').click(function () {
-    		start()
-        //window.location.href = "machineAll.php?option=pourc"
+    		//start("pourc")
+        window.location.href = "machineAll.php?option=pourc"
     });
     $('.btn-group #Pareto').click(function () {
-    		start()
-        //window.location.href = "machineAll.php?option=pareto"
+    		//start("pareto")
+        window.location.href = "machineAll.php?option=pareto"
     });
   </script>
 
