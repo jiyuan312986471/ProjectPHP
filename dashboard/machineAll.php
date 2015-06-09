@@ -7,6 +7,7 @@
   ***********************************************************/
 	
 	include 'util.php';
+	include ("JSON.php");
   require_once('../bdd.php');
 
   // DB connection
@@ -30,6 +31,12 @@
   // declare graph pareto
   $graphPareto = array();
   
+  // get display option
+  $option = $_GET['option'];
+  
+  // JSON tool
+  $json = new Services_JSON();
+  
 ?>
 
 
@@ -49,8 +56,9 @@
     <link href="css/plugins/timeline.css" rel="stylesheet">
     <link href="css/sb-admin-2.css" rel="stylesheet">
     <link href="css/plugins/morris.css" rel="stylesheet">
-    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> 
 </head>
+
 <body>
 		<!------- JAVASCRIPT ------->
 		<!-- jQuery -->
@@ -70,6 +78,8 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>
     
+    <!-- Functions used JavaScript -->
+   	<script src="js/util.js"></script>
     
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -84,6 +94,39 @@
 
         <!-- contenu -->
         <div id="page-wrapper">
+        	
+        	<div class="row">
+        		<div class="col-lg-12">
+        			<h1 class="page-header">
+        				Machines
+        				<div class="btn-group" data-toggle="buttons">
+        					<?php 
+        						if($option == "pareto") {
+        					?>
+										  <label class="btn btn-primary btn-lg" id="Pourcentage">
+										    <input type="radio" name="options" autocomplete="off"> Pourcentage
+										  </label>
+										  <label class="btn btn-primary btn-lg active" id="Pareto">
+										    <input type="radio" name="options" autocomplete="off"> Pareto
+										  </label>
+									<?php
+										}
+										else {
+									?>
+											<label class="btn btn-primary btn-lg active" id="Pourcentage">
+										    <input type="radio" name="options" autocomplete="off"> Pourcentage
+										  </label>
+										  <label class="btn btn-primary btn-lg" id="Pareto">
+										    <input type="radio" name="options" autocomplete="off"> Pareto
+										  </label>
+									<?php
+										}
+									?>
+								</div>
+        			</h1>
+        		</div>
+          </div>
+          
         	<div class="row">
 
 
@@ -143,15 +186,6 @@
 								$graphPourc['jour'] [4], 
 								$graphPourc['jour'] [5],	
 								$graphPourc['jour'] [6] );
-								
-		/*********************************
-  	*	 COMBINE 2 GRAPH AND MACHINE	 *
-  	*********************************/
-  	// combine 2 graphs
-  	$graph = array($graphPourc, $graphPareto);
-  	
-  	// combine machine with graph
-  	$machineGraph = array($machine => $graph);
   	
 ?>
 
@@ -169,92 +203,52 @@
 		        		<div class="panel-body">
 		        			<div class="row">
 		        				
-		        				<!-- graphPourc -->
-		        				<div class="col-lg-6">
-				        			<div class="panel panel-default">
-				        				<div class="panel-heading">
-				        					Pourcentage Defauts <?php echo $machine; ?>
-				        				</div>
-				        				<div class="panel-body">
-				        					<div id="pourcDefaut<?php echo $machine ?>"></div>
-				        				</div>
-				        			</div>
-			        			</div>
-			        			
-			        			<!-- graphPareto -->
-		        				<div class="col-lg-6">
-				        			<div class="panel panel-default">
-				        				<div class="panel-heading">
-				        					Pareto des Defauts <?php echo $machine; ?>
-				        				</div>
-				        				<div class="panel-body">
-				        					<div id="paretoDefaut<?php echo $machine ?>"></div>
-				        				</div>
-				        			</div>
-			        			</div>
+		        				<?php 
+		        					if($option == "pourc") {
+		        				?>
+				        				<!-- graphPourc -->
+				        				<div class="col-lg-12">
+						        			<div class="panel panel-default">
+						        				<div class="panel-heading">
+						        					Pourcentage Defauts <?php echo $machine; ?>
+						        				</div>
+						        				<div class="panel-body">
+						        					<div id="pourcDefaut<?php echo $machine ?>"></div>
+						        				</div>
+						        			</div>
+					        			</div>
+					        	<?php
+					        		}
+					        		else if($option == "pareto") {
+					        	?>
+					        			<!-- graphPareto -->
+				        				<div class="col-lg-12">
+						        			<div class="panel panel-default">
+						        				<div class="panel-heading">
+						        					Pareto des Defauts <?php echo $machine; ?>
+						        				</div>
+						        				<div class="panel-body">
+						        					<div id="paretoDefaut<?php echo $machine ?>"></div>
+						        				</div>
+						        			</div>
+					        			</div>
+					        	<?php
+					        		}
+					        	?>
 			        			
 			        		</div>
 			        	</div>
 			        </div>
 			      </div>
-
-    <script type="text/javascript">
-	    new Morris.Line({
-			  // ID of the element in which to draw the chart.
-			  element: 'pourcDefaut<?php echo $machine ?>',
-			  
-			  // Chart data records -- each entry in this array corresponds to a point on the chart.
-			  data: [
-			    { nbr: '<?php echo convert_j($graphPourc['jour'][0]);?>', valeur: <?php if(isset($graphPourc['pourc'][0])) { echo $graphPourc['pourc'][0];} else { echo 0; } ?> },
-			    { nbr: '<?php echo convert_j($graphPourc['jour'][1]);?>', valeur: <?php if(isset($graphPourc['pourc'][1])) { echo $graphPourc['pourc'][1];} else { echo 0; } ?> },
-			    { nbr: '<?php echo convert_j($graphPourc['jour'][2]);?>', valeur: <?php if(isset($graphPourc['pourc'][2])) { echo $graphPourc['pourc'][2];} else { echo 0; } ?> },
-			    { nbr: '<?php echo convert_j($graphPourc['jour'][3]);?>', valeur: <?php if(isset($graphPourc['pourc'][3])) { echo $graphPourc['pourc'][3];} else { echo 0; } ?> },
-			    { nbr: '<?php echo convert_j($graphPourc['jour'][4]);?>', valeur: <?php if(isset($graphPourc['pourc'][4])) { echo $graphPourc['pourc'][4];} else { echo 0; } ?> },
-			    { nbr: '<?php echo convert_j($graphPourc['jour'][5]);?>', valeur: <?php if(isset($graphPourc['pourc'][5])) { echo $graphPourc['pourc'][5];} else { echo 0; } ?> },
-			    { nbr: '<?php echo convert_j($graphPourc['jour'][6]);?>', valeur: <?php if(isset($graphPourc['pourc'][6])) { echo $graphPourc['pourc'][6];} else { echo 0; } ?> },
-			  ],
-			  
-			  // The name of the data record attribute that contains x-values.
-			  xkey: 'nbr',
-			  
-			  // A list of names of data record attributes that contain y-values.
-			  ykeys: ['valeur'],
-			  
-			  // Labels for the ykeys -- will be displayed when you hover over the chart.
-			  labels: ['Pourcentage'],
-			
-			 	pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4','#09DCB4','#046351','#E16351','#4C221C'],
-			  parseTime: false,
-			  hideHover: false,
-			});
-	
-	    new Morris.Bar({
-			  // ID of the element in which to draw the chart.
-			  element: 'paretoDefaut<?php echo $machine ?>',
-			  
-			  // Chart data records -- each entry in this array corresponds to a point on the chart.
-			  data: [
-			  	<?php
-			  		foreach(array_keys($graphPareto) as $defaut) {
-			  			// get pareto
-			  			$pareto = $graphPareto[$defaut];
-			  			
-			  			// draw with JS
-			  			?>
-			  			{ pourcentage: '<?php echo $defaut ?>',  value: <?php if(isset($pareto))  { echo $pareto;  } else { echo 0; } ?> },
-			  			<?php
-			  		}
-			  	?>
-			  ],
-			  // The name of the data record attribute that contains x-values.
-			  xkey: 'pourcentage',
-			  
-			  // A list of names of data record attributes that contain y-values.
-			  ykeys: ['value'],
-			  
-			  // Labels for the ykeys -- will be displayed when you hover over the chart.
-			  labels: ['Pourcentage'],
-			});
+		
+		<!-- Draw Chosen Graph -->
+    <script language="javascript">
+    	drawGraph(
+    		<?php echo $json -> encodeUnsafe($machine); 		?>,
+    		<?php echo $json -> encodeUnsafe($graphPourc); 	?>,
+    		<?php echo $json -> encodeUnsafe($graphPareto); ?>,
+    		<?php echo $json -> encodeUnsafe($listDefaut); 	?>
+    	);
     </script>
 
 <?php
@@ -264,9 +258,53 @@
 	</div>
 	</div>
 	</div>
-	</div>
 
 <!------------------------------------------ PAGE STRUCTURE ------------------------------------------>
+
+	<script language="javascript">
+		// auto refresh
+    var xmlHttp;
+		function createXMLHttpRequest() {
+			xmlHttp = null;
+			if (window.XMLHttpRequest) {// code for all new browsers
+			  xmlHttp = new XMLHttpRequest();
+			}
+			else if (window.ActiveXObject) {// code for IE5 and IE6
+			  xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
+		
+		function start(){
+		 createXMLHttpRequest();
+		 var url = "machineAll.php?option=<?php echo $option; ?>";
+		 xmlHttp.onreadystatechange = callback;
+		 xmlHttp.open("GET",url,true);
+		 xmlHttp.send(null);
+		}
+		
+		function callback() {
+			if (xmlHttp.readyState == 4) {// 4 = "loaded"
+			  if (xmlHttp.status == 200) {// 200 = OK
+			    document.getElementById("wrapper").innerHTML = xmlHttp.responseText;
+			    alert(xmlHttp.responseText);
+			    setTimeout("start()",3600000);
+			  }
+			  else {
+			    alert("Problem retrieving XML data");
+			  }
+			}
+		}
+		
+		// click to refresh
+    $('.btn-group #Pourcentage').click(function () {
+        window.location.href = "machineAll.php?option=pourc"
+    });
+    $('.btn-group #Pareto').click(function () {
+        window.location.href = "machineAll.php?option=pareto"
+    });
+  </script>
+
+
 
 </body>
 </html>
