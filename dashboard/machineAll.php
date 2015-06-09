@@ -283,24 +283,26 @@
 		}
 		
 		function callback() {
-			if (xmlHttp.readyState == 4) {// 4 = "loaded"
-			  if (xmlHttp.status == 200) {// 200 = OK
-			    document.getElementById("wrapper").innerHTML = xmlHttp.responseText;
-			    alert(xmlHttp.responseText);
-			    setTimeout("start()",3600000);
-			  }
-			  else {
-			    alert("Problem retrieving XML data");
-			  }
+			if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {// 4 = "loaded"  200 = OK
+			  document.getElementById("wrapper").innerHTML = xmlHttp.responseText;
+			    
+			  alert(xmlHttp.responseText);
+			    
+			  setTimeout("start()",3600000);
+			}
+			else {
+			  alert("Connection error or page not found.");
 			}
 		}
 		
 		// click to refresh
     $('.btn-group #Pourcentage').click(function () {
-        window.location.href = "machineAll.php?option=pourc"
+    		start()
+        //window.location.href = "machineAll.php?option=pourc"
     });
     $('.btn-group #Pareto').click(function () {
-        window.location.href = "machineAll.php?option=pareto"
+    		start()
+        //window.location.href = "machineAll.php?option=pareto"
     });
   </script>
 
