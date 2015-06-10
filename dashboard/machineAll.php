@@ -30,8 +30,9 @@
   // declare graph pareto
   $graphPareto = array();
   
-  // get display option
-  $option = $_GET['option'];
+  // initialize display option
+  $listOption = array("pourc","pourc","pourc","pourc","pourc","pourc");
+  $optionMachine = array_combine($listMachine, $listOption);
   
 ?>
 
@@ -111,6 +112,11 @@
   	////////////////////////////////// DATA PREPARATION //////////////////////////////////
   	
   	/*********************************
+  	*					DISPLAY OPTION				 *
+  	*********************************/
+  	$option = $optionMachine[$machine];
+  	
+  	/*********************************
   	*					PARETO GRAPH					 *
   	*********************************/		
   	// identify machine and get corresponding defauts
@@ -188,20 +194,6 @@
 		</div>
 
 <!------------------------------------------ PAGE STRUCTURE ------------------------------------------>
-
-	<script language="javascript">
-		// click to refresh
-    $('.btn-group #Pourcentage').click(function () {
-    		//start("pourc")
-        window.location.href = "machineAll.php?option=pourc"
-    });
-    $('.btn-group #Pareto').click(function () {
-    		//start("pareto")
-        window.location.href = "machineAll.php?option=pareto"
-    });
-  </script>
-
-
 
 </body>
 </html>

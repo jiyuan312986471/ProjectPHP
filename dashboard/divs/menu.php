@@ -7,7 +7,7 @@
                         </li>
                     
                         <li>
-                           <a href="machineAll.php?option=pourc"><i class="fa fa-table fa-fw" ></i> Machines</a>
+                           <a href="machineAll.php"><i class="fa fa-table fa-fw" ></i> Machines</a>
                                 <ul class="nav nav-second-level">
                             <li>
                                     

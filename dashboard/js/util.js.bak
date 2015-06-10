@@ -100,30 +100,40 @@ function createXMLHttpRequest() {
 	return xmlHttp;
 };
 
+// Starter
 function start(machine, option, graphPourc, listDefaut, listPareto){
-	alert(
-				machine + " start! \n\n" 
-			+ "option: " + option + "\n\n"
-			+ "graphPourc: " + graphPourc + "\n\n"
-			+ "listDefaut: " + listDefaut + "\n\n"
-			+ "listPareto: " + listPareto + "\n\n"
-		);
 	var xmlHttp = createXMLHttpRequest();
-	var url = "ajaxController.php?machine=" + machine + "&option=" + option;
-	xmlHttp.onreadystatechange = function(){ callback(xmlHttp, machine, graphPourc, listDefaut, listPareto, option) };
+	var url = "ajaxStarter.php?machine=" + machine + "&option=" + option;
+	xmlHttp.onreadystatechange = function(){ callbackStarter(xmlHttp, machine, graphPourc, listDefaut, listPareto, option) };
 	xmlHttp.open("GET",url,true);
 	xmlHttp.send(null);
 };
 
-function callback(xmlHttp, machine, graphPourc, listDefaut, listPareto, option) {
+// Starter Callback
+function callbackStarter(xmlHttp, machine, graphPourc, listDefaut, listPareto, option) {
 	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
-		/*alert(
-					"Callback: \n\n"
-				+ "Option: " + option
-			);*/
 		document.getElementById("graphMachine"+machine).innerHTML = xmlHttp.responseText;
 		drawGraph(machine, graphPourc, listDefaut, listPareto);
 		
-		setTimeout(function(){ start(machine, option, graphPourc, listDefaut, listPareto);},2000);
+		//setTimeout(function(){ start(machine, option, graphPourc, listDefaut, listPareto);},2000);
+	}
+};
+
+// Changer
+function change(machine, option, graphPourc, listDefaut, listPareto){
+	var xmlHttp = createXMLHttpRequest();
+	var url = "ajaxStarter.php?machine=" + machine + "&option=" + option;
+	xmlHttp.onreadystatechange = function(){ callbackStarter(xmlHttp, machine, graphPourc, listDefaut, listPareto, option) };
+	xmlHttp.open("GET",url,true);
+	xmlHttp.send(null);
+};
+
+// Changer Callback
+function callbackChanger(xmlHttp, machine, graphPourc, listDefaut, listPareto, option) {
+	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
+		document.getElementById("graphMachine"+machine).innerHTML = xmlHttp.responseText;
+		drawGraph(machine, graphPourc, listDefaut, listPareto);
+		
+		//setTimeout(function(){ start(machine, option, graphPourc, listDefaut, listPareto);},2000);
 	}
 };

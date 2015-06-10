@@ -30,8 +30,9 @@
   // declare graph pareto
   $graphPareto = array();
   
-  // get display option
-  $option = $_GET['option'];
+  // initialize display option
+  $listOption = array("pourc","pourc","pourc","pourc","pourc","pourc");
+  $optionMachine = array_combine($listMachine, $listOption);
   
 ?>
 
@@ -111,6 +112,11 @@
   	////////////////////////////////// DATA PREPARATION //////////////////////////////////
   	
   	/*********************************
+  	*					DISPLAY OPTION				 *
+  	*********************************/
+  	$option = $optionMachine[$machine];
+  	
+  	/*********************************
   	*					PARETO GRAPH					 *
   	*********************************/		
   	// identify machine and get corresponding defauts
@@ -165,7 +171,7 @@
         	
 	        	<!-- panel for machine -->
 	        	<div class="col-lg-6">
-		        	<div class="panel panel-success" id="graphMachine"></div>
+		        	<div class="panel panel-success" id="graphMachine<?php echo $machine; ?>"></div>
 			      </div>
 		
 		<!-- Draw Chosen Graph -->
