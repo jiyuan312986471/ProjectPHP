@@ -34,6 +34,18 @@
   $listOption = array("pourc","pourc","pourc","pourc","pourc","pourc");
   $optionMachine = array_combine($listMachine, $listOption);
   
+  // all graph pourcentage
+  $listGraphPourc = array();
+  
+  // all graph pareto
+  $listGraphPareto = array();
+  
+  // machine -> graphPourc
+  $listMachineGraphPourc = array();
+  
+  // machine -> graphPareto
+  $listMachineGraphPareto = array();
+  
 ?>
 
 
@@ -100,7 +112,7 @@
         		</div>
           </div>
           
-        	<div class="row">
+        	<div class="row" id="graphs">
 
 
 <!----------------------------------------- FOR EACH MACHINE ----------------------------------------->
@@ -111,59 +123,20 @@
   	
   	////////////////////////////////// DATA PREPARATION //////////////////////////////////
   	
-  	/*********************************
-  	*					DISPLAY OPTION				 *
-  	*********************************/
+  	// DISPLAY OPTION
   	$option = $optionMachine[$machine];
   	
-  	/*********************************
-  	*					PARETO GRAPH					 *
-  	*********************************/		
-  	// identify machine and get corresponding defauts
-  	$listDefaut = identifyMachine($machine);
+  	// POURCENTAGE GRAPH
+		$graphPourc = getPourcGraphData($machine);
   	
-  	// get pareto data
-		$dataPareto = file_get_contents("macdef/".$machine.".dat");
-		
-		// declare pareto array
-		$listPareto = array();
-		
-		// set value of pareto array
-		for($i = 0; $i < 10; $i++) {
-			// calculate pareto
-			$pareto = pareto_m($listDefaut[$i], $machine, $dataPareto, $conn);
-			
-			// add pareto into array
-			array_push($listPareto, $pareto);
-		}
-		
-		// combine pareto array(value) with defaut array(key)
-		//$graphPareto = array_combine($listDefaut, $listPareto);
+		// PARETO GRAPH
+  	$graphPareto = getParetoGraphData($machine, $conn);
+  	$listDefaut = array_keys($graphPareto);
+  	$listPareto = array_values($graphPareto);
   	
-  	/*********************************
-  	*					POURC GRAPH						 *
-  	*********************************/
-  	// declare the percentage array
-		$graphPourc = array("pourc" => array(0,0,0,0,0,0,0), "jour" => array("","","","","","",""));
-		
-		// get machine data
-		$dataPourc = file_get_contents('graph_'.$machine.'.dat');
-		$n = sscanf($dataPourc,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s",
-								$graphPourc['pourc'][0], 
-								$graphPourc['pourc'][1],
-								$graphPourc['pourc'][2], 
-								$graphPourc['pourc'][3], 
-								$graphPourc['pourc'][4], 
-								$graphPourc['pourc'][5], 
-								$graphPourc['pourc'][6],
-								
-								$graphPourc['jour'] [0], 
-								$graphPourc['jour'] [1],	
-								$graphPourc['jour'] [2], 
-								$graphPourc['jour'] [3],	
-								$graphPourc['jour'] [4], 
-								$graphPourc['jour'] [5],	
-								$graphPourc['jour'] [6] );
+		// push datas into graph lists
+		array_push($listGraphPourc, $graphPourc);
+		array_push($listGraphPareto, $graphPareto);
 								
 ?>
 
@@ -194,6 +167,94 @@
 		</div>
 
 <!------------------------------------------ PAGE STRUCTURE ------------------------------------------>
+
+<?php
+
+	// map machine list (as keys) with graphPourc list (as values)
+	$listMachineGraphPourc = array_combine($listMachine, $listGraphPourc);
+	
+	// map machine list (as keys) with graphPourc list (as values)
+	$listMachineGraphPareto = array_combine($listMachine, $listGraphPareto);
+
+?>
+
+<!-- MUTATION OBSERVER-->
+<script language="javascript">
+	// prepare mutation observer
+	var MutationObserver = window.MutationObserver || window.WebKitMutationObserver ||  window.MozMutationObserver;
+	var mutationObserverSupport = !!MutationObserver;
+	
+	// set callback function
+	var callback = function(mutationRecords){
+		// get mutation record
+    mutationRecords.forEach(function(mutationRecord){
+    	// get node
+    	var node = mutationRecord.target;
+    	
+    	// check class value
+    	if(node.attributes["class"].value.indexOf("active") >= 0) { // button active
+    		// get id
+    		var idTarget = node.attributes["id"].value;
+    		
+    		// Pourcentage button
+    		if(idTarget.indexOf("Pourcentage") >= 0) {
+    			// get machine
+    			var machine = idTarget.substring("Pourcentage".length);
+    			
+    			// set option
+    			var option = "pourc";
+    			
+    			// prepare parametres for AJAX
+    			var url = "ajaxPrepareGraphData.php";
+    			var datas = {
+    				machine: machine,
+    				option:	option,
+    				listMachineGraphPourc: <?php echo json_encode($listMachineGraphPourc); ?>,
+    			};
+    			
+    			// send data to AJAX
+    			$.post(url, datas, function(data){alert(data)});
+    		}
+    		
+    		// Pareto button
+    		else if(idTarget.indexOf("Pareto") >= 0) {
+    			// get machine
+    			var machine = idTarget.substring("Pareto".length);
+    			
+    			// set option
+    			var option = "pareto";
+    			
+    			// prepare parametres for AJAX
+    			var url = "ajaxPrepareGraphData.php";
+    			var datas = {
+    				machine: machine,
+    				option:	option,
+    				listMachineGraphPareto: <?php echo json_encode($listMachineGraphPareto); ?>,
+    			};
+    			
+    			// send data to AJAX
+    			$.post(url, datas, function(data){alert(data)});
+    		}
+    	}
+    });
+	};
+	
+	// create mutation observer
+	var mo = new MutationObserver(callback);
+	
+	// set element
+	var element = document.getElementById('graphs');
+
+	// set option
+	var observerOption = {
+	    attributes: true,
+	    attributeFilter: ["class"],
+	    subtree: true
+	};
+	
+	// start observer
+	mo.observe(element, observerOption);
+</script>
 
 </body>
 </html>

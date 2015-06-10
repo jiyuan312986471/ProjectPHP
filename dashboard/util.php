@@ -406,4 +406,63 @@
 		
 		return $listDefaut;
 	}
+	
+	/* Fonction permettante de préparer les données pour Pourcentage Graph																	*/
+	/* Entre	:	la machine																																									*/
+	/* Sortie	:	les données pour Pourcentage Graph (en 2D Array)																						*/
+	function getPourcGraphData($machine) {
+		// declare the percentage array
+		$graphPourc = array("pourc" => array(0,0,0,0,0,0,0), "jour" => array("","","","","","",""));
+		
+		// get machine data
+		$dataPourc = file_get_contents('graph_'.$machine.'.dat');
+		$n = sscanf($dataPourc,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s",
+								$graphPourc['pourc'][0], 
+								$graphPourc['pourc'][1],
+								$graphPourc['pourc'][2], 
+								$graphPourc['pourc'][3], 
+								$graphPourc['pourc'][4], 
+								$graphPourc['pourc'][5], 
+								$graphPourc['pourc'][6],
+								
+								$graphPourc['jour'] [0], 
+								$graphPourc['jour'] [1],	
+								$graphPourc['jour'] [2], 
+								$graphPourc['jour'] [3],	
+								$graphPourc['jour'] [4], 
+								$graphPourc['jour'] [5],	
+								$graphPourc['jour'] [6] );
+								
+		return $graphPourc;
+	}
+	
+	/* Fonction permettante de préparer les données pour Pareto Graph																				*/
+	/* Entre	:	la machine et DB connection																																	*/
+	/* Sortie	:	les données pour Pareto Graph (en 1D Array)																									*/
+	function getParetoGraphData($machine, $conn) {
+		$graphPareto = array();
+		
+		// identify machine and get corresponding defauts
+  	$listDefaut = identifyMachine($machine);
+  	
+  	// get pareto data
+		$dataPareto = file_get_contents("macdef/".$machine.".dat");
+		
+		// declare pareto array
+		$listPareto = array();
+		
+		// set value of pareto array
+		for($i = 0; $i < 10; $i++) {
+			// calculate pareto
+			$pareto = pareto_m($listDefaut[$i], $machine, $dataPareto, $conn);
+			
+			// add pareto into array
+			array_push($listPareto, $pareto);
+		}
+		
+		// map keys and values
+		$graphPareto = array_combine($listDefaut, $listPareto);
+		
+		return $graphPareto;
+	}
 ?>
