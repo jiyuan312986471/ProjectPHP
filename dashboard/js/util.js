@@ -84,6 +84,10 @@ function drawGraph(machine, graphPourc, listDefaut, listPareto) {
 	}
 };
 
+/*
+*		MUTATION OBSERVER
+*/
+
 
 
 /*

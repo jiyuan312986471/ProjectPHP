@@ -122,7 +122,7 @@ function callbackStarter(xmlHttp, machine, graphPourc, listDefaut, listPareto, o
 // Changer
 function change(machine, option, graphPourc, listDefaut, listPareto){
 	var xmlHttp = createXMLHttpRequest();
-	var url = "ajaxStarter.php?machine=" + machine + "&option=" + option;
+	var url = "ajaxChanger.php?machine=" + machine + "&option=" + option;
 	xmlHttp.onreadystatechange = function(){ callbackStarter(xmlHttp, machine, graphPourc, listDefaut, listPareto, option) };
 	xmlHttp.open("GET",url,true);
 	xmlHttp.send(null);
