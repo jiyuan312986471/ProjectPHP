@@ -213,10 +213,7 @@
     			};
     			
     			// send data to AJAX
-    			$.post(url, datas, function(graphPourc){
-    														alert(idTarget);
-    												 		alert(graphPourc);
-    												 });
+    			$.post(url, datas, changeToGraphPourc(machine, graphPourc));
     		}
     		
     		// Pareto button
@@ -237,8 +234,7 @@
     			
     			// send data to AJAX
     			$.post(url, datas, function(graphPareto){
-    														alert(idTarget);
-    														alert(graphPareto);
+    														changeToGraphPareto(machine, graphPareto);
     												 });
     		}
     	}

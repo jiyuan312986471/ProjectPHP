@@ -1,7 +1,7 @@
 /*
 *		START WITH
 */
-String.prototype.startWith = function (str) {
+String.prototype.startWith = function (str){
 	if(str == null || str == "" || this.length == 0 || str.length > this.length)
 	  return false;
 	if(this.substr(0, str.length) == str)
@@ -14,7 +14,7 @@ String.prototype.startWith = function (str) {
 /*
 *		DRAW GRAPHS
 */
-function drawPourcGraph(machine, graphPourc) {
+function drawPourcGraph(machine, graphPourc){
 	new Morris.Line({
 			// ID of the element in which to draw the chart.
 			element: 'pourcDefaut' + machine,
@@ -45,7 +45,7 @@ function drawPourcGraph(machine, graphPourc) {
 	});
 };
 
-function drawParetoGraph(machine, listDefaut, listPareto) {
+function drawParetoGraph(machine, listDefaut, listPareto){
 	new Morris.Bar({
 			// ID of the element in which to draw the chart.
 			element: 'paretoDefaut' + machine,
@@ -75,7 +75,7 @@ function drawParetoGraph(machine, listDefaut, listPareto) {
 		});
 };
 
-function drawGraph(machine, graphPourc, listDefaut, listPareto) {
+function drawGraph(machine, graphPourc, listDefaut, listPareto){
 	// get label
 	var idLabel = $("label.active").attr("id");
 	
@@ -94,7 +94,7 @@ function drawGraph(machine, graphPourc, listDefaut, listPareto) {
 
 
 /*
-*		AJAX
+*		AJAX PREPARATION
 */
 function createXMLHttpRequest() {
 	var xmlHttp = null;
@@ -107,7 +107,9 @@ function createXMLHttpRequest() {
 	return xmlHttp;
 };
 
-// Starter
+/*
+*		AJAX STARTER
+*/
 function start(machine, option, graphPourc, listDefaut, listPareto){
 	var xmlHttp = createXMLHttpRequest();
 	var url = "ajaxStarter.php?machine=" + machine + "&option=" + option;
@@ -126,21 +128,88 @@ function callbackStarter(xmlHttp, machine, graphPourc, listDefaut, listPareto, o
 	}
 };
 
-// Changer
-function change(machine, option, graphPourc, listDefaut, listPareto){
+/*
+*		AJAX CHANGER POURCENTAGE GRAPH
+*/
+function changeToGraphPourc(machine, graphPourc){
 	var xmlHttp = createXMLHttpRequest();
-	var url = "ajaxChanger.php?machine=" + machine + "&option=" + option;
-	xmlHttp.onreadystatechange = function(){ callbackChanger(xmlHttp, machine, graphPourc, listDefaut, listPareto, option) };
+	var url = "";
+	xmlHttp.onreadystatechange = function(){ callbackChangeToGraphPourc(xmlHttp, machine, graphPourc) };
 	xmlHttp.open("GET",url,true);
 	xmlHttp.send(null);
 };
 
-// Changer Callback
-function callbackChanger(xmlHttp, machine, graphPourc, listDefaut, listPareto, option) {
+// Pourcentage Graph Changer Callback
+function callbackChangeToGraphPourc(xmlHttp, machine, graphPourc) {
 	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
-		document.getElementById("graphMachine"+machine).innerHTML = xmlHttp.responseText;
-		drawGraph(machine, graphPourc, listDefaut, listPareto);
+		// prepare graph data
+		graphPourc = eval("("+graphPourc+")");
 		
-		//setTimeout(function(){ start(machine, option, graphPourc, listDefaut, listPareto);},2000);
+		// clear corresponding graph on the page
+		var element = document.getElementById("pourcDefaut"+machine);
+		if(element){
+			element.innerHTML = "";
+		}
+		else{
+			element = document.getElementById("paretoDefaut"+machine);
+			if(element){
+				element.innerHTML = "";
+			}
+		}
+		
+		// change element id in order to draw graph
+		element.setAttribute("id","pourcDefaut"+machine);
+		
+		// draw new graph
+		drawPourcGraph(machine, graphPourc);
+	}
+};
+
+/*
+*		AJAX CHANGER PARETO GRAPH
+*/
+function changeToGraphPareto(machine, graphPareto){
+	var xmlHttp = createXMLHttpRequest();
+	var url = "";
+	xmlHttp.onreadystatechange = function(){ callbackChangeToGraphPareto(xmlHttp, machine, graphPareto) };
+	xmlHttp.open("GET",url,true);
+	xmlHttp.send(null);
+};
+
+// Pourcentage Graph Changer Callback
+function callbackChangeToGraphPareto(xmlHttp, machine, graphPareto) {
+	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
+		// get graph data
+		graphPareto = eval("("+graphPareto+")");
+		
+		// get listDefaut
+		var listDefaut = [];
+    for (var defaut in graphPareto){
+      listDefaut.push(defaut);
+    }
+		
+		// get listPareto
+		var listPareto = [];
+    for (var defaut in graphPareto){
+      listPareto.push(graphPareto[defaut]);
+    }
+		
+		// clear corresponding graph on the page
+		var element = document.getElementById("pourcDefaut"+machine);
+		if(element){
+			element.innerHTML = "";
+		}
+		else{
+			element = document.getElementById("paretoDefaut"+machine);
+			if(element){
+				element.innerHTML = "";
+			}
+		}
+		
+		// change element id in order to draw graph
+		element.setAttribute("id","paretoDefaut"+machine);
+		
+		// draw new graph
+		drawParetoGraph(machine, listDefaut, listPareto);
 	}
 };

@@ -214,10 +214,7 @@
     			
     			// send data to AJAX
     			$.post(url, datas, function(graphPourc){
-    														//
-    														
-    														alert(idTarget);
-    												 		alert(graphPourc);
+    														changeToGraphPourc(machine, graphPourc);
     												 });
     		}
     		
@@ -239,8 +236,7 @@
     			
     			// send data to AJAX
     			$.post(url, datas, function(graphPareto){
-    														alert(idTarget);
-    														alert(graphPareto);
+    														changeToGraphPareto(machine, graphPareto);
     												 });
     		}
     	}
