@@ -40,7 +40,7 @@ function drawPourcGraph(machine, graphPourc){
 			labels: ['Pourcentage'],
 			
 			pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4','#09DCB4','#046351','#E16351','#4C221C'],
-			parseTime: false,
+			//parseTime: false,
 			hideHover: false,
 	});
 };
@@ -180,7 +180,6 @@ function changeToGraphPareto(machine, graphPareto){
 function callbackChangeToGraphPareto(xmlHttp, machine, graphPareto) {
 	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
 		// get graph data
-		alert(graphPareto);
 		graphPareto = eval("("+graphPareto+")");
 		
 		// get listDefaut
