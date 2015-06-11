@@ -116,6 +116,7 @@ function drawGraph(machine, graphPourc, listDefaut, listPareto) {
 	// if not
 	else if(idLabel.startWith("Pareto")) {
 		// draw pareto graph
+		drawParetoGraph(machine, listDefaut, listPareto);
 //		new Morris.Bar({
 //			// ID of the element in which to draw the chart.
 //			element: 'paretoDefaut' + machine,

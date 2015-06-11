@@ -192,9 +192,9 @@
     	var node = mutationRecord.target;
     	
     	// check class value
-    	if(node.attr("class").indexOf("active") >= 0) { // button active
+    	if(node.attributes["class"].value.indexOf("active") >= 0) { // button active
     		// get id
-    		var idTarget = node.attr("id");
+    		var idTarget = node.attributes["id"].value;
     		
     		// Pourcentage button
     		if(idTarget.indexOf("Pourcentage") >= 0) {
@@ -213,7 +213,10 @@
     			};
     			
     			// send data to AJAX
-    			$.post(url, datas, function(data){alert(data)});
+    			$.post(url, datas, function(graphPourc){
+    														alert(idTarget);
+    												 		alert(graphPourc);
+    												 });
     		}
     		
     		// Pareto button
@@ -233,7 +236,10 @@
     			};
     			
     			// send data to AJAX
-    			$.post(url, datas, function(data){alert(data)});
+    			$.post(url, datas, function(graphPareto){
+    														alert(idTarget);
+    														alert(graphPareto);
+    												 });
     		}
     	}
     });
