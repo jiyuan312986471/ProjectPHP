@@ -76,12 +76,10 @@ function drawGraph(machine, graphPourc, listDefaut, listPareto){
 		
 		// check option
 		if(idLabel == "Pourcentage"+machine){
-			alert("draw "+machine);
 			// draw pourcentage graph
 			drawPourcGraph(machine, graphPourc);
 		}
 		else if(idLabel == "Pareto"+machine){
-			alert("draw "+machine);
 			// draw pareto graph
 			drawParetoGraph(machine, listDefaut, listPareto);
 		}
