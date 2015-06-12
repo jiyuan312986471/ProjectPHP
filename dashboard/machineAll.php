@@ -30,10 +30,6 @@
   // declare graph pareto
   $graphPareto = array();
   
-  // initialize display option
-  $listOption = array("pourc","pourc","pourc","pourc","pourc","pourc");
-  $optionMachine = array_combine($listMachine, $listOption);
-  
   // all graph pourcentage
   $listGraphPourc = array();
   
@@ -72,6 +68,9 @@
 		<!------- JAVASCRIPT ------->
 		<!-- jQuery -->
     <script src="js/jquery.js"></script>
+    
+    <!-- JSON -->
+    <script src="js/json2.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
@@ -89,6 +88,23 @@
     
     <!-- Functions used JavaScript -->
    	<script src="js/util.js"></script>
+   	
+   	<!-- Initialize Display Option JavaScript -->
+   	<script language="javascript">
+   		// listOption
+   		var listOption 	= new Array("pourc","pourc","pourc","pourc","pourc","pourc");
+   		
+   		// listMachine
+   		var listMachine = <?php echo json_encode($listMachine); ?>;
+   		
+   		// create OptionMachine
+   		var optionMachine = {};
+   		
+   		// combine 
+   		for(var index in listMachine){
+   			optionMachine[listMachine[index]] = listOption[index];
+   		}
+   	</script>
     
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -123,9 +139,6 @@
   	
   	////////////////////////////////// DATA PREPARATION //////////////////////////////////
   	
-  	// DISPLAY OPTION
-  	$option = $optionMachine[$machine];
-  	
   	// POURCENTAGE GRAPH
 		$graphPourc = getPourcGraphData($machine);
   	
@@ -139,24 +152,11 @@
 		array_push($listGraphPareto, $graphPareto);
 								
 ?>
-
-<!------------------------------------ DRAW GRAPH OF EACH MACHINE ------------------------------------>
         	
 	        	<!-- panel for machine -->
 	        	<div class="col-lg-6">
 		        	<div class="panel panel-success" id="graphMachine<?php echo $machine; ?>"></div>
 			      </div>
-		
-		<!-- Draw Chosen Graph -->
-    <script language="javascript">
-    	start(
-    		<?php echo json_encode($machine); ?>,
-    		<?php echo json_encode($option); ?>,
-    		<?php echo json_encode($graphPourc); ?>,
-    		<?php echo json_encode($listDefaut); ?>,
-    		<?php echo json_encode($listPareto); ?>
-    	);
-    </script>
 
 <?php
   } // end foreach machine
@@ -173,7 +173,7 @@
 	// map machine list (as keys) with graphPourc list (as values)
 	$listMachineGraphPourc = array_combine($listMachine, $listGraphPourc);
 	
-	// map machine list (as keys) with graphPourc list (as values)
+	// map machine list (as keys) with graphPareto list (as values)
 	$listMachineGraphPareto = array_combine($listMachine, $listGraphPareto);
 
 ?>
@@ -192,7 +192,7 @@
     	var node = mutationRecord.target;
     	
     	// check class value
-    	if(node.attributes["class"].value.indexOf("active") >= 0) { // button active
+    	if(node.attributes["class"].value.indexOf("active") >= 0) { // button active    		
     		// get id
     		var idTarget = node.attributes["id"].value;
     		
@@ -203,6 +203,7 @@
     			
     			// set option
     			var option = "pourc";
+    			optionMachine[machine] = option;
     			
     			// prepare parametres for AJAX
     			var url = "ajaxPrepareGraphData.php";
@@ -225,6 +226,7 @@
     			
     			// set option
     			var option = "pareto";
+    			optionMachine[machine] = option;
     			
     			// prepare parametres for AJAX
     			var url = "ajaxPrepareGraphData.php";
@@ -239,6 +241,10 @@
     														changeToGraphPareto(machine, graphPareto);
     												 });
     		}
+    		
+    		// refresh after change
+    		var jsonOptionMachine = JSON.stringify(optionMachine);
+    		setInterval(refreshMachineAllGraph(jsonOptionMachine), 8000);
     	}
     });
 	};
@@ -258,6 +264,10 @@
 	
 	// start observer
 	mo.observe(element, observerOption);
+	
+	// draw graph and refresh
+  var jsonOptionMachine = JSON.stringify(optionMachine);
+  setInterval(refreshMachineAllGraph(jsonOptionMachine), 8000);
 </script>
 
 </body>

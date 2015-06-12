@@ -3,7 +3,7 @@
 	$result = "";
 	
 	$machine = $_GET['machine'];
-	$option  = $_GET['option'];
+	$option = $_GET['option'];
 	
 	// PANEL-HEADING: machine name
 	$result .= "<div class=\"panel-heading\">";

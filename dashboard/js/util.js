@@ -1,17 +1,4 @@
 /*
-*		START WITH
-*/
-String.prototype.startWith = function (str){
-	if(str == null || str == "" || this.length == 0 || str.length > this.length)
-	  return false;
-	if(this.substr(0, str.length) == str)
-	  return true;
-	else
-	  return false;
-	return true;
-};
-
-/*
 *		DRAW GRAPHS
 */
 function drawPourcGraph(machine, graphPourc){
@@ -76,19 +63,28 @@ function drawParetoGraph(machine, listDefaut, listPareto){
 };
 
 function drawGraph(machine, graphPourc, listDefaut, listPareto){
-	// get label
-	var idLabel = $("label.active").attr("id");
+	// get all active label
+	var listLabel = $("label.active");
 	
-	// if pourcentage button selected
-	if(idLabel.startWith("Pourcentage")) {
-		// draw pourcentage graph
-		drawPourcGraph(machine, graphPourc);
-	}
-	
-	// if not
-	else if(idLabel.startWith("Pareto")) {
-		// draw pareto graph
-		drawParetoGraph(machine, listDefaut, listPareto);
+	// for each label
+	for(var index in listLabel){
+		// get label
+		var label = listLabel[index];
+		
+		// get label id
+		var idLabel = label.getAttribute('id');
+		
+		// check option
+		if(idLabel == "Pourcentage"+machine){
+			alert("draw "+machine);
+			// draw pourcentage graph
+			drawPourcGraph(machine, graphPourc);
+		}
+		else if(idLabel == "Pareto"+machine){
+			alert("draw "+machine);
+			// draw pareto graph
+			drawParetoGraph(machine, listDefaut, listPareto);
+		}
 	}
 };
 
@@ -113,18 +109,16 @@ function createXMLHttpRequest() {
 function start(machine, option, graphPourc, listDefaut, listPareto){
 	var xmlHttp = createXMLHttpRequest();
 	var url = "ajaxStarter.php?machine=" + machine + "&option=" + option;
-	xmlHttp.onreadystatechange = function(){ callbackStarter(xmlHttp, machine, graphPourc, listDefaut, listPareto, option) };
+	xmlHttp.onreadystatechange = function(){ callbackStarter(xmlHttp, machine, graphPourc, listDefaut, listPareto) };
 	xmlHttp.open("GET",url,true);
 	xmlHttp.send(null);
 };
 
 // Starter Callback
-function callbackStarter(xmlHttp, machine, graphPourc, listDefaut, listPareto, option) {
+function callbackStarter(xmlHttp, machine, graphPourc, listDefaut, listPareto) {
 	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
 		document.getElementById("graphMachine"+machine).innerHTML = xmlHttp.responseText;
 		drawGraph(machine, graphPourc, listDefaut, listPareto);
-		
-		//setTimeout(function(){ start(machine, option, graphPourc, listDefaut, listPareto);},2000);
 	}
 };
 
@@ -211,5 +205,71 @@ function callbackChangeToGraphPareto(xmlHttp, machine, graphPareto) {
 		
 		// draw new graph
 		drawParetoGraph(machine, listDefaut, listPareto);
+	}
+};
+
+/*
+*		AJAX REFRESHER
+*/
+function refreshMachineAllGraph(jsonOptionMachine){
+	var xmlHttp = createXMLHttpRequest();
+	var url = "ajaxMachineAllRefresher.php?jsonOptionMachine=" + jsonOptionMachine;
+	xmlHttp.onreadystatechange = function(){ callbackRefreshMachineAllGraph(xmlHttp) };
+	xmlHttp.open("GET",url,true);
+	xmlHttp.send(null);
+};
+
+// Refresher Callback
+function callbackRefreshMachineAllGraph(xmlHttp) {
+	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
+		// get infos
+		var jsonListInfo = xmlHttp.responseText.split("AND");
+		var listInfo = {};
+		for(var index in jsonListInfo){
+			listInfo[index] = eval("("+jsonListInfo[index]+")");
+		}
+		
+		// get listMachine
+		var listMachine = listInfo[0];
+		
+		// get optionMachine
+		var optionMachine = listInfo[1];
+		
+		// get listMachineGraph
+		var listMachineGraph = listInfo[2];
+		
+		// for each machine
+		for(var index in listMachine){
+			// get machine
+			var machine = listMachine[index];
+			
+			// get option
+			var option = optionMachine[machine];
+			
+			// get graph
+			var graph = listMachineGraph[machine];
+			
+			// check option
+			if(option == "pourc"){
+				// draw
+				start(machine, option, graph, null, null);
+			}
+			else if(option == "pareto"){
+				// get listDefaut
+				var listDefaut = [];
+		    for (var defaut in graph){
+		      listDefaut.push(defaut);
+		    }
+				
+				// get listPareto
+				var listPareto = [];
+		    for (var defaut in graph){
+		      listPareto.push(graph[defaut]);
+		    }
+				
+				// draw
+				start(machine, option, null, listDefaut, listPareto);
+			}
+		}
 	}
 };
