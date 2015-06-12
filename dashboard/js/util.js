@@ -72,7 +72,7 @@ function drawGraph(machine, graphPourc, listDefaut, listPareto){
 		var label = listLabel[index];
 		
 		// get label id
-		var idLabel = label.getAttribute('id');
+		var idLabel = label.id;
 		
 		// check option
 		if(idLabel == "Pourcentage"+machine){
