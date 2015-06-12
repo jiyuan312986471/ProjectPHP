@@ -76,12 +76,10 @@ function drawGraph(machine, graphPourc, listDefaut, listPareto){
 		
 		// check option
 		if(idLabel == "Pourcentage"+machine){
-			alert("draw "+machine);
 			// draw pourcentage graph
 			drawPourcGraph(machine, graphPourc);
 		}
 		else if(idLabel == "Pareto"+machine){
-			alert("draw "+machine);
 			// draw pareto graph
 			drawParetoGraph(machine, listDefaut, listPareto);
 		}
@@ -103,6 +101,7 @@ function createXMLHttpRequest() {
 	return xmlHttp;
 };
 
+
 /*
 *		AJAX STARTER
 */
@@ -121,6 +120,7 @@ function callbackStarter(xmlHttp, machine, graphPourc, listDefaut, listPareto) {
 		drawGraph(machine, graphPourc, listDefaut, listPareto);
 	}
 };
+
 
 /*
 *		AJAX CHANGER POURCENTAGE GRAPH
@@ -158,6 +158,7 @@ function callbackChangeToGraphPourc(xmlHttp, machine, graphPourc) {
 		drawPourcGraph(machine, graphPourc);
 	}
 };
+
 
 /*
 *		AJAX CHANGER PARETO GRAPH
@@ -207,6 +208,7 @@ function callbackChangeToGraphPareto(xmlHttp, machine, graphPareto) {
 		drawParetoGraph(machine, listDefaut, listPareto);
 	}
 };
+
 
 /*
 *		AJAX REFRESHER

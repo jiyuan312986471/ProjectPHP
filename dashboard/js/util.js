@@ -1,6 +1,6 @@
-/*
+/****************
 *		DRAW GRAPHS
-*/
+****************/
 function drawPourcGraph(machine, graphPourc){
 	new Morris.Line({
 			// ID of the element in which to draw the chart.
@@ -87,9 +87,9 @@ function drawGraph(machine, graphPourc, listDefaut, listPareto){
 };
 
 
-/*
+/**********************
 *		AJAX PREPARATION
-*/
+**********************/
 function createXMLHttpRequest() {
 	var xmlHttp = null;
 	if (window.XMLHttpRequest) {// code for all new browsers
@@ -101,9 +101,10 @@ function createXMLHttpRequest() {
 	return xmlHttp;
 };
 
-/*
+
+/******************
 *		AJAX STARTER
-*/
+******************/
 function start(machine, option, graphPourc, listDefaut, listPareto){
 	var xmlHttp = createXMLHttpRequest();
 	var url = "ajaxStarter.php?machine=" + machine + "&option=" + option;
@@ -120,9 +121,10 @@ function callbackStarter(xmlHttp, machine, graphPourc, listDefaut, listPareto) {
 	}
 };
 
-/*
+
+/*************************************
 *		AJAX CHANGER POURCENTAGE GRAPH
-*/
+*************************************/
 function changeToGraphPourc(machine, graphPourc){
 	var xmlHttp = createXMLHttpRequest();
 	var url = "";
@@ -157,9 +159,10 @@ function callbackChangeToGraphPourc(xmlHttp, machine, graphPourc) {
 	}
 };
 
-/*
+
+/********************************
 *		AJAX CHANGER PARETO GRAPH
-*/
+********************************/
 function changeToGraphPareto(machine, graphPareto){
 	var xmlHttp = createXMLHttpRequest();
 	var url = "";
@@ -206,9 +209,10 @@ function callbackChangeToGraphPareto(xmlHttp, machine, graphPareto) {
 	}
 };
 
-/*
+
+/*********************
 *		AJAX REFRESHER
-*/
+*********************/
 function refreshMachineAllGraph(jsonOptionMachine){
 	var xmlHttp = createXMLHttpRequest();
 	var url = "ajaxMachineAllRefresher.php?jsonOptionMachine=" + jsonOptionMachine;
