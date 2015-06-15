@@ -152,8 +152,6 @@
 		array_push($listGraphPareto, $graphPareto);
 								
 ?>
-
-<!------------------------------------ DRAW GRAPH OF EACH MACHINE ------------------------------------>
         	
 	        	<!-- panel for machine -->
 	        	<div class="col-lg-6">

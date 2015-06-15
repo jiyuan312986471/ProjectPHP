@@ -32,15 +32,15 @@
 	
 	/* Fonction permettante de calculer le paréto d'un défaut pour la machine séletionnée										*/
 	/* Entre  : defaut, machine sélectionné, nombre des défauts pour cette machine													*/
-	/* Sortie : pourcentage pour ce défaut																																		*/
+	/* Sortie : pourcentage pour ce défaut																																	*/
 	function pareto_m($defaut,$machine,$nombre,$conn) {
 		$type = 0;
 		
-		$row = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT TOP 1 [defau].[code],[defau].[nom],QuelleMachine,NumEnr,NumPal,[Date] 
-																									 FROM [ping2].[dbo].[defaut] AS [defau]
-																									 JOIN [ping2].[dbo].[TeSysK_Auto] AS [defec] ON [defau].[code] = [defec].[CodeDefaut]
-																									 AND  cast(convert(char(8), [Date], 112) as int) =  cast(convert(char(8), GETDATE(), 112) as int)",
-																					 array(), array("Scrollable"=>"buffered")));
+//		$row = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT TOP 1 [defau].[code],[defau].[nom],QuelleMachine,NumEnr,NumPal,[Date] 
+//																									 FROM [ping2].[dbo].[defaut] AS [defau]
+//																									 JOIN [ping2].[dbo].[TeSysK_Auto] AS [defec] ON [defau].[code] = [defec].[CodeDefaut]
+//																									 AND  cast(convert(char(8), [Date], 112) AS int) =  cast(convert(char(8), getdate(), 112) AS int)",
+//																					 array(), array("Scrollable"=>"buffered")));
 
 		//echo $row['QuelleMachine']."-----".$row['NumEnr']."------".$row['NumPal']."<br/>";
 		
@@ -49,10 +49,10 @@
     $query = sqlsrv_query($conn, "SELECT [defau].[code],[defau].[nom],QuelleMachine,NumEnr,NumPal,[Date]
 																	FROM [ping2].[dbo].[defaut] AS [defau]
 																	JOIN [ping2].[dbo].[tesysk_auto] AS [defec] ON [defau].[code] = [defec].[CodeDefaut]
-																	AND  cast(convert(char(8), [Date], 112) as int) =  cast(convert(char(8), GETDATE(), 112) as int)
+																	AND  cast(convert(char(8), [Date], 112) as int) =  cast(convert(char(8), getdate(), 112) AS int)
 																	AND defau.nom LIKE  '%$defaut%'
 																	AND defec.QuelleMachine LIKE '%$machine%'
-																	order by [date] asc",
+																	ORDER BY [Date] asc",
 													array(), array("Scrollable"=>"buffered"));
     		
 		while($rownext = sqlsrv_fetch_array($query)) {
@@ -81,21 +81,21 @@
 	/* Fonction permettante de calculer le paréto d'un défaut pour la machine séletionnée										*/
 	/* Entre  : defaut, nombre des défauts pour toutes les machines																					*/
 	/* Sortie : pourcetage pour ce défaut journalier																												*/
-	function pareto($defaut,$nombre,$conn) {
-		$type = 0;
-    $req = "SELECT COUNT ([nom]) AS nb
-						FROM [ping2].[dbo].[defaut] AS [defau]
-						JOIN [ping2].[dbo].[tesysk_auto] AS [defec] ON [defau].[code] = [defec].[CodeDefaut]
-						AND defau.nom LIKE  '%$defaut%'
-						AND  cast(convert(char(8), [Date], 112) as int) =  cast(convert(char(8), GETDATE(), 112) as int)
-						GROUP BY [defau].[nom]";
-    
-		$row = sqlsrv_fetch_array(sqlsrv_query($conn, $req, array(), array("Scrollable"=>"buffered")));
-		if($nombre != 0) {
-			$type = round($row['nb']/$nombre*100,2);
-		}
-		return $type;
-	}
+//	function pareto($defaut,$nombre,$conn) {
+//		$type = 0;
+//    $req = "SELECT COUNT ([nom]) AS nb
+//						FROM [ping2].[dbo].[defaut] AS [defau]
+//						JOIN [ping2].[dbo].[tesysk_auto] AS [defec] ON [defau].[code] = [defec].[CodeDefaut]
+//						AND defau.nom LIKE  '%$defaut%'
+//						AND  cast(convert(char(8), [Date], 112) as int) =  cast(convert(char(8), GETDATE(), 112) as int)
+//						GROUP BY [defau].[nom]";
+//    
+//		$row = sqlsrv_fetch_array(sqlsrv_query($conn, $req, array(), array("Scrollable"=>"buffered")));
+//		if($nombre != 0) {
+//			$type = round($row['nb']/$nombre*100,2);
+//		}
+//		return $type;
+//	}
 	
 	/* Fonction permettante de convertir le jour en anglais vers le jour en français												*/
 	/* Entre	: le jour en anglais																																					*/
@@ -432,6 +432,11 @@
 								$graphPourc['jour'] [4], 
 								$graphPourc['jour'] [5],	
 								$graphPourc['jour'] [6] );
+								
+		// set date display format
+		foreach($graphPourc['jour'] as &$jour){
+			$jour = convert_j($jour);
+		}
 								
 		return $graphPourc;
 	}
