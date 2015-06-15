@@ -22,7 +22,7 @@
 	/* Sortie : nombre des défauts pour toutes les machines pendant la journée															*/
 	function nb_defaut ($jour,$conn) {
 		$nb = 0;
-		$req = "SELECT max(nb) as nb FROM [ping2].[dbo].[graftotal] where jour = '$jour' ";
+		$req = "SELECT max(nb) AS nb FROM [ping2].[dbo].[graftotal] WHERE jour = '$jour' ";
     
 		$row = sqlsrv_fetch_array(sqlsrv_query($conn, $req, array(), array("Scrollable"=>"buffered"))); 
 		$nb = $row['nb'];

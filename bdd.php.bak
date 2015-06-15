@@ -15,11 +15,19 @@ class bdd {
 		$this->database = $data;
 		$this->Condb();
 	}
-		
+	
+	public function getConn() {
+		return $this->connect;
+	}
+	
 	private function Condb() {
 		$connectionInfo = array("UID" => $this->userdb, "PWD" => $this->passdb, "Database" => $this->database);
-		$this->connect = sqlsrv_connect( $this->hostname, $connectionInfo);
-		if(!$this->connect) {
+		
+		$this->connect = mssql_pconnect($this->hostname, $this->userdb, $this->passdb);
+		//$this->connect = sqlsrv_connect( $this->hostname, $connectionInfo);
+		
+		if(!mssql_select_db($this->database, $this->connect)){
+		//if(!$this->connect) {
 			echo "Errrrooor<br/>";	
 			die( print_r( sqlsrv_errors(), true));
 			echo "<br/>";

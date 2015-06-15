@@ -41,7 +41,7 @@ if(isset($_POST['submit'])){
 		// create user for session
 		$validUser = new Personne($id, $name, $pass);
 		
-		// store user into session
+		// store info into session
 		$_SESSION["utilisateur"] = $validUser;
 		
 		// disconnect DB

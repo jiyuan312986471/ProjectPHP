@@ -41,15 +41,16 @@ if(isset($_POST['submit'])){
 		// create user for session
 		$validUser = new Personne($id, $name, $pass);
 		
-		// store user into session
+		// store info into session
 		$_SESSION["utilisateur"] = $validUser;
+		print_r(serialize($connInfo));
 		
 		// disconnect DB
 		unset($connInfo);
 		unset($db);
 		
 		// redirection
-		header("refresh:3;url=dashboard/index.php");
+		header("refresh:1;url=dashboard/index.php");
 		echo "<center><img src=\"img/loading.gif\" /></center>";
 	}
 }
