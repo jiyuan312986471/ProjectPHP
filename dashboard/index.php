@@ -1,6 +1,4 @@
 <?php
-	
-	session_start();
 
 	include_once 'util.php';
 	include_once '../pers.php';
@@ -75,6 +73,15 @@
 										$graph['pourc'][0],$graph['pourc'][1],$graph['pourc'][2],$graph['pourc'][3],$graph['pourc'][4],$graph['pourc'][5],$graph['pourc'][6],
 										$graph['jour'][0], $graph['jour'][1], $graph['jour'][2], $graph['jour'][3], $graph['jour'][4], $graph['jour'][5], $graph['jour'][6] );
 	file_put_contents('graph.dat', $donne);
+	
+	// set date display format
+	foreach($graph['jour'] as &$jour){
+		$jour = convert_j($jour);
+	}
+	
+	// encode graph into json
+	$jsonGraph = json_encode($graph);
+	
 ?>
 
 
@@ -243,36 +250,11 @@
 	    <!-- Custom Theme JavaScript -->
 	    <script src="js/sb-admin-2.js"></script>
 	    
+	    <!-- Functions used JavaScript -->
+   		<script src="js/util.js"></script>
+	    
 	    <script type="text/javascript">
-		    new Morris.Line({
-		  		// ID of the element in which to draw the chart.
-		  		element: 'pourcUsine',
-		  		
-				  // Chart data records -- each entry in this array corresponds to a point on the chart.
-				  data: [
-				    { nbr: '<?php echo $graph['jour'][0];?>', valeur: <?php if(isset($graph['pourc'][0])) { echo $graph['pourc'][0]; } else { echo 0; } ?> },
-				    { nbr: '<?php echo $graph['jour'][1];?>', valeur: <?php if(isset($graph['pourc'][1])) { echo $graph['pourc'][1]; } else { echo 0; } ?> },
-				    { nbr: '<?php echo $graph['jour'][2];?>', valeur: <?php if(isset($graph['pourc'][2])) { echo $graph['pourc'][2]; } else { echo 0; } ?> },
-				    { nbr: '<?php echo $graph['jour'][3];?>', valeur: <?php if(isset($graph['pourc'][3])) { echo $graph['pourc'][3]; } else { echo 0; } ?> },
-				    { nbr: '<?php echo $graph['jour'][4];?>', valeur: <?php if(isset($graph['pourc'][4])) { echo $graph['pourc'][4]; } else { echo 0; } ?> },
-				    { nbr: '<?php echo $graph['jour'][5];?>', valeur: <?php if(isset($graph['pourc'][5])) { echo $graph['pourc'][5]; } else { echo 0; } ?> },
-				    { nbr: '<?php echo $graph['jour'][6];?>', valeur: <?php if(isset($graph['pourc'][6])) { echo $graph['pourc'][6]; } else { echo 0; } ?> },
-				  ],
-				  
-				  // The name of the data record attribute that contains x-values.
-				  xkey: 'nbr',
-				  
-				  // A list of names of data record attributes that contain y-values.
-				  ykeys: ['valeur'],
-				  
-				  // Labels for the ykeys -- will be displayed when you hover over the
-				  // chart.
-				  labels: ['Pourcentage'],
-				
-				 	pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4'],
-				  parseTime: false,
-				  hideHover: false,
-				});
+	    	drawPourcGraph("All", <?php echo $jsonGraph; ?>);
 	    </script>
 	
 	</body>
