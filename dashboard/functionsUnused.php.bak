@@ -95,7 +95,7 @@
 	/* Entre	:																																															*/
 	/* Sortie	:																																															*/
 	function nbdefaut($conn,$machine) {
-		//$row = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT TOP 1 QuelleMachine,[Date],CodeDefaut,NumEnr,NumPal FROM [ping2].[dbo].[TeSysK_Auto]",array(), array("Scrollable"=>"buffered")));
+		$row = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT TOP 1 QuelleMachine,[Date],CodeDefaut,NumEnr,NumPal FROM [ping2].[dbo].[TeSysK_Auto]",array(), array("Scrollable"=>"buffered")));
 		$count = 0;
 		$graph = array("jour" => array("","","","","","",""), "nb"	 => array(0, 0, 0, 0, 0, 0, 0));
 	

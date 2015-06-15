@@ -125,7 +125,7 @@
 	/* Sortie	: pourcentage																																									*/
 	function calcuPourc($nb_defaut, $nb_total) {
 		if($nb_defaut != 0) {
-			$pourcentage = round( $count / ($nb_total + $nb_defaut) * 100, 2);
+			$pourcentage = round( $nb_defaut / ($nb_total + $nb_defaut) * 100, 2);
 		}
 		else {
 			$pourcentage = 0;

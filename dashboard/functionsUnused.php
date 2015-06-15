@@ -50,11 +50,11 @@
 	function pareto_m($defaut,$machine,$nombre,$conn) {
 		$type = 0;
 		
-//		$row = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT TOP 1 [defau].[code],[defau].[nom],QuelleMachine,NumEnr,NumPal,[Date] 
-//																									 FROM [ping2].[dbo].[defaut] AS [defau]
-//																									 JOIN [ping2].[dbo].[TeSysK_Auto] AS [defec] ON [defau].[code] = [defec].[CodeDefaut]
-//																									 AND  cast(convert(char(8), [Date], 112) AS int) =  cast(convert(char(8), getdate(), 112) AS int)",
-//																					 array(), array("Scrollable"=>"buffered")));
+		$row = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT TOP 1 [defau].[code],[defau].[nom],QuelleMachine,NumEnr,NumPal,[Date] 
+																									 FROM [ping2].[dbo].[defaut] AS [defau]
+																									 JOIN [ping2].[dbo].[TeSysK_Auto] AS [defec] ON [defau].[code] = [defec].[CodeDefaut]
+																									 AND  cast(convert(char(8), [Date], 112) AS int) =  cast(convert(char(8), getdate(), 112) AS int)",
+																					 array(), array("Scrollable"=>"buffered")));
 
 		//echo $row['QuelleMachine']."-----".$row['NumEnr']."------".$row['NumPal']."<br/>";
 		
