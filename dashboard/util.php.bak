@@ -16,7 +16,7 @@
 																	JOIN [ping2].[dbo].[tesysk_auto] AS [defec] ON [defau].[code] = [defec].[CodeDefaut]
 																	AND defec.QuelleMachine LIKE '%$machine%'
 																	AND defau.nom LIKE  '%$defaut%'
-																	AND  cast(convert(char(8), [Date], 112) as int) =  cast(convert(char(8), getdate(), 112) AS int)
+																	AND cast(convert(char(8), [Date], 112) as int) =  cast(convert(char(8), getdate(), 112) AS int)
 																	ORDER BY [Date] ASC",
 													array(), array("Scrollable"=>"buffered"));
     		
