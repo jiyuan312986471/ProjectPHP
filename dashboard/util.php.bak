@@ -1,4 +1,5 @@
-<?php   
+<?php
+
 	/************************************************/
 	/* Les fonctions utilisés dans les fichiers php */
 	/************************************************/
@@ -8,15 +9,6 @@
 	/* Sortie : pourcentage pour ce défaut																																	*/
 	function pareto_m($defaut,$machine,$nombre,$conn) {
 		$type = 0;
-		
-//		$row = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT TOP 1 [defau].[code],[defau].[nom],QuelleMachine,NumEnr,NumPal,[Date] 
-//																									 FROM [ping2].[dbo].[defaut] AS [defau]
-//																									 JOIN [ping2].[dbo].[TeSysK_Auto] AS [defec] ON [defau].[code] = [defec].[CodeDefaut]
-//																									 AND  cast(convert(char(8), [Date], 112) AS int) =  cast(convert(char(8), getdate(), 112) AS int)",
-//																					 array(), array("Scrollable"=>"buffered")));
-
-		//echo $row['QuelleMachine']."-----".$row['NumEnr']."------".$row['NumPal']."<br/>";
-		
 		$count = 0;
 		
     $query = sqlsrv_query($conn, "SELECT [defau].[code],[defau].[nom],QuelleMachine,NumEnr,NumPal,[Date]
@@ -29,10 +21,6 @@
 													array(), array("Scrollable"=>"buffered"));
     		
 		while($rownext = sqlsrv_fetch_array($query)) {
-			//echo $row['QuelleMachine']."-----".$row['NumEnr']."------".$row['NumPal']."<br/>";
-			
-			//echo $rownext['QuelleMachine']."-----".$rownext['NumEnr']."------".$rownext['NumPal']."<br/>";
-			
 			if($rownext['NumEnr'] == $row['NumEnr'] + 1 && $rownext['NumPal'] == $row['NumPal']) {
 				$count++;
 			}
@@ -40,13 +28,10 @@
 			$row = $rownext;
 		}
 		$row = sqlsrv_num_rows($query);
-		//echo $count."/";
-		//echo $row."<br/>";
 		
     if($nombre != 0) {
 			$type = round($count/$nombre*100,2);
 		}
-		//echo $count.'    '.$nombre."<br/>";
 		return $type;
 	}
 	
@@ -74,21 +59,91 @@
 		}
 	}
 	
-	/* Fonction																																															*/
-	/* Entre	:																																															*/
-	/* Sortie	:																																															*/
-	function nbdefaut($conn,$machine) {
-		$row = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT TOP 1 QuelleMachine,[Date],CodeDefaut,NumEnr,NumPal from [ping2].[dbo].[TeSysK_Auto]",array(), array("Scrollable"=>"buffered")));
-		$count = 0;
+	/* Fonction permettante de préparer le graph du nbDéfaut de la machine																	*/
+	/* Entre	:	la machine																																									*/
+	/* Sortie	:	le graph du nbDéfaut																																				*/
+	function getGraphNbDefaut($machine) {
+		// declare the graph array
 		$graph = array("jour" => array("","","","","","",""), "nb"	 => array(0, 0, 0, 0, 0, 0, 0));
 	
+		// get machine data
 		$donne = file_get_contents('graph_'.$machine.'.dat');
 		$n = sscanf($donne,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s",
 								$graph['nb'][0],  $graph['nb'][1],  $graph['nb'][2],  $graph['nb'][3],  $graph['nb'][4],  $graph['nb'][5],  $graph['nb'][6],
 								$graph['jour'][0],$graph['jour'][1],$graph['jour'][2],$graph['jour'][3],$graph['jour'][4],$graph['jour'][5],$graph['jour'][6]);
-
+		
+		return $graph;
+	}
+	
+	/* Fonction permettante de calculer le nb defaut de la machine																					*/
+	/* Entre	: la machine et DB connection																																	*/
+	/* Sortie	: nbDéfaut																																										*/
+	function getNbDefaut($conn, $machine) {
+		// initialize counter
+    $count = 0;
+		
+		// get first defaut record
+		$row = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT TOP 1 QuelleMachine,[Date],CodeDefaut,NumEnr,NumPal 
+																									 FROM [ping2].[dbo].[TeSysK_Auto]",
+																					 array(), array("Scrollable"=>"buffered")));
+    
+    // get defaut records of machine
+		$query = sqlsrv_query($conn, "SELECT QuelleMachine,[Date],CodeDefaut,NumEnr,NumPal 
+																	FROM [ping2].[dbo].[TeSysK_Auto] 
+																	WHERE [CodeDefaut] > 0
+																	AND QuelleMachine = '$machine'
+																	AND cast(convert(char(8), [Date], 112) AS int) = cast(convert(char(8), getdate(), 112) AS int)",
+													array(), array("Scrollable"=>"buffered"));
+		
+		// calculate nb defaut
+		while($rowNext = sqlsrv_fetch_array($query)) {
+			if($rowNext['NumEnr'] == $row['NumEnr'] + 1 && $rowNext['NumPal'] == $row['NumPal']) {
+				$count++;
+			}
+			$row = $rowNext;
+		}
+		
+		return $count;
+	}
+	
+	/* Fonction permettante de calculer le nb total de la machine																						*/
+	/* Entre	: la machine et DB connection																																	*/
+	/* Sortie	: nb total																																										*/
+	function getNbTotal($conn, $machine) {
+		// get total nb
+		$line = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT count([CodeDefaut]) AS nombre 
+																										FROM  [ping2].[dbo].[TeSysK_Auto] 
+																										WHERE  [CodeDefaut] = 0
+																										AND QuelleMachine = '$machine'
+																										AND cast(convert(char(8), [Date], 112) AS int) = cast(convert(char(8), getdate(), 112) AS int)",
+																						array(), array("Scrollable"=>"buffered")));
+		return $line['nombre'];
+	}
+	
+	/* Fonction permettante de calculer le pourcentage du defaut de la machine															*/
+	/* Entre	: nb defaut et nb total																																				*/
+	/* Sortie	: pourcentage																																									*/
+	function calcuPourc($nb_defaut, $nb_total) {
+		if($nb_defaut != 0) {
+			$pourcentage = round( $count / ($nb_total + $nb_defaut) * 100, 2);
+		}
+		else {
+			$pourcentage = 0;
+		}
+		
+		return $pourcentage;
+	}
+	
+	/* Fonction	permettante de stocker nb defaut et nb total dans les fichiers															*/
+	/* Entre	:	la machine et DB connection																																	*/
+	/* Sortie	:	nb total et pourcentage																																			*/
+	function nbdefaut($conn,$machine) {
+		// get machine data
+		$graph = getGraphNbDefaut($machine);
+		
+		// set date format
 		if($graph['jour'][6] != date('D')) {
-			for($i = 0; $i < 6; $i++) {
+			for($i = 0; $i < count($graph['nb'])-1; $i++) {
 				$graph['nb'][$i] = $graph['nb'][$i+1];
 			}
 			$graph['nb'][6] = 0;
@@ -103,53 +158,31 @@
 			}
 		}	
     
-		$query = sqlsrv_query($conn, "SELECT QuelleMachine,[Date],CodeDefaut,NumEnr,NumPal 
-																	FROM [ping2].[dbo].[TeSysK_Auto] 
-																	WHERE CodeDefaut > 0 
-																	AND cast(convert(char(8), [Date], 112) AS int) = cast(convert(char(8), GETDATE(), 112) AS int) 
-																	AND [CodeDefaut] > 0
-																	AND QuelleMachine = '$machine'",
-													array(), array("Scrollable"=>"buffered"));
+    // get nb defaut
+    $count = getNbDefaut($conn, $machine);
 		
-		while($rownext = sqlsrv_fetch_array($query)) {
-			//echo $row['QuelleMachine']."-----".$row['NumEnr']."------".$row['NumPal']."<br/>";
-			//echo $rownext['QuelleMachine']."-----".$rownext['NumEnr']."------".$rownext['NumPal']."<br/>";
-			if($rownext['NumEnr'] == $row['NumEnr'] + 1 && $rownext['NumPal'] == $row['NumPal']) {
-				$count++;
-			}
-			$row = $rownext;
-		}
-		
-		$line = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT COUNT([CodeDefaut]) AS nombre 
-																										FROM  [ping2].[dbo].[TeSysK_Auto] 
-																										WHERE  cast(convert(char(8), [Date], 112) AS int) = cast(convert(char(8), GETDATE(), 112) AS int) 
-																										AND QuelleMachine = '$machine'
-																										AND [CodeDefaut] = 0",
-																						array(), array("Scrollable"=>"buffered")));
-		$nb_total = $line['nombre'];
+		// get total nb
+		$nb_total = getNbTotal($conn, $machine);
 
-		//Calculer le pourcentage du défaut
-		if($count != 0) {
-			$pourcentage = round($count/($nb_total+$count)*100,2);
-		}
-		else {
-			$pourcentage = 0;
-		}
+		// Calculer le pourcentage du défaut
+		$pourcentage = calcuPourc($count, $nb_total);
 		
+		// store nb defaut into file
 		file_put_contents("macdef/".$machine.".dat", $count);
 		
-		//GraphMachine
+		// GraphMachine
 		if($graph['nb'][6]!= $pourcentage) {
 			$graph['nb'][6] = $pourcentage;
 		}
-		//Enregistrer des données dans le graph.bat
+		
+		// Enregistrer des données dans le graph.bat
 		$donne = sprintf("%.2f\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\n%s\t%s\t%s\t%s\t%s\t%s\t%s", 
 											$graph['nb'][0],  $graph['nb'][1],  $graph['nb'][2],  $graph['nb'][3],  $graph['nb'][4],  $graph['nb'][5],  $graph['nb'][6],
 											$graph['jour'][0],$graph['jour'][1],$graph['jour'][2],$graph['jour'][3],$graph['jour'][4],$graph['jour'][5],$graph['jour'][6]);
 	
 		file_put_contents('graph_'.$machine.'.dat', $donne);
-		return $nb_total.' '.$pourcentage;
 		
+		return $nb_total.' '.$pourcentage;
 	}
 	
 	/* Fonction permettante d'identifier la machine																													*/
@@ -423,4 +456,5 @@
 		
 		return $graphPareto;
 	}
+	
 ?>
