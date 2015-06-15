@@ -14,10 +14,10 @@
     $query = sqlsrv_query($conn, "SELECT [defau].[code],[defau].[nom],QuelleMachine,NumEnr,NumPal,[Date]
 																	FROM [ping2].[dbo].[defaut] AS [defau]
 																	JOIN [ping2].[dbo].[tesysk_auto] AS [defec] ON [defau].[code] = [defec].[CodeDefaut]
-																	AND  cast(convert(char(8), [Date], 112) as int) =  cast(convert(char(8), getdate(), 112) AS int)
-																	AND defau.nom LIKE  '%$defaut%'
 																	AND defec.QuelleMachine LIKE '%$machine%'
-																	ORDER BY [Date] asc",
+																	AND defau.nom LIKE  '%$defaut%'
+																	AND  cast(convert(char(8), [Date], 112) as int) =  cast(convert(char(8), getdate(), 112) AS int)
+																	ORDER BY [Date] ASC",
 													array(), array("Scrollable"=>"buffered"));
     		
 		while($rownext = sqlsrv_fetch_array($query)) {

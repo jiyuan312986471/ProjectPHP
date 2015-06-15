@@ -14,10 +14,10 @@
     $query = sqlsrv_query($conn, "SELECT [defau].[code],[defau].[nom],QuelleMachine,NumEnr,NumPal,[Date]
 																	FROM [ping2].[dbo].[defaut] AS [defau]
 																	JOIN [ping2].[dbo].[tesysk_auto] AS [defec] ON [defau].[code] = [defec].[CodeDefaut]
-																	AND  cast(convert(char(8), [Date], 112) as int) =  cast(convert(char(8), getdate(), 112) AS int)
 																	AND defau.nom LIKE  '%$defaut%'
 																	AND defec.QuelleMachine LIKE '%$machine%'
-																	ORDER BY [Date] asc",
+																	AND  cast(convert(char(8), [Date], 112) as int) =  cast(convert(char(8), getdate(), 112) AS int)
+																	ORDER BY [Date] ASC",
 													array(), array("Scrollable"=>"buffered"));
     		
 		while($rownext = sqlsrv_fetch_array($query)) {
@@ -167,7 +167,7 @@
 		// Calculer le pourcentage du défaut
 		$pourcentage = calcuPourc($count, $nb_total);
 		
-		// store nb defaut into file
+		// store nb defaut into macdef.dat file
 		file_put_contents("macdef/".$machine.".dat", $count);
 		
 		// GraphMachine
@@ -175,11 +175,12 @@
 			$graph['nb'][6] = $pourcentage;
 		}
 		
-		// Enregistrer des données dans le graph.bat
+		// prepare data to store
 		$donne = sprintf("%.2f\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\n%s\t%s\t%s\t%s\t%s\t%s\t%s", 
 											$graph['nb'][0],  $graph['nb'][1],  $graph['nb'][2],  $graph['nb'][3],  $graph['nb'][4],  $graph['nb'][5],  $graph['nb'][6],
 											$graph['jour'][0],$graph['jour'][1],$graph['jour'][2],$graph['jour'][3],$graph['jour'][4],$graph['jour'][5],$graph['jour'][6]);
-	
+		
+		// store data into graph.dat file
 		file_put_contents('graph_'.$machine.'.dat', $donne);
 		
 		return $nb_total.' '.$pourcentage;
