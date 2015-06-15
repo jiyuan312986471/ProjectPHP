@@ -15,7 +15,7 @@
   $heure = date('H:i');
   $jour  = date('D');
   
-  // refresh in order to get datas always
+  // refresh in order to keep informed
 	echo '<META HTTP-EQUIV="Refresh" CONTENT="8; URL=index.php">';
 	
 	// declare the pourcentage graph
