@@ -14,7 +14,7 @@
   $jour  = date('D');
   
   // refresh in order to keep informed
-	echo '<META HTTP-EQUIV="Refresh" CONTENT="8; URL=index.php">';
+	//echo '<META HTTP-EQUIV="Refresh" CONTENT="8; URL=index.php">';
 	
 	// get pourcentage graph
 	$graph = getPourcGraphData("All");

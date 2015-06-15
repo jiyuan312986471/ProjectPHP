@@ -3,18 +3,18 @@
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 			<?php
 				if(isset($listeAlerte)) {
-					echo '<i class="fa fa-bell fa-fw" style="background-color:red;"></i>';
+					echo '<i class="fa fa-bell fa-fw fa-lg" style="background-color:red;"></i>';
 				}
 				else {
-					echo '<i class="fa fa-bell fa-fw"></i>';
+					echo '<i class="fa fa-bell fa-fw fa-lg"></i>';
 				}
 			?>
-			<i class="fa fa-caret-down"></i>
+			<i class="fa fa-caret-down fa-lg"></i>
 		</a>
 		<ul class="dropdown-menu dropdown-alerts">
 			<?php
 				if(isset($listeAlerte)) {
-					for($i=0;$i<count($listeAlerte);$i++) {
+					for($i = 0; $i < count($listeAlerte); $i++) {
 			?>
 						<li>
 							<a href="#">
@@ -35,14 +35,28 @@
 	</li>
 	<li class="dropdown">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-			<i class="fa fa-user fa-fw"></i>
-			<i class="fa fa-caret-down"></i>
+			<i class="fa fa-user fa-fw fa-lg"></i>
+			<i class="fa fa-caret-down fa-lg"></i>
 		</a>
 		<ul class="dropdown-menu dropdown-user">
 			<li>
 				<a href="../dec.php">
 					<i class="fa fa-sign-out fa-fw"></i>
 					Deconnexion
+				</a>
+			</li>
+		</ul>
+	</li>
+	<!-- EMAIL -->
+	<li class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			<i class="fa fa-envelope fa-lg"></i>
+		</a>
+		<ul class="dropdown-menu dropdown-user">
+			<li>
+				<a href="mail/sendMail.php">
+					<i class="fa fa-send fa-fw"></i>
+					Envoyer
 				</a>
 			</li>
 		</ul>

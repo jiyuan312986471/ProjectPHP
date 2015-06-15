@@ -75,9 +75,9 @@
 	file_put_contents('graph.dat', $donne);
 	
 	// set date display format
-		foreach($graph['jour'] as &$jour){
-			$jour = convert_j($jour);
-		}
+	foreach($graph['jour'] as &$jour){
+		$jour = convert_j($jour);
+	}
 	
 	// encode graph into json
 	$jsonGraph = json_encode($graph);
