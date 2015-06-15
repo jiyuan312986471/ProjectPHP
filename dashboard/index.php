@@ -18,14 +18,8 @@
   // refresh in order to keep informed
 	echo '<META HTTP-EQUIV="Refresh" CONTENT="8; URL=index.php">';
 	
-	// declare the pourcentage graph
-	$graph = array ("jour" 	=> array("","","","","","",""), "pourc"	=> array(0,0,0,0,0,0,0));
-	
-	// get data from graph.bat
-	$donne = file_get_contents('graph.dat');
-	$n = sscanf($donne,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s",
-						  $graph['pourc'][0], $graph['pourc'][1], $graph['pourc'][2], $graph['pourc'][3], $graph['pourc'][4], $graph['pourc'][5], $graph['pourc'][6],
-						  $graph['jour'][0],  $graph['jour'][1],  $graph['jour'][2],  $graph['jour'][3],  $graph['jour'][4],  $graph['jour'][5],  $graph['jour'][6] );
+	// get pourcentage graph
+	$graph = getPourcGraphData("All");
 
 	// set date format
 	if($graph['jour'][6] != date('D')) {		
@@ -256,13 +250,13 @@
 		  		
 				  // Chart data records -- each entry in this array corresponds to a point on the chart.
 				  data: [
-				    { nbr: '<?php echo convert_j($graph['jour'][0]);?>', valeur: <?php if(isset($graph['pourc'][0])) { echo $graph['pourc'][0]; } else { echo 0; } ?> },
-				    { nbr: '<?php echo convert_j($graph['jour'][1]);?>', valeur: <?php if(isset($graph['pourc'][1])) { echo $graph['pourc'][1]; } else { echo 0; } ?> },
-				    { nbr: '<?php echo convert_j($graph['jour'][2]);?>', valeur: <?php if(isset($graph['pourc'][2])) { echo $graph['pourc'][2]; } else { echo 0; } ?> },
-				    { nbr: '<?php echo convert_j($graph['jour'][3]);?>', valeur: <?php if(isset($graph['pourc'][3])) { echo $graph['pourc'][3]; } else { echo 0; } ?> },
-				    { nbr: '<?php echo convert_j($graph['jour'][4]);?>', valeur: <?php if(isset($graph['pourc'][4])) { echo $graph['pourc'][4]; } else { echo 0; } ?> },
-				    { nbr: '<?php echo convert_j($graph['jour'][5]);?>', valeur: <?php if(isset($graph['pourc'][5])) { echo $graph['pourc'][5]; } else { echo 0; } ?> },
-				    { nbr: '<?php echo convert_j($graph['jour'][6]);?>', valeur: <?php if(isset($graph['pourc'][6])) { echo $graph['pourc'][6]; } else { echo 0; } ?> },
+				    { nbr: '<?php echo $graph['jour'][0];?>', valeur: <?php if(isset($graph['pourc'][0])) { echo $graph['pourc'][0]; } else { echo 0; } ?> },
+				    { nbr: '<?php echo $graph['jour'][1];?>', valeur: <?php if(isset($graph['pourc'][1])) { echo $graph['pourc'][1]; } else { echo 0; } ?> },
+				    { nbr: '<?php echo $graph['jour'][2];?>', valeur: <?php if(isset($graph['pourc'][2])) { echo $graph['pourc'][2]; } else { echo 0; } ?> },
+				    { nbr: '<?php echo $graph['jour'][3];?>', valeur: <?php if(isset($graph['pourc'][3])) { echo $graph['pourc'][3]; } else { echo 0; } ?> },
+				    { nbr: '<?php echo $graph['jour'][4];?>', valeur: <?php if(isset($graph['pourc'][4])) { echo $graph['pourc'][4]; } else { echo 0; } ?> },
+				    { nbr: '<?php echo $graph['jour'][5];?>', valeur: <?php if(isset($graph['pourc'][5])) { echo $graph['pourc'][5]; } else { echo 0; } ?> },
+				    { nbr: '<?php echo $graph['jour'][6];?>', valeur: <?php if(isset($graph['pourc'][6])) { echo $graph['pourc'][6]; } else { echo 0; } ?> },
 				  ],
 				  
 				  // The name of the data record attribute that contains x-values.

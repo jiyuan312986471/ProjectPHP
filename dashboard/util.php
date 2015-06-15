@@ -407,24 +407,33 @@
 		// declare the percentage array
 		$graphPourc = array("pourc" => array(0,0,0,0,0,0,0), "jour" => array("","","","","","",""));
 		
-		// get machine data
-		$dataPourc = file_get_contents('graph_'.$machine.'.dat');
-		$n = sscanf($dataPourc,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s",
-								$graphPourc['pourc'][0], 
-								$graphPourc['pourc'][1],
-								$graphPourc['pourc'][2], 
-								$graphPourc['pourc'][3], 
-								$graphPourc['pourc'][4], 
-								$graphPourc['pourc'][5], 
-								$graphPourc['pourc'][6],
-								
-								$graphPourc['jour'] [0], 
-								$graphPourc['jour'] [1],	
-								$graphPourc['jour'] [2], 
-								$graphPourc['jour'] [3],	
-								$graphPourc['jour'] [4], 
-								$graphPourc['jour'] [5],	
-								$graphPourc['jour'] [6] );
+		if($machine != "All"){
+			// get machine data
+			$dataPourc = file_get_contents('graph_'.$machine.'.dat');
+			$n = sscanf($dataPourc,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s",
+									$graphPourc['pourc'][0], 
+									$graphPourc['pourc'][1],
+									$graphPourc['pourc'][2], 
+									$graphPourc['pourc'][3], 
+									$graphPourc['pourc'][4], 
+									$graphPourc['pourc'][5], 
+									$graphPourc['pourc'][6],
+									
+									$graphPourc['jour'] [0], 
+									$graphPourc['jour'] [1],	
+									$graphPourc['jour'] [2], 
+									$graphPourc['jour'] [3],	
+									$graphPourc['jour'] [4], 
+									$graphPourc['jour'] [5],	
+									$graphPourc['jour'] [6] );
+		}
+		else {
+			// get data from graph.bat
+			$donne = file_get_contents('graph.dat');
+			$n = sscanf($donne,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s",
+								  $graph['pourc'][0], $graph['pourc'][1], $graph['pourc'][2], $graph['pourc'][3], $graph['pourc'][4], $graph['pourc'][5], $graph['pourc'][6],
+								  $graph['jour'][0],  $graph['jour'][1],  $graph['jour'][2],  $graph['jour'][3],  $graph['jour'][4],  $graph['jour'][5],  $graph['jour'][6] );
+		}
 								
 		// set date display format
 		foreach($graphPourc['jour'] as &$jour){
