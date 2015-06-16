@@ -308,6 +308,7 @@ function callbackRefreshMachineAllGraph(xmlHttp) {
 	}
 };
 
+
 /******************************
 *		AJAX INDEX REFRESHER
 ******************************/
@@ -329,4 +330,17 @@ function callbackRefreshIndex(xmlHttp){
 		// draw graph
 		drawPourcGraph("All", graph);
 	}
+}
+
+
+/******************************
+*		AJAX MACHINE REFRESHER
+******************************/
+function refreshMachine(){
+	
+}
+
+// Machine Refresher Callback
+function callbackRefreshMachine(xmlHttp){
+	
 }

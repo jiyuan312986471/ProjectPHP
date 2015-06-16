@@ -308,6 +308,7 @@ function callbackRefreshMachineAllGraph(xmlHttp) {
 	}
 };
 
+
 /******************************
 *		AJAX INDEX REFRESHER
 ******************************/
@@ -324,10 +325,17 @@ function callbackRefreshIndex(xmlHttp){
 	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
 		// get graph
 		var jsonGraph = xmlHttp.responseText;
-		var graph = eval("("+graph+")");
-		alert(graph);
+		var graph = eval("("+jsonGraph+")");
 		
 		// draw graph
 		drawPourcGraph("All", graph);
 	}
+}
+
+
+/******************************
+*		AJAX MACHINE REFRESHER
+******************************/
+function refreshMachine(){
+	
 }
