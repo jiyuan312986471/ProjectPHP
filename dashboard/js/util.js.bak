@@ -33,7 +33,34 @@ function drawPourcGraph(machine, graphPourc){
 		});
 	}
 	else {
-		
+		new Morris.Line({
+				// ID of the element in which to draw the chart.
+				element: 'pourcUsine',
+				
+				// Chart data records -- each entry in this array corresponds to a point on the chart.
+				data: [
+					{ nbr: graphPourc.jour[0], valeur: graphPourc.pourc[0] },
+					{ nbr: graphPourc.jour[1], valeur: graphPourc.pourc[1] },
+					{ nbr: graphPourc.jour[2], valeur: graphPourc.pourc[2] },
+					{ nbr: graphPourc.jour[3], valeur: graphPourc.pourc[3] },
+					{ nbr: graphPourc.jour[4], valeur: graphPourc.pourc[4] },
+					{ nbr: graphPourc.jour[5], valeur: graphPourc.pourc[5] },
+					{ nbr: graphPourc.jour[6], valeur: graphPourc.pourc[6] }
+				],
+				
+				// The name of the data record attribute that contains x-values.
+				xkey: 'nbr',
+				
+				// A list of names of data record attributes that contain y-values.
+				ykeys: ['valeur'],
+				
+				// Labels for the ykeys -- will be displayed when you hover over the chart.
+				labels: ['Pourcentage'],
+				
+				pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4','#09DCB4','#046351','#E16351','#4C221C'],
+				parseTime: false,
+				hideHover: false,
+		});
 	}
 };
 

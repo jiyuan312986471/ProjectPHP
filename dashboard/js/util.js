@@ -242,9 +242,9 @@ function callbackChangeToGraphPareto(xmlHttp, machine, graphPareto) {
 };
 
 
-/*********************
-*		AJAX REFRESHER
-*********************/
+/********************************
+*		AJAX MACHINE ALL REFRESHER
+********************************/
 function refreshMachineAllGraph(jsonOptionMachine){
 	var xmlHttp = createXMLHttpRequest();
 	var url = "ajaxMachineAllRefresher.php?jsonOptionMachine=" + jsonOptionMachine;
