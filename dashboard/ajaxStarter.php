@@ -11,7 +11,8 @@
 	$result .=		"<div class=\"btn-group col-md-offset-7\" data-toggle=\"buttons\">";
 	if($option == "pareto") {
 		$result .= 		"<label class=\"btn btn-primary\" id=\"Pourcentage".$machine."\">";
-		$result .= 			"<input type=\"radio\" name=\"options\" autocomplete=\"off\"> Pourcentage";
+		$result .= 			"<input type=\"radio\" name=\"options\" autocomplete=\"off\">";
+		$result .=			" Pourcentage";
 		$result .= 		"</label>";
 		$result .= 		"<label class=\"btn btn-primary active\" id=\"Pareto".$machine."\">";
 		$result .= 			"<input type=\"radio\" name=\"options\" autocomplete=\"off\"> Pareto";
@@ -58,6 +59,14 @@
 		$result .= 		"</div>";
 	}
 	$result .= 		"</div>";
+	$result .= "</div>";
+	
+	// PANEL-FOOTER: export
+	$result .= "<div class=\"panel-footer\">";
+	$result .= 		"<button class=\"btn btn-primary\" id=\"export".$machine."\">";
+	$result .=			"<i class=\"fa fa-database fa-fw fa-lg\"></i>";
+	$result .=			" Exporter";
+	$result .=		"</button>";
 	$result .= "</div>";
 	
 	// return HTML part to AJAX

@@ -222,13 +222,13 @@
 	                        <div class="panel-heading">
 	                            Pourcentage Défauts Usine
 	                        </div>
-	                        <!-- /.panel-heading -->
 	                        <div class="panel-body">
 	                            <div id="pourcUsine"></div>
 	                        </div>
-	                        <!-- /.panel-body -->
+	                        <div class="panel-footer text-right">
+	                        	<button class="btn btn-primary" id="exportIndex">Exporter</button>
+	                        </div>
 	                    </div>
-	                    <!-- /.panel -->
 	                </div>
 	                <!-- /.col-lg-6 -->
 	

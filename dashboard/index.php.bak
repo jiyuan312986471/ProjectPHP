@@ -108,25 +108,6 @@
 	    
 	    <!-- Show Clock -->
 			<script src="js/MyDigitClock.js"></script>
-			
-			<script type="text/javascript">
-		$("#clock2").MyDigitClock({
-			fontSize:50, 
-			fontFamily:"Century gothic", 
-			fontColor: "#000", 
-			fontWeight:"bold", 
-			bAmPm:true,
-			background:'#fff',
-			bShowHeartBeat:true
-		});
-			
-		$("#clock").MyDigitClock({
-			fontSize:150, 
-			fontColor:"grey",
-			fontWeight:"bold",
-			//timeFormat: '{HH}:{MM}'
-		});
-</script>
 		
 	    <div id="wrapper">
 	
@@ -241,13 +222,13 @@
 	                        <div class="panel-heading">
 	                            Pourcentage Défauts Usine
 	                        </div>
-	                        <!-- /.panel-heading -->
 	                        <div class="panel-body">
 	                            <div id="pourcUsine"></div>
 	                        </div>
-	                        <!-- /.panel-body -->
+	                        <div class="panel-footer text-right">
+	                        	<button class="btn btn-primary">Exporter</button>
+	                        </div>
 	                    </div>
-	                    <!-- /.panel -->
 	                </div>
 	                <!-- /.col-lg-6 -->
 	
