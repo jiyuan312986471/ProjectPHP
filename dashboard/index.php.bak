@@ -218,16 +218,16 @@
 	            <!-- corps -->
 	            <div class="row">
 	            		<div class="col-lg-12">
-	            				<div class="panel panel-success">
+	            				<div class="panel panel-primary">
 	                        <div class="panel-heading">
-	                            <h3>Pourcentage Défauts Usine</h3>
+	                            <h4>Pourcentage Défauts Usine</h4>
 	                        </div>
 	                        <div class="panel-body">
 	                            <div id="pourcUsine"></div>
 	                        </div>
 	                        <div class="panel-footer">
 	                        	<!-- Button Trigger Modal -->
-	                        	<button type="button" class="btn btn-primary" id="exportAll" data-toggle="modal" data-target="#modalExport">
+	                        	<button type="button" class="btn btn-success" id="exportAll" data-toggle="modal" data-target="#modalExport">
 	                        		<i class="fa fa-database fa-fw"></i>
 	                        		Exporter
 	                        	</button>

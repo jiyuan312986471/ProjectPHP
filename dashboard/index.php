@@ -218,7 +218,7 @@
 	            <!-- corps -->
 	            <div class="row">
 	            		<div class="col-lg-12">
-	            				<div class="panel panel-success">
+	            				<div class="panel panel-primary">
 	                        <div class="panel-heading">
 	                            <h4>Pourcentage Défauts Usine</h4>
 	                        </div>
