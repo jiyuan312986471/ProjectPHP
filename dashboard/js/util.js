@@ -336,7 +336,7 @@ function callbackRefreshIndex(xmlHttp){
 /******************************
 *		AJAX MACHINE REFRESHER
 ******************************/
-function refreshMachine(){
+function refreshMachine(machine){
 	
 }
 
