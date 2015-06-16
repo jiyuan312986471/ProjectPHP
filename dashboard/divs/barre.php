@@ -1,11 +1,4 @@
 <script language="javascript">
-//	$("#clock").MyDigitClock({
-//		fontSize:150, 
-//		fontColor:"grey",
-//		background:"#fff",
-//		fontWeight:"bold",
-//		timeFormat: '{HH}:{MM}'}
-//	);
 	$(function(){
 		$("#clock").MyDigitClock();
 	});

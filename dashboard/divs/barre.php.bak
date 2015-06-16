@@ -45,6 +45,12 @@
 					echo "<center>Aucune notification pour l'instant !</center>";
 				}
 			?>
+			<li>
+				<a href="#">
+					<i class="fa fa-cog fa-fw"></i>
+					Configuration
+				</a>
+			</li>
 		</ul>
 	</li>
 	<!-- USER -->
