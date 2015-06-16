@@ -253,7 +253,7 @@ function refreshMachineAllGraph(jsonOptionMachine){
 	xmlHttp.send(null);
 };
 
-// Refresher Callback
+// Machine All Refresher Callback
 function callbackRefreshMachineAllGraph(xmlHttp) {
 	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
 		// get infos
@@ -307,3 +307,15 @@ function callbackRefreshMachineAllGraph(xmlHttp) {
 		}
 	}
 };
+
+/******************************
+*		AJAX INDEX REFRESHER
+******************************/
+function refreshIndex(){
+	
+}
+
+// Index Refresher Callback
+function callbackRefreshIndex(xmlHttp){
+	
+}
