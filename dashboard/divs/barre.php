@@ -30,7 +30,6 @@
 								</div>
 							</a>
 						</li>
-						<li class="divider"></li>
 			<?php
 					}
 				}
@@ -38,14 +37,17 @@
 					echo "<center>Aucune notification pour l'instant !</center>";
 				}
 			?>
+			<li role="presentation" class="divider"></li>
 			<li>
-				<a href="#">
+				<!-- Modal Configer Trigger -->
+				<a href="#" id="config" data-toggle="modal" data-target="#modalConfig">
 					<i class="fa fa-cog fa-fw"></i>
 					Configuration
 				</a>
 			</li>
 		</ul>
 	</li>
+	
 	<!-- USER -->
 	<li class="dropdown">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -61,6 +63,7 @@
 			</li>
 		</ul>
 	</li>
+	
 	<!-- EMAIL -->
 	<li class="dropdown">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -76,6 +79,7 @@
 			</li>
 		</ul>
 	</li>
+	
 	<!-- TIME -->
 	<li class="dropdown" id="clock"></li>
 </ul>

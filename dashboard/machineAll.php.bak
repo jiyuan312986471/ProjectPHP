@@ -267,7 +267,7 @@
 	
 	// draw graph and refresh
   var jsonOptionMachine = JSON.stringify(optionMachine);
-  setInterval(refreshMachineAllGraph(jsonOptionMachine), 8000);
+  setInterval(refreshMachineAllGraph(jsonOptionMachine), 8000); // 8 seconds
 </script>
 
 </body>

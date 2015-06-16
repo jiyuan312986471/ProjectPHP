@@ -226,29 +226,11 @@
 	                            <div id="pourcUsine"></div>
 	                        </div>
 	                        <div class="panel-footer">
-	                        	<!-- Button Trigger Modal -->
-	                        	<button type="button" class="btn btn-success" id="exportAll" data-toggle="modal" data-target="#modalExport">
+	                        	<!-- Modal Exporter Trigger -->
+	                        	<button type="button" class="btn btn-primary" id="exportAll" data-toggle="modal" data-target="#modalExport">
 	                        		<i class="fa fa-database fa-fw"></i>
 	                        		Exporter
 	                        	</button>
-	                        	
-	                        	<!-- Modal Exporter -->
-	                        	<div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-														  <div class="modal-dialog">
-														    <div class="modal-content">
-														      <div class="modal-header">
-														        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-														        <h4 class="modal-title" id="myModalLabel">Exporter</h4>
-														      </div>
-														      <div class="modal-body">
-														        ...
-														      </div>
-														      <div class="modal-footer">
-														        <button type="button" class="btn btn-primary">Exporter</button>
-														      </div>
-														    </div>
-														  </div>
-														</div>
 														
 	                        </div>
 	                    </div>
@@ -282,6 +264,42 @@
 	    <script type="text/javascript">
 	    	drawPourcGraph("All", <?php echo $jsonGraph; ?>);
 	    </script>
+	
+			<!-- Modal Exporter -->
+			<div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Exporter</h4>
+						</div>
+						<div class="modal-body">
+							...
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary">Exporter</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Modal Configer -->
+				<div class="modal fade bs-example-modal-lg" id="modalConfig" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">Configuration</h4>
+							</div>
+							<div class="modal-body">
+								...
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary">Valider</button>
+							</div>
+						</div>
+					</div>
+				</div>
 	
 	</body>
 </html>
