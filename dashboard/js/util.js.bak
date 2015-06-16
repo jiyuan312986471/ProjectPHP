@@ -253,7 +253,7 @@ function refreshMachineAllGraph(jsonOptionMachine){
 	xmlHttp.send(null);
 };
 
-// Refresher Callback
+// Machine All Refresher Callback
 function callbackRefreshMachineAllGraph(xmlHttp) {
 	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
 		// get infos
@@ -312,5 +312,22 @@ function callbackRefreshMachineAllGraph(xmlHttp) {
 *		AJAX INDEX REFRESHER
 ******************************/
 function refreshIndex(){
-	
+	var xmlHttp = createXMLHttpRequest();
+	var url = "ajaxIndexRefresher.php";
+	xmlHttp.onreadystatechange = function(){ callbackRefreshIndex(xmlHttp) };
+	xmlHttp.open("GET",url,true);
+	xmlHttp.send(null);
+}
+
+// Index Refresher Callback
+function callbackRefreshIndex(xmlHttp){
+	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
+		// get graph
+		var jsonGraph = xmlHttp.responseText;
+		var graph = eval("("+graph+")");
+		alert(graph);
+		
+		// draw graph
+		drawPourcGraph("All", graph);
+	}
 }
