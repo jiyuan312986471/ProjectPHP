@@ -103,6 +103,31 @@
 	</head>
 	
 	<body>
+			<!-- jQuery -->
+	    <script src="js/jquery.js"></script>
+	    
+	    <!-- Show Clock -->
+			<script src="js/MyDigitClock.js"></script>
+			
+			<script type="text/javascript">
+		$("#clock2").MyDigitClock({
+			fontSize:50, 
+			fontFamily:"Century gothic", 
+			fontColor: "#000", 
+			fontWeight:"bold", 
+			bAmPm:true,
+			background:'#fff',
+			bShowHeartBeat:true
+		});
+			
+		$("#clock").MyDigitClock({
+			fontSize:150, 
+			fontColor:"grey",
+			fontWeight:"bold",
+			//timeFormat: '{HH}:{MM}'
+		});
+</script>
+		
 	    <div id="wrapper">
 	
 	        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: auto">
@@ -122,88 +147,88 @@
 	                <div class="col-lg-12">
 	                    <div class="page-header">
 	                    	<!-- defaut machine alertes -->
-	            <div class="row">
-	                <div class="col-md-4">
-	                    <div class="panel panel-primary">
-	                        <div class="panel-heading">
-	                            <div class="row">
-	                                <div class="col-xs-3">
-	                                    <i class="fa fa-comments fa-5x"></i>
-	                                </div>
-	                                <div class="col-xs-9 text-right">
-	                                    <div class="huge">
-	                                    	<?php
-	                                    		echo $nombre."%";
-	                                    	?>
-	                                    </div>
-	                                    <div>Pourcentage Défaut</div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <a href="#">
-	                            <div class="panel-footer">
-	                                <span class="pull-left">Voir</span>
-	                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-	                                <div class="clearfix"></div>
-	                            </div>
-	                        </a>
-	                    </div>
-	                </div>
-	                <div class="col-md-4">
-	                    <div class="panel panel-green">
-	                        <div class="panel-heading">
-	                            <div class="row">
-	                                <div class="col-xs-3">
-	                                    <i class="fa fa-tasks fa-5x"></i>
-	                                </div>
-	                                <div class="col-xs-9 text-right">
-	                                    <div class="huge">6</div>
-	                                    <div>QG Graphique</div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <a href="machineAll.php">
-	                            <div class="panel-footer">
-	                                <span class="pull-left">Voir</span>
-	                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-	                                <div class="clearfix"></div>
-	                            </div>
-	                        </a>
-	                    </div>
-	                </div>
-	                <div class="col-md-4">
-	                    <div class="panel panel-red">
-	                        <div class="panel-heading">
-	                            <div class="row">
-	                                <div class="col-xs-3">
-	                                    <i class="fa fa-support fa-5x"></i>
-	                                </div>
-	                                <div class="col-xs-9 text-right">
-	                                    <div class="huge">
-	                                    	<?php
-	                                    		if(isset($Nbalert)){
-	                                    			echo $Nbalert;
-	                                    		}
-	                                    		else {
-	                                    			echo 0;
-	                                    		}
-	                                    	?>
-	                                    </div>
-	                                    <div>Alertes</div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <a href="alertes.php">
-	                            <div class="panel-footer">
-	                                <span class="pull-left">Voir</span>
-	                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-	                                <div class="clearfix"></div>
-	                            </div>
-	                        </a>
-	                    </div>
-	                </div>
-	            </div>
-	            <!-- defaut machine alertes -->
+						            <div class="row">
+						                <div class="col-md-4">
+						                    <div class="panel panel-primary">
+						                        <div class="panel-heading">
+						                            <div class="row">
+						                                <div class="col-xs-3">
+						                                    <i class="fa fa-comments fa-5x"></i>
+						                                </div>
+						                                <div class="col-xs-9 text-right">
+						                                    <div class="huge">
+						                                    	<?php
+						                                    		echo $nombre."%";
+						                                    	?>
+						                                    </div>
+						                                    <div>Pourcentage Défaut</div>
+						                                </div>
+						                            </div>
+						                        </div>
+						                        <a href="#">
+						                            <div class="panel-footer">
+						                                <span class="pull-left">Voir</span>
+						                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+						                                <div class="clearfix"></div>
+						                            </div>
+						                        </a>
+						                    </div>
+						                </div>
+						                <div class="col-md-4">
+						                    <div class="panel panel-green">
+						                        <div class="panel-heading">
+						                            <div class="row">
+						                                <div class="col-xs-3">
+						                                    <i class="fa fa-tasks fa-5x"></i>
+						                                </div>
+						                                <div class="col-xs-9 text-right">
+						                                    <div class="huge">6</div>
+						                                    <div>QG Graphique</div>
+						                                </div>
+						                            </div>
+						                        </div>
+						                        <a href="machineAll.php">
+						                            <div class="panel-footer">
+						                                <span class="pull-left">Voir</span>
+						                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+						                                <div class="clearfix"></div>
+						                            </div>
+						                        </a>
+						                    </div>
+						                </div>
+						                <div class="col-md-4">
+						                    <div class="panel panel-red">
+						                        <div class="panel-heading">
+						                            <div class="row">
+						                                <div class="col-xs-3">
+						                                    <i class="fa fa-support fa-5x"></i>
+						                                </div>
+						                                <div class="col-xs-9 text-right">
+						                                    <div class="huge">
+						                                    	<?php
+						                                    		if(isset($Nbalert)){
+						                                    			echo $Nbalert;
+						                                    		}
+						                                    		else {
+						                                    			echo 0;
+						                                    		}
+						                                    	?>
+						                                    </div>
+						                                    <div>Alertes</div>
+						                                </div>
+						                            </div>
+						                        </div>
+						                        <a href="alertes.php">
+						                            <div class="panel-footer">
+						                                <span class="pull-left">Voir</span>
+						                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+						                                <div class="clearfix"></div>
+						                            </div>
+						                        </a>
+						                    </div>
+						                </div>
+						            </div>
+						            <!-- defaut machine alertes -->
 	                    </div>
 	                </div>
 	            </div>
@@ -235,9 +260,7 @@
 	    </div>
 	    <!-- /#wrapper -->
 	    
-	    <!-- jQuery -->
-	    <script src="js/jquery.js"></script>
-	
+	    
 	    <!-- Bootstrap Core JavaScript -->
 	    <script src="js/bootstrap.min.js"></script>
 	

@@ -1,4 +1,18 @@
+<script language="javascript">
+//	$("#clock").MyDigitClock({
+//		fontSize:150, 
+//		fontColor:"grey",
+//		background:"#fff",
+//		fontWeight:"bold",
+//		timeFormat: '{HH}:{MM}'}
+//	);
+	$(function(){
+		$("#clock").MyDigitClock();
+	});
+</script>
+
 <ul class="nav navbar-top-links navbar-right">
+	<!-- ALERT -->
 	<li class="dropdown">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 			<?php
@@ -33,6 +47,7 @@
 			?>
 		</ul>
 	</li>
+	<!-- USER -->
 	<li class="dropdown">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 			<i class="fa fa-user fa-fw fa-lg"></i>
@@ -51,6 +66,7 @@
 	<li class="dropdown">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 			<i class="fa fa-envelope fa-lg"></i>
+			<i class="fa fa-caret-down fa-lg"></i>
 		</a>
 		<ul class="dropdown-menu dropdown-user">
 			<li>
@@ -61,4 +77,6 @@
 			</li>
 		</ul>
 	</li>
+	<!-- TIME -->
+	<li id="clock" style="margin-bottom: -2px"></li>
 </ul>

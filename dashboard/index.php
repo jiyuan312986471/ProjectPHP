@@ -103,6 +103,12 @@
 	</head>
 	
 	<body>
+			<!-- jQuery -->
+	    <script src="js/jquery.js"></script>
+	    
+	    <!-- Show Clock -->
+			<script src="js/MyDigitClock.js"></script>
+		
 	    <div id="wrapper">
 	
 	        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: auto">
@@ -235,9 +241,7 @@
 	    </div>
 	    <!-- /#wrapper -->
 	    
-	    <!-- jQuery -->
-	    <script src="js/jquery.js"></script>
-	
+	    
 	    <!-- Bootstrap Core JavaScript -->
 	    <script src="js/bootstrap.min.js"></script>
 	
