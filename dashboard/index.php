@@ -225,8 +225,11 @@
 	                        <div class="panel-body">
 	                            <div id="pourcUsine"></div>
 	                        </div>
-	                        <div class="panel-footer text-right">
-	                        	<button class="btn btn-primary" id="exportIndex">Exporter</button>
+	                        <div class="panel-footer">
+	                        	<button class="btn btn-primary" id="exportIndex">
+	                        		<i class="fa fa-database fa-fw"></i>
+	                        		Exporter
+	                        	</button>
 	                        </div>
 	                    </div>
 	                </div>

@@ -10,7 +10,6 @@
 	$result .= 		"Machine ".$machine;
 	$result .=		"<div class=\"btn-group col-md-offset-7\" data-toggle=\"buttons\">";
 	if($option == "pareto") {
-		$result .=			"<i class=\"fa fa-line-chart fa-fw fa-lg\"></i>";
 		$result .= 		"<label class=\"btn btn-primary\" id=\"Pourcentage".$machine."\">";
 		$result .= 			"<input type=\"radio\" name=\"options\" autocomplete=\"off\">";
 		$result .=			" Pourcentage";

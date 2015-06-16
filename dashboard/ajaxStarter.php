@@ -64,7 +64,7 @@
 	// PANEL-FOOTER: export
 	$result .= "<div class=\"panel-footer\">";
 	$result .= 		"<button class=\"btn btn-primary\" id=\"export".$machine."\">";
-	$result .=			"<i class=\"fa fa-database fa-fw fa-lg\"></i>";
+	$result .=			"<i class=\"fa fa-database fa-fw\"></i>";
 	$result .=			" Exporter";
 	$result .=		"</button>";
 	$result .= "</div>";
