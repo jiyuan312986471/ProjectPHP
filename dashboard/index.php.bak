@@ -218,29 +218,46 @@
 	            <!-- corps -->
 	            <div class="row">
 	            		<div class="col-lg-12">
-	            				<div class="panel panel-default">
+	            				<div class="panel panel-success">
 	                        <div class="panel-heading">
-	                            Pourcentage Défauts Usine
+	                            <h3>Pourcentage Défauts Usine</h3>
 	                        </div>
 	                        <div class="panel-body">
 	                            <div id="pourcUsine"></div>
 	                        </div>
 	                        <div class="panel-footer">
-	                        	<button class="btn btn-primary" id="exportIndex">
-	                        		<i class="fa fa-database fa-fw fa-lg"></i>
+	                        	<!-- Button Trigger Modal -->
+	                        	<button type="button" class="btn btn-primary" id="exportAll" data-toggle="modal" data-target="#modalExport">
+	                        		<i class="fa fa-database fa-fw"></i>
 	                        		Exporter
 	                        	</button>
+	                        	
+	                        	<!-- Modal Exporter -->
+	                        	<div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+														  <div class="modal-dialog">
+														    <div class="modal-content">
+														      <div class="modal-header">
+														        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+														        <h4 class="modal-title" id="myModalLabel">Exporter</h4>
+														      </div>
+														      <div class="modal-body">
+														        ...
+														      </div>
+														      <div class="modal-footer">
+														        <button type="button" class="btn btn-primary">Exporter</button>
+														      </div>
+														    </div>
+														  </div>
+														</div>
+														
 	                        </div>
 	                    </div>
 	                </div>
-	                <!-- /.col-lg-6 -->
-	
-	                <!-- notifications-->
-	
 	            </div>
 	            <!-- corps -->
 	        </div>
 	        <!-- contenu -->
+	        
 	    </div>
 	    <!-- /#wrapper -->
 	    
