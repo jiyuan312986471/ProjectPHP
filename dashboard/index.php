@@ -211,6 +211,7 @@
    		<script src="js/util.js"></script>
 	    
 	    <script language="javascript">
+	    	// refresh every 8s
 	    	setInterval(refreshIndex(), 8000);
 	    </script>
 	
