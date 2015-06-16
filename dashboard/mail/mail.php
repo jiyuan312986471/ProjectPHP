@@ -27,12 +27,16 @@
 	  $mail->AddAddress($address, "Partner");
 	  if(!($mail->Send())) 
 	  {
-	  	echo "Mailer Error: " . $mail->ErrorInfo;
+	  	echo "<br/>";
+	  	print_r($mail->ErrorInfo);
+	  	echo "<br/>";
 	  	return false;
 	  }
 	  else
 	  {
+	  	echo "<br/>";
 			echo "Message sent!";
+			echo "<br/>";
 			return true;
 	  }
 	}

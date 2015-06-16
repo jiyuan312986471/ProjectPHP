@@ -3,7 +3,7 @@
 	include("mail.php");
 	
 	// prepare mail
-	$address = "312986471@qq.com";
+	$address = "";
 	$subject = "Schneider Mail Test";
 	$body		 = "Congratulation! You can see me!";
 	

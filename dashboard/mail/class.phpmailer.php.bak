@@ -322,7 +322,7 @@ class PHPMailer
      * @type string|callable
      * @see SMTP::$Debugoutput
      */
-    public $Debugoutput = 'html';
+    public $Debugoutput = 'echo';
 
     /**
      * Whether to keep SMTP connection open after each message.
