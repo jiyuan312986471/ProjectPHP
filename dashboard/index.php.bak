@@ -194,7 +194,7 @@
 	    
 	    
 	    <!-- Bootstrap Core JavaScript -->
-	    <script src="js/bootstrap.min.js"></script>
+	    <script src="js/bootstrap.js"></script>
 	
 	    <!-- Metis Menu Plugin JavaScript -->
 	    <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
@@ -211,6 +211,7 @@
    		<script src="js/util.js"></script>
 	    
 	    <script language="javascript">
+	    	// refresh every 8s
 	    	setInterval(refreshIndex(), 8000);
 	    </script>
 	
@@ -241,7 +242,7 @@
 							<h4 class="modal-title" id="myModalLabel">Configuration</h4>
 						</div>
 						<div class="modal-body">
-							...
+						...</br>...</br>...</br>...</br>...</br>...</br>...</br>...</br>...</br>...</br>...</br>...</br>...</br>...</br>...</br>...</br>...</br>...</br>...</br>...</br>...</br>...
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-primary">Valider</button>

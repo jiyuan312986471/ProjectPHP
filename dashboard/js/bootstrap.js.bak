@@ -982,7 +982,7 @@ if (typeof jQuery === 'undefined') {
       }
 
 			// 2015.06.17: customized MODAL position: very middle of the page
-			var top = ($(window).height() - that.$element.find('.modal-content').height()) * 0.4;
+			var top = ($(window).height() - that.$element.find('.modal-content').height()) / 2;
 			that.$element.find('.modal-content').css({ 'margin': top + 'px auto' });
 
       that.$element
