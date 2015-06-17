@@ -55,7 +55,12 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Machine <?php echo $machine; ?></h1>
+					<h1 class="page-header">Machine <?php echo $machine; ?>
+						<button class="btn btn-primary btn-lg pull-right" id="export<?php echo $machine; ?>" style="margin-top: -3px" data-toggle="modal" data-target="#modalExport">
+							<i class="fa fa-database fa-fw"></i>
+								Exporter <?php echo $machine; ?>
+						</button>
+					</h1>
 				</div>
 			</div>
 			
@@ -102,6 +107,24 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary">Valider</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal Exporter -->
+	<div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Exporter <?php echo $machine; ?></h4>
+				</div>
+				<div class="modal-body">
+					...
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary">Exporter</button>
 				</div>
 			</div>
 		</div>

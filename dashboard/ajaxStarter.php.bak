@@ -8,8 +8,8 @@
 	// PANEL-HEADING: machine name
 	if($option != "both") {
 		$result .= "<div class=\"panel-heading\">";
-		$result .= 		"Machine ".$machine;
-		$result .=		"<div class=\"btn-group col-md-offset-7\" data-toggle=\"buttons\">";
+		$result .= 		"<h4>Machine ".$machine;
+		$result .=		"<div class=\"btn-group pull-right\" role=\"group\" data-toggle=\"buttons\" style=\"margin-top: -7.5px\">";
 		if($option == "pareto") {
 			$result .= 		"<label class=\"btn btn-primary\" id=\"Pourcentage".$machine."\">";
 			$result .= 			"<input type=\"radio\" name=\"options\" autocomplete=\"off\"> Pourcentage";
@@ -26,6 +26,7 @@
 			$result .= 			"<input type=\"radio\" name=\"options\" autocomplete=\"off\"> Pareto";
 			$result .= 		"</label>";
 		}
+		$result .=		"</h4>";
 		$result .=		"</div>";
 		$result .= "</div>";
 	}
@@ -74,7 +75,7 @@
 		
 		// graphPareto
 		$result .= 		"<div class=\"col-lg-12\">";
-		$result .= 			"<div class=\"panel panel-primary\">";
+		$result .= 			"<div class=\"panel panel-success\">";
 		$result .= 				"<div class=\"panel-heading\">";
 		$result .= 					"<h4>Pareto des Defauts ".$machine."</h4>";
 		$result .= 				"</div>";
@@ -90,7 +91,7 @@
 	// PANEL-FOOTER: export
 	if($option != "both") {
 		$result .= "<div class=\"panel-footer\">";
-		$result .= 		"<button class=\"btn btn-primary\" id=\"export".$machine."\">";
+		$result .= 		"<button class=\"btn btn-primary\" id=\"export".$machine."\" data-toggle=\"modal\" data-target=\"#modalExport\">";
 		$result .=			"<i class=\"fa fa-database fa-fw\"></i>";
 		$result .=			" Exporter ".$machine;
 		$result .=		"</button>";
