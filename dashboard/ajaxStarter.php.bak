@@ -91,7 +91,7 @@
 	// PANEL-FOOTER: export
 	if($option != "both") {
 		$result .= "<div class=\"panel-footer\">";
-		$result .= 		"<button class=\"btn btn-primary\" id=\"export".$machine."\" data-toggle=\"modal\" data-target=\"#modalExport\">";
+		$result .= 		"<button class=\"btn btn-primary\" id=\"export".$machine."\" data-toggle=\"modal\" data-target=\"#modalExport".$machine."\">";
 		$result .=			"<i class=\"fa fa-database fa-fw\"></i>";
 		$result .=			" Exporter ".$machine;
 		$result .=		"</button>";
