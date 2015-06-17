@@ -140,16 +140,22 @@ function createXMLHttpRequest() {
 function start(machine, option, graphPourc, listDefaut, listPareto){
 	var xmlHttp = createXMLHttpRequest();
 	var url = "ajaxStarter.php?machine=" + machine + "&option=" + option;
-	xmlHttp.onreadystatechange = function(){ callbackStarter(xmlHttp, machine, graphPourc, listDefaut, listPareto) };
+	xmlHttp.onreadystatechange = function(){ callbackStarter(xmlHttp, machine, option, graphPourc, listDefaut, listPareto) };
 	xmlHttp.open("GET",url,true);
 	xmlHttp.send(null);
 };
 
 // Starter Callback
-function callbackStarter(xmlHttp, machine, graphPourc, listDefaut, listPareto) {
+function callbackStarter(xmlHttp, machine, option, graphPourc, listDefaut, listPareto) {
 	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
 		document.getElementById("graphMachine"+machine).innerHTML = xmlHttp.responseText;
-		drawGraph(machine, graphPourc, listDefaut, listPareto);
+		if(option == "both"){
+			drawPourcGraph(machine, graphPourc);
+			drawParetoGraph(machine, listDefaut, listPareto);
+		}
+		else{
+			drawGraph(machine, graphPourc, listDefaut, listPareto);
+		}
 	}
 };
 
@@ -337,10 +343,33 @@ function callbackRefreshIndex(xmlHttp){
 *		AJAX MACHINE REFRESHER
 ******************************/
 function refreshMachine(machine){
-	
+	var xmlHttp = createXMLHttpRequest();
+	var url = "ajaxMachineRefresher.php?machine=" + machine;
+	xmlHttp.onreadystatechange = function(){ callbackRefreshMachine(xmlHttp, machine) };
+	xmlHttp.open("GET",url,true);
+	xmlHttp.send(null);
 }
 
 // Machine Refresher Callback
-function callbackRefreshMachine(xmlHttp){
-	
+function callbackRefreshMachine(xmlHttp, machine){
+	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
+		// get infos
+		var jsonListInfo = xmlHttp.responseText.split("AND");
+		var listInfo = {};
+		for(var index in jsonListInfo){
+			listInfo[index] = eval("("+jsonListInfo[index]+")");
+		}
+		
+		// get graphPourc
+		var graphPourc = listInfo[0];
+		
+		// get listDefaut
+		var listDefaut = listInfo[1];
+		
+		// get listPareto
+		var listPareto = listInfo[2];
+		
+		// draw graphs
+		start(machine, "both", graphPourc, listDefaut, listPareto);
+	}
 }

@@ -8,19 +8,7 @@
 	$conn = $db->getConn();
   
   // get machine
-  $machine = $_GET['machine'];  
-  
-  // get graph Pourc
-  $graphPourc = getPourcGraphData($machine);
-	
-  // get graph Pareto
-	$graphPareto = getParetoGraphData($machine, $conn);
-	
-	// get listDefaut
-	$listDefaut = array_keys($graphPareto);
-	
-	// get listPareto
-	$listPareto = array_values($graphPareto);
+  $machine = $_GET['machine'];
 	
 ?>
 
@@ -71,33 +59,8 @@
 				</div>
 			</div>
 			
-			<!-- REMAIN TO FINISH 2015.6.16 -->
 			<div class="row">
-				<div class="row" id="graphMachine<?php echo $machine; ?>">
-					
-					<div class="col-lg-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								Pourcentage Défauts <?php echo $machine; ?>
-							</div>
-							<div class="panel-body">
-								<div id="pourcDefaut<?php echo $machine; ?>"></div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-lg-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								Pareto des Défauts <?php echo $machine; ?>
-							</div>
-							<div class="panel-body">
-								<div id="paretoDefaut<?php echo $machine; ?>"></div>
-							</div>
-						</div>
-					</div>
-					
-				</div>
+				<div class="row" id="graphMachine<?php echo $machine; ?>"></div>
 			</div>
 			
 		</div>
@@ -122,8 +85,8 @@
   <script src="js/util.js"></script>
     
   <script type="text/javascript">
-    drawPourcGraph(<?php echo json_encode($machine); ?>, <?php echo json_encode($graphPourc); ?>);
-		drawParetoGraph(<?php echo json_encode($machine); ?>, <?php echo json_encode($listDefaut); ?>, <?php echo json_encode($listPareto); ?>);
+  	// refresh every 8s
+	  setInterval(refreshMachine(<?php echo json_encode($machine); ?>), 8000);
   </script>
 
 	<!-- Modal Configer -->
