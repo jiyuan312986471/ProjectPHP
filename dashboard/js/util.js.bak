@@ -337,11 +337,7 @@ function callbackRefreshIndex(xmlHttp){
 *		AJAX MACHINE REFRESHER
 ******************************/
 function refreshMachine(machine){
-	var xmlHttp = createXMLHttpRequest();
-	var url = "ajaxIndexRefresher.php";
-	xmlHttp.onreadystatechange = function(){ callbackRefreshIndex(xmlHttp) };
-	xmlHttp.open("GET",url,true);
-	xmlHttp.send(null);
+	
 }
 
 // Machine Refresher Callback

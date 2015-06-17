@@ -16,6 +16,12 @@
   // get graph Pareto
 	$graphPareto = getParetoGraphData($machine, $conn);
 	
+	// get listDefaut
+	$listDefaut = array_keys($graphPareto);
+	
+	// get listPareto
+	$listPareto = array_values($graphPareto);
+	
 ?>
 
 
@@ -117,7 +123,7 @@
     
   <script type="text/javascript">
     drawPourcGraph(<?php echo json_encode($machine); ?>, <?php echo json_encode($graphPourc); ?>);
-		//drawParetoGraph();
+		drawParetoGraph(<?php echo json_encode($machine); ?>, <?php echo json_encode($listDefaut); ?>, <?php echo json_encode($listPareto); ?>);
   </script>
 
 	<!-- Modal Configer -->
