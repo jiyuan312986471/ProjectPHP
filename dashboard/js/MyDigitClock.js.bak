@@ -77,13 +77,13 @@
 	
 	//default values
 	jQuery.fn.MyDigitClock.defaults = {
-		fontSize: '18px',
+		fontSize: '25px',
 		fontFamily: 'Microsoft JhengHei, Century gothic, Arial',
 		fontColor: '#428bca',
 		fontWeight: 'bold',
 		background: '#f8f8f8',
 		timeFormat: '{HH}<span id="ch1">:</span>{MM}<span id="ch2">:</span>{SS}',
-		bShowHeartBeat: true,
+		bShowHeartBeat: false,
 		bAmPm:false
 	};
 

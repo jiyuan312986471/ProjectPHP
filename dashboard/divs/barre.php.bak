@@ -1,3 +1,6 @@
+<!-- Show Clock -->
+<script src="js/MyDigitClock.js"></script>
+
 <script language="javascript">
 	$(function(){
 		$("#clock").MyDigitClock();
@@ -81,5 +84,5 @@
 	</li>
 	
 	<!-- TIME -->
-	<li class="dropdown" id="clock"></li>
+	<li class="dropdown" id="clock" style="padding-top: 5px"></li>
 </ul>

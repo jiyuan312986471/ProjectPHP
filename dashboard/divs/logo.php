@@ -5,7 +5,7 @@
 		<span class="icon-bar"></span>
 		<span class="icon-bar"></span>
 	</button>
-	<a class="navbar-brand" href="index.php" style="padding-bottom: 5px">
+	<a class="navbar-brand" href="index.php" style="padding-bottom: 6px">
 		<img src="../img/logo-schneider-electric.png" class="img-responsive" height="125" width="125" style="margin-top: -12px">
 	</a>
 </div>

@@ -77,7 +77,7 @@
 	
 	//default values
 	jQuery.fn.MyDigitClock.defaults = {
-		fontSize: '18px',
+		fontSize: '20px',
 		fontFamily: 'Microsoft JhengHei, Century gothic, Arial',
 		fontColor: '#428bca',
 		fontWeight: 'bold',
