@@ -36,6 +36,9 @@
   
   <!-- Show Clock -->
   <script src="js/MyDigitClock.js"></script>
+  
+  <!-- Configuration Modal -->
+  <?php include 'divs/modalConfig.php'; ?>
 	
 	<div id="wrapper">
 		<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -73,7 +76,7 @@
 	</div>
 	
 	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.js"></script>
 
 	<!-- Metis Menu Plugin JavaScript -->
   <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
@@ -94,24 +97,7 @@
 	  setInterval(refreshMachine(<?php echo json_encode($machine); ?>), 8000);
   </script>
 
-	<!-- Modal Configer -->
-	<div class="modal fade bs-example-modal-lg" id="modalConfig" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Configuration</h4>
-				</div>
-				<div class="modal-body">
-					...
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">Valider</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	
+
 	<!-- Modal Exporter -->
 	<div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
