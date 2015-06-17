@@ -58,8 +58,7 @@
 			<!-- jQuery -->
 	    <script src="js/jquery.js"></script>
 	    
-	    <!-- Show Clock -->
-			<script src="js/MyDigitClock.js"></script>
+	    
 		
 	    <div id="wrapper">
 	

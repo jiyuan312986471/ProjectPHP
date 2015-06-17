@@ -37,22 +37,29 @@
   <!-- Show Clock -->
   <script src="js/MyDigitClock.js"></script>
   
+  <!-- Bootstrap Core JavaScript -->
+	<script src="js/bootstrap.js"></script>
+
+	<!-- Metis Menu Plugin JavaScript -->
+  <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+
+  <!-- Morris Charts JavaScript -->
+  <script src="js/plugins/morris/raphael.min.js"></script>
+  <script src="js/plugins/morris/morris.min.js"></script>
+  <script src="js/plugins/morris/morris-data.js"></script>
+
+  <!-- Custom Theme JavaScript -->
+  <script src="js/sb-admin-2.js"></script>
+    
+  <!-- JS Functions -->
+  <script src="js/util.js"></script>
+  
   <!-- Configuration Modal -->
   <?php include 'divs/modalConfig.php'; ?>
 	
 	<div id="wrapper">
-		<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-			<?php
-				// logo schneider
-				include('divs/logo.php');
-				
-				// notification et logout
-				include('divs/barre.php');
-				
-				// Menu
-				include('divs/menu.php');
-			?>
-		</nav>
+		<!-- NavBar -->
+		<?php include 'divs/navbar.php'; ?>
 		
 		<!-- contenu -->
 		<div id="page-wrapper">
@@ -75,22 +82,7 @@
 		
 	</div>
 	
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.js"></script>
-
-	<!-- Metis Menu Plugin JavaScript -->
-  <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
-
-  <!-- Morris Charts JavaScript -->
-  <script src="js/plugins/morris/raphael.min.js"></script>
-  <script src="js/plugins/morris/morris.min.js"></script>
-  <script src="js/plugins/morris/morris-data.js"></script>
-
-  <!-- Custom Theme JavaScript -->
-  <script src="js/sb-admin-2.js"></script>
-    
-  <!-- JS Functions -->
-  <script src="js/util.js"></script>
+	
     
   <script type="text/javascript">
   	// refresh every 8s
@@ -99,7 +91,7 @@
 
 
 	<!-- Modal Exporter -->
-	<div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="modalExport<?php echo $machine; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">

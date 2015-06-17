@@ -41,18 +41,8 @@
   <?php include 'divs/modalConfig.php'; ?>
 	
 	<div id="wrapper">
-		<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-			<?php
-				// logo schneider
-				include('divs/logo.php');
-				
-				// notification et logout
-				include('divs/barre.php');
-				
-				// Menu
-				include('divs/menu.php');
-			?>
-		</nav>
+		<!-- NavBar -->
+		<?php include 'divs/navbar.php'; ?>
 		
 		<!-- contenu -->
 		<div id="page-wrapper">

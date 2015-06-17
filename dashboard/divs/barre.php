@@ -1,3 +1,6 @@
+<!-- Show Clock -->
+<script src="js/MyDigitClock.js"></script>
+
 <script language="javascript">
 	$(function(){
 		$("#clock").MyDigitClock();
