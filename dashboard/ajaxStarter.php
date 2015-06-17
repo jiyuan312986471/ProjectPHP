@@ -38,7 +38,7 @@
 		$result .= 		"<div class=\"col-lg-12\">";
 		$result .= 			"<div class=\"panel panel-default\">";
 		$result .= 				"<div class=\"panel-heading\">";
-		$result .= 					"Pourcentage Defauts ".$machine;
+		$result .= 					"<h5>Pourcentage Defauts ".$machine."</h5>";
 		$result .= 				"</div>";
 		$result .= 				"<div class=\"panel-body\">";
 		$result .= 					"<div id=\"pourcDefaut".$machine."\"></div>";
@@ -51,7 +51,7 @@
 		$result .= 		"<div class=\"col-lg-12\">";
 		$result .= 			"<div class=\"panel panel-default\">";
 		$result .= 				"<div class=\"panel-heading\">";
-		$result .= 					"Pareto des Defauts ".$machine;
+		$result .= 					"<h5>Pareto des Defauts ".$machine."</h5>";
 		$result .= 				"</div>";
 		$result .= 				"<div class=\"panel-body\">";
 		$result .= 					"<div id=\"paretoDefaut".$machine."\"></div>";
@@ -62,9 +62,9 @@
 	else if($option == "both") {
 		// graphPourc
 		$result .= 		"<div class=\"col-lg-12\">";
-		$result .= 			"<div class=\"panel panel-default\">";
+		$result .= 			"<div class=\"panel panel-success\">";
 		$result .= 				"<div class=\"panel-heading\">";
-		$result .= 					"Pourcentage Defauts ".$machine;
+		$result .= 					"<h4>Pourcentage Defauts ".$machine."</h4>";
 		$result .= 				"</div>";
 		$result .= 				"<div class=\"panel-body\">";
 		$result .= 					"<div id=\"pourcDefaut".$machine."\"></div>";
@@ -74,9 +74,9 @@
 		
 		// graphPareto
 		$result .= 		"<div class=\"col-lg-12\">";
-		$result .= 			"<div class=\"panel panel-default\">";
+		$result .= 			"<div class=\"panel panel-success\">";
 		$result .= 				"<div class=\"panel-heading\">";
-		$result .= 					"Pareto des Defauts ".$machine;
+		$result .= 					"<h4>Pareto des Defauts ".$machine."</h4>";
 		$result .= 				"</div>";
 		$result .= 				"<div class=\"panel-body\">";
 		$result .= 					"<div id=\"paretoDefaut".$machine."\"></div>";
