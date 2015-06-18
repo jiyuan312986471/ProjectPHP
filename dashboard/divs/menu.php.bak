@@ -15,10 +15,7 @@
 				<ul class="nav nav-second-level">
 					<li>
 						<li>
-							<a href="machine.php?machine=AK">
-								<i class="fa fa-bar-chart fa-fw"></i>
-								Final Auto K
-							</a>
+							<a href="machine.php?machine=AK">Final Auto K</a>
 						</li>
 						<li>
 							<a href="machine.php?machine=SAK">Semi Auto K</a>
