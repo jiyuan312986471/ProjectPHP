@@ -1,13 +1,13 @@
 <div class="navbar-default sidebar" role="navigation">
 	<div class="sidebar-nav navbar-collapse">
 		<ul class="nav" id="side-menu">
-			<li id="indexPage">
+			<li>
 				<a class="active" href="index.php">
 					<i class="fa fa-dashboard fa-fw"></i>
 					Accueil
 				</a>
 			</li>
-			<li id="machineAllPage">
+			<li>
 				<a href="machineAll.php">
 					<i class="fa fa-table fa-fw" ></i>
 					Machines
@@ -15,7 +15,10 @@
 				<ul class="nav nav-second-level">
 					<li>
 						<li>
-							<a href="machine.php?machine=AK">Final Auto K</a>
+							<a href="machine.php?machine=AK">
+								<i class="fa fa-bar-chart fa-fw"></i>
+								Final Auto K
+							</a>
 						</li>
 						<li>
 							<a href="machine.php?machine=SAK">Semi Auto K</a>
