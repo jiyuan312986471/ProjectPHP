@@ -57,8 +57,7 @@
 	  	// refresh every 8s
 		  setInterval(refreshMachine(<?php echo json_encode($machine); ?>), 8000);
 	  </script>
-	
-	
+		
 		<!-- Modal Exporter -->
 		<div class="modal fade" id="modalExport<?php echo $machine; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">

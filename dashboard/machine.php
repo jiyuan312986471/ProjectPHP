@@ -47,7 +47,6 @@
 				</div>
 				
 			</div>
-			
 		</div>
 		
 		<!-- Common Script Src Pool -->
