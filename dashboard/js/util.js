@@ -373,3 +373,43 @@ function callbackRefreshMachine(xmlHttp, machine){
 		start(machine, "both", graphPourc, listDefaut, listPareto);
 	}
 }
+
+
+/******************************
+*				PAGE DETECTION
+*						 AND
+*				MENU TAB FOCUS
+******************************/
+function focusMenuTab(){
+	// get url
+	var url = window.location.href;
+	
+	// get page
+	var strs = url.split("/");
+	var page = strs[strs.length - 1];
+	
+	// check if query exists
+	strs = page.split("?");
+	if (strs.length == 1){ // index OR machineAll
+		// no query
+		if (strs[0] == "index.php") {
+			// focus tab
+			$("#menuIndex").addClass("active");
+		}
+		else if (strs[0] == "machineAll.php") {
+			// focus tab
+			$("#menuMachineAll").addClass("active");
+		}
+	}
+	else if (strs.length == 2) { // machine
+		// get machine name
+		strs = strs[strs.length - 1].split("=");
+		var machine = strs[strs.length - 1];
+		
+		// generate id
+		var id = "menu" + machine;
+		
+		// focus tab
+		$("#" + id).addClass("active");
+	}
+}

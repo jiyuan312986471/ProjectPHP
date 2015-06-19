@@ -7,6 +7,10 @@
 	include('divs/logo.php');
 	// Notification et Logout
 	include('divs/barre.php');
+	?>
+	<!-- Functions used JavaScript -->
+	<script src="js/util.js"></script>
+	<?php
 	// Menu
 	include('divs/menu.php');
 	?>

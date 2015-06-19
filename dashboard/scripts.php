@@ -13,6 +13,3 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="js/sb-admin-2.js"></script>
-
-<!-- Functions used JavaScript -->
-<script src="js/util.js"></script>
