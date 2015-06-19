@@ -11,7 +11,39 @@
 			
 			<!-- Modal Body -->
 			<div class="modal-body">
-				...
+				<!-- MACHINE -->
+				<button type="button" class="btn btn-outline btn-primary btn-lg btn-block" data-toggle="collapse" data-target="#collapseConfigMachine" 
+					aria-expanded="false" aria-controls="collapseExample">
+					Machine
+				</button>
+				<div class="collapse" id="collapseConfigMachine">
+					<div class="well well-lg">
+						
+					</div>
+				</div>
+				
+				<!-- REFRESH FREQUENCY -->
+				<button type="button" class="btn btn-outline btn-primary btn-lg btn-block" data-toggle="collapse" data-target="#collapseConfigFrequence" 
+					aria-expanded="false" aria-controls="collapseExample">
+					Frequence d'actualisation
+				</button>
+				<div class="collapse" id="collapseConfigFrequence">
+				  <div class="well">
+				    collapseConfigFrequence
+				  </div>
+				</div>
+				
+				<!-- DEFAUT -->
+				<button type="button" class="btn btn-outline btn-primary btn-lg btn-block" data-toggle="collapse" data-target="#collapseConfigDefaut" 
+					aria-expanded="false" aria-controls="collapseExample">
+					Defaut
+				</button>
+				<div class="collapse" id="collapseConfigDefaut">
+				  <div class="well">
+				    collapseConfigDefaut
+				  </div>
+				</div>
+				
 			</div>
 			
 			<!-- Modal Footer -->

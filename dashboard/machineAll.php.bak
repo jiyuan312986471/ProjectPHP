@@ -19,7 +19,7 @@
   $jour = date('D');
   
   // declare 6 machines
-  $listMachine = array("AK","SAK","DT1","DT2","SAD","DT3");
+  $listMachine = array("AK","SAK","DT1","DT2","DT3","SAD");
   
   // declare graph pourcentage
   $graphPourc = array();
@@ -259,8 +259,6 @@
 				</div>
 			</div>
 		<?php } ?>
-
-
-
+		
 	</body>
 </html>
