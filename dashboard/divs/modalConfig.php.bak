@@ -18,26 +18,7 @@
 				</button>
 				<div class="collapse" id="collapseConfigMachine">
 					<div class="well well-lg">
-						<!-- Content Machine -->
-					  <div role="tabpanel">
-							<!-- Nav tabs -->
-							<nav class="navbar" role="navigation">
-								<ul class="nav nav-pills" role="tablist">
-								  <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-								  <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-								  <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-								  <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
-								</ul>
-							</nav>
-							
-						  <!-- Tab panes -->
-						  <div class="tab-content">
-								<div role="tabpanel" class="tab-pane fade in active" id="home">HOOOOOOOOOOOME</div>
-								<div role="tabpanel" class="tab-pane fade" id="profile">PROOOOOOOOFILE</div>
-								<div role="tabpanel" class="tab-pane fade" id="messages">MESSAAAAAAAAAAAGES</div>
-								<div role="tabpanel" class="tab-pane fade" id="settings">SEEEEEEEEEETTINGS</div>
-							</div>
-						</div>
+						<!-- content -->
 					</div>
 				</div>
 				

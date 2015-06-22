@@ -18,7 +18,7 @@
 				</button>
 				<div class="collapse" id="collapseConfigMachine">
 					<div class="well well-lg">
-						
+						<!-- content -->
 					</div>
 				</div>
 				
@@ -29,6 +29,7 @@
 				</button>
 				<div class="collapse" id="collapseConfigFrequence">
 				  <div class="well">
+				  	<!-- content -->
 				    collapseConfigFrequence
 				  </div>
 				</div>
@@ -40,6 +41,7 @@
 				</button>
 				<div class="collapse" id="collapseConfigDefaut">
 				  <div class="well">
+				  	<!-- content -->
 				    collapseConfigDefaut
 				  </div>
 				</div>
