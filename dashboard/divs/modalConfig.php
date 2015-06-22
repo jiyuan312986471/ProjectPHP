@@ -1,3 +1,7 @@
+<!-- Slider Plugin -->
+<link href="css/bootstrap-slider.css" rel="stylesheet">
+<script type='text/javascript' src="js/bootstrap-slider.js"></script>
+
 <!-- Modal Configer -->
 <div class="modal fade bs-example-modal-lg" id="modalConfig" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
@@ -69,7 +73,24 @@
 																	</div>
 																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
 																    <div class="col-sm-offset-1 col-sm-7" style="padding: 0px">
-																      Slider
+																    	<!-- Bootstrap Slider: Remain to finish -->
+																      <input id="seuilPourc" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="5" data-slider-enabled="false"/>
+																			<input id="seuilPourc-enabled" type="checkbox"/> Enabled
+																			<script language="javascript">
+																				// Without JQuery
+																				var slider = new Slider("#seuilPourc");
+																				
+																				$("#seuilPourc-enabled").click(function() {
+																					if(this.checked) {
+																						// Without JQuery
+																						slider.enable();
+																					}
+																					else {
+																						// Without JQuery
+																						slider.disable();
+																					}
+																				});
+																			</script>
 																    </div>
 																    <button class="btn btn-sm btn-primary col-sm-3 pull-right">Modifier</button>
 																  </div>
