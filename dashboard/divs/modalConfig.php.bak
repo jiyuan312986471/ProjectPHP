@@ -1,3 +1,9 @@
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- JS for Conf Menu -->
+<script type="text/javascript" src="js/site.js"></script>
+
 <!-- Modal Configer -->
 <div class="modal fade bs-example-modal-lg" id="modalConfig" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -19,6 +25,16 @@
 				<div class="collapse" id="collapseConfigMachine">
 					<div class="well well-lg">
 						<!-- content -->
+						<div id="menu">
+							<a href="javascript:;" class="close"></a>
+							<ul>
+								<li class="active"><a href="#">Accueil</a></li>
+								<li><a href="#">Articles</a></li>
+								<li><a href="#">Votes</a></li>
+								<li><a href="#">Blog</a></li>
+							</ul>
+						</div>
+						<a href="javascript:;" class="menu_btn"></a>
 					</div>
 				</div>
 				
@@ -29,6 +45,7 @@
 				</button>
 				<div class="collapse" id="collapseConfigFrequence">
 				  <div class="well">
+				  	<!-- content -->
 				    collapseConfigFrequence
 				  </div>
 				</div>
@@ -40,6 +57,7 @@
 				</button>
 				<div class="collapse" id="collapseConfigDefaut">
 				  <div class="well">
+				  	<!-- content -->
 				    collapseConfigDefaut
 				  </div>
 				</div>

@@ -1,5 +1,5 @@
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
+<!-- jQuery
+<script src="js/jquery.js"></script> -->
 
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: auto">
 	<?php
@@ -7,6 +7,10 @@
 	include('divs/logo.php');
 	// Notification et Logout
 	include('divs/barre.php');
+	?>
+	<!-- Functions used JavaScript -->
+	<script src="js/util.js"></script>
+	<?php
 	// Menu
 	include('divs/menu.php');
 	?>
