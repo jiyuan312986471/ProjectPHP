@@ -17,36 +17,34 @@
 					Machine
 				</button>
 				<div class="collapse" id="collapseConfigMachine">
-					<div class="panel panel-default well" style="padding: 5px 0px 5px 0px">
-						<div class="panel-body" style="padding: 0px">
-							<div class="row">
-								<div class="col-sm-12">
-									<!-- menu machine -->
-									<nav class="navbar col-sm-3" style="padding: 0px; margin: 0px">
-											<ul class="nav sidebar-nav navbar-collapse" style="padding: 0px" id="side-menu">
-												<?php foreach($listMachine as $machine){ ?>
-																<li class="pull-left" style="width: 100%">
-																	<a href="#confMachinePage<?php echo $machine; ?>" id="confMachineMenu<?php echo $machine; ?>" data-toggle="tab">
-																		<i class="fa fa-wrench fa-fw"></i>
-																		<?php echo $machine; ?>
-																		<i class="fa fa-angle-right fa-fw pull-right"></i>
-																	</a>
-																</li>
-												<?php	} ?>
-											</ul>
-									</nav>
-									<!-- Conf Page machine -->
-									<div class="tab-content col-sm-9" style="padding: 0px; height: 100%">
+					<div class="well" style="padding: 5px 0px 5px 0px">
+						<div class="row">
+							<div class="col-sm-12">
+								<!-- menu machine -->
+								<nav class="navbar col-sm-3" style="padding: 0px; margin: 0px">
+									<ul class="nav sidebar-nav navbar-collapse" style="padding: 0px" id="side-menu">
 										<?php foreach($listMachine as $machine){ ?>
-														<div role="tabpanel" class="tab-pane" id="confMachinePage<?php echo $machine; ?>">
-															<?php echo $machine; ?>
-														</div>
-										<?php } ?>
-								  </div>
+														<li class="pull-left" style="width: 100%">
+															<a href="#confMachinePage<?php echo $machine; ?>" id="confMachineMenu<?php echo $machine; ?>" data-toggle="tab">
+																<i class="fa fa-wrench fa-fw"></i>
+																<?php echo $machine; ?>
+																<i class="fa fa-angle-right fa-fw pull-right"></i>
+															</a>
+														</li>
+										<?php	} ?>
+									</ul>
+								</nav>
+								<!-- Conf Page machine -->
+								<div class="tab-content col-sm-9" style="padding: 0px; height: 100%">
+									<?php foreach($listMachine as $machine){ ?>
+													<div role="tabpanel" class="tab-pane" id="confMachinePage<?php echo $machine; ?>">
+														<?php echo $machine; ?>
+													</div>
+									<?php } ?>
+							  </div>
 					  
-					  		</div>
-					  	</div>
-					  </div>
+					 		</div>
+					 	</div>
 					</div>
 				</div>
 				
