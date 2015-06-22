@@ -981,7 +981,7 @@ if (typeof jQuery === 'undefined') {
         that.$element[0].offsetWidth // force reflow
       }
 
-			// 2015.06.17: customized MODAL position: very middle of the page
+			// 2015.06.17: customized MODAL position: 30% from the page top
 			var top = ($(window).height() - that.$element.find('.modal-content').height()) * 0.3;
 			that.$element.find('.modal-content').css({ 'margin': top + 'px auto' });
 

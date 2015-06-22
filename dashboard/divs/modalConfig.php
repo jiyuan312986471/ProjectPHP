@@ -1,6 +1,6 @@
 <!-- Modal Configer -->
 <div class="modal fade bs-example-modal-lg" id="modalConfig" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			
 			<!-- Modal Header -->
@@ -17,11 +17,11 @@
 					Machine
 				</button>
 				<div class="collapse" id="collapseConfigMachine">
-					<div class="well" style="padding: 5px 0px 5px 0px">
+					<div class="well" style="padding: 0px 0px 5px 0px">
 						<div class="row">
 							<div class="col-sm-12">
 								<!-- menu machine -->
-								<nav class="navbar col-sm-3" style="padding: 0px; margin: 0px">
+								<nav class="navbar col-sm-2" style="padding: 0px; margin: 0px">
 									<ul class="nav sidebar-nav navbar-collapse" style="padding: 0px" id="side-menu">
 										<?php foreach($listMachine as $machine){ ?>
 														<li class="pull-left" style="width: 100%">
@@ -35,10 +35,50 @@
 									</ul>
 								</nav>
 								<!-- Conf Page machine -->
-								<div class="tab-content col-sm-9" style="padding: 0px; height: 100%">
+								<div class="tab-content col-sm-10" style="padding: 0px">
 									<?php foreach($listMachine as $machine){ ?>
 													<div role="tabpanel" class="tab-pane" id="confMachinePage<?php echo $machine; ?>">
-														<?php echo $machine; ?>
+														<div class="panel panel-default">
+															<div class="panel-heading">
+																Machine <?php echo $machine; ?>
+															</div>
+															<form>
+																<!-- Nom Machine -->
+																<div class="panel-body">
+																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+																		<label class="col-sm-12">Nom</label>
+																	</div>
+																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+																    <div class="col-sm-offset-1 col-sm-7" style="padding: 0px">
+																      fdafdasfsadfasdfadsf
+																    </div>
+																    <button class="btn btn-sm btn-primary col-sm-3 pull-right">Modifier</button>
+																  </div>
+																  <div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+																  	<input type="text" class="col-sm-offset-1 col-sm-7" style="padding: 1px" placeholder="Nouveau Nom...">
+																  	<input type="submit" class="btn btn-sm btn-primary col-sm-3 pull-right" value="Enregistrer">
+																  </div>
+																</div>
+																
+																<hr style="margin-top: 2px; margin-bottom: 2px">
+																
+																<!-- Seuil Pourc -->
+																<div class="panel-body">
+																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+																		<label class="col-sm-12">Seuil du Graph Pourcentage</label>
+																	</div>
+																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+																    <div class="col-sm-offset-1 col-sm-7" style="padding: 0px">
+																      Slider
+																    </div>
+																    <button class="btn btn-sm btn-primary col-sm-3 pull-right">Modifier</button>
+																  </div>
+																</div>
+																<div class="panel-footer">
+																	<button type="submit" class="btn btn-primary">Enregistrer</button>
+																</div>
+															</form>
+														</div>
 													</div>
 									<?php } ?>
 							  </div>
