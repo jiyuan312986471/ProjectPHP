@@ -1,3 +1,6 @@
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
 <!-- Slider Plugin -->
 <link href="css/bootstrap-slider.css" rel="stylesheet">
 <script type='text/javascript' src="js/bootstrap-slider.js"></script>

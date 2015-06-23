@@ -78,9 +78,9 @@
 																			<input id="sliderSeuilPourc-enabled" type="checkbox"/> Enabled
 																			<script language="javascript">
 																				// Without JQuery
-																				var slider = new Slider("#seuilPourc");
+																				var slider = new Slider("#sliderSeuilPourc");
 																				
-																				$("#seuilPourc-enabled").click(function() {
+																				$("#sliderSeuilPourc-enabled").click(function() {
 																					if(this.checked) {
 																						// Without JQuery
 																						slider.enable();

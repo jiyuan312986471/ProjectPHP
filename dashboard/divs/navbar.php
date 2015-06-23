@@ -1,6 +1,3 @@
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: auto">
 	<?php
 	// Logo Schneider
