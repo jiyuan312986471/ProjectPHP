@@ -44,7 +44,7 @@
 								<div class="tab-content col-sm-10" style="padding: 0px">
 									<?php foreach($listMachine as $machine){ ?>
 													<div role="tabpanel" class="tab-pane" id="confMachinePage<?php echo $machine; ?>">
-														<div class="panel panel-default">
+														<div class="panel panel-default" style="margin: 0px">
 															<div class="panel-heading">
 																Machine <?php echo $machine; ?>
 															</div>
@@ -58,9 +58,11 @@
 																    <div class="col-sm-offset-1 col-sm-7" style="padding: 0px">
 																      fdafdasfsadfasdfadsf
 																    </div>
-																    <button class="btn btn-sm btn-primary col-sm-3 pull-right">Modifier</button>
+																    <button type="button" class="btn btn-sm btn-primary col-sm-3 pull-right" onclick="activeNameSetting('<?php echo $machine; ?>')">
+																    	Modifier
+																    </button>
 																  </div>
-																  <div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+																  <div class="row" id="nameSetting<?php echo $machine; ?>" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px; display: none">
 																  	<div class="alert alert-info col-sm-offset-1 col-sm-11">
 																	  	<input type="text" class="col-sm-8" style="padding-left: 15px; padding-right: 15px" placeholder="Nouveau Nom...">
 																	  	<input type="submit" class="btn btn-sm btn-primary col-sm-3 pull-right" value="Enregistrer">
@@ -90,8 +92,9 @@
 																		<label class="col-sm-12">Machine Status</label>
 																	</div>
 																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
-																		<button type="button" class="btn btn-success btn-lg col-sm-offset-1 col-sm-11">
-																			A
+																		<button type="button" class="btn btn-success btn-lg col-sm-offset-1 col-sm-11" id="status<?php echo $machine; ?>" 
+																			onclick="toggleMachineStatus('<?php echo $machine; ?>')">
+																			Active
 																		</button>
 																	</div>
 																</div>
@@ -156,3 +159,23 @@
 		</div>
 	</div>
 </div>
+
+<script language="javascript">
+	function activeNameSetting(machine){
+		$("div#nameSetting" + machine).css("display","");
+	}
+	
+	function toggleMachineStatus(machine){
+		var btn = $("button#status" + machine);
+		if ( btn.hasClass("btn-danger") ){
+			btn.removeClass("btn-danger");
+			btn.addClass("btn-success");
+			btn.text("Active");
+		}
+		else if ( btn.hasClass("btn-success") ){
+			btn.removeClass("btn-success");
+			btn.addClass("btn-danger");
+			btn.text("Disabled");
+		}
+	}
+</script>
