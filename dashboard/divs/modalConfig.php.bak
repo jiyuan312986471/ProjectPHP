@@ -78,9 +78,9 @@
 																		<label class="col-sm-12">Seuil du Graph Pourcentage</label>
 																	</div>
 																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
-																    <input id="sliderSeuilPourc<?php echo $machine; ?>" type="text" data-slider-id="slider<?php echo $machine; ?>" data-slider-min="0" data-slider-max="100" data-slider-step="1"
-																      		data-slider-value="5" data-slider-enabled="false" />
-																    <input type="submit" class="btn btn-sm btn-primary col-sm-3 pull-right" value="Enregistrer">
+																    <input id="sliderSeuilPourc<?php echo $machine; ?>" type="text" data-slider-id="slider<?php echo $machine; ?>" 
+																    	data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="5" />
+																    <input type="submit" class="btn btn-sm btn-primary col-sm-3 pull-right" value="Enregistrer" />
 																  </div>
 																</div>
 																
@@ -134,7 +134,33 @@
 				<div class="collapse" id="collapseConfigFrequence">
 				  <div class="well">
 				  	<!-- content -->
-				    collapseConfigFrequence
+				  	<div class="row">
+					    <input id="sliderRefreshTime" type="text" data-slider-id="sliderRefresh" data-slider-min="8" data-slider-max="60" data-slider-step="1" data-slider-value="8" />
+					    <span class="col-sm-2" id="currentRefreshTime">
+					    	Refresh Time: 
+					    	<span id="sliderRefreshVal">8</span>
+					    	s
+					    </span>
+					    <input type="submit" class="btn btn-sm btn-primary col-sm-offset-1 col-sm-2" value="Enregistrer" />
+				    </div>
+				    
+				    <script language="javascript">
+				    	// create slider
+				    	$("#sliderRefreshTime").slider({
+				    			formatter: function(value) {
+				    				return 'Current value: ' + value;
+				    			}
+				    	});
+				    	
+				    	// set slider width and offset
+				    	$("div.slider").addClass("col-sm-offset-1 col-sm-5");
+				    	
+				    	// sliderRefresh Listener
+				    	$("#sliderRefreshTime").on("slide", function(slideEvt) {
+								$("#sliderRefreshVal").text(slideEvt.value);
+							});
+				    </script>
+				    
 				  </div>
 				</div>
 				
