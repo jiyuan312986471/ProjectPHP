@@ -11,4 +11,5 @@
 	<link href="css/sb-admin-2.css" rel="stylesheet">
 	<link href="css/plugins/morris.css" rel="stylesheet">
 	<link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="css/bootstrap-slider.css" rel="stylesheet">
 </head>

@@ -2,7 +2,6 @@
 <script src="js/jquery.js"></script>
 
 <!-- Slider Plugin -->
-<link href="css/bootstrap-slider.css" rel="stylesheet">
 <script type='text/javascript' src="js/bootstrap-slider.js"></script>
 
 <!-- Modal Configer -->
@@ -75,35 +74,45 @@
 																		<label class="col-sm-12">Seuil du Graph Pourcentage</label>
 																	</div>
 																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
-																    <div class="col-sm-offset-1 col-sm-7" style="padding: 0px">
-																    	<!-- Bootstrap Slider: Remain to finish -->
-																      <input id="sliderSeuilPourc" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="5" data-slider-enabled="false"/>
-																			<input id="sliderSeuilPourc-enabled" type="checkbox"/> Enabled
-																			<script language="javascript">
-																				// Without JQuery
-																				var slider = new Slider("#sliderSeuilPourc");
-																				
-																				$("#sliderSeuilPourc-enabled").click(function() {
-																					if(this.checked) {
-																						// Without JQuery
-																						slider.enable();
-																					}
-																					else {
-																						// Without JQuery
-																						slider.disable();
-																					}
-																				});
-																			</script>
-																    </div>
-																    <button class="btn btn-sm btn-primary col-sm-3 pull-right">Modifier</button>
+																    <input id="sliderSeuilPourc<?php echo $machine; ?>" type="text" data-slider-id="slider<?php echo $machine; ?>" data-slider-min="0" data-slider-max="100" data-slider-step="1"
+																      		data-slider-value="5" data-slider-enabled="false" />
+																    <input type="submit" class="btn btn-sm btn-primary col-sm-3 pull-right" value="Enregistrer">
 																  </div>
 																</div>
+																
+																<hr style="margin-top: 2px; margin-bottom: 2px">
+																
+																<!-- Status -->
+																<div class="panel-body">
+																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+																		<label class="col-sm-12">Machine Status</label>
+																	</div>
+																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+																		<button type="button" class="btn btn-success btn-lg col-sm-offset-1 col-sm-11">
+																			Active
+																		</button>
+																	</div>
+																</div>
+																
 																<div class="panel-footer">
 																	<button type="submit" class="btn btn-primary">Enregistrer</button>
 																</div>
 															</form>
 														</div>
 													</div>
+													
+													<script language="javascript">
+														// create slider
+														$("#sliderSeuilPourc" + <?php echo json_encode($machine); ?>).slider({
+																formatter: function(value) {
+																	return 'Current value: ' + value;
+																}
+															});
+														
+														// set slider width and offset
+														$("div.slider").addClass("col-sm-offset-1 col-sm-7");
+													</script>
+													
 									<?php } ?>
 							  </div>
 					  

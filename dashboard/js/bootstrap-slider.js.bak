@@ -57,7 +57,7 @@
 			default:
 				this.picker
 					.addClass('slider-horizontal')
-					// 2015.06.23: remove width in order to inherit from parent
+					// 2015.06.23 remove width in order to inherit from parent
 					//.css('width', this.element.outerWidth());
 				this.orientation = 'horizontal';
 				this.stylePos = 'left';
