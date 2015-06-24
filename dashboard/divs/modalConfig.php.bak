@@ -132,16 +132,16 @@
 					Frequence d'actualisation
 				</button>
 				<div class="collapse" id="collapseConfigFrequence">
-				  <div class="well">
+				  <div class="well" style="background-color: #5bc0de">
 				  	<!-- content -->
 				  	<div class="row">
-					    <input id="sliderRefreshTime" type="text" data-slider-id="sliderRefresh" data-slider-min="8" data-slider-max="60" data-slider-step="1" data-slider-value="8" />
-					    <span class="col-sm-2" id="currentRefreshTime">
-					    	Refresh Time: 
-					    	<span id="sliderRefreshVal">8</span>
-					    	s
-					    </span>
-					    <input type="submit" class="btn btn-sm btn-primary col-sm-offset-1 col-sm-2" value="Enregistrer" />
+						  <input id="sliderRefreshTime" type="text" data-slider-id="sliderRefresh" data-slider-min="8" data-slider-max="60" data-slider-step="1" data-slider-value="8" />
+						  <span class="col-sm-3" id="currentRefreshTime">
+						   	Refresh Time: 
+						   	<span id="sliderRefreshVal">8</span>
+						   	s
+						  </span>
+						  <input type="submit" class="btn btn-sm btn-primary col-sm-2" value="Enregistrer" />
 				    </div>
 				    
 				    <script language="javascript">

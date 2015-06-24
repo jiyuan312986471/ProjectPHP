@@ -135,13 +135,15 @@
 				  <div class="well">
 				  	<!-- content -->
 				  	<div class="row">
-					    <input id="sliderRefreshTime" type="text" data-slider-id="sliderRefresh" data-slider-min="8" data-slider-max="60" data-slider-step="1" data-slider-value="8" />
-					    <span class="col-sm-3" id="currentRefreshTime">
-					    	Refresh Time: 
-					    	<span id="sliderRefreshVal">8</span>
-					    	s
-					    </span>
-					    <input type="submit" class="btn btn-sm btn-primary col-sm-2" value="Enregistrer" />
+				  		<div class="alert alert-info col-sm-12" style="margin: 0px">
+						    <input id="sliderRefreshTime" type="text" data-slider-id="sliderRefresh" data-slider-min="8" data-slider-max="60" data-slider-step="1" data-slider-value="8" />
+						    <span class="col-sm-3" id="currentRefreshTime">
+						    	Refresh Time: 
+						    	<span id="sliderRefreshVal">8</span>
+						    	s
+						    </span>
+						    <input type="submit" class="btn btn-sm btn-primary col-sm-2" value="Enregistrer" />
+					    </div>
 				    </div>
 				    
 				    <script language="javascript">
