@@ -346,6 +346,7 @@
 											<!-- Panel Footer -->
 											<div class="panel-footer">
 												<button type="submit" class="btn btn-primary">Enregistrer</button>
+												<button type="reset" class="btn btn-primary">Annuler</button>
 											</div>
 										</div>
 									</div>

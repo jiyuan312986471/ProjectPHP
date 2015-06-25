@@ -195,6 +195,7 @@
 									</ul>
 								</nav>
 								
+								<!-- content defaut -->
 								<div class="tab-content col-sm-10" style="padding: 0px">
 									<!-- Conf Defaut Page Modif -->
 									<div role="tabpanel" class="tab-pane fade" id="confDefautPageModif">
@@ -219,7 +220,7 @@
 												</div>
 											</div>
 											
-											<span id="defautInfo" style="display: none">
+											<span id="defautInfo" class="tab-pane fade" style="display: none">
 												<hr style="margin-top: 2px; margin-bottom: 2px">
 												
 												<!-- Code -->
@@ -345,10 +346,12 @@
 											<!-- Panel Footer -->
 											<div class="panel-footer">
 												<button type="submit" class="btn btn-primary">Enregistrer</button>
+												<button type="reset" class="btn btn-primary">Annuler</button>
 											</div>
 										</div>
 									</div>
 								</div>
+								
 							</div>
 						</div>
 								
