@@ -479,4 +479,7 @@
 	// machine list
 	include 'listMachine.php';
 	
+	// defaut list
+	include 'listDefaut.php';
+	
 ?>
