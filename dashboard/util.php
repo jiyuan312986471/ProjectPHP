@@ -473,4 +473,10 @@
 		return $graphPareto;
 	}
 	
+	
+	
+	
+	// machine list
+	include 'listMachine.php';
+	
 ?>

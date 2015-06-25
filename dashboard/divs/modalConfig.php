@@ -172,9 +172,19 @@
 					Defaut
 				</button>
 				<div class="collapse" id="collapseConfigDefaut">
-				  <div class="well">
+				  <div class="well" style="padding: 0px 0px 5px 0px">
 				  	<!-- content -->
-				    collapseConfigDefaut
+				    <div class="row">
+							<div class="col-sm-12">
+								<!-- menu defaut -->
+								
+								
+								<!-- Conf Page defaut -->
+								
+								
+							</div>
+						</div>
+								
 				  </div>
 				</div>
 				

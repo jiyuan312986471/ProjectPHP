@@ -2,6 +2,7 @@
 
 	include_once 'util.php';
 	include_once '../bdd.php';
+	include 'listMachine.php';
 	
 	// DB connection
 	$db = new bdd("SAMUEL-PC","bdd_user","user_bdd","ping2");
