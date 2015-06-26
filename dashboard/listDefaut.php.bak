@@ -33,6 +33,5 @@
 																"Status"		 => "D3"
 															 )
 											);
-	//$listDefautConfig = json_encode($listDefautConfig);
 
 ?>

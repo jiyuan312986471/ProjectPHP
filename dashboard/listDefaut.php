@@ -33,5 +33,6 @@
 																"Status"		 => "D3"
 															 )
 											);
+	$listCodeDefaut = array_keys($listDefautConfig);
 
 ?>

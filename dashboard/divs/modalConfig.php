@@ -4,8 +4,13 @@
 <!-- Slider Plugin -->
 <script type='text/javascript' src="js/bootstrap-slider.js"></script>
 
-<!-- Auto Complete -->
-<script type='text/javascript' src="js/jquery-autocomplete.js"></script>
+<!-- Type Ahead -->
+<script type='text/javascript' src="js/typeahead/bloodhound.js"></script>
+<script type='text/javascript' src="js/typeahead/typeahead.bundle.js"></script>
+<script type='text/javascript' src="js/typeahead/typeahead.jquery.js"></script>
+
+<!-- Map JS -->
+<script type='text/javascript' src="js/map.js"></script>
 
 <!-- Modal Configer -->
 <div class="modal fade bs-example-modal-lg" id="modalConfig" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -215,7 +220,8 @@
 													</label>
 													<div class="col-sm-8">
 														<div class="input-group">
-															<input type="text" class="form-control" id="inputCode" placeholder="Saisissez le code defaut...">
+															<input type="text" class="typeahead" id="inputCode" class="form-control" placeholder="Saisissez le code defaut..."
+																data-provide="typeahead">
 															<div class="input-group-btn">
 																<button id="researchCode" class="btn btn-primary">Rechercher</button>
 															</div>
@@ -411,9 +417,11 @@
 		$("span#defautInfo").css("display","");
 	})
 	
-	$("button#confDefautCancel").click(function (){
+	$("input#confDefautCancel").click(function (){
 		$("span#defautInfo").css("display","none");
 	})
+	
+	//$("span.twitter-typeahead").
 </script>
 
 <script language="javascript">
@@ -423,11 +431,24 @@
 	// get data
 	var data = eval(<?php echo json_encode($listDefautConfig); ?>);
 	
-	// get listDefaut
-	var listDefaut = [];
-  for (var defaut in data){
-    listDefaut.push(defaut);
+	// preparer list code defaut
+	var listCodeDefaut = [];
+  for (var codeDefaut in data){
+    listCodeDefaut.push(codeDefaut);
   }
   
-  alert(listDefaut);
+  var codes = new Bloodhound({
+  datumTokenizer: Bloodhound.tokenizers.whitespace,
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+  local: listCodeDefaut
+	});
+  
+  $("input#inputCode").typeahead({
+  	hint: true,
+  	highlight: true,
+  	minLength: 1
+  },
+  {
+  	source: codes
+  });
 </script>

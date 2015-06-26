@@ -1,5 +1,3 @@
-<!-- jQuery is in navbar.php -->
-
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.js"></script>
 
