@@ -417,7 +417,17 @@
 </script>
 
 <script language="javascript">
-	// Auto Complete
-	var data = eval(<?php echo $listDefautConfig; ?>);
-	alert (data);
+	/********************************/
+	/* 				Auto Complete 				*/
+	/********************************/
+	// get data
+	var data = eval("("+<?php echo json_encode($listDefautConfig); ?>+")");
+	
+	// get listDefaut
+	var listDefaut = [];
+  for (var defaut in data){
+    listDefaut.push(defaut);
+  }
+  
+  alert(listDefaut);
 </script>
