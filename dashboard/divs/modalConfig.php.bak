@@ -4,6 +4,9 @@
 <!-- Slider Plugin -->
 <script type='text/javascript' src="js/bootstrap-slider.js"></script>
 
+<!-- Auto Complete -->
+<script type='text/javascript' src="js/jquery-autocomplete.js"></script>
+
 <!-- Modal Configer -->
 <div class="modal fade bs-example-modal-lg" id="modalConfig" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
@@ -197,6 +200,7 @@
 								
 								<!-- content defaut -->
 								<div class="tab-content col-sm-10" style="padding: 0px">
+									
 									<!-- Conf Defaut Page Modif -->
 									<div role="tabpanel" class="tab-pane fade" id="confDefautPageModif">
 										<div class="panel panel-default" style="margin: 0px">
@@ -220,16 +224,95 @@
 												</div>
 											</div>
 											
-											<span id="defautInfo" class="tab-pane fade" style="display: none">
-												<hr style="margin-top: 2px; margin-bottom: 2px">
+											<form id="formModifDefaut" action="#">
+												<span id="defautInfo" style="display: none">
+													<hr style="margin-top: 2px; margin-bottom: 2px">
+													
+													<!-- Code -->
+													<div class="panel-body">
+														<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+															<label class="col-sm-3">
+																<div class="pull-right">Code Defaut :</div>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" placeholder="Code Defaut...">
+															</div>
+														</div>
+													</div>
+													
+													<hr style="margin-top: 2px; margin-bottom: 2px">
+													
+													<!-- Nom -->
+													<div class="panel-body">
+														<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+															<label class="col-sm-3">
+																<div class="pull-right">Nom Defaut :</div>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" placeholder="Nom du Defaut...">
+															</div>
+														</div>
+													</div>
+													
+													<hr style="margin-top: 2px; margin-bottom: 2px">
+													
+													<!-- Nom Abrege -->
+													<div class="panel-body">
+														<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+															<label class="col-sm-3">
+																<div class="pull-right">Nom Defaut Abrege :</div>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" placeholder="Nom du Defaut Abrege...">
+															</div>
+														</div>
+													</div>
+													
+													<hr style="margin-top: 2px; margin-bottom: 2px">
+													
+													<!-- Status -->
+													<div class="panel-body">
+														<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+															<label class="col-sm-3">
+																<div class="pull-right">Status :</div>
+															</label>
+															<div class="col-sm-6">
+																<select multiple class="form-control">
+																	<option>K</option>
+																	<option>D12</option>
+																	<option>D3</option>
+																</select>
+															</div>
+														</div>
+													</div>
+												</span>
 												
+												<!-- Panel Footer -->
+												<div class="panel-footer">
+													<input type="submit" class="btn btn-primary" value="Enregistrer">
+													<input type="reset" id="confDefautCancel" class="btn btn-primary" value="Annuler">
+												</div>
+											</form>
+										</div>
+									</div>
+									
+									<!-- Conf Defaut Page Ajout -->
+									<div role="tabpanel" class="tab-pane fade" id="confDefautPageAjout">
+										<div class="panel panel-default" style="margin: 0px">
+											<div class="panel-heading">
+												<h3>Ajouter un defaut</h3>
+											</div>
+											
+											<form id="formAjoutDefaut" action="#">
 												<!-- Code -->
 												<div class="panel-body">
 													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
 														<label class="col-sm-3">
 															<div class="pull-right">Code Defaut :</div>
 														</label>
-														<span class="col-sm-8">123456</span>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" placeholder="Code Defaut...">
+														</div>
 													</div>
 												</div>
 												
@@ -241,7 +324,9 @@
 														<label class="col-sm-3">
 															<div class="pull-right">Nom Defaut :</div>
 														</label>
-														<span class="col-sm-8">123456</span>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" placeholder="Nom du Defaut...">
+														</div>
 													</div>
 												</div>
 												
@@ -253,7 +338,9 @@
 														<label class="col-sm-3">
 															<div class="pull-right">Nom Defaut Abrege :</div>
 														</label>
-														<span class="col-sm-8">123456</span>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" placeholder="Nom du Defaut Abrege...">
+														</div>
 													</div>
 												</div>
 												
@@ -267,87 +354,20 @@
 														</label>
 														<div class="col-sm-6">
 															<select multiple class="form-control">
-																<option>1</option>
-																<option>2</option>
-																<option>3</option>
+																<option>K</option>
+																<option>D12</option>
+																<option>D3</option>
 															</select>
 														</div>
 													</div>
 												</div>
-											</span>
-											
-											<!-- Panel Footer -->
-											<div class="panel-footer">
-												<button type="submit" class="btn btn-primary">Enregistrer</button>
-												<button type="reset" id="confDefautCancel" class="btn btn-primary">Annuler</button>
-											</div>
-										</div>
-									</div>
-									<!-- Conf Defaut Page Ajout -->
-									<div role="tabpanel" class="tab-pane fade" id="confDefautPageAjout">
-										<div class="panel panel-default" style="margin: 0px">
-											<div class="panel-heading">
-												<h3>Ajouter un defaut</h3>
-											</div>
-											<!-- Code -->
-											<div class="panel-body">
-												<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
-													<label class="col-sm-3">
-														<div class="pull-right">Code Defaut :</div>
-													</label>
-													<div class="col-sm-8">
-														<input type="text" class="form-control" placeholder="Code Defaut...">
-													</div>
+												
+												<!-- Panel Footer -->
+												<div class="panel-footer">
+													<button type="submit" class="btn btn-primary">Enregistrer</button>
+													<button type="reset" class="btn btn-primary">Annuler</button>
 												</div>
-											</div>
-											
-											<hr style="margin-top: 2px; margin-bottom: 2px">
-											
-											<!-- Nom -->
-											<div class="panel-body">
-												<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
-													<label class="col-sm-3">
-														<div class="pull-right">Nom Defaut :</div>
-													</label>
-													<span class="col-sm-8 ">123456</span>
-												</div>
-											</div>
-											
-											<hr style="margin-top: 2px; margin-bottom: 2px">
-											
-											<!-- Nom Abrege -->
-											<div class="panel-body">
-												<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
-													<label class="col-sm-3">
-														<div class="pull-right">Nom Defaut Abrege :</div>
-													</label>
-													<span class="col-sm-8">123456</span>
-												</div>
-											</div>
-											
-											<hr style="margin-top: 2px; margin-bottom: 2px">
-											
-											<!-- Status -->
-											<div class="panel-body">
-												<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
-													<label class="col-sm-3">
-														<div class="pull-right">Status :</div>
-													</label>
-													<div class="col-sm-6">
-														<select multiple class="form-control">
-															<option>1</option>
-															<option>2</option>
-															<option>3</option>
-														</select>
-													</div>
-												</div>
-											</div>
-											
-											<!-- Panel Footer -->
-											<div class="panel-footer">
-												<button type="submit" class="btn btn-primary">Enregistrer</button>
-												<button type="reset" class="btn btn-primary">Annuler</button>
-											</div>
+											</form>
 										</div>
 									</div>
 								</div>
@@ -394,4 +414,10 @@
 	$("button#confDefautCancel").click(function (){
 		$("span#defautInfo").css("display","none");
 	})
+</script>
+
+<script language="javascript">
+	// Auto Complete
+	var data = eval(<?php echo $listDefautConfig; ?>);
+	alert (data);
 </script>
