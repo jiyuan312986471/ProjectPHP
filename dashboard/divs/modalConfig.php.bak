@@ -473,10 +473,12 @@
 </div>
 
 <script language="javascript">
+	// activate machine name setting
 	function activeNameSetting(machine){
 		$("input#inputNameMachine" + machine).removeAttr("disabled");
 	}
 	
+	// activate machine seuil setting
 	function activeSeuilSetting(machine){
 		var divSlider = $("#slider" + machine);
 		if( divSlider.hasClass("slider-disabled") ){
@@ -484,6 +486,7 @@
 		}
 	}
 	
+	// activate and disactivate machine status
 	function toggleMachineStatus(machine){
 		var btn = $("button#status" + machine);
 		if ( btn.hasClass("btn-danger") ){
@@ -498,6 +501,7 @@
 		}
 	}
 	
+	// reset current machine setting page
 	function resetMachineSetting(machine){
 		if(machine != "NewMachine"){
 			// disable name input
@@ -512,7 +516,7 @@
 			
 			// reset slider
 			$("#sliderSeuilPourc" + machine).slider('setValue', 5);
-			$("#sliderVal" + machine).text(slideEvt.value);
+			$("#sliderVal" + machine).text(5);
 		}
 	}
 	

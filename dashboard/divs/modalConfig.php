@@ -473,10 +473,12 @@
 </div>
 
 <script language="javascript">
+	// activate machine name setting
 	function activeNameSetting(machine){
 		$("input#inputNameMachine" + machine).removeAttr("disabled");
 	}
 	
+	// activate machine seuil setting
 	function activeSeuilSetting(machine){
 		var divSlider = $("#slider" + machine);
 		if( divSlider.hasClass("slider-disabled") ){
@@ -484,6 +486,7 @@
 		}
 	}
 	
+	// activate and disactivate machine status
 	function toggleMachineStatus(machine){
 		var btn = $("button#status" + machine);
 		if ( btn.hasClass("btn-danger") ){
@@ -498,6 +501,7 @@
 		}
 	}
 	
+	// reset current machine setting page
 	function resetMachineSetting(machine){
 		if(machine != "NewMachine"){
 			// disable name input
@@ -516,10 +520,12 @@
 		}
 	}
 	
+	// show defaut info page by entered code defaut
 	$("button#researchCode").click(function (){
 		$("span#defautInfo").css("display","");
 	})
 	
+	// hide defaut info page
 	$("input#confDefautCancel").click(function (){
 		$("span#defautInfo").css("display","none");
 	})
