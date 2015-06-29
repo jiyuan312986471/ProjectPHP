@@ -79,8 +79,7 @@
 																  </div>
 																  <div class="row" id="nameSetting<?php echo $machine; ?>" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px; display: none">
 																  	<div class="alert alert-info col-sm-offset-1 col-sm-11">
-																	  	<input type="text" class="col-sm-8" style="padding-left: 15px; padding-right: 15px" placeholder="Nouveau Nom...">
-																	  	<input type="submit" class="btn btn-sm btn-primary col-sm-3 pull-right" value="Enregistrer">
+																	  	<input type="text" class="form-control col-sm-8" style="padding-left: 15px; padding-right: 15px" placeholder="Nouveau Nom...">
 																  	</div>
 																  </div>
 																</div>
@@ -93,9 +92,8 @@
 																		<label class="col-sm-12">Seuil du Graph Pourcentage</label>
 																	</div>
 																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
-																    <input id="sliderSeuilPourc<?php echo $machine; ?>" type="text" data-slider-id="slider<?php echo $machine; ?>" 
-																    	data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="5" />
-																    <input type="submit" class="btn btn-sm btn-primary col-sm-3 pull-right" value="Enregistrer" />
+																	  <input id="sliderSeuilPourc<?php echo $machine; ?>" type="text" data-slider-id="slider<?php echo $machine; ?>" 
+																	    data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="5" />
 																  </div>
 																</div>
 																
@@ -130,13 +128,14 @@
 															});
 														
 														// set slider width and offset
-														$("div.slider").addClass("col-sm-offset-1 col-sm-7");
+														$("div.slider").addClass("col-sm-offset-1 col-sm-10");
 													</script>
 													
 									<?php } ?>
 									
 									<!-- New Machine -->
 									<div role="tabpanel" class="tab-pane fade" id="confMachinePage<?php echo $machine; ?>">
+										
 									</div>
 									
 							  </div>
