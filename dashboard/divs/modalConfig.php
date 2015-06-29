@@ -46,6 +46,13 @@
 															</a>
 														</li>
 										<?php	} ?>
+														<li class="pull-left" style="width: 100%">
+															<a href="#confMachinePageAjout" id="confMachineMenuAjout" data-toggle="tab">
+																<i class="fa fa-plus fa-fw"></i>
+																Ajouter
+																<i class="fa fa-angle-right fa-fw pull-right"></i>
+															</a>
+														</li>
 									</ul>
 								</nav>
 								<!-- Conf Page machine -->
@@ -127,6 +134,11 @@
 													</script>
 													
 									<?php } ?>
+									
+									<!-- New Machine -->
+									<div role="tabpanel" class="tab-pane fade" id="confMachinePage<?php echo $machine; ?>">
+									</div>
+									
 							  </div>
 					 		</div>
 					 	</div>
@@ -230,7 +242,7 @@
 												</div>
 											</div>
 											
-											<form id="formModifDefaut" action="#">
+											<form id="formModifDefaut" action="#" name="formModifDefaut">
 												<span id="defautInfo" style="display: none">
 													<hr style="margin-top: 2px; margin-bottom: 2px">
 													
@@ -309,7 +321,7 @@
 												<h3>Ajouter un defaut</h3>
 											</div>
 											
-											<form id="formAjoutDefaut" action="#">
+											<form id="formAjoutDefaut" action="#" name="formAjoutDefaut">
 												<!-- Code -->
 												<div class="panel-body">
 													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
