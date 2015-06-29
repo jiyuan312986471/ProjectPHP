@@ -2,7 +2,7 @@
 <script src="js/jquery.js"></script>
 
 <!-- Slider Plugin -->
-<script type='text/javascript' src="js/bootstrap-slider.js"></script>
+<script type='text/javascript' src="js/bootstrap-slider1.js"></script>
 
 <!-- Type Ahead -->
 <script type='text/javascript' src="js/typeahead/bloodhound.js"></script>
@@ -93,7 +93,13 @@
 																	</div>
 																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
 																	  <input id="sliderSeuilPourc<?php echo $machine; ?>" type="text" data-slider-id="slider<?php echo $machine; ?>" 
-																	    data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="5" />
+																	    data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="5" data-slider-enabled="false" />
+																	  <span class="col-sm-3" id="currentSliderValLabel">Current Value: 
+																	  	<span id="sliderVal<?php echo $machine; ?>" style="color: #428bca">5</span>
+																	  </span>
+																	  <button type="button" class="btn btn-sm btn-primary col-sm-3 pull-right" onclick="activeSeuilSetting('<?php echo $machine; ?>')">
+																    	Modifier
+																    </button>
 																  </div>
 																</div>
 																
@@ -121,14 +127,14 @@
 													
 													<script language="javascript">
 														// create slider
-														$("#sliderSeuilPourc" + <?php echo json_encode($machine); ?>).slider({
-																formatter: function(value) {
-																	return 'Current value: ' + value;
-																}
-															});
+														$("#sliderSeuilPourc" + <?php echo json_encode($machine); ?>).slider();
+														
+														$("#sliderSeuilPourc" + <?php echo json_encode($machine); ?>).on("slide", function(slideEvt) {
+															$("#sliderVal" + <?php echo json_encode($machine); ?>).text(slideEvt.value);
+														});
 														
 														// set slider width and offset
-														$("div.slider").addClass("col-sm-offset-1 col-sm-10");
+														$("div.slider").addClass("col-sm-offset-1 col-sm-5");
 													</script>
 													
 									<?php } ?>
@@ -173,7 +179,7 @@
 				    	});
 				    	
 				    	// set slider width and offset
-				    	$("div.slider").addClass("col-sm-offset-1 col-sm-5");
+				    	$("div.slider#sliderRefresh").addClass("col-sm-offset-1 col-sm-5");
 				    	
 				    	// sliderRefresh Listener
 				    	$("#sliderRefreshTime").on("slide", function(slideEvt) {
@@ -408,6 +414,13 @@
 <script language="javascript">
 	function activeNameSetting(machine){
 		$("div#nameSetting" + machine).css("display","");
+	}
+	
+	function activeSeuilSetting(machine){
+		var divSlider = $("#slider" + machine);
+		if( divSlider.hasClass("slider-disabled") ){
+			$("#sliderSeuilPourc" + machine).slider("enable");
+		}
 	}
 	
 	function toggleMachineStatus(machine){
