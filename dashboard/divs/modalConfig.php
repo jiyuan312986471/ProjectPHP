@@ -71,16 +71,11 @@
 																	</div>
 																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
 																    <div class="col-sm-offset-1 col-sm-7" style="padding: 0px">
-																      fdafdasfsadfasdfadsf
+																      <input id="inputNameMachine<?php echo $machine; ?>" type="text" class="form-control" placeholder="Nouveau Nom..." value="asdfsadfasdf" disabled >
 																    </div>
 																    <button type="button" class="btn btn-sm btn-primary col-sm-3 pull-right" onclick="activeNameSetting('<?php echo $machine; ?>')">
 																    	Modifier
 																    </button>
-																  </div>
-																  <div class="row" id="nameSetting<?php echo $machine; ?>" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px; display: none">
-																  	<div class="alert alert-info col-sm-offset-1 col-sm-11">
-																	  	<input type="text" class="form-control col-sm-8" style="padding-left: 15px; padding-right: 15px" placeholder="Nouveau Nom...">
-																  	</div>
 																  </div>
 																</div>
 																
@@ -120,6 +115,7 @@
 																
 																<div class="panel-footer">
 																	<button type="submit" class="btn btn-primary">Enregistrer</button>
+																	<button type="button" class="btn btn-primary" onclick="resetMachineSetting('<?php echo $machine; ?>')">Annuler</button>
 																</div>
 															</form>
 														</div>
@@ -134,15 +130,80 @@
 														});
 														
 														// set slider width and offset
-														$("div.slider").addClass("col-sm-offset-1 col-sm-5");
+														$("div.slider#slider" + <?php echo json_encode($machine); ?>).addClass("col-sm-offset-1 col-sm-5");
 													</script>
 													
 									<?php } ?>
 									
 									<!-- New Machine -->
-									<div role="tabpanel" class="tab-pane fade" id="confMachinePage<?php echo $machine; ?>">
-										
+									<div role="tabpanel" class="tab-pane fade" id="confMachinePageAjout">
+										<div class="panel panel-default" style="margin: 0px">
+											<div class="panel-heading">
+												<h3>Ajouter une Machine</h3>
+											</div>
+											<form>
+												<!-- Nom Machine -->
+												<div class="panel-body">
+													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+														<label class="col-sm-12">Nom</label>
+													</div>
+													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+														<div class="col-sm-offset-1 col-sm-8" style="padding: 0px">
+															<input id="inputNameNewMachine" type="text" class="form-control" placeholder="Nom de la machine...">
+														</div>
+													</div>
+												</div>
+												
+												<hr style="margin-top: 2px; margin-bottom: 2px">
+												
+												<!-- Seuil Pourc -->
+												<div class="panel-body">
+													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+														<label class="col-sm-12">Seuil du Graph Pourcentage</label>
+													</div>
+													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+														<input id="sliderSeuilPourcNewMachine" type="text" data-slider-id="sliderNewMachine" 
+															data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="5" />
+														<span class="col-sm-3" id="currentSliderValLabel">Current Value: 
+															<span id="sliderValNewMachine" style="color: #428bca">5</span>
+														</span>
+													</div>
+												</div>
+												
+												<hr style="margin-top: 2px; margin-bottom: 2px">
+												
+												<!-- Status -->
+												<div class="panel-body">
+													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+														<label class="col-sm-12">Machine Status</label>
+													</div>
+													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+														<button type="button" class="btn btn-success btn-lg col-sm-offset-1 col-sm-11" id="statusNewMachine" 
+															onclick="toggleMachineStatus('NewMachine')">
+															Active
+														</button>
+													</div>
+												</div>
+												
+												<div class="panel-footer">
+													<button type="submit" class="btn btn-primary">Enregistrer</button>
+													<button type="button" class="btn btn-primary" onclick="resetMachineSetting('NewMachine')">Annuler</button>
+												</div>
+											</form>
+										</div>
 									</div>
+									
+									<script language="javascript">
+										// create slider
+										$("#sliderSeuilPourcNewMachine").slider();
+										
+										$("#sliderSeuilPourcNewMachine").on("slide", function(slideEvt){
+											$("#sliderValNewMachine").text(slideEvt.value);
+										});
+										
+										// set slider width and offset
+										$("div.slider#sliderNewMachine").addClass("col-sm-offset-1 col-sm-8");
+									</script>
 									
 							  </div>
 					 		</div>
@@ -413,7 +474,7 @@
 
 <script language="javascript">
 	function activeNameSetting(machine){
-		$("div#nameSetting" + machine).css("display","");
+		$("input#inputNameMachine" + machine).removeAttr("disabled");
 	}
 	
 	function activeSeuilSetting(machine){
@@ -434,6 +495,24 @@
 			btn.removeClass("btn-success");
 			btn.addClass("btn-danger");
 			btn.text("Disabled");
+		}
+	}
+	
+	function resetMachineSetting(machine){
+		if(machine != "NewMachine"){
+			// disable name input
+			$("input#inputNameMachine" + machine).attr("disabled", "disabled");
+			
+			// disable seuil slider
+			$("#sliderSeuilPourc" + machine).slider("disable");
+		}
+		else {
+			// clear name
+			$("input#inputName" + machine).val("");
+			
+			// reset slider
+			$("#sliderSeuilPourc" + machine).slider('setValue', 5);
+			$("#sliderVal" + machine).text(5);
 		}
 	}
 	
