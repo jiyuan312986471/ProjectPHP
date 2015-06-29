@@ -420,8 +420,6 @@
 	$("input#confDefautCancel").click(function (){
 		$("span#defautInfo").css("display","none");
 	})
-	
-	//$("span.twitter-typeahead").
 </script>
 
 <script language="javascript">
@@ -451,4 +449,17 @@
   {
   	source: codes
   });
+</script>
+
+<script language="javascript">
+	/********************************/
+	/* 			Code Defaut Search 			*/
+	/********************************/
+	function getDefautInfo(codeDefaut){
+		// get data
+		var data = eval(<?php echo json_encode($listDefautConfig); ?>);
+		
+		// get info
+		var defautInfo = data[codeDefaut];
+	}	
 </script>
