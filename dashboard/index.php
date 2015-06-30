@@ -8,21 +8,36 @@
 	$db = new bdd("SAMUEL-PC","bdd_user","user_bdd","ping2");
 	$conn = $db->getConn();
 	
-	include 'listMachine.php';
+	// get machine info
+	$listMachineInfo = getListMachine($conn);
+	$listMachine = array_keys($listMachineInfo);	
 	
 	// Chercher des nb total et taux de defaut pour chaque machine
-	$paraMachine = array( "nb" 	=> array(0,0,0,0,0,0), "pourc"	=> array(0,0,0,0,0,0) );
+	$nbMachine = count($listMachine);
+	$arrayNb = array();
+	$arrayPourc = array();
 	
-	sscanf(nbdefaut($conn,'AK'),  "%d %f",$paraMachine['nb'][0], $paraMachine['pourc'][0]);
-	sscanf(nbdefaut($conn,'SAK'), "%d %f",$paraMachine['nb'][1], $paraMachine['pourc'][1]);
-	sscanf(nbdefaut($conn,'DT1'), "%d %f",$paraMachine['nb'][2], $paraMachine['pourc'][2]);
-	sscanf(nbdefaut($conn,'DT2'), "%d %f",$paraMachine['nb'][3], $paraMachine['pourc'][3]);
-	sscanf(nbdefaut($conn,'DT3'), "%d %f",$paraMachine['nb'][4], $paraMachine['pourc'][4]);
-	sscanf(nbdefaut($conn,'SAD'), "%d %f",$paraMachine['nb'][5], $paraMachine['pourc'][5]);
+	for($i = 0; $i < $nbMachine; $i++) {
+		array_push($arrayNb, 0);
+		array_push($arrayPourc, 0);
+	}
+	
+	$paraMachine = array( "nb" 	=> $arrayNb, "pourc"	=> $arrayPourc );
+	
+	for($i = 0; $i < $nbMachine; $i++) {
+		sscanf(nbdefaut($conn, $listMachine[$i]),  "%d %f",$paraMachine['nb'][$i], $paraMachine['pourc'][$i]);
+	}
+	
+//	sscanf(nbdefaut($conn,'AK'),  "%d %f",$paraMachine['nb'][0], $paraMachine['pourc'][0]);
+//	sscanf(nbdefaut($conn,'SAK'), "%d %f",$paraMachine['nb'][1], $paraMachine['pourc'][1]);
+//	sscanf(nbdefaut($conn,'DT1'), "%d %f",$paraMachine['nb'][2], $paraMachine['pourc'][2]);
+//	sscanf(nbdefaut($conn,'DT2'), "%d %f",$paraMachine['nb'][3], $paraMachine['pourc'][3]);
+//	sscanf(nbdefaut($conn,'DT3'), "%d %f",$paraMachine['nb'][4], $paraMachine['pourc'][4]);
+//	sscanf(nbdefaut($conn,'SAD'), "%d %f",$paraMachine['nb'][5], $paraMachine['pourc'][5]);
 	
 	$sum = 0;
 	$sumdefaut = 0;
-	for ($i = 0; $i < count($paraMachine['nb']); $i++) {
+	for ($i = 0; $i < $nbMachine; $i++) {
 		$sum = $paraMachine['nb'][$i] + $sum;
 		$sumdefaut = $paraMachine['nb'][$i] * $paraMachine['pourc'][$i] + $sumdefaut;
 	}

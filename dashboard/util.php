@@ -473,6 +473,34 @@
 		return $graphPareto;
 	}
 	
+	/* Fonction permettante de récupérer les infos machines dans BD																					*/
+	/* Entre	:	DB connection																																								*/
+	/* Sortie	:	les infos	machines																																					*/
+	function getListMachine($conn) {
+		$listMachineInfo = array();
+		$infoMachine = array();
+		
+		// prepare query
+		$query = sqlsrv_query($conn, "SELECT [ID],[Nom],[Seuil],[TypeProduit],[Status]
+  																FROM [ping2].[dbo].[machine]",
+													array(), array("Scrollable"=>"buffered"));
+		
+		// execute query
+		while($row = sqlsrv_fetch_array($query)) {
+			// push info
+			$infoMachine["Nom"] 				= $row["Nom"];
+			$infoMachine["Seuil"] 			= $row["Seuil"];
+			$infoMachine["TypeProduit"] = $row["TypeProduit"];
+			$infoMachine["Status"] 			= $row["Status"];
+			
+			// map machine ID with info
+			$ID = $row["ID"];
+			$listMachineInfo[$ID] = $infoMachine;
+		}
+		
+		return $listMachineInfo;
+	}
+	
 	
 	// defaut list
 	include 'listDefaut.php';
