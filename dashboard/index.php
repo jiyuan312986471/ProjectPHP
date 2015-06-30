@@ -8,6 +8,8 @@
 	$db = new bdd("SAMUEL-PC","bdd_user","user_bdd","ping2");
 	$conn = $db->getConn();
 	
+	include 'listMachine.php';
+	
 	// Chercher des nb total et taux de defaut pour chaque machine
 	$paraMachine = array( "nb" 	=> array(0,0,0,0,0,0), "pourc"	=> array(0,0,0,0,0,0) );
 	
