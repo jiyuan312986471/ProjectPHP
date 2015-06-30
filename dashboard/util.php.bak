@@ -218,7 +218,7 @@
 				$defaut6 = 'etiq';
 				    
 				/* montée retombée */
-				$defaut7 = 'mont';
+				$defaut7 = 'Vmont';
 				   
 				/* motorisation */
 				$defaut8 = 'motori';
@@ -250,7 +250,7 @@
 				$defaut6 = 'etiq';
 				    
 				/* montée retombée */
-				$defaut7 = 'mont';
+				$defaut7 = 'Vmont';
 				   
 				/* motorisation */
 				$defaut8 = 'motori';
@@ -279,10 +279,10 @@
 				$defaut5 = 'Course/ecras';
 				      
 				/* tension de montée */
-				$defaut6 = 'mont';
+				$defaut6 = 'Vmont';
 				    
 				/* tension de retombée */
-				$defaut7 = 'retomb';
+				$defaut7 = 'Vretomb';
 				   
 				/* consommation */
 				$defaut8 = 'conso';
@@ -311,10 +311,10 @@
 				$defaut5 = 'Course/ecras';
 				      
 				/* tension de montée */
-				$defaut6 = 'mont';
+				$defaut6 = 'Vmont';
 				    
 				/* tension de retombée */
-				$defaut7 = 'retomb';
+				$defaut7 = 'Vretomb';
 				   
 				/* consommation */
 				$defaut8 = 'conso';
@@ -343,10 +343,10 @@
 				$defaut5 = 'Course/ecras';
 				      
 				/* tension de montée */
-				$defaut6 = 'mont';
+				$defaut6 = 'Vmont';
 				    
 				/* tension de retombée */
-				$defaut7 = 'retomb';
+				$defaut7 = 'Vretomb';
 				   
 				/* consommation */
 				$defaut8 = 'conso';
@@ -366,7 +366,7 @@
 				$defaut2 = 'course/e';
 				        
 				/* tension de montée */
-				$defaut3 = 'mont';
+				$defaut3 = 'Vmont';
 				        
 				/* consommation  */
 				$defaut4 = 'conso';
@@ -480,5 +480,6 @@
 	include 'listMachine.php';
 	
 	// defaut list
+	include 'listDefaut.php';
 	
 ?>
