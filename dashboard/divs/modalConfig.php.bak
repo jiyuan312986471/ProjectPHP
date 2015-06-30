@@ -57,7 +57,9 @@
 								</nav>
 								<!-- Conf Page machine -->
 								<div class="tab-content col-sm-10" style="padding: 0px">
-									<?php foreach($listMachine as $machine){ ?>
+									<?php foreach($listMachineInfo as $machine => $machineInfo){ 
+													print_r($machineInfo["Nom"]);
+										?>
 													<div role="tabpanel" class="tab-pane fade" id="confMachinePage<?php echo $machine; ?>">
 														<div class="panel panel-default" style="margin: 0px">
 															<div class="panel-heading">
@@ -71,7 +73,8 @@
 																	</div>
 																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
 																    <div class="col-sm-offset-1 col-sm-7" style="padding: 0px">
-																      <input id="inputNameMachine<?php echo $machine; ?>" type="text" class="form-control" placeholder="Nouveau Nom..." value="asdfsadfasdf" disabled >
+																      <input id="inputNameMachine<?php echo $machine; ?>" type="text" class="form-control" placeholder="Nouveau Nom..." 
+																      	value="<?php echo $machineInfo["Nom"]; ?>" disabled >
 																    </div>
 																    <button type="button" class="btn btn-sm btn-primary col-sm-3 pull-right" onclick="activeNameSetting('<?php echo $machine; ?>')">
 																    	Modifier
@@ -88,9 +91,9 @@
 																	</div>
 																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
 																	  <input id="sliderSeuilPourc<?php echo $machine; ?>" type="text" data-slider-id="slider<?php echo $machine; ?>" 
-																	    data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="5" data-slider-enabled="false" />
+																	    data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="<?php echo $machineInfo["Seuil"]; ?>" data-slider-enabled="false" />
 																	  <span class="col-sm-3" id="currentSliderValLabel">Current Value: 
-																	  	<span id="sliderVal<?php echo $machine; ?>" style="color: #428bca">5</span>
+																	  	<span id="sliderVal<?php echo $machine; ?>" style="color: #428bca"><?php echo $machineInfo["Seuil"]; ?></span>
 																	  </span>
 																	  <button type="button" class="btn btn-sm btn-primary col-sm-3 pull-right" onclick="activeSeuilSetting('<?php echo $machine; ?>')">
 																    	Modifier
@@ -106,10 +109,17 @@
 																		<label class="col-sm-12">Machine Status</label>
 																	</div>
 																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
-																		<button type="button" class="btn btn-success btn-lg col-sm-offset-1 col-sm-11" id="status<?php echo $machine; ?>" 
-																			onclick="toggleMachineStatus('<?php echo $machine; ?>')">
-																			Active
-																		</button>
+																		<?php if($machineInfo["Status"] == "Active"){ ?>
+																						<button type="button" class="btn btn-success btn-lg col-sm-offset-1 col-sm-11" id="status<?php echo $machine; ?>" 
+																							onclick="toggleMachineStatus('<?php echo $machine; ?>')">
+																							Active
+																						</button>
+																		<?php } else { ?>
+																						<button type="button" class="btn btn-danger btn-lg col-sm-offset-1 col-sm-11" id="status<?php echo $machine; ?>" 
+																							onclick="toggleMachineStatus('<?php echo $machine; ?>')">
+																							Disabled
+																						</button>
+																		<?php } ?>
 																	</div>
 																</div>
 																
@@ -520,10 +530,12 @@
 		}
 	}
 	
+	// show defaut info page by entered code defaut
 	$("button#researchCode").click(function (){
 		$("span#defautInfo").css("display","");
 	})
 	
+	// hide defaut info page
 	$("input#confDefautCancel").click(function (){
 		$("span#defautInfo").css("display","none");
 	})
