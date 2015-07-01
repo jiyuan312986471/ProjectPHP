@@ -14,24 +14,11 @@
 				</a>
 				<ul class="nav nav-second-level">
 					<li>
-						<li>
-							<a href="machine.php?machine=AK" id="menuAK">Final Auto K</a>
-						</li>
-						<li>
-							<a href="machine.php?machine=SAK" id="menuSAK">Semi Auto K</a>
-						</li>
-						<li>
-							<a href="machine.php?machine=DT1" id="menuDT1">Plateau TéSys D Taille 1</a>
-						</li>
-						<li>
-							<a href="machine.php?machine=DT2" id="menuDT2">Plateau TéSys D Tailles 1 & 2</a>
-						</li>
-						<li>
-							<a href="machine.php?machine=DT3" id="menuDT3">Plateau TéSys D Taille 3</a>
-						</li>
-						<li>
-							<a href="machine.php?machine=SAD" id="menuSAD">Plateau TéSys D Semi auto</a>
-						</li>
+						<?php foreach($listMachineInfo as $machine => $machineInfo){ ?>
+										<li>
+											<a href="machine.php?machine=<?php echo $machine; ?>" id="menu<?php echo $machine; ?>"><?php echo $machineInfo["Nom"]; ?></a>
+										</li>
+						<?php } ?>
 					</li>
 				</ul>
 			</li>

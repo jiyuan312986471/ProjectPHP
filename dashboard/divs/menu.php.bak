@@ -8,12 +8,19 @@
 				</a>
 			</li>
 			<li>
-				<a href="machineAll.php" id="manuMachineAll">
+				<a href="machineAll.php" id="menuMachineAll">
 					<i class="fa fa-table fa-fw" ></i>
 					Machines
 				</a>
 				<ul class="nav nav-second-level">
 					<li>
+						<?php foreach($listMachineInfo as $machine => $machineInfo){ ?>
+										<li>
+											<a href="machine.php?machine=<?php echo $machine; ?>" id="menu<?php echo $machine; ?>"><?php echo $machineInfo["Nom"]; ?></a>
+										</li>
+						<?php } ?>
+						
+						<!--
 						<li>
 							<a href="machine.php?machine=AK" id="menuAK">Final Auto K</a>
 						</li>
@@ -32,6 +39,8 @@
 						<li>
 							<a href="machine.php?machine=SAD" id="menuSAD">Plateau TéSys D Semi auto</a>
 						</li>
+						-->
+						
 					</li>
 				</ul>
 			</li>
