@@ -14,6 +14,7 @@
 	$conn = $db->getConn();
 	
 	include 'listMachine.php';
+	include 'listTypeProduit.php';
   
   // get time
   $date = date('Y-m-d');

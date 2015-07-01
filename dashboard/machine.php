@@ -8,6 +8,7 @@
 	$conn = $db->getConn();
   
   include 'listMachine.php';
+  include 'listTypeProduit.php';
   
   // get machine
   $machine = $_GET['machine'];

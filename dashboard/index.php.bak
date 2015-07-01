@@ -8,9 +8,7 @@
 	$db = new bdd("SAMUEL-PC","bdd_user","user_bdd","ping2");
 	$conn = $db->getConn();
 	
-	// get machine info
-	$listMachineInfo = getListMachine($conn);
-	$listMachine = array_keys($listMachineInfo);
+	include 'listMachine.php';
 	
 	// Chercher des nb total et taux de defaut pour chaque machine
 	$nbMachine = count($listMachine);

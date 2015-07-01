@@ -102,6 +102,24 @@
 																
 																<hr style="margin-top: 2px; margin-bottom: 2px">
 																
+																<!-- Type Produit -->
+																<div class="panel-body">
+																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+																		<label class="col-sm-12">Type Produit</label>
+																	</div>
+																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+																		<div class="col-sm-offset-1 col-sm-7" style="padding: 0px">
+																			<select class="form-control">
+																				<?php foreach($listTypeProduit as $type){ ?>
+																								<option><?php echo $type; ?></option>
+																				<?php } ?>
+																			</select>
+																		</div>
+																	</div>
+																</div>
+																
+																<hr style="margin-top: 2px; margin-bottom: 2px">
+																
 																<!-- Status -->
 																<div class="panel-body">
 																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
@@ -179,6 +197,24 @@
 														<span class="col-sm-3" id="currentSliderValLabel">Current Value: 
 															<span id="sliderValNewMachine" style="color: #428bca">5</span>
 														</span>
+													</div>
+												</div>
+												
+												<hr style="margin-top: 2px; margin-bottom: 2px">
+												
+												<!-- Type Produit -->
+												<div class="panel-body">
+													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+														<label class="col-sm-12">Type Produit</label>
+													</div>
+													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+														<div class="col-sm-offset-1 col-sm-7" style="padding: 0px">
+															<select class="form-control">
+																<?php foreach($listTypeProduit as $type){ ?>
+																				<option><?php echo $type; ?></option>
+																<?php } ?>
+															</select>
+														</div>
 													</div>
 												</div>
 												
@@ -373,10 +409,10 @@
 																<div class="pull-right">Status :</div>
 															</label>
 															<div class="col-sm-6">
-																<select multiple class="form-control">
-																	<option>K</option>
-																	<option>D12</option>
-																	<option>D3</option>
+																<select class="form-control">
+																	<?php foreach($listTypeProduit as $type){ ?>
+																					<option><?php echo $type; ?></option>
+																	<?php } ?>
 																</select>
 															</div>
 														</div>
@@ -449,10 +485,10 @@
 															<div class="pull-right">Status :</div>
 														</label>
 														<div class="col-sm-6">
-															<select multiple class="form-control">
-																<option>K</option>
-																<option>D12</option>
-																<option>D3</option>
+															<select class="form-control">
+																<?php foreach($listTypeProduit as $type){ ?>
+																				<option><?php echo $type; ?></option>
+																<?php } ?>
 															</select>
 														</div>
 													</div>

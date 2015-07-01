@@ -1,0 +1,5 @@
+<?php
+
+	$listTypeProduit = getTypeProduit($conn);
+
+?>

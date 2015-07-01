@@ -9,6 +9,7 @@
 	$conn = $db->getConn();
 	
 	include 'listMachine.php';
+	include 'listTypeProduit.php';
 	
 	// Chercher des nb total et taux de defaut pour chaque machine
 	$nbMachine = count($listMachine);

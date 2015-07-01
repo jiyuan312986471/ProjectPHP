@@ -501,6 +501,25 @@
 		return $listMachineInfo;
 	}
 	
+	/* Fonction permettante de récupérer les types produits																									*/
+	/* Entre	:	DB connection																																								*/
+	/* Sortie	:	les types produits																																					*/
+	function getTypeProduit($conn) {
+		$listTypeProduit = array();
+		
+		// prepare query
+		$query = sqlsrv_query($conn, "SELECT [type]
+  																FROM [ping2].[dbo].[TypeProduit]",
+													array(), array("Scrollable"=>"buffered"));
+													
+		// execute query
+		while($row = sqlsrv_fetch_array($query)) {
+			array_push($listTypeProduit, $row["type"]);
+		}
+		
+		return $listTypeProduit;
+	}
+	
 	
 	// defaut list
 	include 'listDefaut.php';
