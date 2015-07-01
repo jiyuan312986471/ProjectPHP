@@ -55,6 +55,7 @@
 														</li>
 									</ul>
 								</nav>
+								
 								<!-- Conf Page machine -->
 								<div class="tab-content col-sm-10" style="padding: 0px">
 									<?php foreach($listMachineInfo as $machine => $machineInfo){ ?>
@@ -123,7 +124,10 @@
 																
 																<div class="panel-footer">
 																	<button type="submit" class="btn btn-primary">Enregistrer</button>
-																	<button type="button" class="btn btn-primary" onclick="resetMachineSetting('<?php echo $machine; ?>')">Annuler</button>
+																	<button type="button" class="btn btn-primary" 
+																		onclick="resetMachineSetting('<?php echo $machine; ?>', '<?php echo $machineInfo["Nom"]; ?>', <?php echo $machineInfo["Seuil"]; ?>)">
+																		Annuler
+																	</button>
 																</div>
 															</form>
 														</div>
@@ -510,13 +514,34 @@
 	}
 	
 	// reset current machine setting page
-	function resetMachineSetting(machine){
+	function resetMachineSetting(machine, nom, seuil, status){
 		if(machine != "NewMachine"){
+			// reset name input
+			$("input#inputNameMachine" + machine).val(nom);
+			
 			// disable name input
 			$("input#inputNameMachine" + machine).attr("disabled", "disabled");
 			
+			// reset seuil slider
+			$("#sliderSeuilPourc" + machine).slider('setValue', seuil);
+			
 			// disable seuil slider
 			$("#sliderSeuilPourc" + machine).slider("disable");
+			
+			// reset value display
+			$("#sliderVal" + machine).text(seuil);
+			
+			// reset status
+			if(status == "Active"){
+				$("button#status" + machine).removeClass("btn-danger");
+				$("button#status" + machine).addClass("btn-success");
+				$("button#status" + machine).text("Active");
+			}
+			else {
+				$("button#status" + machine).removeClass("btn-success");
+				$("button#status" + machine).addClass("btn-danger");
+				$("button#status" + machine).text("Disabled");
+			}
 		}
 		else {
 			// clear name
@@ -525,6 +550,11 @@
 			// reset slider
 			$("#sliderSeuilPourc" + machine).slider('setValue', 5);
 			$("#sliderVal" + machine).text(5);
+			
+			// reset status
+			$("button#status" + machine).removeClass("btn-danger");
+			$("button#status" + machine).addClass("btn-success");
+			$("button#status" + machine).text("Active");
 		}
 	}
 	
