@@ -109,12 +109,26 @@
 																	</div>
 																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
 																		<div class="col-sm-offset-1 col-sm-7" style="padding: 0px">
-																			<select class="form-control">
-																				<?php foreach($listTypeProduit as $type){ ?>
-																								<option><?php echo $type; ?></option>
-																				<?php } ?>
+																			<select id="selectTypeProduit<?php echo $machine; ?>" class="form-control" disabled>
+																				<?php 
+																					foreach($listTypeProduit as $type){ 
+																						if($machineInfo["TypeProduit"] == $type){
+																				?>
+																							<option selected><?php echo $type; ?></option>
+																				<?php
+																						}
+																						else {
+																				?>
+																							<option><?php echo $type; ?></option>
+																				<?php
+																						}
+																					}
+																				?>
 																			</select>
 																		</div>
+																		<button type="button" class="btn btn-sm btn-primary col-sm-3 pull-right" onclick="activeTypeProduitSetting('<?php echo $machine; ?>')">
+																    	Modifier
+																    </button>
 																	</div>
 																</div>
 																
@@ -142,8 +156,13 @@
 																
 																<div class="panel-footer">
 																	<button type="submit" class="btn btn-primary">Enregistrer</button>
-																	<button type="button" class="btn btn-primary" 
-																		onclick="resetMachineSetting('<?php echo $machine; ?>', '<?php echo $machineInfo["Nom"]; ?>', <?php echo $machineInfo["Seuil"]; ?>)">
+																	<button type="button" class="btn btn-primary" onclick="resetMachineSetting(
+																																													'<?php echo $machine; ?>',
+																																													'<?php echo $machineInfo["Nom"]; ?>',
+																																													<?php echo $machineInfo["Seuil"]; ?>,
+																																													'<?php echo $machineInfo["TypeProduit"]; ?>',
+																																													'<?php echo $machineInfo["Status"]; ?>'
+																																												)">
 																		Annuler
 																	</button>
 																</div>
@@ -486,9 +505,9 @@
 														</label>
 														<div class="col-sm-6">
 															<select class="form-control">
-																<option>K</option>
-																<option>D12</option>
-																<option>D3</option>
+																<?php foreach($listTypeProduit as $type){ ?>
+																				<option><?php echo $type; ?></option>
+																<?php } ?>
 															</select>
 														</div>
 													</div>
@@ -534,6 +553,11 @@
 		}
 	}
 	
+	// activate machine type produit setting
+	function activeTypeProduitSetting(machine){
+		$("select#selectTypeProduit" + machine).removeAttr("disabled");
+	}
+	
 	// activate and disactivate machine status
 	function toggleMachineStatus(machine){
 		var btn = $("button#status" + machine);
@@ -550,7 +574,7 @@
 	}
 	
 	// reset current machine setting page
-	function resetMachineSetting(machine, nom, seuil, status){
+	function resetMachineSetting(machine, nom, seuil, typeProduit, status){
 		if(machine != "NewMachine"){
 			// reset name input
 			$("input#inputNameMachine" + machine).val(nom);
@@ -578,6 +602,21 @@
 				$("button#status" + machine).addClass("btn-danger");
 				$("button#status" + machine).text("Disabled");
 			}
+			
+			// reset type produit
+			var listType = $("select#selectTypeProduit" + machine).children("option");
+			for(var i in listType){
+				alert(listType[i]);
+				if(listType[i].text == typeProduit){
+					listType[i].attr("selected", "selected");
+				}
+				else{
+					listType[i].removeAttr("selected");
+				}
+			}
+			
+			// disable type produit
+			$("select#selectTypeProduit" + machine).attr("disabled", "disabled");
 		}
 		else {
 			// clear name
