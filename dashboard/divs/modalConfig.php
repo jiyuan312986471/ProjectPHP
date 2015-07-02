@@ -2,7 +2,7 @@
 <script src="js/jquery.js"></script>
 
 <!-- Slider Plugin -->
-<script type='text/javascript' src="js/bootstrap-slider1.js"></script>
+<script type='text/javascript' src="js/bootstrap-slider.js"></script>
 
 <!-- Type Ahead -->
 <script type='text/javascript' src="js/typeahead/bloodhound.js"></script>

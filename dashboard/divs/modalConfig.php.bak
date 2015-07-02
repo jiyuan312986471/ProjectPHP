@@ -632,6 +632,9 @@
 			$("select#selectTypeProduit" + machine).attr("disabled", "disabled");
 		}
 		else {
+			// clear ID
+			$("input#inputId" + machine).val("");
+			
 			// clear name
 			$("input#inputName" + machine).val("");
 			
