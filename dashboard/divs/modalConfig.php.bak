@@ -691,7 +691,7 @@
 		$("input#nomAbregeDefautModif").val(nomAbrege);
 		
 		// display type produit
-		var listType = $("select#selectTypeProduit" + machine).children("option");
+		var listType = $("select#typeProduitDefautModif").children("option");
 		for(var i in listType){
 			if($(listType[i]).text() == typeProduit){
 				$(listType[i]).attr("selected", "selected");
