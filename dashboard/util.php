@@ -539,9 +539,8 @@
 			$infoDefaut["NomAbrege"] 	 = $row["nomAbrege"];
 			$infoDefaut["TypeProduit"] = $row["typeProduit"];
 			
+			// map codeDefaut with defaut info
 			$codeDefaut = $row["code"];
-			
-			// push defaut info into list
 			$listDefautInfo[$codeDefaut] = $infoDefaut;
 		}
 		

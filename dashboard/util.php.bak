@@ -535,7 +535,6 @@
 		// execute query
 		while($row = sqlsrv_fetch_array($query)) {			
 			// push info
-			$infoDefaut["Code"]				 = $row["code"];
 			$infoDefaut["Nom"] 				 = $row["nom"];
 			$infoDefaut["NomAbrege"] 	 = $row["nomAbrege"];
 			$infoDefaut["TypeProduit"] = $row["typeProduit"];
@@ -543,7 +542,7 @@
 			$codeDefaut = $row["code"];
 			
 			// push defaut info into list
-			array_push($listDefautInfo, $infoDefaut);
+			$listDefautInfo[$codeDefaut] = $infoDefaut;
 		}
 		
 		return $listDefautInfo;
