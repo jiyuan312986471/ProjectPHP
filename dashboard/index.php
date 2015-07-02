@@ -10,6 +10,7 @@
 	
 	include 'listMachine.php';
 	include 'listTypeProduit.php';
+	include 'listDefaut.php';
 	
 	// Chercher des nb total et taux de defaut pour chaque machine
 	$nbMachine = count($listMachine);

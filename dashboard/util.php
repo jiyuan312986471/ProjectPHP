@@ -520,8 +520,32 @@
 		return $listTypeProduit;
 	}
 	
-	
-	// defaut list
-	include 'listDefaut.php';
+	/* Fonction permettante de récupérer les defauts dans BD																								*/
+	/* Entre	:	DB connection																																								*/
+	/* Sortie	:	les defauts																																									*/
+	function getListDefaut($conn) {
+		$listDefautInfo = array();
+		$infoDefaut = array();
+		
+		// prepare query
+		$query = sqlsrv_query($conn, "SELECT [code],[nom],[nomAbrege],[typeProduit]
+  																FROM [ping2].[dbo].[defaut]",
+													array(), array("Scrollable"=>"buffered"));
+													
+		// execute query
+		while($row = sqlsrv_fetch_array($query)) {			
+			// push info
+			$infoDefaut["Nom"] 				 = $row["nom"];
+			$infoDefaut["NomAbrege"] 	 = $row["nomAbrege"];
+			$infoDefaut["TypeProduit"] = $row["typeProduit"];
+			
+			$codeDefaut = $row["code"];
+			
+			// push defaut info into list
+			$listDefautInfo[$codeDefaut] = $infoDefaut;
+		}
+		
+		return $listDefautInfo;
+	}
 	
 ?>

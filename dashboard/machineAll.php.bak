@@ -14,6 +14,8 @@
 	$conn = $db->getConn();
 	
 	include 'listMachine.php';
+	include 'listTypeProduit.php';
+	include 'listDefaut.php';
   
   // get time
   $date = date('Y-m-d');
@@ -136,6 +138,8 @@
 	
 	// map machine list (as keys) with graphPareto list (as values)
 	$listMachineGraphPareto = array_combine($listMachine, $listGraphPareto);
+	
+	print_r(json_encode($listMachineGraphPareto));
 
 ?>
 

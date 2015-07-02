@@ -632,8 +632,13 @@
 		}
 	}
 	
-	// show defaut info page by entered code defaut
+	// search defaut info and show 
 	$("button#researchCode").click(function (){
+		// search defaut info by code
+		var code = $("input#inputCode").val();
+		getDefautInfo(code);
+		
+		// show info
 		$("span#defautInfo").css("display","");
 	})
 	
@@ -647,14 +652,8 @@
 	/********************************/
 	/* 				Auto Complete 				*/
 	/********************************/
-	// get data
-	var data = eval(<?php echo json_encode($listDefautConfig); ?>);
-	
 	// preparer list code defaut
-	var listCodeDefaut = [];
-  for (var codeDefaut in data){
-    listCodeDefaut.push(codeDefaut);
-  }
+	var listCodeDefaut = eval(<?php echo json_encode($listCodeDefaut); ?>);
   
   var codes = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.whitespace,
@@ -675,12 +674,14 @@
 <script language="javascript">
 	/********************************/
 	/* 			Code Defaut Search 			*/
-	/********************************/
+	/********************************/	
 	function getDefautInfo(codeDefaut){
 		// get data
 		var data = eval(<?php echo json_encode($listDefautConfig); ?>);
+		alert(data);
 		
 		// get info
 		var defautInfo = data[codeDefaut];
+		alert(defautInfo);
 	}	
 </script>

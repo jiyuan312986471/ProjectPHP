@@ -15,6 +15,7 @@
 	
 	include 'listMachine.php';
 	include 'listTypeProduit.php';
+	include 'listDefaut.php';
   
   // get time
   $date = date('Y-m-d');

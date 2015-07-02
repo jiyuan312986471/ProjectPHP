@@ -6,6 +6,7 @@ class bdd {
 	private $userdb;
 	private $passdb;
 	private $database;
+	private $charset;
 	private $connect;
 	
 	public function __construct($host,$user,$pass,$data) {
@@ -13,6 +14,7 @@ class bdd {
 		$this->userdb   = $user;
 		$this->passdb   = $pass;
 		$this->database = $data;
+		$this->charset  = "UTF-8";
 		$this->Condb();
 	}
 	
@@ -21,9 +23,8 @@ class bdd {
 	}
 	
 	private function Condb() {
-		$connectionInfo = array("UID" => $this->userdb, "PWD" => $this->passdb, "Database" => $this->database);
+		$connectionInfo = array("UID" => $this->userdb, "PWD" => $this->passdb, "Database" => $this->database,  "CharacterSet" => $this->charset);
 		
-		//$this->connect = mssql_pconnect($this->hostname, $this->userdb, $this->passdb);
 		$this->connect = sqlsrv_connect( $this->hostname, $connectionInfo);
 		
 		//if(!mssql_select_db($this->database, $this->connect)){

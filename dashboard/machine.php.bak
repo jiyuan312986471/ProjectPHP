@@ -11,7 +11,7 @@
   include 'listTypeProduit.php';
   
   // get machine
-  $machine = $_GET['machine'];
+  $machineSelected = $_GET['machine'];
 	
 ?>
 
@@ -35,10 +35,10 @@
 				<!-- Machine name and export button -->
 				<div class="row">
 					<div class="col-lg-12">
-						<h1 class="page-header">Machine <?php echo $machine; ?>
-							<button class="btn btn-primary btn-lg pull-right" id="export<?php echo $machine; ?>" style="margin-top: -3px" data-toggle="modal" data-target="#modalExport">
+						<h1 class="page-header">Machine <?php echo $machineSelected; ?>
+							<button class="btn btn-primary btn-lg pull-right" id="export<?php echo $machineSelected; ?>" style="margin-top: -3px" data-toggle="modal" data-target="#modalExport">
 								<i class="fa fa-database fa-fw"></i>
-								Exporter <?php echo $machine; ?>
+								Exporter <?php echo $machineSelected; ?>
 							</button>
 						</h1>
 					</div>
@@ -46,7 +46,7 @@
 				
 				<!-- Graphs -->
 				<div class="row">
-					<div class="row" id="graphMachine<?php echo $machine; ?>"></div>
+					<div class="row" id="graphMachine<?php echo $machineSelected; ?>"></div>
 				</div>
 				
 			</div>
@@ -57,16 +57,16 @@
 	    
 	  <script type="text/javascript">
 	  	// refresh every 8s
-		  setInterval(refreshMachine(<?php echo json_encode($machine); ?>), 8000);
+		  setInterval(refreshMachine(<?php echo json_encode($machineSelected); ?>), 8000);
 	  </script>
 		
 		<!-- Modal Exporter -->
-		<div class="modal fade" id="modalExport<?php echo $machine; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="modalExport<?php echo $machineSelected; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">Exporter <?php echo $machine; ?></h4>
+						<h4 class="modal-title" id="myModalLabel">Exporter <?php echo $machineSelected; ?></h4>
 					</div>
 					<div class="modal-body">
 						...

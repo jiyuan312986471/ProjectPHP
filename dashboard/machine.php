@@ -9,6 +9,7 @@
   
   include 'listMachine.php';
   include 'listTypeProduit.php';
+  include 'listDefaut.php';
   
   // get machine
   $machineSelected = $_GET['machine'];
