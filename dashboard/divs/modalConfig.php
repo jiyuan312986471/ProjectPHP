@@ -386,7 +386,7 @@
 																<div class="pull-right">Code Defaut :</div>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" placeholder="Code Defaut...">
+																<input id="codeDefautModif" type="text" class="form-control" placeholder="Code Defaut...">
 															</div>
 														</div>
 													</div>
@@ -400,7 +400,7 @@
 																<div class="pull-right">Nom Defaut :</div>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" placeholder="Nom du Defaut...">
+																<input id="nomDefautModif" type="text" class="form-control" placeholder="Nom du Defaut...">
 															</div>
 														</div>
 													</div>
@@ -414,21 +414,21 @@
 																<div class="pull-right">Nom Defaut Abrege :</div>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" placeholder="Nom du Defaut Abrege...">
+																<input id="nomAbregeDefautModif" type="text" class="form-control" placeholder="Nom du Defaut Abrege...">
 															</div>
 														</div>
 													</div>
 													
 													<hr style="margin-top: 2px; margin-bottom: 2px">
 													
-													<!-- Status -->
+													<!-- Type Produit -->
 													<div class="panel-body">
 														<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
 															<label class="col-sm-3">
-																<div class="pull-right">Status :</div>
+																<div class="pull-right">Type Produit :</div>
 															</label>
 															<div class="col-sm-6">
-																<select class="form-control">
+																<select id="typeProduitDefautModif" class="form-control">
 																	<?php foreach($listTypeProduit as $type){ ?>
 																					<option><?php echo $type; ?></option>
 																	<?php } ?>
@@ -676,12 +676,29 @@
 	/* 			Code Defaut Search 			*/
 	/********************************/	
 	function getDefautInfo(codeDefaut){
-		// get data
-		var data = eval(<?php echo json_encode($listDefautConfig); ?>);
-		alert(data);
+		// get defaut
+		var defauts = eval(<?php echo json_encode($listDefautConfig); ?>);
+		var defautInfo = defauts[codeDefaut];
 		
-		// get info
-		var defautInfo = data[codeDefaut];
-		alert(defautInfo);
+		// get infos
+		var nom 				= defautInfo["Nom"];
+		var nomAbrege 	= defautInfo["NomAbrege"];
+		var typeProduit = defautInfo["TypeProduit"];
+		
+		// display info on defaut modif page
+		$("input#codeDefautModif").val(codeDefaut);
+		$("input#nomDefautModif").val(nom);
+		$("input#nomAbregeDefautModif").val(nomAbrege);
+		
+		// display type produit
+		var listType = $("select#typeProduitDefautModif").children("option");
+		for(var i in listType){
+			if($(listType[i]).text() == typeProduit){
+				$(listType[i]).attr("selected", "selected");
+			}
+			else{
+				$(listType[i]).removeAttr("selected");
+			}
+		}
 	}	
 </script>
