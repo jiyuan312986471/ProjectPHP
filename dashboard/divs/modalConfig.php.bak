@@ -191,6 +191,20 @@
 												<h3>Ajouter une Machine</h3>
 											</div>
 											<form>
+												<!-- ID Machine -->
+												<div class="panel-body">
+													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+														<label class="col-sm-12">ID</label>
+													</div>
+													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+														<div class="col-sm-offset-1 col-sm-8" style="padding: 0px">
+															<input id="inputIdNewMachine" type="text" class="form-control" placeholder="ID de la machine...">
+														</div>
+													</div>
+												</div>
+												
+												<hr style="margin-top: 2px; margin-bottom: 2px">
+												
 												<!-- Nom Machine -->
 												<div class="panel-body">
 													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
