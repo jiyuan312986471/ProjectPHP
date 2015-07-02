@@ -454,8 +454,8 @@
 												
 												<!-- Panel Footer -->
 												<div class="panel-footer">
-													<input type="submit" class="btn btn-primary" value="Enregistrer">
-													<input type="reset" id="confDefautCancel" class="btn btn-primary" value="Annuler">
+													<input type="submit" id="confDefautEnregistrer" class="btn btn-primary" value="Enregistrer" disabled>
+													<input type="reset" id="confDefautAnnuler" class="btn btn-primary" value="Annuler">
 												</div>
 											</form>
 										</div>
@@ -651,17 +651,28 @@
 	
 	// search defaut info and show 
 	$("button#researchCode").click(function (){
-		// search defaut info by code
+		// get code
 		var code = $("input#inputCode").val();
-		getDefautInfo(code);
 		
-		// show info
-		$("span#defautInfo").css("display","");
+		if(getDefautInfo(code)){
+			// if code existes: show info
+			$("span#defautInfo").css("display","");
+			
+			// activate enregistrer button
+			$("input#confDefautEnregistrer").removeAttr("disabled")
+		}
+		else{
+			// if code doesn't exist: show alert
+			alert("Code " + code + " n'existe pas!");
+		}
 	})
 	
-	// hide defaut info page
-	$("input#confDefautCancel").click(function (){
+	// button Annuler of defaut conf page
+	$("input#confDefautAnnuler").click(function (){
+		// hide info page
 		$("span#defautInfo").css("display","none");
+		
+		// disable enregistrer button
 	})
 	
 	// popover for ajout machine's ID input
@@ -671,7 +682,7 @@
 					"placement": "top",
 					"content": "Chaque machine a un ID unique",
 					"template": '<div class="popover" role="tooltip" style="left: 0 !important"><div class="arrow" style="left: 10% !important"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-				});
+				})
 				.blur(function () {
             $(this).popover('hide');
         });
@@ -710,25 +721,31 @@
 		var defauts = eval(<?php echo json_encode($listDefautConfig); ?>);
 		var defautInfo = defauts[codeDefaut];
 		
-		// get infos
-		var nom 				= defautInfo["Nom"];
-		var nomAbrege 	= defautInfo["NomAbrege"];
-		var typeProduit = defautInfo["TypeProduit"];
-		
-		// display info on defaut modif page
-		$("input#codeDefautModif").val(codeDefaut);
-		$("input#nomDefautModif").val(nom);
-		$("input#nomAbregeDefautModif").val(nomAbrege);
-		
-		// display type produit
-		var listType = $("select#typeProduitDefautModif").children("option");
-		for(var i in listType){
-			if($(listType[i]).text() == typeProduit){
-				$(listType[i]).attr("selected", "selected");
+		if(typeof(defautInfo)=="undefined"){
+			return false;
+		}
+		else{
+			// get infos
+			var nom 				= defautInfo["Nom"];
+			var nomAbrege 	= defautInfo["NomAbrege"];
+			var typeProduit = defautInfo["TypeProduit"];
+			
+			// display info on defaut modif page
+			$("input#codeDefautModif").val(codeDefaut);
+			$("input#nomDefautModif").val(nom);
+			$("input#nomAbregeDefautModif").val(nomAbrege);
+			
+			// display type produit
+			var listType = $("select#typeProduitDefautModif").children("option");
+			for(var i in listType){
+				if($(listType[i]).text() == typeProduit){
+					$(listType[i]).attr("selected", "selected");
+				}
+				else{
+					$(listType[i]).removeAttr("selected");
+				}
 			}
-			else{
-				$(listType[i]).removeAttr("selected");
-			}
+			return true;
 		}
 	}	
 </script>
