@@ -669,7 +669,8 @@
 		$("input#inputIdNewMachine")
 				.popover({
 					"placement": "top",
-					"content": "Chaque machine a un ID unique"
+					"content": "Chaque machine a un ID unique",
+					"template": '<div class="popover" role="tooltip" style="left: 0 !important"><div class="arrow" style="left: 10% !important"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
 				})
 				.blur(function () {
             $(this).popover('hide');
