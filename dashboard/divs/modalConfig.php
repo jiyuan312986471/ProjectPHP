@@ -64,7 +64,7 @@
 															<div class="panel-heading">
 																<h3>Machine <?php echo $machine; ?></h3>
 															</div>
-															<form>
+															<form id="formConfMachine<?php echo $machine; ?>">
 																<!-- Nom Machine -->
 																<div class="panel-body">
 																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">

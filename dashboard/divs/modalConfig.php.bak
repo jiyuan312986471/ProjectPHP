@@ -648,7 +648,7 @@
 			$("select#selectTypeProduit" + machine).attr("disabled", "disabled");
 			
 			// disable enregistrer button
-		$("input#confMachine" + machine + "Enregistrer").attr("disabled", "disabled");
+			$("input#confMachine" + machine + "Enregistrer").attr("disabled", "disabled");
 		}
 		else {
 			// clear ID
