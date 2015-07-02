@@ -476,7 +476,7 @@
 															<div class="pull-right">Code Defaut :</div>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" placeholder="Code Defaut...">
+															<input id="inputIdNewDefaut" type="text" class="form-control" placeholder="Code Defaut...">
 														</div>
 													</div>
 												</div>
@@ -682,6 +682,19 @@
 				.popover({
 					"placement": "top",
 					"content": "Chaque machine a un ID unique",
+					"template": '<div class="popover" role="tooltip" style="left: 0 !important"><div class="arrow" style="left: 10% !important"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+				})
+				.blur(function () {
+            $(this).popover('hide');
+        });
+	})
+	
+	// popover for ajout defaut's code input
+	$("input#inputIdNewDefaut").focus(function (){
+		$("input#inputIdNewDefaut")
+				.popover({
+					"placement": "top",
+					"content": "Le code defaut est un chiffre unique pour chaque defaut.",
 					"template": '<div class="popover" role="tooltip" style="left: 0 !important"><div class="arrow" style="left: 10% !important"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
 				})
 				.blur(function () {

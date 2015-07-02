@@ -476,7 +476,7 @@
 															<div class="pull-right">Code Defaut :</div>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" placeholder="Code Defaut...">
+															<input id="inputIdNewDefaut" type="text" class="form-control" placeholder="Code Defaut...">
 														</div>
 													</div>
 												</div>
@@ -659,7 +659,7 @@
 			$("span#defautInfo").css("display","");
 			
 			// activate enregistrer button
-			$("input#confDefautEnregistrer").removeAttr("disabled")
+			$("input#confDefautEnregistrer").removeAttr("disabled");
 		}
 		else{
 			// if code doesn't exist: show alert
@@ -673,6 +673,7 @@
 		$("span#defautInfo").css("display","none");
 		
 		// disable enregistrer button
+		$("input#confDefautEnregistrer").attr("disabled", "disabled");
 	})
 	
 	// popover for ajout machine's ID input
