@@ -155,7 +155,7 @@
 																</div>
 																
 																<div class="panel-footer">
-																	<button type="submit" class="btn btn-primary">Enregistrer</button>
+																	<input id="confMachine<?php echo $machine; ?>Enregistrer" type="submit" class="btn btn-primary" value="Enregistrer" disabled>
 																	<button type="button" class="btn btn-primary" onclick="resetMachineSetting(
 																																													'<?php echo $machine; ?>',
 																																													'<?php echo $machineInfo["Nom"]; ?>',
@@ -556,24 +556,37 @@
 <script language="javascript">
 	// activate machine name setting
 	function activeNameSetting(machine){
+		// activate input
 		$("input#inputNameMachine" + machine).removeAttr("disabled");
+		
+		// activate enregistrer button
+		$("input#confMachine" + machine + "Enregistrer").removeAttr("disabled");
 	}
 	
 	// activate machine seuil setting
 	function activeSeuilSetting(machine){
+		// activate slider
 		var divSlider = $("#slider" + machine);
 		if( divSlider.hasClass("slider-disabled") ){
 			$("#sliderSeuilPourc" + machine).slider("enable");
 		}
+		
+		// activate enregistrer button
+		$("input#confMachine" + machine + "Enregistrer").removeAttr("disabled");
 	}
 	
 	// activate machine type produit setting
 	function activeTypeProduitSetting(machine){
+		// activate select
 		$("select#selectTypeProduit" + machine).removeAttr("disabled");
+		
+		// activate enregistrer button
+		$("input#confMachine" + machine + "Enregistrer").removeAttr("disabled");
 	}
 	
 	// activate and disactivate machine status
 	function toggleMachineStatus(machine){
+		// toggle status
 		var btn = $("button#status" + machine);
 		if ( btn.hasClass("btn-danger") ){
 			btn.removeClass("btn-danger");
@@ -585,6 +598,9 @@
 			btn.addClass("btn-danger");
 			btn.text("Disabled");
 		}
+		
+		// activate enregistrer button
+		$("input#confMachine" + machine + "Enregistrer").removeAttr("disabled");
 	}
 	
 	// reset current machine setting page
@@ -630,6 +646,9 @@
 			
 			// disable type produit
 			$("select#selectTypeProduit" + machine).attr("disabled", "disabled");
+			
+			// disable enregistrer button
+			$("input#confMachine" + machine + "Enregistrer").attr("disabled", "disabled");
 		}
 		else {
 			// clear ID
