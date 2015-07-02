@@ -663,6 +663,18 @@
 	$("input#confDefautCancel").click(function (){
 		$("span#defautInfo").css("display","none");
 	})
+	
+	// popover for ajout machine's ID input
+	$("input#inputIdNewMachine").focus(function (){
+		$("input#inputIdNewMachine")
+				.popover({
+					"placement": "top",
+					"content": "Chaque machine a un ID unique"
+				})
+				.blur(function () {
+            $(this).popover('hide');
+        });
+	})
 </script>
 
 <script language="javascript">

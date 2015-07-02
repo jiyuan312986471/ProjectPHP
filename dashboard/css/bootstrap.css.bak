@@ -5782,7 +5782,7 @@ button.close {
 .popover.top > .arrow {
   bottom: -11px;
   /* 2015.07.02: customized popover arrow */
-  left: 0;
+  left: 0px;
   /*left: 50%;*/
   margin-left: -11px;
   border-top-color: #999;

@@ -2,7 +2,7 @@
 <script src="js/jquery.js"></script>
 
 <!-- Slider Plugin -->
-<script type='text/javascript' src="js/bootstrap-slider1.js"></script>
+<script type='text/javascript' src="js/bootstrap-slider.js"></script>
 
 <!-- Type Ahead -->
 <script type='text/javascript' src="js/typeahead/bloodhound.js"></script>
@@ -662,6 +662,14 @@
 	// hide defaut info page
 	$("input#confDefautCancel").click(function (){
 		$("span#defautInfo").css("display","none");
+	})
+	
+	// popover for ajout machine's ID input
+	$("input#inputIdNewMachine").focus(function (){
+		$("input#inputIdNewMachine").popover({
+			"placement": "top",
+			"content": "Chaque machine a un ID unique"
+		});
 	})
 </script>
 
