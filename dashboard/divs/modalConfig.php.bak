@@ -241,14 +241,19 @@
 														<label class="col-sm-12">Type Produit</label>
 													</div>
 													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
-														<div class="col-sm-offset-1 col-sm-7" style="padding: 0px">
+														<div class="col-sm-offset-1 col-sm-8" style="padding: 0px">
 															<select id="selectTypeProduitNewMachine" class="form-control">
 																				<option value="empty">-- Choisissez le type produit --</option>
 																<?php foreach($listTypeProduit as $type){ ?>
-																				<option><?php echo $type; ?></option>
+																				<option value="<?php echo $type; ?>"><?php echo $type; ?></option>
 																<?php } ?>
 																				<option value="NouveauType">Nouveau Type...</option>
 															</select>
+														</div>
+													</div>
+													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
+														<div class="col-sm-offset-1 col-sm-8" style="padding: 0px">
+															<input id="inputNewTypeProduitNewMachine" type="text" class="form-control" placeholder="Nom du nouveau type produit..." style="display: none">
 														</div>
 													</div>
 												</div>
@@ -721,6 +726,15 @@
 				.blur(function () {
             $(this).popover('hide');
         });
+	})
+	
+	// new type produit for new machine
+	$("select#selectTypeProduitNewMachine").change(function (){
+		// show type produit input
+		
+		
+		// disable select
+		$(this).attr("disabled", "disabled");
 	})
 </script>
 
