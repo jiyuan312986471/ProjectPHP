@@ -242,10 +242,11 @@
 													</div>
 													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
 														<div class="col-sm-offset-1 col-sm-7" style="padding: 0px">
-															<select class="form-control">
+															<select id="selectTypeProduitNewMachine" class="form-control">
 																<?php foreach($listTypeProduit as $type){ ?>
 																				<option><?php echo $type; ?></option>
 																<?php } ?>
+																				<option value="Nouveau Type">Nouveau Type...</option>
 															</select>
 														</div>
 													</div>
