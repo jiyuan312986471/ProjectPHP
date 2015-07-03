@@ -680,7 +680,10 @@
 		// get code
 		var code = $("input#inputCode").val();
 		
-		if(getDefautInfo(code)){
+		if(code == ""){
+			alert("Veuillez saisir le code defaut!");
+		}
+		else if(getDefautInfo(code)){
 			// if code existes: show info
 			$("span#defautInfo").css("display","");
 			
@@ -797,4 +800,10 @@
 			return true;
 		}
 	}	
+</script>
+
+<script language="javascript">
+	/********************************/
+	/* 					FORM CHECK					*/
+	/********************************/
 </script>

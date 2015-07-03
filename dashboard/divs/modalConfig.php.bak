@@ -731,7 +731,7 @@
 	// new type produit for new machine
 	$("select#selectTypeProduitNewMachine").change(function (){
 		// show type produit input
-		
+		$("input#inputNewTypeProduitNewMachine").css("display", "");
 		
 		// disable select
 		$(this).attr("disabled", "disabled");
@@ -797,4 +797,10 @@
 			return true;
 		}
 	}	
+</script>
+
+<script language="javascript">
+	/********************************/
+	/* 					FORM CHECK					*/
+	/********************************/
 </script>
