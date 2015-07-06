@@ -190,7 +190,7 @@
 											<div class="panel-heading">
 												<h3>Ajouter une Machine</h3>
 											</div>
-											<form id="formNewMachine" action="javascript:checkFormAjoutMachine()">
+											<form id="formNewMachine" action="javascript:void(0);">
 												<!-- ID Machine -->
 												<div class="panel-body">
 													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
@@ -828,22 +828,37 @@
 	};
 	
 	// Ajout Machine
-	function checkFormAjoutMachine(){
+	$("form#formNewMachine").submit(function (){
 		// get infos
-		var $this = $("form#formNewMachine");
-		var idMachine = $this.find("input#inputIdNewMachine").val();
-		var nomMachine = $this.find("input#inputNameNewMachine").val();
-		var seuilMachine = $this.find("span#sliderValNewMachine").text();
-		if($("input#inputNewTypeProduitNewMachine").attr("display") != "none"){
-			
+		var idMachine = $.trim($(this).find("input#inputIdNewMachine").val());
+		var nomMachine = $.trim($(this).find("input#inputNameNewMachine").val());
+		var seuilMachine = $.trim($(this).find("span#sliderValNewMachine").text());
+		var selectValTypeProduit = $(this).find("select#selectTypeProduitNewMachine").val();
+		if(selectValTypeProduit == "NouveauType"){
+			var typeProduitMachine = $.trim($(this).find("input#inputNewTypeProduitNewMachine").val());
 		}
 		else{
-			
+			var typeProduitMachine = $.trim(selectValTypeProduit);
 		}
+		var statusMachine = $.trim($(this).find("button#statusNewMachine").text());
+		
+		console.log("ID: " + idMachine + " Typeof(): " + typeof(idMachine));
+		console.log("Nom: " + nomMachine + " Typeof(): " + typeof(nomMachine));
+		console.log("Seuil: " + seuilMachine + " Typeof(): " + typeof(seuilMachine));
+		console.log("Type: " + typeProduitMachine + " Typeof(): " + typeof(typeProduitMachine));
+		console.log("Status: " + statusMachine + " Typeof(): " + typeof(statusMachine));
+		console.log();
 		
 		// ID check
-		
-	};
+		if(idMachine == ""){
+			alert("Veuillez saisir ID!");
+			return;
+		}
+		if(idMachine.length > 10){
+			alert("La longueur max de l'ID est 10 caracteres!");
+			return;
+		}
+	});
 	
 	// Conf Defaut
 	$("form#formModifDefaut").submit(function (){
