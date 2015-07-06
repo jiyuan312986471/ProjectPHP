@@ -190,7 +190,7 @@
 											<div class="panel-heading">
 												<h3>Ajouter une Machine</h3>
 											</div>
-											<form id="formNewMachine">
+											<form id="formNewMachine" action="javascript:checkFormAjoutMachine()">
 												<!-- ID Machine -->
 												<div class="panel-body">
 													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
@@ -274,7 +274,7 @@
 												</div>
 												
 												<div class="panel-footer">
-													<button type="submit" class="btn btn-primary">Enregistrer</button>
+													<input type="submit" class="btn btn-primary" value="Enregistrer">
 													<button type="button" class="btn btn-primary" onclick="resetMachineSetting('NewMachine')">Annuler</button>
 												</div>
 											</form>
@@ -672,6 +672,19 @@
 			$("button#status" + machine).removeClass("btn-danger");
 			$("button#status" + machine).addClass("btn-success");
 			$("button#status" + machine).text("Active");
+			
+			// reset type produit
+			var listType = $("select#selectTypeProduit" + machine).children("option");
+			for(var i in listType){
+				if($(listType[i]).text() == "-- Choisissez le type produit --"){
+					$(listType[i]).attr("selected", "selected");
+				}
+				else{
+					$(listType[i]).removeAttr("selected");
+				}
+			}
+			$("input#inputNewTypeProduit" + machine).css("display", "none");
+			$("select#selectTypeProduitNewMachine").removeAttr("disabled");
 		}
 	}
 	
@@ -815,9 +828,22 @@
 	};
 	
 	// Ajout Machine
-	$("form#formNewMachine").submit(function (){
+	function checkFormAjoutMachine(){
+		// get infos
+		var $this = $("form#formNewMachine");
+		var idMachine = $this.find("input#inputIdNewMachine").val();
+		var nomMachine = $this.find("input#inputNameNewMachine").val();
+		var seuilMachine = $this.find("span#sliderValNewMachine").text();
+		if($("input#inputNewTypeProduitNewMachine").attr("display") != "none"){
+			
+		}
+		else{
+			
+		}
+		
 		// ID check
-	});
+		
+	};
 	
 	// Conf Defaut
 	$("form#formModifDefaut").submit(function (){
