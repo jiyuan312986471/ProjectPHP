@@ -56,8 +56,8 @@
 									</ul>
 								</nav>
 								
-								<!-- Conf Page machine -->
 								<div class="tab-content col-sm-10" style="padding: 0px">
+									<!-- Conf Page machine -->
 									<?php foreach($listMachineInfo as $machine => $machineInfo){ ?>
 													<div role="tabpanel" class="tab-pane fade" id="confMachinePage<?php echo $machine; ?>">
 														<div class="panel panel-default" style="margin: 0px">
@@ -190,7 +190,7 @@
 											<div class="panel-heading">
 												<h3>Ajouter une Machine</h3>
 											</div>
-											<form>
+											<form id="formNewMachine">
 												<!-- ID Machine -->
 												<div class="panel-body">
 													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
@@ -733,11 +733,13 @@
 	
 	// new type produit for new machine
 	$("select#selectTypeProduitNewMachine").change(function (){
-		// show type produit input
-		$("input#inputNewTypeProduitNewMachine").css("display", "");
-		
-		// disable select
-		$(this).attr("disabled", "disabled");
+		if( $(this).val() == "NouveauType" ){
+			// show type produit input
+			$("input#inputNewTypeProduitNewMachine").css("display", "");
+			
+			// disable select
+			$(this).attr("disabled", "disabled");
+		}
 	})
 </script>
 
