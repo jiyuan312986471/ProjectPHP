@@ -64,7 +64,7 @@
 															<div class="panel-heading">
 																<h3>Machine <?php echo $machine; ?></h3>
 															</div>
-															<form id="formConfMachine<?php echo $machine; ?>">
+															<form id="formConfMachine<?php echo $machine; ?>" action="checkFormConfMachine('<?php echo $machine; ?>')">
 																<!-- Nom Machine -->
 																<div class="panel-body">
 																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
@@ -710,7 +710,8 @@
 		$("input#inputIdNewMachine")
 				.popover({
 					"placement": "top",
-					"content": "Chaque machine a un ID unique",
+					"content": "Chaque machine a un ID unique dont la longeur est 10 caracteres max.<br/>Ex: AK",
+					"html": "html",
 					"template": '<div class="popover" role="tooltip" style="left: 0 !important"><div class="arrow" style="left: 10% !important"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
 				})
 				.blur(function () {
@@ -733,7 +734,6 @@
 	
 	// new type produit for new machine
 	$("select#selectTypeProduitNewMachine").change(function (){
-		alert($(this).val());
 		if( $(this).val() == "NouveauType" ){
 			// show type produit input
 			$("input#inputNewTypeProduitNewMachine").css("display", "");
@@ -809,4 +809,23 @@
 	/********************************/
 	/* 					FORM CHECK					*/
 	/********************************/
+	// Conf Machine
+	function checkFormConfMachine(machine){
+		
+	};
+	
+	// Ajout Machine
+	$("form#formNewMachine").submit(function (){
+		// ID check
+	});
+	
+	// Conf Defaut
+	$("form#formModifDefaut").submit(function (){
+		
+	});
+	
+	// Ajout Defaut
+	$("form#formAjoutDefaut")submit(function (){
+		
+	});
 </script>
