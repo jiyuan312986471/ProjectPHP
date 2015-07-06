@@ -73,10 +73,12 @@
 		$graph = array("jour" => array("","","","","","",""), "nb"	 => array(0, 0, 0, 0, 0, 0, 0));
 	
 		// get machine data
-		$donne = file_get_contents('graph_'.$machine.'.dat');
-		$n = sscanf($donne,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s",
-								$graph['nb'][0],  $graph['nb'][1],  $graph['nb'][2],  $graph['nb'][3],  $graph['nb'][4],  $graph['nb'][5],  $graph['nb'][6],
-								$graph['jour'][0],$graph['jour'][1],$graph['jour'][2],$graph['jour'][3],$graph['jour'][4],$graph['jour'][5],$graph['jour'][6]);
+		if(file_exists('graph_'.$machine.'.dat')){
+			$donne = file_get_contents('graph_'.$machine.'.dat');
+			$n = sscanf($donne,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s",
+									$graph['nb'][0],  $graph['nb'][1],  $graph['nb'][2],  $graph['nb'][3],  $graph['nb'][4],  $graph['nb'][5],  $graph['nb'][6],
+									$graph['jour'][0],$graph['jour'][1],$graph['jour'][2],$graph['jour'][3],$graph['jour'][4],$graph['jour'][5],$graph['jour'][6]);
+		}
 		
 		return $graph;
 	}
@@ -545,6 +547,41 @@
 		}
 		
 		return $listDefautInfo;
+	}
+	
+	/* Fonction permettante d'ajouter un nouveau type produit dans BD																				*/
+	/* Entre	:	DB connection	et type produit																																*/
+	/* Sortie	:	true si succes, false si echec																															*/
+	function addTypeProduit($conn, $type) {
+		// prepare statement
+		$sql = "INSERT INTO [dbo].[TypeProduit] ([type]) VALUES (?)";
+		$param = array($type);
+		
+		// execute statement
+		$stmt = sqlsrv_query($conn, $sql, $param);
+		
+		if( $stmt === false ) {
+     return false;
+		}
+		return true;
+	}
+	
+	/* Fonction permettante d'ajouter une nouvelle machine dans BD																					*/
+	/* Entre	:	DB connection, ID, nom, seuil, type, status																									*/
+	/* Sortie	:	true si succes, false si echec																															*/
+	function addNewMachine($conn, $id, $nom, $seuil, $typeProduit, $status) {
+		// prepare statement
+		$sql = "INSERT INTO [dbo].[machine] ([ID],[Nom],[Seuil],[TypeProduit],[Status]) 
+						VALUES (?,?,?,?,?)";
+		$param = array($id, $nom, $seuil, $typeProduit, $status);
+		
+		// execute statement
+		$stmt = sqlsrv_query($conn, $sql, $param);
+		
+		if( $stmt === false ) {
+     return false;
+		}
+		return true;
 	}
 	
 ?>

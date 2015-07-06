@@ -842,22 +842,81 @@
 		}
 		var statusMachine = $.trim($(this).find("button#statusNewMachine").text());
 		
-		console.log("ID: " + idMachine + " Typeof(): " + typeof(idMachine));
-		console.log("Nom: " + nomMachine + " Typeof(): " + typeof(nomMachine));
-		console.log("Seuil: " + seuilMachine + " Typeof(): " + typeof(seuilMachine));
-		console.log("Type: " + typeProduitMachine + " Typeof(): " + typeof(typeProduitMachine));
-		console.log("Status: " + statusMachine + " Typeof(): " + typeof(statusMachine));
-		console.log();
-		
-		// ID check
+		// empty check
 		if(idMachine == ""){
 			alert("Veuillez saisir ID!");
 			return;
 		}
+		if(nomMachine == ""){
+			alert("Veuillez saisir le nom!");
+			return;
+		}
+		if(typeProduitMachine == "empty"){
+			alert("Veuillez choisir le type produit!");
+			return;
+		}
+		if(typeProduitMachine == ""){
+			alert("Veuillez saisir le type produit!");
+			return;
+		}
+		
+		// ID check
 		if(idMachine.length > 10){
 			alert("La longueur max de l'ID est 10 caracteres!");
 			return;
 		}
+
+		// nom check
+		if(nomMachine.length > 50){
+			alert("La longueur max du nom est 50 caracteres!");
+			return;
+		}
+		
+		// seuil convert(to integer)
+		seuilMachine = ~~seuilMachine;
+		
+		// type produit check(if new type needed to add)
+		if(selectValTypeProduit == "NouveauType"){
+			if(typeProduitMachine.length > 10){
+				alert("La longueur max du type produit est 10 caracteres!");
+				return;
+			}
+			var listTypeProduit = eval(<?php echo json_encode($listTypeProduit); ?>);
+			for(i in listTypeProduit){
+				if(typeProduitMachine == listTypeProduit[i]){
+					alert("Le type " + typeProduitMachine + " existe deja!");
+					return;
+				}
+			}
+		}
+		
+		// send data to php page via ajax
+		$.ajax({
+			url: "addMachine.php",
+			type: "POST",
+			data: {
+				id: idMachine,
+				nom: nomMachine,
+				seuil: seuilMachine,
+				typeProduit: typeProduitMachine,
+				status: statusMachine
+			},
+			dataType: "text",
+			success: function(data){
+				// show result
+				alert(data);
+				
+				// if sth failed: return
+				if(data.indexOf("Failed") >= 0){
+					return;
+				}
+				// if all goes right: to index page
+				else{
+					location.href = "index.php";
+				}
+			}
+		});
+		
 	});
 	
 	// Conf Defaut
