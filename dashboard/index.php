@@ -28,13 +28,6 @@
 		sscanf(nbdefaut($conn, $listMachine[$i]),  "%d %f",$paraMachine['nb'][$i], $paraMachine['pourc'][$i]);
 	}
 	
-//	sscanf(nbdefaut($conn,'AK'),  "%d %f",$paraMachine['nb'][0], $paraMachine['pourc'][0]);
-//	sscanf(nbdefaut($conn,'SAK'), "%d %f",$paraMachine['nb'][1], $paraMachine['pourc'][1]);
-//	sscanf(nbdefaut($conn,'DT1'), "%d %f",$paraMachine['nb'][2], $paraMachine['pourc'][2]);
-//	sscanf(nbdefaut($conn,'DT2'), "%d %f",$paraMachine['nb'][3], $paraMachine['pourc'][3]);
-//	sscanf(nbdefaut($conn,'DT3'), "%d %f",$paraMachine['nb'][4], $paraMachine['pourc'][4]);
-//	sscanf(nbdefaut($conn,'SAD'), "%d %f",$paraMachine['nb'][5], $paraMachine['pourc'][5]);
-	
 	$sum = 0;
 	$sumdefaut = 0;
 	for ($i = 0; $i < $nbMachine; $i++) {
