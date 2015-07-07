@@ -919,9 +919,9 @@
 			alert("La longueur max de l'ID est 10 caracteres!");
 			return;
 		}
-		var regID = /^[A-Z0-9@#%&<>:\-\.\+\\\/\*\^\$]+/;
+		var regID = /^[A-Z0-9]+/;
 		if(!regID.test(idMachine)){
-			alert("Seulement les caracteres suivants sont autorises:\n1. Les lettres majuscules\n2. Les chiffres\n3. @,#,%,&,<,>,:,-,.,+,\\,/,*,^,$");
+			alert("Seulement les caracteres suivants sont autorises:\n1. Les lettres majuscules\n2. Les chiffres");
 			return;
 		}
 
