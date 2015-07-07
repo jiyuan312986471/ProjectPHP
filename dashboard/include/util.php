@@ -657,4 +657,41 @@
 		return true;
 	}
 	
+	/* Fonction permettante d'ajouter un nouveau defaut dans BD																							*/
+	/* Entre	:	DB connection, code, nom, nomAbrege, type																										*/
+	/* Sortie	:	true si succes, false si echec																															*/
+	function addNewDefaut($conn, $code, $nom, $nomAbrege, $typeProduit) {
+		// prepare statement
+		$sql = "INSERT INTO [dbo].[defaut] ([code],[nom],[nomAbrege],[typeProduit]) 
+						VALUES (?,?,?,?)";
+		$param = array($code, $nom, $nomAbrege, $typeProduit);
+		
+		// execute statement
+		$stmt = sqlsrv_query($conn, $sql, $param);
+		
+		if( $stmt === false ) {
+     return false;
+		}
+		return true;
+	}
+	
+	/* Fonction permettante de modifier le defaut dans BD																										*/
+	/* Entre	:	DB connection, codeAncien, code, nom, nomAbrege, type																				*/
+	/* Sortie	:	true si succes, false si echec																															*/
+	function modifDefaut($conn, $codeAncien, $code, $nom, $nomAbrege, $typeProduit) {
+		// prepare statement
+		$sql = "UPDATE [dbo].[defaut]
+						SET [code] = ?, [nom] = ?, [nomAbrege] = ?, [typeProduit] = ?
+						WHERE [code] = ?";
+		$param = array($code, $nom, $nomAbrege, $typeProduit, $codeAncien);
+		
+		// execute statement
+		$stmt = sqlsrv_query($conn, $sql, $param);
+		
+		if( $stmt === false ) {
+     return false;
+		}
+		return true;
+	}
+	
 ?>

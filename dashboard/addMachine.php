@@ -25,10 +25,10 @@
 	// add new type into DB
 	if(!$isTypeExist){
 		if(addTypeProduit($conn, $typeProduit)){
-			$result .= "Type Produit added!";
+			$result .= "Succes d'ajouter le nouveau Type Produit ".$typeProduit."!";
 		}
 		else{
-			$result .= "Failed to add Type Produit!";
+			$result .= "Echec d'ajouter le nouveau Type Produit ".$typeProduit."!";
 			$willAddMachine = false;
 		}
 	}
@@ -36,10 +36,10 @@
 	// add machine into DB
 	if($willAddMachine){
 		if(addNewMachine($conn, $id, $nom, $seuil, $typeProduit, $status)){
-			$result .= "\nNew Machine added!";
+			$result .= "\nSucces d'ajouter la nouvelle machine ".$id."!";
 		}
 		else{
-			$result .= "\nFailed to add New Machine!";
+			$result .= "\nEchec d'ajouter la nouvelle machine ".$id."!";
 		}
 	}
 	

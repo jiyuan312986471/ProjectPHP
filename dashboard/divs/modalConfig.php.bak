@@ -396,7 +396,7 @@
 												</div>
 											</div>
 											
-											<form id="formModifDefaut" action="#" name="formModifDefaut">
+											<form id="formModifDefaut" action="javascript:void(0);">
 												<span id="defautInfo" style="display: none">
 													<hr style="margin-top: 2px; margin-bottom: 2px">
 													
@@ -450,8 +450,9 @@
 															</label>
 															<div class="col-sm-6">
 																<select id="typeProduitDefautModif" class="form-control">
+																					<option value="empty">-- Choisissez le type produit --</option>
 																	<?php foreach($listTypeProduit as $type){ ?>
-																					<option><?php echo $type; ?></option>
+																					<option value="<?php echo $type; ?>"><?php echo $type; ?></option>
 																	<?php } ?>
 																</select>
 															</div>
@@ -475,7 +476,7 @@
 												<h3>Ajouter un defaut</h3>
 											</div>
 											
-											<form id="formAjoutDefaut" action="#" name="formAjoutDefaut">
+											<form id="formAjoutDefaut" action="javascript:void(0);">
 												<!-- Code -->
 												<div class="panel-body">
 													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
@@ -497,7 +498,7 @@
 															<div class="pull-right">Nom Defaut :</div>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" placeholder="Nom du Defaut...">
+															<input id="inputNomNewDefaut" type="text" class="form-control" placeholder="Nom du Defaut...">
 														</div>
 													</div>
 												</div>
@@ -511,23 +512,24 @@
 															<div class="pull-right">Nom Defaut Abrege :</div>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" placeholder="Nom du Defaut Abrege...">
+															<input id="inputNomAbregeNewDefaut" type="text" class="form-control" placeholder="Nom Abrege du Defaut...">
 														</div>
 													</div>
 												</div>
 												
 												<hr style="margin-top: 2px; margin-bottom: 2px">
 												
-												<!-- Status -->
+												<!-- Type Produit -->
 												<div class="panel-body">
 													<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
 														<label class="col-sm-3">
-															<div class="pull-right">Status :</div>
+															<div class="pull-right">Type Produit :</div>
 														</label>
 														<div class="col-sm-6">
-															<select class="form-control">
+															<select id="selectTypeProduitNewDefaut" class="form-control">
+																				<option value="empty">-- Choisissez le type produit --</option>
 																<?php foreach($listTypeProduit as $type){ ?>
-																				<option><?php echo $type; ?></option>
+																				<option value="<?php echo $type; ?>"><?php echo $type; ?></option>
 																<?php } ?>
 															</select>
 														</div>
@@ -919,10 +921,17 @@
 			alert("La longueur max de l'ID est 10 caracteres!");
 			return;
 		}
-		var regID = /^[A-Z0-9@#%&<>:\-\.\+\\\/\*\^\$]+/;
+		var regID = /^[A-Z0-9]+/;
 		if(!regID.test(idMachine)){
-			alert("Seulement les caracteres suivants sont autorises:\n1. Les lettres majuscules\n2. Les chiffres\n3. @,#,%,&,<,>,:,-,.,+,\\,/,*,^,$");
+			alert("Seulement les caracteres suivants sont autorises pour ID machine:\n1. Les lettres MAJUSCULES\n2. Les chiffres");
 			return;
+		}
+		var listMachine = <?php echo json_encode($listMachine); ?>;
+		for(i in listMachine){
+			if(idMachine == listMachine[i]){
+				alert("Machine " + idMachine + " existe deja!");
+				return;
+			}
 		}
 
 		// nom check
@@ -966,7 +975,7 @@
 				alert(data);
 				
 				// if sth failed: return
-				if(data.indexOf("Failed") >= 0){
+				if(data.indexOf("Echec") >= 0){
 					return;
 				}
 				// if all goes right: to index page
@@ -979,11 +988,172 @@
 	
 	// Conf Defaut
 	$("form#formModifDefaut").submit(function (){
+		// get infos
+		var codeAncien = $.trim($("input#inputCode").val());
+		var code = $.trim($(this).find("input#codeDefautModif").val());
+		var nom = $.trim($(this).find("input#nomDefautModif").val());
+		var nomAbrege = $.trim($(this).find("input#nomAbregeDefautModif").val());
+		var typeProduit = $(this).find("select#typeProduitDefautModif").val();
 		
+		// empty check
+		if(code == ""){
+			alert("Veuillez saisir le code defaut!");
+			return;
+		}
+		if(nom == ""){
+			alert("Veuillez saisir le nom defaut!");
+			return;
+		}
+		if(nomAbrege == ""){
+			alert("Veuillez saisir le nom abrege du defaut!");
+			return;
+		}
+		if(typeProduit == "empty"){
+			alert("Veuillez choisir le type produit du defaut!");
+			return;
+		}
+		
+		// code check
+		var regCode = /^[0-9]+/;
+		if(!regCode.test(code)){
+			alert("Seulement les chiffres sont autorises pour le code defaut.");
+			return;
+		}
+		var listCodeDefaut = <?php echo json_encode($listCodeDefaut); ?>;
+		var listAutreCodeDefaut = [];
+		for(i in listCodeDefaut){
+			if(codeAncien != listCodeDefaut[i]){
+				listAutreCodeDefaut[i] = listCodeDefaut[i];
+			}
+		}
+		for(i in listAutreCodeDefaut){
+			if(code == listAutreCodeDefaut[i]){
+				alert("Code defaut " + code + " existe deja!");
+				return;
+			}
+		}
+		
+		// nom check
+		if(nom.length > 50){
+			alert("La longueur max du nom est 50 caracteres!");
+			return;
+		}
+		
+		// nom abrege check
+		if(nomAbrege.length > 15){
+			alert("La longueur max du nom abrege est 15 caracteres!");
+			return;
+		}
+		
+		// code convert (to integer)
+		code = ~~code;
+		
+		// send data to php page via ajax
+		$.ajax({
+			url: "modifDefaut.php",
+			type: "POST",
+			data: {
+				code: code,
+				nom: nom,
+				nomAbrege: nomAbrege,
+				typeProduit: typeProduit
+			},
+			dataType: "text",
+			success: function(data){
+				// show result
+				alert(data);
+				
+				// if sth failed: return
+				if(data.indexOf("Echec") >= 0){
+					return;
+				}
+				// if all goes right: to index page
+				else{
+					location.href = "index.php";
+				}
+			}
+		});
 	});
 	
 	// Ajout Defaut
 	$("form#formAjoutDefaut").submit(function (){
+		// get infos
+		var code = $.trim($(this).find("input#inputIdNewDefaut").val());
+		var nom = $.trim($(this).find("input#inputNomNewDefaut").val());
+		var nomAbrege = $.trim($(this).find("input#inputNomAbregeNewDefaut").val());
+		var typeProduit = $(this).find("select#selectTypeProduitNewDefaut").val();
 		
+		// empty check
+		if(code == ""){
+			alert("Veuillez saisir le code defaut!");
+			return;
+		}
+		if(nom == ""){
+			alert("Veuillez saisir le nom defaut!");
+			return;
+		}
+		if(nomAbrege == ""){
+			alert("Veuillez saisir le nom abrege du defaut!");
+			return;
+		}
+		if(typeProduit == "empty"){
+			alert("Veuillez choisir le type produit du defaut!");
+			return;
+		}
+		
+		// code check
+		var regCode = /^[0-9]+/;
+		if(!regCode.test(code)){
+			alert("Seulement les chiffres sont autorises pour le code defaut.");
+			return;
+		}
+		var listCodeDefaut = <?php echo json_encode($listCodeDefaut); ?>;
+		for(i in listCodeDefaut){
+			if(code == listCodeDefaut[i]){
+				alert("Code defaut " + code + " existe deja!");
+				return;
+			}
+		}
+		
+		// nom check
+		if(nom.length > 50){
+			alert("La longueur max du nom est 50 caracteres!");
+			return;
+		}
+		
+		// nom abrege check
+		if(nomAbrege.length > 15){
+			alert("La longueur max du nom abrege est 15 caracteres!");
+			return;
+		}
+		
+		// code convert (to integer)
+		code = ~~code;
+		
+		// send data to php page via ajax
+		$.ajax({
+			url: "addDefaut.php",
+			type: "POST",
+			data: {
+				code: code,
+				nom: nom,
+				nomAbrege: nomAbrege,
+				typeProduit: typeProduit
+			},
+			dataType: "text",
+			success: function(data){
+				// show result
+				alert(data);
+				
+				// if sth failed: return
+				if(data.indexOf("Echec") >= 0){
+					return;
+				}
+				// if all goes right: to index page
+				else{
+					location.href = "index.php";
+				}
+			}
+		});
 	});
 </script>
