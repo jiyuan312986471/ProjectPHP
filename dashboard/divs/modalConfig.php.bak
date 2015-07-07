@@ -64,7 +64,7 @@
 															<div class="panel-heading">
 																<h3>Machine <?php echo $machine; ?></h3>
 															</div>
-															<form id="formConfMachine<?php echo $machine; ?>" action="checkFormConfMachine('<?php echo $machine; ?>')">
+															<form id="formConfMachine<?php echo $machine; ?>" action="javascript:checkFormConfMachine('<?php echo $machine; ?>')">
 																<!-- Nom Machine -->
 																<div class="panel-body">
 																	<div class="row" style="margin-left: -10px; margin-right: 0px; margin-bottom: 5px">
@@ -114,12 +114,12 @@
 																					foreach($listTypeProduit as $type){ 
 																						if($machineInfo["TypeProduit"] == $type){
 																				?>
-																							<option selected><?php echo $type; ?></option>
+																							<option value="<?php echo $type; ?>" selected><?php echo $type; ?></option>
 																				<?php
 																						}
 																						else {
 																				?>
-																							<option><?php echo $type; ?></option>
+																							<option value="<?php echo $type; ?>"><?php echo $type; ?></option>
 																				<?php
 																						}
 																					}
@@ -824,7 +824,61 @@
 	/********************************/
 	// Conf Machine
 	function checkFormConfMachine(machine){
+		var $inputName = $("input#inputNameMachine" + machine);
+		var $selectTypeProduit = $("select#selectTypeProduit" + machine);
 		
+		var nomMachine = "";
+		var seuilMachine = "";
+		var typeProduitMachine = "";
+		
+		// get infos and empty check
+		if( typeof($inputName.attr("disabled")) == "undefined" ){
+			nomMachine = $.trim($inputName.val());
+			if(nomMachine == ""){
+				alert("Veuillez saisir le nom!");
+				return;
+			}
+		}
+		if( !$("div#slider" + machine).hasClass("slider-disabled") ){
+			seuilMachine = $.trim($("span#sliderVal" + machine).text());
+		}
+		if( typeof($selectTypeProduit.attr("disabled")) == "undefined" ){
+			typeProduitMachine = $.trim($selectTypeProduit.val());
+		}
+		var statusMachine = $.trim($("button#status" + machine).text());
+		
+		// nom check
+		if(nomMachine.length > 50){
+			alert("La longueur max du nom est 50 caracteres!");
+			return;
+		}
+		
+		// send data to php page via ajax
+		$.ajax({
+			url: "modifMachine.php",
+			type: "POST",
+			data: {
+				id: machine,
+				nom: nomMachine,
+				seuil: seuilMachine,
+				typeProduit: typeProduitMachine,
+				status: statusMachine
+			},
+			dataType: "text",
+			success: function(data){
+				// show result
+				alert(data);
+				
+				// if sth failed: return
+				if(data.indexOf("Failed") >= 0){
+					return;
+				}
+				// if all goes right: to index page
+				else{
+					location.href = "index.php";
+				}
+			}
+		});
 	};
 	
 	// Ajout Machine
@@ -865,6 +919,11 @@
 			alert("La longueur max de l'ID est 10 caracteres!");
 			return;
 		}
+		var regID = /^[A-Z0-9@#%&<>:\-\.\+\\\/\*\^\$]+/;
+		if(!regID.test(idMachine)){
+			alert("La longueur max de l'ID est 10 caracteres!");
+			return;
+		}
 
 		// nom check
 		if(nomMachine.length > 50){
@@ -892,7 +951,7 @@
 		
 		// send data to php page via ajax
 		$.ajax({
-			url: "ajax/addMachine.php",
+			url: "addMachine.php",
 			type: "POST",
 			data: {
 				id: idMachine,
@@ -916,7 +975,6 @@
 				}
 			}
 		});
-		
 	});
 	
 	// Conf Defaut

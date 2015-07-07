@@ -592,8 +592,8 @@
 		if($nom != ""){
 			// prepare statement
 			$sql = "UPDATE [ping2].[dbo].[machine]
-							SET [Nom] = ?
-							WHERE [ID] = ?";
+							SET [Nom] = '?'
+							WHERE [ID] = '?'";
 			$param = array($nom, $id);
 			
 			// execute statement
@@ -611,7 +611,7 @@
 			// prepare statement
 			$sql = "UPDATE [ping2].[dbo].[machine]
 							SET [Seuil] = ?
-							WHERE [ID] = ?";
+							WHERE [ID] = '?'";
 			$param = array($seuil, $id);
 			
 			// execute statement
@@ -626,8 +626,8 @@
 		if($typeProduit != ""){
 			// prepare statement
 			$sql = "UPDATE [ping2].[dbo].[machine]
-							SET [TypeProduit] = ?
-							WHERE [ID] = ?";
+							SET [TypeProduit] = '?'
+							WHERE [ID] = '?'";
 			$param = array($typeProduit, $id);
 			
 			// execute statement
@@ -642,8 +642,8 @@
 		if($status != ""){
 			// prepare statement
 			$sql = "UPDATE [ping2].[dbo].[machine]
-							SET [Status] = ?
-							WHERE [ID] = ?";
+							SET [Status] = '?'
+							WHERE [ID] = '?'";
 			$param = array($status, $id);
 			
 			// execute statement
