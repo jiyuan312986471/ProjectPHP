@@ -1,7 +1,7 @@
 <?php
 
-	include_once 'util.php';
-	include 'include/conn.php';
+	include_once 'include/util.php';
+	include 'conn.php';
 	
 	// get datas
 	$id					 = $_POST["id"];

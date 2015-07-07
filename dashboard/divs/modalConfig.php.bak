@@ -892,7 +892,7 @@
 		
 		// send data to php page via ajax
 		$.ajax({
-			url: "addMachine.php",
+			url: "ajax/addMachine.php",
 			type: "POST",
 			data: {
 				id: idMachine,
@@ -906,11 +906,11 @@
 				// show result
 				alert(data);
 				
-				// if sth failed
+				// if sth failed: return
 				if(data.indexOf("Failed") >= 0){
 					return;
 				}
-				// if all goes right
+				// if all goes right: to index page
 				else{
 					location.href = "index.php";
 				}

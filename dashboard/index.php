@@ -2,7 +2,7 @@
 
 	include_once 'include/util.php';
 	
-	include 'include/conn.php';
+	include 'conn.php';
 	
 	include 'include/listMachine.php';
 	include 'include/listTypeProduit.php';

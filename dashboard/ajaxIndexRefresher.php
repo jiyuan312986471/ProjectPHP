@@ -3,7 +3,7 @@
 	include_once 'include/util.php';
 	//include_once '../pers.php';
 	
-	include 'include/conn.php';
+	include 'conn.php';
 	
 	include 'include/listMachine.php';
 	include 'include/listTypeProduit.php';
@@ -79,7 +79,7 @@
 	$donne = sprintf("%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s", 
 										$graph['pourc'][0],$graph['pourc'][1],$graph['pourc'][2],$graph['pourc'][3],$graph['pourc'][4],$graph['pourc'][5],$graph['pourc'][6],
 										$graph['jour'][0], $graph['jour'][1], $graph['jour'][2], $graph['jour'][3], $graph['jour'][4], $graph['jour'][5], $graph['jour'][6] );
-	file_put_contents('graph.dat', $donne);
+	file_put_contents('../graph.dat', $donne);
 	
 	// set date display format
 	foreach($graph['jour'] as &$jour){

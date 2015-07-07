@@ -892,7 +892,7 @@
 		
 		// send data to php page via ajax
 		$.ajax({
-			url: "addMachine.php",
+			url: "ajax/addMachine.php",
 			type: "POST",
 			data: {
 				id: idMachine,

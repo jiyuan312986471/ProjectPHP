@@ -139,7 +139,7 @@ function createXMLHttpRequest() {
 ******************/
 function start(machine, option, graphPourc, listDefaut, listPareto){
 	var xmlHttp = createXMLHttpRequest();
-	var url = "ajax/ajaxStarter.php?machine=" + machine + "&option=" + option;
+	var url = "ajaxStarter.php?machine=" + machine + "&option=" + option;
 	xmlHttp.onreadystatechange = function(){ callbackStarter(xmlHttp, machine, option, graphPourc, listDefaut, listPareto) };
 	xmlHttp.open("GET",url,true);
 	xmlHttp.send(null);
@@ -253,7 +253,7 @@ function callbackChangeToGraphPareto(xmlHttp, machine, graphPareto) {
 ********************************/
 function refreshMachineAllGraph(jsonOptionMachine){
 	var xmlHttp = createXMLHttpRequest();
-	var url = "ajax/ajaxMachineAllRefresher.php?jsonOptionMachine=" + jsonOptionMachine;
+	var url = "ajaxMachineAllRefresher.php?jsonOptionMachine=" + jsonOptionMachine;
 	xmlHttp.onreadystatechange = function(){ callbackRefreshMachineAllGraph(xmlHttp) };
 	xmlHttp.open("GET",url,true);
 	xmlHttp.send(null);
@@ -320,7 +320,7 @@ function callbackRefreshMachineAllGraph(xmlHttp) {
 ******************************/
 function refreshIndex(){
 	var xmlHttp = createXMLHttpRequest();
-	var url = "ajax/ajaxIndexRefresher.php";
+	var url = "ajaxIndexRefresher.php";
 	xmlHttp.onreadystatechange = function(){ callbackRefreshIndex(xmlHttp) };
 	xmlHttp.open("GET",url,true);
 	xmlHttp.send(null);
@@ -344,7 +344,7 @@ function callbackRefreshIndex(xmlHttp){
 ******************************/
 function refreshMachine(machine){
 	var xmlHttp = createXMLHttpRequest();
-	var url = "ajax/ajaxMachineRefresher.php?machine=" + machine;
+	var url = "ajaxMachineRefresher.php?machine=" + machine;
 	xmlHttp.onreadystatechange = function(){ callbackRefreshMachine(xmlHttp, machine) };
 	xmlHttp.open("GET",url,true);
 	xmlHttp.send(null);

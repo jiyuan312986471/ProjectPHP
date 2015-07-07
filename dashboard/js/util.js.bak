@@ -413,5 +413,3 @@ function focusMenuTab(){
 		$("#" + id).addClass("active");
 	}
 }
-
-

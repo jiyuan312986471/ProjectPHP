@@ -1,8 +1,8 @@
 <?php
 	
-	include 'util.php';
+	include 'include/util.php';
   
-  include 'include/conn.php';
+  include 'conn.php';
   
   include 'include/listMachine.php';
   include 'include/listTypeProduit.php';
@@ -51,7 +51,7 @@
 		</div>
 		
 		<!-- Common Script Src Pool -->
-		<?php include 'scripts.php'; ?>
+		<?php include 'include/scripts.php'; ?>
 	    
 	  <script type="text/javascript">
 	  	// refresh every 8s

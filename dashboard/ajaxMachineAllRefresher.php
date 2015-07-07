@@ -1,7 +1,7 @@
 <?php
 
 	include "include/util.php";
-	include "include/conn.php";
+	include "conn.php";
 	
 	// get optionMachine
 	$jsonOptionMachine = $_GET['jsonOptionMachine'];
