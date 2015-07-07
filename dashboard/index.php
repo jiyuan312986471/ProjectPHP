@@ -1,16 +1,12 @@
 <?php
 
-	include_once 'util.php';
-	include_once '../bdd.php';
+	include_once 'include/util.php';
 	
+	include 'include/conn.php';
 	
-	// DB connection
-	$db = new bdd("SAMUEL-PC","bdd_user","user_bdd","ping2");
-	$conn = $db->getConn();
-	
-	include 'listMachine.php';
-	include 'listTypeProduit.php';
-	include 'listDefaut.php';
+	include 'include/listMachine.php';
+	include 'include/listTypeProduit.php';
+	include 'include/listDefaut.php';
 	
 	// Chercher des nb total et taux de defaut pour chaque machine
 	$nbMachine = count($listMachine);
@@ -186,7 +182,7 @@
 		</div>
 		
 		<!-- Common Script Src Pool -->
-		<?php include 'scripts.php'; ?>
+		<?php include 'include/scripts.php'; ?>
 		
 		<script language="javascript">
 			// refresh every 8s

@@ -1,7 +1,7 @@
 <?php
 
 	include_once 'util.php';
-	include_once '../bdd.php';
+	include 'include/conn.php';
 	
 	// get datas
 	$id					 = $_POST["id"];
@@ -9,10 +9,6 @@
 	$seuil			 = $_POST["seuil"];
 	$typeProduit = $_POST["typeProduit"];
 	$status 		 = $_POST["status"];
-	
-	// DB connection
-	$db = new bdd("SAMUEL-PC","bdd_user","user_bdd","ping2");
-	$conn = $db->getConn();
 	
 	$result = "";
 	$willAddMachine = true;

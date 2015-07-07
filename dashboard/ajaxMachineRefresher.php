@@ -1,11 +1,7 @@
 <?php
 
-	include 'util.php';
-  require_once('../bdd.php');
-
-  // DB connection
-	$db = new bdd("SAMUEL-PC","bdd_user","user_bdd","ping2");
-	$conn = $db->getConn();
+	include 'include/util.php';
+  include 'include/conn.php';
 	
 	// get machine
 	$machine = $_GET['machine'];

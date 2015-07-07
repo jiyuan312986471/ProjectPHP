@@ -1,15 +1,12 @@
 <?php
 	
 	include 'util.php';
-  require_once('../bdd.php');
   
-  // DB connection
-	$db = new bdd("SAMUEL-PC","bdd_user","user_bdd","ping2");
-	$conn = $db->getConn();
+  include 'include/conn.php';
   
-  include 'listMachine.php';
-  include 'listTypeProduit.php';
-  include 'listDefaut.php';
+  include 'include/listMachine.php';
+  include 'include/listTypeProduit.php';
+  include 'include/listDefaut.php';
   
   // get machine
   $machineSelected = $_GET['machine'];

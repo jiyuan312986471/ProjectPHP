@@ -1,12 +1,13 @@
 <?php
 
-	include_once 'util.php';
-	include_once '../pers.php';
-	include_once '../bdd.php';
+	include_once 'include/util.php';
+	//include_once '../pers.php';
 	
-	// DB connection
-	$db = new bdd("SAMUEL-PC","bdd_user","user_bdd","ping2");
-	$conn = $db->getConn();
+	include 'include/conn.php';
+	
+	include 'include/listMachine.php';
+	include 'include/listTypeProduit.php';
+	include 'include/listDefaut.php';
 	
 	// get time
   $date  = date('Y-m-d');
@@ -40,14 +41,20 @@
 	}
 	
 	// Chercher des nb total et taux de defaut pour chaque machine
-	$paraMachine = array( "nb" 	=> array(0,0,0,0,0,0), "pourc"	=> array(0,0,0,0,0,0) );
+	$nbMachine = count($listMachine);
+	$arrayNb = array();
+	$arrayPourc = array();
 	
-	sscanf(nbdefaut($conn,'AK'),  "%d %f",$paraMachine['nb'][0], $paraMachine['pourc'][0]);
-	sscanf(nbdefaut($conn,'SAK'), "%d %f",$paraMachine['nb'][1], $paraMachine['pourc'][1]);
-	sscanf(nbdefaut($conn,'DT1'), "%d %f",$paraMachine['nb'][2], $paraMachine['pourc'][2]);
-	sscanf(nbdefaut($conn,'DT2'), "%d %f",$paraMachine['nb'][3], $paraMachine['pourc'][3]);
-	sscanf(nbdefaut($conn,'DT3'), "%d %f",$paraMachine['nb'][4], $paraMachine['pourc'][4]);
-	sscanf(nbdefaut($conn,'SAD'), "%d %f",$paraMachine['nb'][5], $paraMachine['pourc'][5]);
+	for($i = 0; $i < $nbMachine; $i++) {
+		array_push($arrayNb, 0);
+		array_push($arrayPourc, 0);
+	}
+	
+	$paraMachine = array( "nb" 	=> $arrayNb, "pourc"	=> $arrayPourc );
+	
+	for($i = 0; $i < $nbMachine; $i++) {
+		sscanf(nbdefaut($conn, $listMachine[$i]),  "%d %f",$paraMachine['nb'][$i], $paraMachine['pourc'][$i]);
+	}
 	
 	$sum = 0;
 	$sumdefaut = 0;
