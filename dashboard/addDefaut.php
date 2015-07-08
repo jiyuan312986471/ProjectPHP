@@ -12,10 +12,10 @@
 	$result = "";
 	
 	if(addNewDefaut($conn, $code, $nom, $nomAbrege, $typeProduit)){
-		$result .= "Succes d'ajouter le nouveau defaut (Code: ".$code.")!";
+		$result .= "Succes de l'ajout du nouveau defaut (Code: ".$code.")!";
 	}
 	else{
-		$result .= "Echec d'ajouter le nouveau defaut (Code: ".$code.")!";
+		$result .= "Echec de l'ajout du nouveau defaut (Code: ".$code.")!";
 	}
 	
 	echo $result;

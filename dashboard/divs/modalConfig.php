@@ -893,7 +893,7 @@
 				alert(data);
 				
 				// if sth failed: return
-				if(data.indexOf("Failed") >= 0){
+				if(data.indexOf("Echec") >= 0){
 					return;
 				}
 				// if all goes right: to index page

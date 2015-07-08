@@ -796,17 +796,8 @@
 			data: { time: time },
 			dataType: "text",
 			success: function(data){
-				// show result
-				alert(data);
-				
-				// if sth failed: return
-				if(data.indexOf("Failed") >= 0){
-					return;
-				}
-				// if all goes right: to index page
-				else{
-					location.href = "index.php";
-				}
+				alert(data);				
+				location.href = "index.php";
 			}
 		});
 	})

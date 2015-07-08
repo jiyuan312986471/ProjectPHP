@@ -13,10 +13,10 @@
 	$result = "";
 	
 	if(modifDefaut($conn, $codeAncien, $code, $nom, $nomAbrege, $typeProduit)){
-		$result .= "Succes de modifier defaut (Code: ".$code.", Ancien Code: ".$codeAncien.")!";
+		$result .= "Succes de la modification defaut (Code: ".$code.", Ancien Code: ".$codeAncien.")!";
 	}
 	else{
-		$result .= "Echec de modifier defaut (Code: ".$code.", Ancien Code: ".$codeAncien.")!";
+		$result .= "Echec de la modification defaut (Code: ".$code.", Ancien Code: ".$codeAncien.")!";
 	}
 	
 	echo $result;

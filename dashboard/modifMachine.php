@@ -13,10 +13,10 @@
 	$result = "";
 	
 	if(modifMachine($conn, $id, $nom, $seuil, $typeProduit, $status)){
-		$result .= "Machine ".$id." Modified!";
+		$result .= "Succes de la modification de la machine ".$id."!";
 	}
 	else{
-		$result .= "Failed to modify machine ".$id."!";
+		$result .= "Echec de la modification de la machine ".$id."!";
 	}
 	
 	echo $result;
