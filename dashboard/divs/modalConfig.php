@@ -563,6 +563,28 @@
 </div>
 
 <script language="javascript">
+	/********************************/
+	/* 				Auto Complete 				*/
+	/********************************/
+	function autoComplete(dataset, $inputSelector){	  
+	  var datas = new Bloodhound({
+		  datumTokenizer: Bloodhound.tokenizers.whitespace,
+		  queryTokenizer: Bloodhound.tokenizers.whitespace,
+		  local: dataset
+		});
+	  
+	  $inputSelector.typeahead({
+	  	hint: true,
+	  	highlight: true,
+	  	minLength: 1
+	  },
+	  {
+	  	source: datas
+	  });
+	}
+</script>
+
+<script language="javascript">
 	// activate machine name setting
 	function activeNameSetting(machine){
 		// activate input
@@ -757,29 +779,11 @@
 			$(this).attr("disabled", "disabled");
 		}
 	})
-</script>
-
-<script language="javascript">
-	/********************************/
-	/* 				Auto Complete 				*/
-	/********************************/
-	// preparer list code defaut
+	
+	// auto complete for code defaut research
 	var listCodeDefaut = eval(<?php echo json_encode($listCodeDefaut); ?>);
-  
-  var codes = new Bloodhound({
-	  datumTokenizer: Bloodhound.tokenizers.whitespace,
-	  queryTokenizer: Bloodhound.tokenizers.whitespace,
-	  local: listCodeDefaut
-	});
-  
-  $("input#inputCode").typeahead({
-  	hint: true,
-  	highlight: true,
-  	minLength: 1
-  },
-  {
-  	source: codes
-  });
+	var $inputSelector = $("input#inputCode");
+	autoComplete(listCodeDefaut, $inputSelector);
 </script>
 
 <script language="javascript">

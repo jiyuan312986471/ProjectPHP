@@ -531,8 +531,7 @@
 		
 		// prepare query
 		$query = sqlsrv_query($conn, "SELECT [code],[nom],[nomAbrege],[typeProduit]
-  																FROM [ping2].[dbo].[defaut]
-  																ORDER BY [code] ASC",
+  																FROM [ping2].[dbo].[defaut]",
 													array(), array("Scrollable"=>"buffered"));
 													
 		// execute query
