@@ -309,13 +309,13 @@
 				  	<!-- content -->
 				  	<div class="row">
 				  		<div class="alert alert-info col-sm-12" style="margin: 0px">
-						    <input id="sliderRefreshTime" type="text" data-slider-id="sliderRefresh" data-slider-min="8" data-slider-max="60" data-slider-step="1" data-slider-value="8" />
+						    <input id="sliderRefreshTime" type="text" data-slider-id="sliderRefresh" data-slider-min="8" data-slider-max="60" data-slider-step="1" data-slider-value="<?php echo $refreshTime; ?>" />
 						    <span class="col-sm-3" id="currentRefreshTime">
 						    	Refresh Time: 
-						    	<span id="sliderRefreshVal">8</span>
+						    	<span id="sliderRefreshVal"><?php echo $refreshTime; ?></span>
 						    	s
 						    </span>
-						    <input type="submit" class="btn btn-sm btn-primary col-sm-2" value="Enregistrer" />
+						    <button id="buttonSetRefreshTime" class="btn btn-sm btn-primary col-sm-2">Enregistrer</button>
 					    </div>
 				    </div>
 				    
@@ -784,6 +784,23 @@
 	var listCodeDefaut = eval(<?php echo json_encode($listCodeDefaut); ?>);
 	var $inputSelector = $("input#inputCode");
 	autoComplete(listCodeDefaut, $inputSelector);
+	
+	// refresh time setting
+	$("button#buttonSetRefreshTime").click(function (){
+		var time = $("span#sliderRefreshVal").text();
+		
+		// send data to php page via ajax
+		$.ajax({
+			url: "setRefreshTime.php",
+			type: "POST",
+			data: { time: time },
+			dataType: "text",
+			success: function(data){
+				alert(data);				
+				location.href = "index.php";
+			}
+		});
+	})
 </script>
 
 <script language="javascript">
@@ -1161,8 +1178,4 @@
 			}
 		});
 	});
-</script>
-
-<script language="javascript">
-	
 </script>
