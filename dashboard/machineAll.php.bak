@@ -6,7 +6,7 @@
   *																													 *
   ***********************************************************/
 	
-	session_start();
+	
 	
 	include 'include/util.php';
   
@@ -38,8 +38,6 @@
   
   // machine -> graphPareto
   $listMachineGraphPareto = array();
-  
-  $refreshTime = $_SESSION["refreshTime"];
   
 ?>
 

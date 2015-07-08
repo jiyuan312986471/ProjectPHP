@@ -59,8 +59,7 @@
 	    
 	  <script type="text/javascript">
 	  	// refresh every 8s
-	  	var time = <?php echo $refreshTime; ?> * 1000;
-		  setInterval(refreshMachine(<?php echo json_encode($machineSelected); ?>), time);
+		  setInterval(refreshMachine(<?php echo json_encode($machineSelected); ?>), 8000);
 	  </script>
 		
 		<!-- Modal Exporter -->
