@@ -31,7 +31,7 @@ function drawPourcGraph(machine, graphPourc){
 				parseTime: false,
 				hideHover: false
 		}).on('click', function(i, row){
-			console.log(i, row);
+			console.log("i: " + i + "\nrow:", row);
 		});
 	}
 	else {
