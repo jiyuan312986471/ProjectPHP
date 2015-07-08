@@ -43,6 +43,7 @@ if(isset($_POST['submit'])){
 		
 		// store info into session
 		$_SESSION["utilisateur"] = $validUser;
+		$_SESSION["refreshTime"] = 8;
 		
 		// disconnect DB
 		unset($connInfo);

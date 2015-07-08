@@ -566,17 +566,13 @@
 	/********************************/
 	/* 				Auto Complete 				*/
 	/********************************/
-	function autoComplete(dataset, $inputSelector){
-		// preparer list code defaut
-		/*var listCodeDefaut = eval(<?php echo json_encode($listCodeDefaut); ?>);*/
-	  
+	function autoComplete(dataset, $inputSelector){	  
 	  var datas = new Bloodhound({
 		  datumTokenizer: Bloodhound.tokenizers.whitespace,
 		  queryTokenizer: Bloodhound.tokenizers.whitespace,
 		  local: dataset
 		});
 	  
-	  //$("input#inputCode").typeahead({
 	  $inputSelector.typeahead({
 	  	hint: true,
 	  	highlight: true,

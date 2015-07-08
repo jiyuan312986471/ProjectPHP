@@ -1,4 +1,6 @@
 <?php
+	
+	session_start();
 
 	include_once 'include/util.php';
 	
@@ -37,6 +39,8 @@
 	else {
 		$nombre = round($sumdefaut/$sum,2);
 	}
+	
+	$refreshTime = $_SESSION["refreshTime"];
 	
 ?>
 
@@ -186,7 +190,8 @@
 		
 		<script language="javascript">
 			// refresh every 8s
-			setInterval(refreshIndex(), 8000);
+			var time = <?php echo $refreshTime; ?> * 1000;
+			setInterval(refreshIndex(), time);
 		</script>
 		
 		<!-- Modal Exporter -->
