@@ -116,10 +116,10 @@
 													
 					?>
 					        	
-					    <!-- panel for machine -->
-						  <div class="col-lg-6">
-						  	<div class="panel panel-success" id="graphMachine<?php echo $machine; ?>"></div>
-						  </div>
+					        	<!-- panel for machine -->
+						       	<div class="col-lg-6">
+						        	<div class="panel panel-success" id="graphMachine<?php echo $machine; ?>"></div>
+							      </div>
 					
 					<?php
 					  } // end foreach machine
