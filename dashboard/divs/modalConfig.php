@@ -767,9 +767,9 @@
 	var listCodeDefaut = eval(<?php echo json_encode($listCodeDefaut); ?>);
   
   var codes = new Bloodhound({
-  datumTokenizer: Bloodhound.tokenizers.whitespace,
-  queryTokenizer: Bloodhound.tokenizers.whitespace,
-  local: listCodeDefaut
+	  datumTokenizer: Bloodhound.tokenizers.whitespace,
+	  queryTokenizer: Bloodhound.tokenizers.whitespace,
+	  local: listCodeDefaut
 	});
   
   $("input#inputCode").typeahead({

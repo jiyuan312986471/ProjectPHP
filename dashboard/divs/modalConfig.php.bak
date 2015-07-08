@@ -1053,6 +1053,7 @@
 			url: "modifDefaut.php",
 			type: "POST",
 			data: {
+				codeAncien: codeAncien,
 				code: code,
 				nom: nom,
 				nomAbrege: nomAbrege,
