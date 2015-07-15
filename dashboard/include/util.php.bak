@@ -695,4 +695,30 @@
 		return true;
 	}
 	
+	/* Fonction permettante de récupérer les donnees d'un jour																							*/
+	/* Entre	:	DB connection, machine, dateOffset																													*/
+	/* Sortie	:	les donnees																																									*/
+	function get24hData($conn, $machine, $dateOffset) {
+		$listData = array();
+		$data = array();
+		
+		// prepare query
+		$query = sqlsrv_query($conn, "SELECT * FROM [ping2].[dbo].[TeSysK_Auto]
+  																WHERE [QuelleMachine] LIKE '$machine'
+  																AND DAY([Date]) = DAY(DATEADD(day, -125, GETDATE()))",
+													array(), array("Scrollable"=>"buffered"));
+													
+		// execute query
+		while($row = sqlsrv_fetch_array($query)) {			
+			// push info
+			$infoDefaut["Nom"] 				 = $row["nom"];
+			$infoDefaut["NomAbrege"] 	 = $row["nomAbrege"];
+			$infoDefaut["TypeProduit"] = $row["typeProduit"];
+			
+			// map codeDefaut with defaut info
+			$codeDefaut = $row["code"];
+			$listDefautInfo[$codeDefaut] = $infoDefaut;
+		}
+	}
+	
 ?>

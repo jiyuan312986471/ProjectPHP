@@ -64,7 +64,7 @@ function drawPourcGraph(machine, graphPourc){
 				hideHover: false
 		}).on('click', function(i, row){
 			console.log("i: " + i + "\nrow:", row);
-			var dateOffset = 0 - i;
+			var dateOffset = i - 6;
 			
 			// send data to php page via ajax
 			$.ajax({
@@ -76,7 +76,7 @@ function drawPourcGraph(machine, graphPourc){
 				},
 				dataType: "text",
 				success: function(data){
-					alert(data);
+					console.log(data);
 					
 					// activate 24h graph modal
 					//$("#modal24h" + machine).modal();
