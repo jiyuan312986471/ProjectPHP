@@ -64,6 +64,9 @@ function drawPourcGraph(machine, graphPourc){
 				hideHover: false
 		}).on('click', function(i, row){
 			console.log("i: " + i + "\nrow:", row);
+			
+			// activate 24h graph modal
+			$("#modal24h" + machine).modal();
 		});
 	}
 };
