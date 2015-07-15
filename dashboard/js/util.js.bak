@@ -64,6 +64,24 @@ function drawPourcGraph(machine, graphPourc){
 				hideHover: false
 		}).on('click', function(i, row){
 			console.log("i: " + i + "\nrow:", row);
+			var dateOffset = 0 - i;
+			
+			// send data to php page via ajax
+			$.ajax({
+				url: "get24hData.php",
+				type: "POST",
+				data: {
+					machine: machine,
+					dateOffset: dateOffset
+				},
+				dataType: "text",
+				success: function(data){
+					alert(data);
+					
+					// activate 24h graph modal
+					$("#modal24h" + machine).modal();
+				}
+			});
 		});
 	}
 };
