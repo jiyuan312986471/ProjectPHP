@@ -76,7 +76,17 @@ function drawPourcGraph(machine, graphPourc){
 				},
 				dataType: "text",
 				success: function(data){
-					console.log(data);
+					var jsonData = eval("("+data+")");
+					
+					// retrive hours and datas
+					var listHour = new Array();
+					var listData = new Array();
+					for(var hour in jsonData){
+						listHour.push(hour);
+						listData.push(jsonData[hour]);
+					}
+					
+					console.log(listData);
 					
 					// activate 24h graph modal
 					//$("#modal24h" + machine).modal();
@@ -123,7 +133,7 @@ function draw24hGraph(machine, graph24h){
 				
 		// Chart data records -- each entry in this array corresponds to a point on the chart.
 		data: [
-			{ Heure: graphPourc.jour[0], valeur: graphPourc.pourc[0] }
+			{ Heure: graph24h.jour[0], valeur: graph24h.pourc[0] }
 		],
 		
 		// The name of the data record attribute that contains x-values.

@@ -1,7 +1,6 @@
 <?php
 
 	include_once 'include/util.php';
-	//include_once '../pers.php';
 	
 	include 'conn.php';
 	
