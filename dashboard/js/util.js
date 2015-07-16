@@ -29,9 +29,10 @@ function drawPourcGraph(machine, graphPourc){
 				
 				pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4','#09DCB4','#046351','#E16351','#4C221C'],
 				parseTime: false,
-				hideHover: false
+				hideHover: false,
+				resize: true
 		}).on('click', function(i, row){
-			console.log("i: " + i + "\nrow:", row);
+			
 		});
 	}
 	else {
@@ -61,9 +62,9 @@ function drawPourcGraph(machine, graphPourc){
 				
 				pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4','#09DCB4','#046351','#E16351','#4C221C'],
 				parseTime: false,
-				hideHover: false
+				hideHover: false,
+				resize: true
 		}).on('click', function(i, row){
-			//console.log("i: " + i + "\nrow:", row);
 			var dateOffset = i - 6;
 			
 			// send data to php page via ajax
@@ -165,7 +166,7 @@ function draw24hGraph(machine, graph24h){
 				
 		pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4','#09DCB4','#046351','#E16351','#4C221C'],
 		parseTime: false,
-		hideHover: false
+		hideHover: true
 	})
 }
 
