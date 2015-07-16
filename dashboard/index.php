@@ -221,7 +221,11 @@
 						<h4 class="modal-title">24h Graph</h4>
 					</div>
 					<div class="modal-body">
-						<div id="graph24hAll"></div>
+						<div class="row">
+							<div class="col-md-12">
+								<div id="graph24hAll"></div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

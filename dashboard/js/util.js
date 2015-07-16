@@ -75,11 +75,10 @@ function drawPourcGraph(machine, graphPourc){
 					machine: machine,
 					dateOffset: dateOffset
 				},
-				dataType: "text",
+				dataType: "json",
 				success: function(data){
-					var jsonData = eval("("+data+")");
-					
-					console.log(jsonData.pourc[0]);
+					//var jsonData = eval("("+data+")");
+					var jsonData = eval(data);
 					
 					// activate 24h graph modal
 					$("#modal24h" + machine).modal();
@@ -166,7 +165,7 @@ function draw24hGraph(machine, graph24h){
 				
 		pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4','#09DCB4','#046351','#E16351','#4C221C'],
 		parseTime: false,
-		hideHover: true
+		hideHover: false
 	})
 }
 
