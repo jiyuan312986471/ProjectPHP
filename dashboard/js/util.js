@@ -81,10 +81,12 @@ function drawPourcGraph(machine, graphPourc){
 					var jsonData = eval(data);
 					
 					// activate 24h graph modal
-					$("#modal24h" + machine).modal();
-					
-					// draw 24h graph in modal
-					draw24hGraph(machine, jsonData);
+					$("#modal24h" + machine)
+						.modal()
+						.on('shown.bs.modal',function(){
+						  // draw 24h graph in modal
+							draw24hGraph(machine, jsonData);
+						});
 				}
 			});
 		});
