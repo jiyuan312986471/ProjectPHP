@@ -704,48 +704,7 @@
 		
 		if($machine != "All"){
 			// prepare query
-			$query = sqlsrv_query($conn, "SELECT [QuelleMachine],
-																					 [NumEnr],
-																					 [Date],
-																					 [NumPal],
-																					 [Ref],
-																					 [CodeDefaut],
-																					 [EcrasementP1],
-																					 [EcrasementP2],
-																					 [EcrasementP3],
-																					 [EcrasementP4],
-																					 [EcrasementAux1],
-																					 [EcrasementAux2],
-																					 [PosRepos],
-																					 [PosTravail],
-																					 [Course],
-																					 [Consommation],
-																					 [TpsFermetureDC],
-																					 [MoyenneF],
-																					 [MoyenneO],
-																					 [MinP1],
-																					 [MaxP1],
-																					 [MinP2],
-																					 [MaxP2],
-																					 [MinP3],
-																					 [MaxP3],
-																					 [MinP4],
-																					 [MaxP4],
-																					 [MinPosRepos],
-																					 [MaxPosRepos],
-																					 [MinPosTravail],
-																					 [MaxPosTravail],
-																					 [MinMoyenneF],
-																					 [MaxMoyenneF],
-																					 [MinMoyenneO],
-																					 [MaxMoyenneO],
-																					 [CoeffA],
-																					 [CoeffB],
-																					 [CoeffC],
-																					 [OffsetRepos],
-																					 [OffsetTravail],
-																					 [CorrectionRepos],
-																					 [CorrectionTravail]
+			$query = sqlsrv_query($conn, "SELECT [QuelleMachine],[NumEnr],[Date],[NumPal],[CodeDefaut]
 																		FROM [ping2].[dbo].[TeSysK_Auto]
 	  																WHERE [QuelleMachine] LIKE '$machine'
 	  																AND DAY([Date]) = DAY(DATEADD(day, -126, GETDATE()))",
@@ -758,44 +717,7 @@
 				$data["NumEnr"] = $row["NumEnr"];
 				$data["Date"] = $row["Date"];
 				$data["NumPal"] = $row["NumPal"];
-				$data["Ref"] = $row["Ref"];
 				$data["CodeDefaut"] = $row["CodeDefaut"];
-				$data["EcrasementP1"] = $row["EcrasementP1"];
-				$data["EcrasementP2"] = $row["EcrasementP2"];
-				$data["EcrasementP3"] = $row["EcrasementP3"];
-				$data["EcrasementP4"] = $row["EcrasementP4"];
-				$data["EcrasementAux1"] = $row["EcrasementAux1"];
-				$data["EcrasementAux2"] = $row["EcrasementAux2"];
-				$data["PosRepos"] = $row["PosRepos"];
-				$data["PosTravail"] = $row["PosTravail"];
-				$data["Course"] = $row["Course"];
-				$data["Consommation"] = $row["Consommation"];
-				$data["TpsFermetureDC"] = $row["TpsFermetureDC"];
-				$data["MoyenneF"] = $row["MoyenneF"];
-				$data["MoyenneO"] = $row["MoyenneO"];
-				$data["MinP1"] = $row["MinP1"];
-				$data["MaxP1"] = $row["MaxP1"];
-				$data["MinP2"] = $row["MinP2"];
-				$data["MaxP2"] = $row["MaxP2"];
-				$data["MinP3"] = $row["MinP3"];
-				$data["MaxP3"] = $row["MaxP3"];
-				$data["MinP4"] = $row["MinP4"];
-				$data["MaxP4"] = $row["MaxP4"];
-				$data["MinPosRepos"] = $row["MinPosRepos"];
-				$data["MaxPosRepos"] = $row["MaxPosRepos"];
-				$data["MinPosTravail"] = $row["MinPosTravail"];
-				$data["MaxPosTravail"] = $row["MaxPosTravail"];
-				$data["MinMoyenneF"] = $row["MinMoyenneF"];
-				$data["MaxMoyenneF"] = $row["MaxMoyenneF"];
-				$data["MinMoyenneO"] = $row["MinMoyenneO"];
-				$data["MaxMoyenneO"] = $row["MaxMoyenneO"];
-				$data["CoeffA"] = $row["CoeffA"];
-				$data["CoeffB"] = $row["CoeffB"];
-				$data["CoeffC"] = $row["CoeffC"];
-				$data["OffsetRepos"] = $row["OffsetRepos"];
-				$data["OffsetTravail"] = $row["OffsetTravail"];
-				$data["CorrectionRepos"] = $row["CorrectionRepos"];
-				$data["CorrectionTravail"] = $row["CorrectionTravail"];
 				
 				// add data into list
 				array_push($listData, $data);
@@ -803,48 +725,7 @@
 		}
 		else {
 			// prepare query
-			$query = sqlsrv_query($conn, "SELECT [QuelleMachine],
-																					 [NumEnr],
-																					 [Date],
-																					 [NumPal],
-																					 [Ref],
-																					 [CodeDefaut],
-																					 [EcrasementP1],
-																					 [EcrasementP2],
-																					 [EcrasementP3],
-																					 [EcrasementP4],
-																					 [EcrasementAux1],
-																					 [EcrasementAux2],
-																					 [PosRepos],
-																					 [PosTravail],
-																					 [Course],
-																					 [Consommation],
-																					 [TpsFermetureDC],
-																					 [MoyenneF],
-																					 [MoyenneO],
-																					 [MinP1],
-																					 [MaxP1],
-																					 [MinP2],
-																					 [MaxP2],
-																					 [MinP3],
-																					 [MaxP3],
-																					 [MinP4],
-																					 [MaxP4],
-																					 [MinPosRepos],
-																					 [MaxPosRepos],
-																					 [MinPosTravail],
-																					 [MaxPosTravail],
-																					 [MinMoyenneF],
-																					 [MaxMoyenneF],
-																					 [MinMoyenneO],
-																					 [MaxMoyenneO],
-																					 [CoeffA],
-																					 [CoeffB],
-																					 [CoeffC],
-																					 [OffsetRepos],
-																					 [OffsetTravail],
-																					 [CorrectionRepos],
-																					 [CorrectionTravail]
+			$query = sqlsrv_query($conn, "SELECT [QuelleMachine],[NumEnr],[Date],[NumPal],[CodeDefaut]
 																		FROM [ping2].[dbo].[TeSysK_Auto]
 	  																WHERE DAY([Date]) = DAY(DATEADD(day, -126, GETDATE()))",
 														array(), array("Scrollable"=>"buffered"));
@@ -856,44 +737,7 @@
 				$data["NumEnr"] = $row["NumEnr"];
 				$data["Date"] = $row["Date"];
 				$data["NumPal"] = $row["NumPal"];
-				$data["Ref"] = $row["Ref"];
 				$data["CodeDefaut"] = $row["CodeDefaut"];
-				$data["EcrasementP1"] = $row["EcrasementP1"];
-				$data["EcrasementP2"] = $row["EcrasementP2"];
-				$data["EcrasementP3"] = $row["EcrasementP3"];
-				$data["EcrasementP4"] = $row["EcrasementP4"];
-				$data["EcrasementAux1"] = $row["EcrasementAux1"];
-				$data["EcrasementAux2"] = $row["EcrasementAux2"];
-				$data["PosRepos"] = $row["PosRepos"];
-				$data["PosTravail"] = $row["PosTravail"];
-				$data["Course"] = $row["Course"];
-				$data["Consommation"] = $row["Consommation"];
-				$data["TpsFermetureDC"] = $row["TpsFermetureDC"];
-				$data["MoyenneF"] = $row["MoyenneF"];
-				$data["MoyenneO"] = $row["MoyenneO"];
-				$data["MinP1"] = $row["MinP1"];
-				$data["MaxP1"] = $row["MaxP1"];
-				$data["MinP2"] = $row["MinP2"];
-				$data["MaxP2"] = $row["MaxP2"];
-				$data["MinP3"] = $row["MinP3"];
-				$data["MaxP3"] = $row["MaxP3"];
-				$data["MinP4"] = $row["MinP4"];
-				$data["MaxP4"] = $row["MaxP4"];
-				$data["MinPosRepos"] = $row["MinPosRepos"];
-				$data["MaxPosRepos"] = $row["MaxPosRepos"];
-				$data["MinPosTravail"] = $row["MinPosTravail"];
-				$data["MaxPosTravail"] = $row["MaxPosTravail"];
-				$data["MinMoyenneF"] = $row["MinMoyenneF"];
-				$data["MaxMoyenneF"] = $row["MaxMoyenneF"];
-				$data["MinMoyenneO"] = $row["MinMoyenneO"];
-				$data["MaxMoyenneO"] = $row["MaxMoyenneO"];
-				$data["CoeffA"] = $row["CoeffA"];
-				$data["CoeffB"] = $row["CoeffB"];
-				$data["CoeffC"] = $row["CoeffC"];
-				$data["OffsetRepos"] = $row["OffsetRepos"];
-				$data["OffsetTravail"] = $row["OffsetTravail"];
-				$data["CorrectionRepos"] = $row["CorrectionRepos"];
-				$data["CorrectionTravail"] = $row["CorrectionTravail"];
 				
 				// add data into list
 				array_push($listData, $data);

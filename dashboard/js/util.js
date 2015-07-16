@@ -86,7 +86,7 @@ function drawPourcGraph(machine, graphPourc){
 						listData.push(jsonData[hour]);
 					}
 					
-					console.log(listData[0]);
+					console.log(listData);
 					
 					// activate 24h graph modal
 					//$("#modal24h" + machine).modal();

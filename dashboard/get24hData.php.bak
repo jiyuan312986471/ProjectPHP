@@ -181,6 +181,6 @@
 	// map hour list and data lists
 	$listData = array_combine($listHour, $listDataHour);
 	
-	echo "DATE!!!\n".json_encode($listData);
+	echo json_encode($listData);
 
 ?>

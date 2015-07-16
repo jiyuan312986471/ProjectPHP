@@ -178,6 +178,10 @@
 	array_push($listDataHour, $dataHour22);
 	array_push($listDataHour, $dataHour23);
 	
+	// calculate pourc by hour
+	
+	
+	
 	// map hour list and data lists
 	$listData = array_combine($listHour, $listDataHour);
 	
