@@ -178,12 +178,38 @@
 	array_push($listDataHour, $dataHour22);
 	array_push($listDataHour, $dataHour23);
 	
-	// calculate pourc by hour
+	// calcul result list
+	$listPourc = array();
+	$list = array();
 	
+	// calculate pourc by hour
+	foreach($listDataHour as $dataHour){
+		// calculate nbDefaut and nbTotal
+		$nbDefaut = 0;
+		$nbTotal = 0;
+		while($row = current($dataHour)){
+			$rowNext = next($dataHour);
+			
+			if($row['CodeDefaut'] > 0 && $rowNext['NumEnr'] == $row['NumEnr'] + 1 && $rowNext['NumPal'] == $row['NumPal']){
+				$nbDefaut++;
+			}
+			else if($row['CodeDefaut'] == 0){
+				$nbTotal++;
+			}
+			
+			$row = $rowNext;
+		}
+		
+		// calculate pourc
+		$pourc = calcuPourc($nbDefaut, $nbTotal);
+		
+		// store result
+		array_push($listPourc, $pourc);
+	}
 	
 	
 	// map hour list and data lists
-	$listData = array_combine($listHour, $listDataHour);
+	$listData = array("hour" => $listHour, "pourc" => $listPourc);
 	
 	echo json_encode($listData);
 

@@ -78,18 +78,13 @@ function drawPourcGraph(machine, graphPourc){
 				success: function(data){
 					var jsonData = eval("("+data+")");
 					
-					// retrive hours and datas
-					var listHour = new Array();
-					var listData = new Array();
-					for(var hour in jsonData){
-						listHour.push(hour);
-						listData.push(jsonData[hour]);
-					}
-					
-					console.log(listData);
+					console.log(jsonData.pourc[0]);
 					
 					// activate 24h graph modal
-					//$("#modal24h" + machine).modal();
+					$("#modal24h" + machine).modal();
+					
+					// draw 24h graph in modal
+					draw24hGraph(machine, jsonData);
 				}
 			});
 		});
@@ -133,7 +128,30 @@ function draw24hGraph(machine, graph24h){
 				
 		// Chart data records -- each entry in this array corresponds to a point on the chart.
 		data: [
-			{ Heure: graph24h.jour[0], valeur: graph24h.pourc[0] }
+			{ Heure: graph24h.hour[0], valeur: graph24h.pourc[0] },
+			{ Heure: graph24h.hour[1], valeur: graph24h.pourc[1] },
+			{ Heure: graph24h.hour[2], valeur: graph24h.pourc[2] },
+			{ Heure: graph24h.hour[3], valeur: graph24h.pourc[3] },
+			{ Heure: graph24h.hour[4], valeur: graph24h.pourc[4] },
+			{ Heure: graph24h.hour[5], valeur: graph24h.pourc[5] },
+			{ Heure: graph24h.hour[6], valeur: graph24h.pourc[6] },
+			{ Heure: graph24h.hour[7], valeur: graph24h.pourc[7] },
+			{ Heure: graph24h.hour[8], valeur: graph24h.pourc[8] },
+			{ Heure: graph24h.hour[9], valeur: graph24h.pourc[9] },
+			{ Heure: graph24h.hour[10], valeur: graph24h.pourc[10] },
+			{ Heure: graph24h.hour[11], valeur: graph24h.pourc[11] },
+			{ Heure: graph24h.hour[12], valeur: graph24h.pourc[12] },
+			{ Heure: graph24h.hour[13], valeur: graph24h.pourc[13] },
+			{ Heure: graph24h.hour[14], valeur: graph24h.pourc[14] },
+			{ Heure: graph24h.hour[15], valeur: graph24h.pourc[15] },
+			{ Heure: graph24h.hour[16], valeur: graph24h.pourc[16] },
+			{ Heure: graph24h.hour[17], valeur: graph24h.pourc[17] },
+			{ Heure: graph24h.hour[18], valeur: graph24h.pourc[18] },
+			{ Heure: graph24h.hour[19], valeur: graph24h.pourc[19] },
+			{ Heure: graph24h.hour[20], valeur: graph24h.pourc[20] },
+			{ Heure: graph24h.hour[21], valeur: graph24h.pourc[21] },
+			{ Heure: graph24h.hour[22], valeur: graph24h.pourc[22] },
+			{ Heure: graph24h.hour[23], valeur: graph24h.pourc[23] }
 		],
 		
 		// The name of the data record attribute that contains x-values.
