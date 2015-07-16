@@ -63,8 +63,8 @@ function drawPourcGraph(machine, graphPourc){
 				parseTime: false,
 				hideHover: false
 		}).on('click', function(i, row){
-			console.log("i: " + i + "\nrow:", row);
-			var dateOffset = 0 - i;
+			//console.log("i: " + i + "\nrow:", row);
+			var dateOffset = i - 6;
 			
 			// send data to php page via ajax
 			$.ajax({
@@ -115,6 +115,31 @@ function drawParetoGraph(machine, listDefaut, listPareto){
 			labels: ['Pourcentage'],
 		});
 };
+
+function draw24hGraph(machine, graph24h){
+	new Morris.Line({
+		// ID of the element in which to draw the chart.
+		element: 'graph24h' + machine,
+				
+		// Chart data records -- each entry in this array corresponds to a point on the chart.
+		data: [
+			{ Heure: graphPourc.jour[0], valeur: graphPourc.pourc[0] }
+		],
+		
+		// The name of the data record attribute that contains x-values.
+		xkey: 'Heure',
+				
+		// A list of names of data record attributes that contain y-values.
+		ykeys: ['valeur'],
+		
+		// Labels for the ykeys -- will be displayed when you hover over the chart.
+		labels: ['Pourcentage'],
+				
+		pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4','#09DCB4','#046351','#E16351','#4C221C'],
+		parseTime: false,
+		hideHover: false
+	})
+}
 
 function drawGraph(machine, graphPourc, listDefaut, listPareto){
 	// get all active label

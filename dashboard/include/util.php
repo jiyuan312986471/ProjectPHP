@@ -748,7 +748,7 @@
 																					 [CorrectionTravail]
 																		FROM [ping2].[dbo].[TeSysK_Auto]
 	  																WHERE [QuelleMachine] LIKE '$machine'
-	  																AND DAY([Date]) = DAY(DATEADD(day, -125, GETDATE()))",
+	  																AND DAY([Date]) = DAY(DATEADD(day, -126, GETDATE()))",
 														array(), array("Scrollable"=>"buffered"));
 														
 			// execute query
@@ -846,7 +846,7 @@
 																					 [CorrectionRepos],
 																					 [CorrectionTravail]
 																		FROM [ping2].[dbo].[TeSysK_Auto]
-	  																WHERE DAY([Date]) = DAY(DATEADD(day, -125, GETDATE()))",
+	  																WHERE DAY([Date]) = DAY(DATEADD(day, -126, GETDATE()))",
 														array(), array("Scrollable"=>"buffered"));
 														
 			// execute query
