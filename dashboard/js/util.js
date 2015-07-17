@@ -2,6 +2,8 @@
 *		DRAW GRAPHS
 ****************/
 function drawPourcGraph(machine, graphPourc){
+	var graph24h;
+	
 	if(machine != "All"){
 		new Morris.Line({
 				// ID of the element in which to draw the chart.
@@ -77,15 +79,14 @@ function drawPourcGraph(machine, graphPourc){
 				},
 				dataType: "json",
 				success: function(data){
-					//var jsonData = eval("("+data+")");
 					var jsonData = eval(data);
 					
 					// activate 24h graph modal
 					$("#modal24h" + machine)
 						.modal()
-						.on('shown.bs.modal',function(){
+						.on('shown.bs.modal',function(){							
 						  // draw 24h graph in modal
-							draw24hGraph(machine, jsonData);
+							graph24h = draw24hGraph(machine, jsonData, graph24h);
 						});
 				}
 			});
@@ -123,52 +124,84 @@ function drawParetoGraph(machine, listDefaut, listPareto){
 		});
 };
 
-function draw24hGraph(machine, graph24h){
-	new Morris.Line({
-		// ID of the element in which to draw the chart.
-		element: 'graph24h' + machine,
-				
-		// Chart data records -- each entry in this array corresponds to a point on the chart.
-		data: [
-			{ Heure: graph24h.hour[0],  valeur: graph24h.pourc[0]  },
-			{ Heure: graph24h.hour[1],  valeur: graph24h.pourc[1]  },
-			{ Heure: graph24h.hour[2],  valeur: graph24h.pourc[2]  },
-			{ Heure: graph24h.hour[3],  valeur: graph24h.pourc[3]  },
-			{ Heure: graph24h.hour[4],  valeur: graph24h.pourc[4]  },
-			{ Heure: graph24h.hour[5],  valeur: graph24h.pourc[5]  },
-			{ Heure: graph24h.hour[6],  valeur: graph24h.pourc[6]  },
-			{ Heure: graph24h.hour[7],  valeur: graph24h.pourc[7]  },
-			{ Heure: graph24h.hour[8],  valeur: graph24h.pourc[8]  },
-			{ Heure: graph24h.hour[9],  valeur: graph24h.pourc[9]  },
-			{ Heure: graph24h.hour[10], valeur: graph24h.pourc[10] },
-			{ Heure: graph24h.hour[11], valeur: graph24h.pourc[11] },
-			{ Heure: graph24h.hour[12], valeur: graph24h.pourc[12] },
-			{ Heure: graph24h.hour[13], valeur: graph24h.pourc[13] },
-			{ Heure: graph24h.hour[14], valeur: graph24h.pourc[14] },
-			{ Heure: graph24h.hour[15], valeur: graph24h.pourc[15] },
-			{ Heure: graph24h.hour[16], valeur: graph24h.pourc[16] },
-			{ Heure: graph24h.hour[17], valeur: graph24h.pourc[17] },
-			{ Heure: graph24h.hour[18], valeur: graph24h.pourc[18] },
-			{ Heure: graph24h.hour[19], valeur: graph24h.pourc[19] },
-			{ Heure: graph24h.hour[20], valeur: graph24h.pourc[20] },
-			{ Heure: graph24h.hour[21], valeur: graph24h.pourc[21] },
-			{ Heure: graph24h.hour[22], valeur: graph24h.pourc[22] },
-			{ Heure: graph24h.hour[23], valeur: graph24h.pourc[23] }
-		],
-		
-		// The name of the data record attribute that contains x-values.
-		xkey: 'Heure',
-				
-		// A list of names of data record attributes that contain y-values.
-		ykeys: ['valeur'],
-		
-		// Labels for the ykeys -- will be displayed when you hover over the chart.
-		labels: ['Pourcentage'],
-				
-		pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4','#09DCB4','#046351','#E16351','#4C221C'],
-		parseTime: false,
-		hideHover: false
-	})
+function draw24hGraph(machine, dataGraph24h, graph24h){
+	if(typeof graph24h !== 'undefined'){
+		var data = [
+				{ Heure: dataGraph24h.hour[0],  valeur: dataGraph24h.pourc[0]  },
+				{ Heure: dataGraph24h.hour[1],  valeur: dataGraph24h.pourc[1]  },
+				{ Heure: dataGraph24h.hour[2],  valeur: dataGraph24h.pourc[2]  },
+				{ Heure: dataGraph24h.hour[3],  valeur: dataGraph24h.pourc[3]  },
+				{ Heure: dataGraph24h.hour[4],  valeur: dataGraph24h.pourc[4]  },
+				{ Heure: dataGraph24h.hour[5],  valeur: dataGraph24h.pourc[5]  },
+				{ Heure: dataGraph24h.hour[6],  valeur: dataGraph24h.pourc[6]  },
+				{ Heure: dataGraph24h.hour[7],  valeur: dataGraph24h.pourc[7]  },
+				{ Heure: dataGraph24h.hour[8],  valeur: dataGraph24h.pourc[8]  },
+				{ Heure: dataGraph24h.hour[9],  valeur: dataGraph24h.pourc[9]  },
+				{ Heure: dataGraph24h.hour[10], valeur: dataGraph24h.pourc[10] },
+				{ Heure: dataGraph24h.hour[11], valeur: dataGraph24h.pourc[11] },
+				{ Heure: dataGraph24h.hour[12], valeur: dataGraph24h.pourc[12] },
+				{ Heure: dataGraph24h.hour[13], valeur: dataGraph24h.pourc[13] },
+				{ Heure: dataGraph24h.hour[14], valeur: dataGraph24h.pourc[14] },
+				{ Heure: dataGraph24h.hour[15], valeur: dataGraph24h.pourc[15] },
+				{ Heure: dataGraph24h.hour[16], valeur: dataGraph24h.pourc[16] },
+				{ Heure: dataGraph24h.hour[17], valeur: dataGraph24h.pourc[17] },
+				{ Heure: dataGraph24h.hour[18], valeur: dataGraph24h.pourc[18] },
+				{ Heure: dataGraph24h.hour[19], valeur: dataGraph24h.pourc[19] },
+				{ Heure: dataGraph24h.hour[20], valeur: dataGraph24h.pourc[20] },
+				{ Heure: dataGraph24h.hour[21], valeur: dataGraph24h.pourc[21] },
+				{ Heure: dataGraph24h.hour[22], valeur: dataGraph24h.pourc[22] },
+				{ Heure: dataGraph24h.hour[23], valeur: dataGraph24h.pourc[23] }
+			];
+		graph24h.setData(data);
+		return graph24h;
+	}
+	else{
+		return new Morris.Line({
+			// ID of the element in which to draw the chart.
+			element: 'graph24h' + machine,
+					
+			// Chart data records -- each entry in this array corresponds to a point on the chart.
+			data: [
+				{ Heure: dataGraph24h.hour[0],  valeur: dataGraph24h.pourc[0]  },
+				{ Heure: dataGraph24h.hour[1],  valeur: dataGraph24h.pourc[1]  },
+				{ Heure: dataGraph24h.hour[2],  valeur: dataGraph24h.pourc[2]  },
+				{ Heure: dataGraph24h.hour[3],  valeur: dataGraph24h.pourc[3]  },
+				{ Heure: dataGraph24h.hour[4],  valeur: dataGraph24h.pourc[4]  },
+				{ Heure: dataGraph24h.hour[5],  valeur: dataGraph24h.pourc[5]  },
+				{ Heure: dataGraph24h.hour[6],  valeur: dataGraph24h.pourc[6]  },
+				{ Heure: dataGraph24h.hour[7],  valeur: dataGraph24h.pourc[7]  },
+				{ Heure: dataGraph24h.hour[8],  valeur: dataGraph24h.pourc[8]  },
+				{ Heure: dataGraph24h.hour[9],  valeur: dataGraph24h.pourc[9]  },
+				{ Heure: dataGraph24h.hour[10], valeur: dataGraph24h.pourc[10] },
+				{ Heure: dataGraph24h.hour[11], valeur: dataGraph24h.pourc[11] },
+				{ Heure: dataGraph24h.hour[12], valeur: dataGraph24h.pourc[12] },
+				{ Heure: dataGraph24h.hour[13], valeur: dataGraph24h.pourc[13] },
+				{ Heure: dataGraph24h.hour[14], valeur: dataGraph24h.pourc[14] },
+				{ Heure: dataGraph24h.hour[15], valeur: dataGraph24h.pourc[15] },
+				{ Heure: dataGraph24h.hour[16], valeur: dataGraph24h.pourc[16] },
+				{ Heure: dataGraph24h.hour[17], valeur: dataGraph24h.pourc[17] },
+				{ Heure: dataGraph24h.hour[18], valeur: dataGraph24h.pourc[18] },
+				{ Heure: dataGraph24h.hour[19], valeur: dataGraph24h.pourc[19] },
+				{ Heure: dataGraph24h.hour[20], valeur: dataGraph24h.pourc[20] },
+				{ Heure: dataGraph24h.hour[21], valeur: dataGraph24h.pourc[21] },
+				{ Heure: dataGraph24h.hour[22], valeur: dataGraph24h.pourc[22] },
+				{ Heure: dataGraph24h.hour[23], valeur: dataGraph24h.pourc[23] }
+			],
+			
+			// The name of the data record attribute that contains x-values.
+			xkey: 'Heure',
+					
+			// A list of names of data record attributes that contain y-values.
+			ykeys: ['valeur'],
+			
+			// Labels for the ykeys -- will be displayed when you hover over the chart.
+			labels: ['Pourcentage'],
+					
+			pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4','#09DCB4','#046351','#E16351','#4C221C'],
+			parseTime: false,
+			hideHover: false
+		});
+	}
 }
 
 function drawGraph(machine, graphPourc, listDefaut, listPareto){

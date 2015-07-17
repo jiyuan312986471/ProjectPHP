@@ -6,6 +6,7 @@
 	// get options
 	$machine 		= $_POST["machine"];
 	$dateOffset = $_POST["dateOffset"];
+	$graph24h   = $_POST["graph24h"];
 	
 	// get datas
 	$listData = get24hData($conn, $machine, $dateOffset);
@@ -209,7 +210,7 @@
 	
 	
 	// map hour list and data lists
-	$listData = array_combine($listHour, $listPourc);
+	$listData = array("hour" => $listHour, "pourc" => $listPourc);
 	
 	echo json_encode($listData);
 
