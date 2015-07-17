@@ -209,6 +209,7 @@
 	}
 	else{
 		$listPourc = array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+		$date = get24hGraphDate($dateOffset);
 	}
 	
 	// map hour list and data lists
