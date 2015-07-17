@@ -106,6 +106,7 @@ function drawPourcGraph(machine, graphPourc){
 				},
 				dataType: "text",
 				success: function(data){
+					console.log(data);
 					var listData = data.split("AND");
 					var jsonData = eval("("+listData[0]+")");
 					var date = listData[1];
@@ -119,7 +120,7 @@ function drawPourcGraph(machine, graphPourc){
 						});
 					
 					// set date for modal title
-					$("#date24hGraph").text(date);
+					$("#date24hGraph" + machine).text(date);
 				}
 			});
 		});

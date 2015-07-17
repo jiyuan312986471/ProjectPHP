@@ -701,14 +701,14 @@
 	function get24hData($conn, $machine, $dateOffset) {
 		$listData = array();
 		$data = array();
-		//$dateOffset = -127;
 		
 		if($machine != "All"){
 			// prepare query
 			$sql = "SELECT [QuelleMachine],[NumEnr],[Date],[NumPal],[CodeDefaut]
 							FROM [ping2].[dbo].[TeSysK_Auto]
 	  					WHERE [QuelleMachine] LIKE '".$machine."'
-	  					AND DAY([Date]) = DAY(DATEADD(day, ".$dateOffset.", GETDATE()))";
+	  					AND DAY([Date]) = DAY(DATEADD(day, ".$dateOffset.", GETDATE()))
+	  					AND	MONTH([Date]) = MONTH(DATEADD(day, ".$dateOffset.", GETDATE()))";
 			$stmt = sqlsrv_query($conn, $sql);
 														
 			// execute query
@@ -728,7 +728,8 @@
 			// prepare query
 			$sql = "SELECT [QuelleMachine],[NumEnr],[Date],[NumPal],[CodeDefaut]
 							FROM [ping2].[dbo].[TeSysK_Auto]
-	  					WHERE DAY([Date]) = DAY(DATEADD(day, ".$dateOffset.", GETDATE()))";
+	  					WHERE DAY([Date]) = DAY(DATEADD(day, ".$dateOffset.", GETDATE()))
+	  					AND	MONTH([Date]) = MONTH(DATEADD(day, ".$dateOffset.", GETDATE()))";
 			$stmt = sqlsrv_query($conn, $sql);
 														
 			// execute query
