@@ -82,17 +82,17 @@
 		</div>
 		
 		<!-- Modal 24h Graph -->
-		<div class="modal fade" id="modal24h<?php echo $machineSelected; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="modal24h<?php echo $machine; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title">24h Graph pour <?php echo $machineSelected; ?> au <span id="date24hGraph<?php echo $machineSelected; ?>"></span></h4>
+						<h4 class="modal-title">24h Graph pour <?php echo $machine; ?> au <span id="date24hGraph<?php echo $machine; ?>"></span></h4>
 					</div>
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-md-12">
-								<div id="graph24h<?php echo $machineSelected; ?>"></div>
+								<div id="graph24h<?php echo $machine; ?>"></div>
 							</div>
 						</div>
 					</div>

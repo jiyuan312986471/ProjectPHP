@@ -116,10 +116,10 @@
 													
 					?>
 					        	
-					        	<!-- panel for machine -->
-						       	<div class="col-lg-6">
-						        	<div class="panel panel-success" id="graphMachine<?php echo $machine; ?>"></div>
-							      </div>
+					    <!-- panel for machine -->
+						  <div class="col-lg-6">
+						  	<div class="panel panel-success" id="graphMachine<?php echo $machine; ?>"></div>
+						  </div>
 					
 					<?php
 					  } // end foreach machine
@@ -259,6 +259,27 @@
 						<!-- Modal Footer -->
 						<div class="modal-footer">
 							<button type="button" class="btn btn-primary">Exporter</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		
+		<!-- Modals 24h Graph -->
+		<?php foreach($listMachine as $machine) { ?>
+			<div class="modal fade" id="modal24h<?php echo $machine; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title">24h Graph pour <?php echo $machine; ?> au <span id="date24hGraph"></span></h4>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-12">
+									<div id="graph24h<?php echo $machine; ?>"></div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

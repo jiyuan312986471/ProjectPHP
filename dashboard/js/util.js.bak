@@ -34,7 +34,34 @@ function drawPourcGraph(machine, graphPourc){
 				hideHover: false,
 				resize: true
 		}).on('click', function(i, row){
+			var dateOffset = i - 6;
 			
+			// send data to php page via ajax
+			$.ajax({
+				url: "get24hData.php",
+				type: "POST",
+				data: {
+					machine: machine,
+					dateOffset: dateOffset
+				},
+				dataType: "text",
+				success: function(data){
+					var listData = data.split("AND");
+					var jsonData = eval("("+listData[0]+")");
+					var date = listData[1];
+					
+					// activate 24h graph modal
+					$("#modal24h" + machine)
+						.modal()
+						.on('shown.bs.modal',function(){							
+						  // draw 24h graph in modal
+							graph24h = draw24hGraph(machine, jsonData, graph24h);
+						});
+					
+					// set date for modal title
+					$("#date24hGraph" + machine).text(date);
+				}
+			});
 		});
 	}
 	else {
@@ -77,17 +104,22 @@ function drawPourcGraph(machine, graphPourc){
 					machine: machine,
 					dateOffset: dateOffset
 				},
-				dataType: "json",
+				dataType: "text",
 				success: function(data){
-					var jsonData = eval(data);
+					var listData = data.split("AND");
+					var jsonData = eval("("+listData[0]+")");
+					var date = listData[1];
 					
 					// activate 24h graph modal
 					$("#modal24h" + machine)
 						.modal()
-						.on('shown.bs.modal',function(){							
+						.on('shown.bs.modal',function(){
 						  // draw 24h graph in modal
 							graph24h = draw24hGraph(machine, jsonData, graph24h);
 						});
+					
+					// set date for modal title
+					$("#date24hGraph").text(date);
 				}
 			});
 		});
@@ -125,7 +157,6 @@ function drawParetoGraph(machine, listDefaut, listPareto){
 };
 
 function draw24hGraph(machine, dataGraph24h, graph24h){
-	console.log(graph24h);
 	if(typeof graph24h !== 'undefined'){
 		var data = [
 				{ Heure: dataGraph24h.hour[0],  valeur: dataGraph24h.pourc[0]  },
@@ -522,5 +553,21 @@ function focusMenuTab(){
 		
 		// focus tab
 		$("#" + id).addClass("active");
+	}
+}
+
+
+/*********************************
+*						GET DATE
+*							FOR
+*					 24H GRAPH
+*********************************/
+function get24hGraphDate(dateOffset){
+	var today = new Date();
+	if(today.getDate() <= 6){
+		
+	}
+	else{
+		return today.toDateString();
 	}
 }

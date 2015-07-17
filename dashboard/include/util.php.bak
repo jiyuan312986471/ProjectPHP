@@ -701,21 +701,18 @@
 	function get24hData($conn, $machine, $dateOffset) {
 		$listData = array();
 		$data = array();
+		//$dateOffset = -127;
 		
 		if($machine != "All"){
 			// prepare query
-			$query = sqlsrv_query($conn, "SELECT [QuelleMachine],
-																					 [NumEnr],
-																					 [Date],
-																					 [NumPal],
-																					 [CodeDefaut]
-																		FROM [ping2].[dbo].[TeSysK_Auto]
-	  																WHERE [QuelleMachine] LIKE '$machine'
-	  																AND DAY([Date]) = DAY(DATEADD(day, -126, GETDATE()))",
-														array(), array("Scrollable"=>"buffered"));
+			$sql = "SELECT [QuelleMachine],[NumEnr],[Date],[NumPal],[CodeDefaut]
+							FROM [ping2].[dbo].[TeSysK_Auto]
+	  					WHERE [QuelleMachine] LIKE '".$machine."'
+	  					AND DAY([Date]) = DAY(DATEADD(day, ".$dateOffset.", GETDATE()))";
+			$stmt = sqlsrv_query($conn, $sql);
 														
 			// execute query
-			while($row = sqlsrv_fetch_array($query)) {			
+			while($row = sqlsrv_fetch_array($stmt)) {			
 				// push info
 				$data["QuelleMachine"] = $row["QuelleMachine"];
 				$data["NumEnr"] = $row["NumEnr"];
@@ -729,17 +726,13 @@
 		}
 		else {
 			// prepare query
-			$query = sqlsrv_query($conn, "SELECT [QuelleMachine],
-																					 [NumEnr],
-																					 [Date],
-																					 [NumPal],
-																					 [CodeDefaut]
-																		FROM [ping2].[dbo].[TeSysK_Auto]
-	  																WHERE DAY([Date]) = DAY(DATEADD(day, -126, GETDATE()))",
-														array(), array("Scrollable"=>"buffered"));
+			$sql = "SELECT [QuelleMachine],[NumEnr],[Date],[NumPal],[CodeDefaut]
+							FROM [ping2].[dbo].[TeSysK_Auto]
+	  					WHERE DAY([Date]) = DAY(DATEADD(day, ".$dateOffset.", GETDATE()))";
+			$stmt = sqlsrv_query($conn, $sql);
 														
 			// execute query
-			while($row = sqlsrv_fetch_array($query)) {			
+			while($row = sqlsrv_fetch_array($stmt)) {			
 				// push info
 				$data["QuelleMachine"] = $row["QuelleMachine"];
 				$data["NumEnr"] = $row["NumEnr"];
@@ -753,6 +746,13 @@
 		}
 		
 		return $listData;
+	}
+	
+	/* Fonction permettante de calculer la date avec offset depuis aujourd'hui															*/
+	/* Entre	:	dateOffset																																									*/
+	/* Sortie	:	la date																																											*/
+	function get24hGraphDate($dateOffset){
+		return date("d-m-Y",strtotime($dateOffset." day"))
 	}
 	
 ?>
