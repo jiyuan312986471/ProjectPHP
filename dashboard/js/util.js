@@ -4,7 +4,7 @@
 function drawPourcGraph(machine, graphPourc){
 	var graph24h;
 	
-	if(machine != "All"){
+	if(machine !== "All"){
 		new Morris.Line({
 				// ID of the element in which to draw the chart.
 				element: 'pourcDefaut' + machine,
@@ -47,16 +47,16 @@ function drawPourcGraph(machine, graphPourc){
 				dataType: "text",
 				success: function(data){
 					var listData = data.split("AND");
-					var jsonData = eval("("+listData[0]+")");
+					var dataGraph24h = eval("("+listData[0]+")");
 					var date = listData[1];
 					
 					// activate 24h graph modal
-					$("#modal24h" + machine)
-						.modal()
-						.on('shown.bs.modal',function(){							
-						  // draw 24h graph in modal
-							graph24h = draw24hGraph(machine, jsonData, graph24h);
-						});
+					var $modal24h = $("#modal24h" + machine).modal();
+					$modal24h.on('shown.bs.modal',function(){
+						// draw 24h graph in modal
+						graph24h = draw24hGraph(machine, dataGraph24h, graph24h);
+						$(this).off('shown.bs.modal');
+					});
 					
 					// set date for modal title
 					$("#date24hGraph" + machine).text(date);
@@ -107,22 +107,23 @@ function drawPourcGraph(machine, graphPourc){
 				dataType: "text",
 				success: function(data){
 					var listData = data.split("AND");
-					var jsonData = eval("("+listData[0]+")");
+					var dataGraph24h = eval("("+listData[0]+")");
 					var date = listData[1];
 					
 					// activate 24h graph modal
-					$("#modal24h" + machine)
-						.modal()
-						.on('shown.bs.modal',function(){
-						  // draw 24h graph in modal
-							graph24h = draw24hGraph(machine, jsonData, graph24h);
-						});
+					var $modal24h = $("#modal24h" + machine).modal();
+					$modal24h.on('shown.bs.modal',function(){
+						// draw 24h graph in modal
+						graph24h = draw24hGraph(machine, dataGraph24h, graph24h);
+						$(this).off('shown.bs.modal');
+					});
 					
 					// set date for modal title
 					$("#date24hGraph" + machine).text(date);
 				}
 			});
 		});
+		
 	}
 };
 
@@ -158,6 +159,7 @@ function drawParetoGraph(machine, listDefaut, listPareto){
 
 function draw24hGraph(machine, dataGraph24h, graph24h){
 	if(typeof graph24h !== 'undefined'){
+		console.time("draw24hGraph");
 		var data = [
 				{ Heure: dataGraph24h.hour[0],  valeur: dataGraph24h.pourc[0]  },
 				{ Heure: dataGraph24h.hour[1],  valeur: dataGraph24h.pourc[1]  },
@@ -185,10 +187,11 @@ function draw24hGraph(machine, dataGraph24h, graph24h){
 				{ Heure: dataGraph24h.hour[23], valeur: dataGraph24h.pourc[23] }
 			];
 		graph24h.setData(data);
+		console.timeEnd("draw24hGraph");
 		return graph24h;
 	}
 	else{
-		return new Morris.Line({
+		var graph = new Morris.Line({
 			// ID of the element in which to draw the chart.
 			element: 'graph24h' + machine,
 					
@@ -233,6 +236,8 @@ function draw24hGraph(machine, dataGraph24h, graph24h){
 			parseTime: false,
 			hideHover: false
 		});
+		
+		return graph;
 	}
 }
 
