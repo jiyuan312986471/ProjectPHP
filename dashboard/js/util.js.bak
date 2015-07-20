@@ -55,7 +55,7 @@ function drawPourcGraph(machine, graphPourc){
 					$modal24h.on('shown.bs.modal',function(){
 						// draw 24h graph in modal
 						graph24h = draw24hGraph(machine, dataGraph24h, graph24h);
-						console.log(j++);
+						$(this).off('shown.bs.modal');
 					});
 					
 					// set date for modal title

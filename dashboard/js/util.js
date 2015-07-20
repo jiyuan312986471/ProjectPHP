@@ -159,7 +159,6 @@ function drawParetoGraph(machine, listDefaut, listPareto){
 
 function draw24hGraph(machine, dataGraph24h, graph24h){
 	if(typeof graph24h !== 'undefined'){
-		console.time("draw24hGraph");
 		var data = [
 				{ Heure: dataGraph24h.hour[0],  valeur: dataGraph24h.pourc[0]  },
 				{ Heure: dataGraph24h.hour[1],  valeur: dataGraph24h.pourc[1]  },
@@ -187,7 +186,6 @@ function draw24hGraph(machine, dataGraph24h, graph24h){
 				{ Heure: dataGraph24h.hour[23], valeur: dataGraph24h.pourc[23] }
 			];
 		graph24h.setData(data);
-		console.timeEnd("draw24hGraph");
 		return graph24h;
 	}
 	else{
