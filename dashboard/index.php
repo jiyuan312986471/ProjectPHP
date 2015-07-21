@@ -178,7 +178,7 @@
 							</div>
 							<div class="panel-footer">
 								<!-- Modal Exporter Trigger -->
-								<button type="button" class="btn btn-primary" id="exportAll" data-toggle="modal" data-target="#modalExport">
+								<button type="button" class="btn btn-primary" id="exportAll" data-toggle="modal" data-target="#modalExportAll">
 									<i class="fa fa-database fa-fw"></i>
 									Exporter
 								</button>
@@ -201,15 +201,17 @@
 		
 		
 		<!-- Modal Exporter -->
+		<script type="text/javascript" src="js/moment.min.js"></script>
+		<script type="text/javascript" src="js/daterangepicker.js"></script>
 		<?php $listRef = getListRef($conn); ?>
-		<div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="modalExportAll" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					
 					<!-- Modal Header -->
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">Exporter</h4>
+						<h4 class="modal-title">Exporter</h4>
 					</div>
 					
 					<!-- Modal Body -->
@@ -220,7 +222,7 @@
 								<label class="col-sm-3">
 									<div class="pull-right">Reference :</div>
 								</label>
-								<div class="col-sm-6">
+								<div class="col-sm-7">
 									<select id="selectRefAll" class="form-control">
 										<option value="empty">-- Choisissez la reference --</option>
 										<?php foreach($listRef as $ref){ ?>
@@ -234,7 +236,19 @@
 						<hr style="margin-top: 0px; margin-bottom: 2px">
 							
 						<!-- Period Selection -->
-						
+						<div class="modal-body">
+							<div class="row">
+								<label class="col-sm-3">
+									<div class="pull-right">Duree :</div>
+								</label>
+								<div class="col-sm-7">
+									<div id="dateRangeAll" class="form-control" style="cursor: pointer">
+										<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+										<span id="dateRangeValAll" class="pull-right"></span>
+									</div>
+								</div>
+							</div>
+						</div>
 							
 					<?php } else { ?>
 						<div class="modal-body">
@@ -245,12 +259,40 @@
 					<!-- Modal Footer -->
 					<?php if($listRef){ ?>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-primary">Exporter</button>
+							<button id="buttonExportAll" type="button" class="btn btn-primary">Exporter</button>
 						</div>
 					<?php } ?>
 				</div>
 			</div>
 		</div>
+		
+		<script language="javascript">
+			/**********************************
+			*				DATE RANGE PICKER
+			**********************************/
+			function callback(start, end) {
+	    	$('span#dateRangeValAll').html(start.format('MMMM D, YYYY HH:mm') + ' - ' + end.format('MMMM D, YYYY HH:mm'));
+	    }
+	    callback(moment().subtract(7, 'days'), moment());
+	    	
+	    $('#dateRangeAll').daterangepicker({
+		   	timePicker: true,
+		   	timePickerIncrement: 60,
+		   	timePicker24Hour: true,
+		   	minDate: moment().subtract(3, 'month'),
+		   	maxDate: moment(),
+		   	opens: "left"
+			}, callback);
+		</script>
+		
+		<script language="javascript">
+			/**********************************
+			*					 EXPORT DATA
+			**********************************/
+			$("button#buttonExportAll").on('click',function(){
+				console.log($("span#dateRangeValAll").text());
+			});
+		</script>
 	
 	
 		<!-- Modal 24h Graph -->

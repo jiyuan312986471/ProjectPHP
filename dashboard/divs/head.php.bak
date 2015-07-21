@@ -5,7 +5,8 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<title>Schneider Application</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
 	<link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
 	<link href="css/plugins/timeline.css" rel="stylesheet">
 	<link href="css/sb-admin-2.css" rel="stylesheet">

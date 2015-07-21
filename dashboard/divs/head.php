@@ -14,4 +14,5 @@
 	<link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="css/bootstrap-slider.css" rel="stylesheet">
 	<link href="css/typeahead.css" rel="stylesheet">
+	<link href="css/daterangepicker.css" rel="stylesheet">
 </head>
