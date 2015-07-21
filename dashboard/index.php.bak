@@ -212,7 +212,9 @@
 						<?php if($listRef){ ?>
 										<h1>Connexion Succes</h1>
 						<?php } else { ?>
-										<h1>Connexion echec a la base de donnee.</h1>
+										<div class="text-center">
+											<h1>Connexion echec a la base de donnee.</h1>
+										</div>
 						<?php } ?>
 					</div>
 					<div class="modal-footer">

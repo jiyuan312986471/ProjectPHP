@@ -210,9 +210,9 @@
 					</div>
 					<div class="modal-body">
 						<?php if($listRef){ ?>
-										<h1>Connexion Succes</h1>
+										<h1 class="text-center">Connexion Succes</h1>
 						<?php } else { ?>
-										<h1>Connexion echec a la base de donnee.</h1>
+										<h1 class="text-center">Connexion echec a la base de donnee.</h1>
 						<?php } ?>
 					</div>
 					<div class="modal-footer">
