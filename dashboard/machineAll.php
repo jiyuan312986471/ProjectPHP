@@ -39,7 +39,12 @@
   // machine -> graphPareto
   $listMachineGraphPareto = array();
   
-  $refreshTime = $_SESSION["refreshTime"];
+  if(isset($_SESSION["refreshTime"])){
+		$refreshTime = $_SESSION["refreshTime"];
+	}
+	else{
+		$refreshTime = 8;
+	}
   
 ?>
 

@@ -13,7 +13,12 @@
   // get machine
   $machineSelected = $_GET['machine'];
   
-  $refreshTime = $_SESSION["refreshTime"];
+  if(isset($_SESSION["refreshTime"])){
+		$refreshTime = $_SESSION["refreshTime"];
+	}
+	else{
+		$refreshTime = 8;
+	}
 	
 ?>
 

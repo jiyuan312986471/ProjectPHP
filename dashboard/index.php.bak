@@ -210,16 +210,16 @@
 					</div>
 					<div class="modal-body">
 						<?php if($listRef){ ?>
-										<h1>Connexion Succes</h1>
+										<h1 class="text-center">Connexion Succes</h1>
 						<?php } else { ?>
-										<div class="text-center">
-											<h1>Connexion echec a la base de donnee.</h1>
-										</div>
+										<h1 class="text-center">Connexion echec a la base de donnee.</h1>
 						<?php } ?>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary">Exporter</button>
-					</div>
+					<?php if($listRef){ ?>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary">Exporter</button>
+						</div>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
