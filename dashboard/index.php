@@ -199,15 +199,20 @@
 			setInterval(refreshIndex(), time);
 		</script>
 		
+		
 		<!-- Modal Exporter -->
 		<?php $listRef = getListRef($conn); ?>
 		<div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
+					
+					<!-- Modal Header -->
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<h4 class="modal-title" id="myModalLabel">Exporter</h4>
 					</div>
+					
+					<!-- Modal Body -->
 					<div class="modal-body">
 						<?php if($listRef){ ?>
 							<h1 class="text-center">Connexion Succes</h1>
@@ -215,6 +220,8 @@
 							<h1 class="text-center">Connexion echec a la base de donnee.</h1>
 						<?php } ?>
 					</div>
+					
+					<!-- Modal Footer -->
 					<?php if($listRef){ ?>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-primary">Exporter</button>
@@ -223,6 +230,7 @@
 				</div>
 			</div>
 		</div>
+	
 	
 		<!-- Modal 24h Graph -->
 		<div class="modal fade" id="modal24hAll" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
