@@ -245,6 +245,7 @@
 									<div id="dateRangeAll" class="form-control" style="cursor: pointer">
 										<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
 										<span id="dateRangeValAll" class="pull-right"></span>
+										<b class="caret"></b>
 									</div>
 								</div>
 							</div>
@@ -271,7 +272,7 @@
 			*				DATE RANGE PICKER
 			**********************************/
 			function callback(start, end) {
-	    	$('span#dateRangeValAll').html(start.format('MMMM D, YYYY HH:mm') + ' - ' + end.format('MMMM D, YYYY HH:mm'));
+	    	$('span#dateRangeValAll').html(start.format('D/M/YYYY HH:mm') + ' - ' + end.format('D/M/YYYY HH:mm'));
 	    }
 	    callback(moment().subtract(7, 'days'), moment());
 	    	
@@ -290,7 +291,38 @@
 			*					 EXPORT DATA
 			**********************************/
 			$("button#buttonExportAll").on('click',function(){
-				console.log($("span#dateRangeValAll").text());
+				// reference check
+				var ref = $("select#selectRefAll").val();
+				if(ref === "empty"){
+					alert("Veuillez choisir la reference !");
+				}
+				else{
+					// time treatment
+					var period = $("span#dateRangeValAll").text();
+					var start = period.split("-")[0].trim();
+					var end = period.split("-")[1].trim();
+					
+					start = moment(start, 'D/M/YYYY HH:mm');
+					end = moment(end, 'D/M/YYYY HH:mm');
+					
+					start = start.format('YYYY-MM-DD HH:mm:ss.SSS');
+					end = end.format('YYYY-MM-DD HH:mm:ss.SSS');
+					
+					// get data by ajax
+					$.ajax({
+						url: "getDataToExport.php",
+						type: "POST",
+						data: {
+							ref: ref,
+							startTime: start,
+							endTime: end
+						},
+						dataType: "text",
+						success: function(data){
+							console.log(data);
+						}
+					});
+				}
 			});
 		</script>
 	

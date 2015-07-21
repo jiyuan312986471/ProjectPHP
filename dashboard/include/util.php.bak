@@ -760,18 +760,177 @@
 	/* Entre	:	connexion BDD																																								*/
 	/* Sortie	:	la list des references si succes, false si echec																						*/
 	function getListRef($conn) {
-		$listRef = array();
+		if($conn){
+			$listRef = array();
+			$sql = "SELECT DISTINCT [Ref]
+	  					FROM [ping2].[dbo].[TeSysK_Auto]
+	  					WHERE [Ref] != 'NULL'";
+	  	$stmt = sqlsrv_query($conn, $sql);
+	  	while($row = sqlsrv_fetch_array($stmt)) {
+	  		array_push($listRef, $row["Ref"]);
+	  	}
+	  	return $listRef;
+  	}
+  	else{
+  		return false;
+  	}
+	}
+	
+	/* Fonction permettante de recuperer toutes les donnees selon ref & date																*/
+	/* Entre	:	connexion BDD, ref, date debut, date fin																										*/
+	/* Sortie	:	la list des donnee																																					*/
+	function getDataByRefAndTime($conn, $ref, $startTime, $endTime) {
+		$listData = array();
 		
-		$sql = "SELECT DISTINCT [Ref]
-  					FROM [ping2].[dbo].[TeSysK_Auto]
-  					WHERE [Ref] != 'NULL'";
+//		$sql = "SELECT * FROM [ping2].[dbo].[TeSysK_Auto]
+//  					WHERE [Ref] = '".$ref."'
+//  					AND DATEDIFF([second], '".$startTime."', [Date]) > 0
+//  					AND DATEDIFF([second], '".$endTime."', [Date]) < 0";
   					
+  	$sql = "SELECT [QuelleMachine]
+      						,[NumEnr]
+      						,[Date]
+     							,[NumPal]
+      						,[Ref]
+      						,[CodeDefaut]
+      						,[EcrasementP1]
+      						,[EcrasementP2]
+      						,[EcrasementP3]
+      						,[EcrasementP4]
+      						,[EcrasementAux1]
+      						,[EcrasementAux2]
+      						,[PosRepos]
+      						,[PosTravail]
+      						,[Course]
+      						,[Consommation]
+      						,[TpsFermetureDC]
+      						,[MoyenneF]
+      						,[MoyenneO]
+    						  ,[MinP1]
+     					 	  ,[MaxP1]
+   						    ,[MinP2]
+   						    ,[MaxP2]
+  						    ,[MinP3]
+   						    ,[MaxP3]
+   						    ,[MinP4]
+  				        ,[MaxP4]
+      				    ,[MinPosRepos]
+     				      ,[MaxPosRepos]
+     				      ,[MinPosTravail]
+     				      ,[MaxPosTravail]
+     				      ,[MinMoyenneF]
+     				      ,[MaxMoyenneF]
+    				      ,[MinMoyenneO]
+   				        ,[MaxMoyenneO]
+      				    ,[CoeffA]
+    				      ,[CoeffB]
+     				      ,[CoeffC]
+     				      ,[OffsetRepos]
+    				      ,[OffsetTravail]
+     				      ,[CorrectionRepos]
+     				      ,[CorrectionTravail]
+  					FROM [ping2].[dbo].[TeSysK_Auto]
+  					WHERE [Ref] = '".$ref."'
+  					AND DATEDIFF([second], '2015-03-01 00:00:00.000', [Date]) > 0
+  					AND DATEDIFF([second], '2015-03-31 00:00:00.000', [Date]) < 0";
   	$stmt = sqlsrv_query($conn, $sql);
+  	
   	while($row = sqlsrv_fetch_array($stmt)) {
-  		array_push($listRef, $row["Ref"]);
+  		// get info
+  		$QuelleMachine = ["QuelleMachine" => $row["QuelleMachine"]];
+  		$NumEnr = ["NumEnr" => $row["NumEnr"]];
+  		$Date = $row["Date"];
+  		$Date = ["Date" => $Date["date"]];
+	  	$NumPal = ["NumPal" => $row["NumPal"]];
+  		$Ref = ["Ref" => $row["Ref"]];
+  		$CodeDefaut = ["CodeDefaut" => $row["CodeDefaut"]];
+	  	$EcrasementP1 = ["EcrasementP1" => $row["EcrasementP1"]];
+ 		 	$EcrasementP2 = ["EcrasementP2" => $row["EcrasementP2"]];
+ 		 	$EcrasementP3 = ["EcrasementP3" => $row["EcrasementP3"]];
+  		$EcrasementP4 = ["EcrasementP4" => $row["EcrasementP4"]];
+  		$EcrasementAux1 = ["EcrasementAux1" => $row["EcrasementAux1"]];
+  		$EcrasementAux2 = ["EcrasementAux2" => $row["EcrasementAux2"]];
+  		$PosRepos = ["PosRepos" => $row["PosRepos"]];
+  		$PosTravail = ["PosTravail" => $row["PosTravail"]];
+  		$Course = ["Course" => $row["Course"]];
+  		$Consommation = ["Consommation" => $row["Consommation"]];
+  		$TpsFermetureDC = ["TpsFermetureDC" => $row["TpsFermetureDC"]];
+  		$MoyenneF = ["MoyenneF" => $row["MoyenneF"]];
+  		$MoyenneO = ["MoyenneO" => $row["MoyenneO"]];
+  		$MinP1 = ["MinP1" => $row["MinP1"]];
+	  	$MaxP1 = ["MaxP1" => $row["MaxP1"]];
+	  	$MinP2 = ["MinP2" => $row["MinP2"]];
+	  	$MaxP2 = ["MaxP2" => $row["MaxP2"]];
+	  	$MinP3 = ["MinP3" => $row["MinP3"]];
+	  	$MaxP3 = ["MaxP3" => $row["MaxP3"]];
+	  	$MinP4 = ["MinP4" => $row["MinP4"]];
+	  	$MaxP4 = ["MaxP4" => $row["MaxP4"]];
+	  	$MinPosRepos = ["MinPosRepos" => $row["MinPosRepos"]];
+	  	$MaxPosRepos = ["MaxPosRepos" => $row["MaxPosRepos"]];
+	  	$MinPosTravail = ["MinPosTravail" => $row["MinPosTravail"]];
+	  	$MaxPosTravail = ["MaxPosTravail" => $row["MaxPosTravail"]];
+	  	$MinMoyenneF = ["MinMoyenneF" => $row["MinMoyenneF"]];
+	  	$MaxMoyenneF = ["MaxMoyenneF" => $row["MaxMoyenneF"]];
+	  	$MinMoyenneO = ["MinMoyenneO" => $row["MinMoyenneO"]];
+	  	$MaxMoyenneO = ["MaxMoyenneO" => $row["MaxMoyenneO"]];
+	  	$CoeffA = ["CoeffA" => $row["CoeffA"]];
+	  	$CoeffB = ["CoeffB" => $row["CoeffB"]];
+	  	$CoeffC = ["CoeffC" => $row["CoeffC"]];
+	  	$OffsetRepos = ["OffsetRepos" => $row["OffsetRepos"]];
+	  	$OffsetTravail = ["OffsetTravail" => $row["OffsetTravail"]];
+	  	$CorrectionRepos = ["CorrectionRepos" => $row["CorrectionRepos"]];
+	  	$CorrectionTravail = ["CorrectionTravail" => $row["CorrectionTravail"]];
+  		
+  		// create data
+  		$data = array();
+  		array_push($data, $QuelleMachine);
+  		array_push($data, $NumEnr);
+  		array_push($data, $Date);
+  		array_push($data, $NumPal);
+  		array_push($data, $Ref);
+  		array_push($data, $CodeDefaut);
+  		array_push($data, $EcrasementP1);
+  		array_push($data, $EcrasementP2);
+  		array_push($data, $EcrasementP3);
+  		array_push($data, $EcrasementP4);
+  		array_push($data, $EcrasementAux1);
+  		array_push($data, $EcrasementAux2);
+  		array_push($data, $PosRepos);
+  		array_push($data, $PosTravail);
+  		array_push($data, $Course);
+  		array_push($data, $Consommation);
+  		array_push($data, $TpsFermetureDC);
+  		array_push($data, $MoyenneF);
+  		array_push($data, $MoyenneO);
+  		array_push($data, $MinP1);
+  		array_push($data, $MaxP1);
+  		array_push($data, $MinP2);
+  		array_push($data, $MaxP2);
+  		array_push($data, $MinP3);
+  		array_push($data, $MaxP3);
+  		array_push($data, $MinP4);
+  		array_push($data, $MaxP4);
+  		array_push($data, $MinPosRepos);
+  		array_push($data, $MaxPosRepos);
+  		array_push($data, $MinPosTravail);
+  		array_push($data, $MaxPosTravail);
+  		array_push($data, $MinMoyenneF);
+  		array_push($data, $MaxMoyenneF);
+  		array_push($data, $MinMoyenneO);
+  		array_push($data, $MaxMoyenneO);
+  		array_push($data, $CoeffA);
+  		array_push($data, $CoeffB);
+  		array_push($data, $CoeffC);
+  		array_push($data, $OffsetRepos);
+  		array_push($data, $OffsetTravail);
+  		array_push($data, $CorrectionRepos);
+  		array_push($data, $CorrectionTravail);
+  		
+  		// push data into list
+  		array_push($listData, $data);
   	}
   	
-  	return $listRef;
+  	return $listData;
 	}
 	
 ?>
