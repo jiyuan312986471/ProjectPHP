@@ -756,4 +756,24 @@
 		return date("d-m-Y",strtotime($dateOffset." day"));
 	}
 	
+	/* Fonction permettante de recuperer toutes les references dans la BDD																	*/
+	/* Entre	:	connexion BDD																																								*/
+	/* Sortie	:	la list des references si succes, false si echec																						*/
+	function getListRef($conn) {
+		if($conn){
+			$listRef = array();
+			$sql = "SELECT DISTINCT [Ref]
+	  					FROM [ping2].[dbo].[TeSysK_Auto]
+	  					WHERE [Ref] != 'NULL'";
+	  	$stmt = sqlsrv_query($conn, $sql);
+	  	while($row = sqlsrv_fetch_array($stmt)) {
+	  		array_push($listRef, $row["Ref"]);
+	  	}
+	  	return $listRef;
+  	}
+  	else{
+  		return false;
+  	}
+	}
+	
 ?>

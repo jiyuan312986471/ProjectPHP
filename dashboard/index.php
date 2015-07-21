@@ -40,7 +40,12 @@
 		$nombre = round($sumdefaut/$sum,2);
 	}
 	
-	$refreshTime = $_SESSION["refreshTime"];
+	if(isset($_SESSION["refreshTime"])){
+		$refreshTime = $_SESSION["refreshTime"];
+	}
+	else{
+		$refreshTime = 8;
+	}
 	
 ?>
 
@@ -195,6 +200,7 @@
 		</script>
 		
 		<!-- Modal Exporter -->
+		<?php $listRef = getListRef($conn); ?>
 		<div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -203,7 +209,11 @@
 						<h4 class="modal-title" id="myModalLabel">Exporter</h4>
 					</div>
 					<div class="modal-body">
-						...
+						<?php if($listRef){ ?>
+										<h1>Connexion Succes</h1>
+						<?php } else { ?>
+										<h1>Connexion echec a la base de donnee.</h1>
+						<?php } ?>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary">Exporter</button>
