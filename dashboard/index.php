@@ -213,13 +213,34 @@
 					</div>
 					
 					<!-- Modal Body -->
-					<div class="modal-body">
-						<?php if($listRef){ ?>
-							<h1 class="text-center">Connexion Succes</h1>
-						<?php } else { ?>
+					<?php if($listRef){ ?>
+						<!-- Reference Selection -->
+						<div class="modal-body">
+							<div class="row">
+								<label class="col-sm-3">
+									<div class="pull-right">Reference :</div>
+								</label>
+								<div class="col-sm-6">
+									<select id="selectRefAll" class="form-control">
+										<option value="empty">-- Choisissez la reference --</option>
+										<?php foreach($listRef as $ref){ ?>
+											<option value="<?php echo $ref; ?>"><?php echo $ref; ?></option>
+										<?php } ?>
+									</select>
+								</div>
+							</div>
+						</div>
+							
+						<hr style="margin-top: 0px; margin-bottom: 2px">
+							
+						<!-- Period Selection -->
+						
+							
+					<?php } else { ?>
+						<div class="modal-body">
 							<h1 class="text-center">Connexion echec a la base de donnee.</h1>
-						<?php } ?>
-					</div>
+						</div>
+					<?php } ?>
 					
 					<!-- Modal Footer -->
 					<?php if($listRef){ ?>
