@@ -9,7 +9,12 @@
 	$startTime = $_POST["startTime"];
 	$endTime 	 = $_POST["endTime"];
 	
+	// get all data from DB
 	$listData = getDataByRefAndTime($conn, $ref, $startTime, $endTime);
+	
+	/**************************
+	*				EXCEL PART
+	**************************/
 	
 	echo json_encode($listData);
 
