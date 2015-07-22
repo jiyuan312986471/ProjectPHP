@@ -201,8 +201,6 @@
 		
 		
 		<!-- Modal Exporter -->
-		<script type="text/javascript" src="js/moment.min.js"></script>
-		<script type="text/javascript" src="js/daterangepicker.js"></script>
 		<?php $listRef = getListRef($conn); ?>
 		<div class="modal fade" id="modalExportAll" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">

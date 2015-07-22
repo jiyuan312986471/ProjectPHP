@@ -11,3 +11,7 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="js/sb-admin-2.js"></script>
+
+<!-- DateRangePicker JavaScript -->
+<script type="text/javascript" src="js/moment.min.js"></script>
+<script type="text/javascript" src="js/daterangepicker.js"></script>
