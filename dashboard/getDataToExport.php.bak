@@ -31,17 +31,19 @@
 		'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
 		'AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP'
 	);
-	$tableHeader = array_keys($listData[0]);
-	for($i = 0; $i < count($tableHeader); $i++) {
-		$excel->getActiveSheet()->setCellValue("$colomn[$i]1","$tableHeader[$i]");
+	
+	$data = $listData[0];
+	for($i = 0; $i < count(array_keys($data)); $i++) {
+		$key = key($data[$i]);
+		$excel->getActiveSheet()->setCellValue("$colomn[$i]1","$key");
 	}
 	
 	// table content filling
 	for ($i = 2; $i <= count($listData) + 1; $i++) {
 		$j = 0;
-		foreach ($listData[$i-2] as $key => $value) {
-			$key = json_encode($key);
-			$value = json_encode($value);
+		foreach ($listData[$i-2] as $data) {
+			$key = key($data);
+			$value = $data[$key];
 			$excel->getActiveSheet()->setCellValue("$colomn[$j]$i","$value");
 			$j++;
 		}
@@ -52,19 +54,8 @@
 	$url = dirname('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 	$filePath = $url.'/excel/'.$fileName;
 	$write = new PHPExcel_Writer_Excel5($excel);
-	$write->save($filePath);
-	header("Pragma: public");
-	header("Expires: 0");
-	header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
-	header("Content-Type:application/force-download");
-	//header("Content-Type:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-	header("Content-Type:application/vnd.ms-excel");
-	header("Content-Type:application/octet-stream");
-	header("Content-Type:application/download");
-	header("Content-Disposition:attachment;filename=\"".$fileName."\"");
-	header("Content-Transfer-Encoding:binary");	
+	$write->save("excel/test.xls");
 	
-	
-	echo $filePath;
+	echo $fileName;
 
 ?>

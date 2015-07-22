@@ -318,10 +318,10 @@
 							endTime: end
 						},
 						dataType: "text",
-						success: function(filePath){
-							window.location.href = 'downloadExcel.php?path=' + filePath;
+						success: function(fileName){
+							//window.location.href = 'downloadExcel.php?fileName=' + fileName;
 							
-							console.log(filePath);
+							console.log(fileName);
 						}
 					});
 				}

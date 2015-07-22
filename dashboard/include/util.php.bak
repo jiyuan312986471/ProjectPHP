@@ -837,10 +837,10 @@
   	
   	while($row = sqlsrv_fetch_array($stmt)) {
   		// get info
-  		$QuelleMachine = ["QuelleMachine" => $row["QuelleMachine"]];
+  		$QuelleMachine = ["QuelleMachine" : $row["QuelleMachine"]];
   		$NumEnr = ["NumEnr" => $row["NumEnr"]];
   		$Date = $row["Date"];
-  		$Date = ["Date" => $Date["date"]];
+  		$Date = ["Date" => $Date->format('Y-m-d H:i:s.B')];
 	  	$NumPal = ["NumPal" => $row["NumPal"]];
   		$Ref = ["Ref" => $row["Ref"]];
   		$CodeDefaut = ["CodeDefaut" => $row["CodeDefaut"]];
