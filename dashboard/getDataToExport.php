@@ -27,7 +27,7 @@
 	$excel = new PHPExcel();
 	
 	// table head preparation
-	$colomn = array(
+	$colomns = array(
 		'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
 		'AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP'
 	);
@@ -35,7 +35,7 @@
 	$data = $listData[0];
 	for($i = 0; $i < count(array_keys($data)); $i++) {
 		$key = key($data[$i]);
-		$excel->getActiveSheet()->setCellValue("$colomn[$i]1","$key");
+		$excel->getActiveSheet()->setCellValue("$colomns[$i]1","$key");
 	}
 	
 	// table content filling
@@ -44,8 +44,17 @@
 		foreach ($listData[$i-2] as $data) {
 			$key = key($data);
 			$value = $data[$key];
-			$excel->getActiveSheet()->setCellValue("$colomn[$j]$i","$value");
+			$excel->getActiveSheet()->setCellValue("$colomns[$j]$i","$value");
 			$j++;
+		}
+	}
+	
+	// style setting
+	foreach($colomns as $col){
+		$excel->getActiveSheet()->getColumnDimension($col)->setAutoSize(true);
+		for($row = 1; $row <= count($listData) + 1; $row++){
+			$excel->getActiveSheet()->getStyle($col.$row)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+			$excel->getActiveSheet()->getStyle($col.$row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		}
 	}
 	
