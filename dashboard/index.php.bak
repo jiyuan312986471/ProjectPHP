@@ -308,9 +308,6 @@
 					start = start.format('YYYY-MM-DD HH:mm:ss.SSS');
 					end = end.format('YYYY-MM-DD HH:mm:ss.SSS');
 					
-					console.log(start);
-					console.log(end);
-					
 					// get data by ajax
 					$.ajax({
 						url: "getDataToExport.php",
@@ -321,8 +318,10 @@
 							endTime: end
 						},
 						dataType: "text",
-						success: function(data){
-							console.log(data);
+						success: function(filePath){
+							window.location.href = 'downloadExcel.php?path=' + filePath;
+							
+							console.log(filePath);
 						}
 					});
 				}
