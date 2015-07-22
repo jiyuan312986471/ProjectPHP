@@ -246,6 +246,7 @@
 		</script>
 		
 		<!-- Modals Exporter -->
+		<?php $listRef = getListRef($conn); ?>
 		<?php foreach($listMachine as $machine) { ?>
 			<div class="modal fade" id="modalExport<?php echo $machine; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
