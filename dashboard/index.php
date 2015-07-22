@@ -320,7 +320,6 @@
 						dataType: "text",
 						success: function(fileName){
 							window.location.href = 'downloadExcel.php?fileName=' + fileName;
-							
 							console.log(fileName);
 						}
 					});
