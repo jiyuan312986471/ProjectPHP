@@ -369,6 +369,44 @@ function changeToGraphPareto(machine, graphPareto){
 	});
 };
 
+// Pourcentage Graph Changer Callback
+function callbackChangeToGraphPareto(xmlHttp, machine, graphPareto) {
+	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
+		// get graph data
+		graphPareto = eval("("+graphPareto+")");
+		
+		// get listDefaut
+		var listDefaut = [];
+    for (var defaut in graphPareto){
+      listDefaut.push(defaut);
+    }
+		
+		// get listPareto
+		var listPareto = [];
+    for (var defaut in graphPareto){
+      listPareto.push(graphPareto[defaut]);
+    }
+		
+		// clear corresponding graph on the page
+		var element = document.getElementById("pourcDefaut"+machine);
+		if(element){
+			element.innerHTML = "";
+		}
+		else{
+			element = document.getElementById("paretoDefaut"+machine);
+			if(element){
+				element.innerHTML = "";
+			}
+		}
+		
+		// change element id in order to draw graph
+		element.setAttribute("id","paretoDefaut"+machine);
+		
+		// draw new graph
+		drawParetoGraph(machine, listDefaut, listPareto);
+	}
+};
+
 
 /********************************
 *		AJAX MACHINE ALL REFRESHER
