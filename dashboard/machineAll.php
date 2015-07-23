@@ -251,24 +251,125 @@
 			<div class="modal fade" id="modalExport<?php echo $machine; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
+						
 						<!-- Modal Header -->
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel">Exporter <?php echo $machine; ?></h4>
+							<h4 class="modal-title">Exporter <?php echo $machine; ?></h4>
 						</div>
 						
-						<!-- Modal Body-->
-						<div class="modal-body">
-							...
-						</div>
+						<!-- Modal Body -->
+						<?php if($listRef){ ?>
+							<!-- Reference Selection -->
+							<div class="modal-body">
+								<div class="row">
+									<label class="col-sm-3">
+										<div class="pull-right">Reference :</div>
+									</label>
+									<div class="col-sm-7">
+										<select id="selectRef<?php echo $machine; ?>" class="form-control">
+											<option value="empty">-- Choisissez la reference --</option>
+											<?php foreach($listRef as $ref){ ?>
+												<option value="<?php echo $ref; ?>"><?php echo $ref; ?></option>
+											<?php } ?>
+										</select>
+									</div>
+								</div>
+							</div>
+								
+							<hr style="margin-top: 0px; margin-bottom: 2px">
+								
+							<!-- Period Selection -->
+							<div class="modal-body">
+								<div class="row">
+									<label class="col-sm-3">
+										<div class="pull-right">Duree :</div>
+									</label>
+									<div class="col-sm-7">
+										<div id="dateRange<?php echo $machine; ?>" class="form-control" style="cursor: pointer">
+											<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+											<span id="dateRangeVal<?php echo $machine; ?>" class="pull-right"></span>
+											<b class="caret"></b>
+										</div>
+									</div>
+								</div>
+							</div>
+								
+						<?php } else { ?>
+							<div class="modal-body">
+								<h1 class="text-center">Connexion echec a la base de donnee.</h1>
+							</div>
+						<?php } ?>
 						
 						<!-- Modal Footer -->
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary">Exporter</button>
-						</div>
+						<?php if($listRef){ ?>
+							<div class="modal-footer">
+								<button id="buttonExport<?php echo $machine; ?>" type="button" class="btn btn-primary">Exporter</button>
+							</div>
+						<?php } ?>
 					</div>
 				</div>
 			</div>
+			
+			<script language="javascript">
+				/**********************************
+				*				DATE RANGE PICKER
+				**********************************/
+				function callback(start, end) {
+		    	$("span#dateRangeVal" + <?php echo json_encode($machine); ?>).html(start.format('D/M/YYYY HH:mm') + ' - ' + end.format('D/M/YYYY HH:mm'));
+		    }
+		    callback(moment().subtract(7, 'days'), moment());
+		    	
+		    $("#dateRange" + <?php echo json_encode($machine); ?>).daterangepicker({
+			   	timePicker: true,
+			   	timePickerIncrement: 60,
+			   	timePicker24Hour: true,
+			   	minDate: moment().subtract(3, 'month'),
+			   	maxDate: moment(),
+			   	opens: "left"
+				}, callback);
+			</script>
+			
+			<script language="javascript">
+				/**********************************
+				*					 EXPORT DATA
+				**********************************/
+				$("button#buttonExport" + <?php echo json_encode($machine); ?>).on('click',function(){
+					// reference check
+					var ref = $("select#selectRef" + <?php echo json_encode($machine); ?>).val();
+					if(ref === "empty"){
+						alert("Veuillez choisir la reference !");
+					}
+					else{
+						// time treatment
+						var period = $("span#dateRangeVal" + <?php echo json_encode($machine); ?>).text();
+						var start = period.split("-")[0].trim();
+						var end = period.split("-")[1].trim();
+						
+						start = moment(start, 'D/M/YYYY HH:mm');
+						end = moment(end, 'D/M/YYYY HH:mm');
+						
+						start = start.format('YYYY-MM-DD HH:mm:ss.SSS');
+						end = end.format('YYYY-MM-DD HH:mm:ss.SSS');
+						
+						// get data by ajax
+						$.ajax({
+							url: "getDataToExport.php",
+							type: "POST",
+							data: {
+								ref: ref,
+								startTime: start,
+								endTime: end
+							},
+							dataType: "text",
+							success: function(fileName){
+								window.location.href = 'downloadExcel.php?fileName=' + fileName;
+								console.log(fileName);
+							}
+						});
+					}
+				});
+			</script>
 		<?php } ?>
 		
 		<!-- Modals 24h Graph -->
