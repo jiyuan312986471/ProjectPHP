@@ -439,6 +439,28 @@ function callbackRefreshMachineAllGraph(xmlHttp) {
 *		AJAX INDEX REFRESHER
 ******************************/
 function refreshIndex(graphPourc, time){
+	$.ajax({
+		url: "ajaxIndexRefresher.php",
+		type: "GET",
+		dataType: "text",
+		success: function(cbdata){
+			// get graph
+			var jsonGraph = cbdata;
+			var graphData = eval("("+jsonGraph+")");
+			
+			// draw graph
+			graphPourc = drawPourcGraph("All", graphData, graphPourc);
+			
+			// wait and refresh
+			setTimeout(
+				function(){
+					refreshIndex(graphPourc, time);
+				},
+				time
+			);
+		}
+	});
+	
 //	var xmlHttp = createXMLHttpRequest();
 //	var url = "ajaxIndexRefresher.php";
 //	xmlHttp.onreadystatechange = function(){
@@ -450,45 +472,7 @@ function refreshIndex(graphPourc, time){
 //	if(typeof graphPourc !== 'undefined'){
 //		return graphPourc;
 //	}
-	
-	var url = "ajaxIndexRefresher.php";
-	$.ajax({
-		url: url,
-		type: "GET",
-		dataType: "text",
-		success: function(cbdata){
-			// get graph
-			var jsonGraph = cbdata;
-			var graphData = eval("("+jsonGraph+")");
-			
-			// draw graph
-			graphPourc = drawPourcGraph("All", graphData, graphPourc);
-			
-			setTimeout(
-				function(){
-					refreshIndex(graphPourc, time);
-				},
-				time
-			);
-		}
-	});
 }
-
-//// Index Refresher Callback
-//function callbackRefreshIndex(xmlHttp, graphPourc){
-//	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
-//		// get graph
-//		var jsonGraph = xmlHttp.responseText;
-//		var graphData = eval("("+jsonGraph+")");
-//		
-//		// draw graph
-//		console.log("before draw: " + graphPourc);
-//		graphPourc = drawPourcGraph("All", graphData, graphPourc);
-//		
-//		console.log("after draw: " + graphPourc);
-//		return graphPourc;
-//	}
-//}
 
 
 /******************************

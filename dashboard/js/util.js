@@ -451,6 +451,7 @@ function refreshIndex(graphPourc, time){
 			// draw graph
 			graphPourc = drawPourcGraph("All", graphData, graphPourc);
 			
+			// wait and refresh
 			setTimeout(
 				function(){
 					refreshIndex(graphPourc, time);
@@ -459,35 +460,7 @@ function refreshIndex(graphPourc, time){
 			);
 		}
 	});
-	
-//	var xmlHttp = createXMLHttpRequest();
-//	var url = "ajaxIndexRefresher.php";
-//	xmlHttp.onreadystatechange = function(){
-//		graphPourc = callbackRefreshIndex(xmlHttp, graphPourc);
-//	};
-//	xmlHttp.open("GET",url,true);
-//	xmlHttp.send(null);
-//	
-//	if(typeof graphPourc !== 'undefined'){
-//		return graphPourc;
-//	}
 }
-
-//// Index Refresher Callback
-//function callbackRefreshIndex(xmlHttp, graphPourc){
-//	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
-//		// get graph
-//		var jsonGraph = xmlHttp.responseText;
-//		var graphData = eval("("+jsonGraph+")");
-//		
-//		// draw graph
-//		console.log("before draw: " + graphPourc);
-//		graphPourc = drawPourcGraph("All", graphData, graphPourc);
-//		
-//		console.log("after draw: " + graphPourc);
-//		return graphPourc;
-//	}
-//}
 
 
 /******************************
