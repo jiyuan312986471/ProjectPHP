@@ -199,6 +199,10 @@
 				var time = <?php echo $refreshTime; ?> * 1000;
 				var graphPourc;
 				graphPourc = refreshIndex(graphPourc, time);
+//				setInterval(function(){
+//						graphPourc = refreshIndex(graphPourc);
+//						console.log("in interval: " + graphPourc);
+//					}, time);
 			})(jQuery);
 		</script>
 		
