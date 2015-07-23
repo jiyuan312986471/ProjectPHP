@@ -452,12 +452,9 @@ function refreshIndex(graphPourc, time){
 			graphPourc = drawPourcGraph("All", graphData, graphPourc);
 			
 			// wait and refresh
-			setTimeout(
-				function(){
+			setTimeout(function(){
 					refreshIndex(graphPourc, time);
-				},
-				time
-			);
+				},time);
 		}
 	});
 }

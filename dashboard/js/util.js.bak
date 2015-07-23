@@ -460,18 +460,6 @@ function refreshIndex(graphPourc, time){
 			);
 		}
 	});
-	
-//	var xmlHttp = createXMLHttpRequest();
-//	var url = "ajaxIndexRefresher.php";
-//	xmlHttp.onreadystatechange = function(){
-//		graphPourc = callbackRefreshIndex(xmlHttp, graphPourc);
-//	};
-//	xmlHttp.open("GET",url,true);
-//	xmlHttp.send(null);
-//	
-//	if(typeof graphPourc !== 'undefined'){
-//		return graphPourc;
-//	}
 }
 
 
