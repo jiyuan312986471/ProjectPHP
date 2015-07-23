@@ -66,7 +66,6 @@
 	  <script type="text/javascript">
 	  	// refresh every 8s
 	  	var time = <?php echo $refreshTime; ?> * 1000;
-	  	refreshMachine(<?php echo json_encode($machineSelected); ?>);
 		  setInterval(function(){
 		  	refreshMachine(<?php echo json_encode($machineSelected); ?>);
 		  }, time);

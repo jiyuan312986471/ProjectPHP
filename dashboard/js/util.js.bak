@@ -434,9 +434,6 @@ function refreshMachineAllGraph(jsonOptionMachine){
 					start(machine, option, null, listDefaut, listPareto);
 				}
 			}
-			
-			// json encoding
-			jsonOptionMachine = JSON.stringify(optionMachine);
 		}
 	});
 };
@@ -471,12 +468,33 @@ function refreshIndex(graphPourc, time){
 *		AJAX MACHINE REFRESHER
 ******************************/
 function refreshMachine(machine){
-	var xmlHttp = createXMLHttpRequest();
-	var url = "ajaxMachineRefresher.php?machine=" + machine;
-	xmlHttp.onreadystatechange = function(){ callbackRefreshMachine(xmlHttp, machine) };
-	xmlHttp.open("GET",url,true);
-	xmlHttp.send(null);
-}
+	$.ajax({
+		url: "ajaxMachineRefresher.php",
+		type: "GET",
+		data: {"machine": machine},
+		dataType: "text",
+		success: function(cbdata){
+			// get infos
+			var jsonListInfo = cbdata.split("AND");
+			var listInfo = {};
+			for(var index in jsonListInfo){
+				listInfo[index] = eval("("+jsonListInfo[index]+")");
+			}
+			
+			// get graphPourc
+			var graphPourc = listInfo[0];
+			
+			// get listDefaut
+			var listDefaut = listInfo[1];
+			
+			// get listPareto
+			var listPareto = listInfo[2];
+			
+			// draw graphs
+			start(machine, "both", graphPourc, listDefaut, listPareto);
+		}
+	});
+};
 
 // Machine Refresher Callback
 function callbackRefreshMachine(xmlHttp, machine){
@@ -540,7 +558,7 @@ function focusMenuTab(){
 		// focus tab
 		$("#" + id).addClass("active");
 	}
-}
+};
 
 
 /*********************************
@@ -556,4 +574,4 @@ function get24hGraphDate(dateOffset){
 	else{
 		return today.toDateString();
 	}
-}
+};

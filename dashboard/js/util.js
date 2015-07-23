@@ -468,36 +468,33 @@ function refreshIndex(graphPourc, time){
 *		AJAX MACHINE REFRESHER
 ******************************/
 function refreshMachine(machine){
-	var xmlHttp = createXMLHttpRequest();
-	var url = "ajaxMachineRefresher.php?machine=" + machine;
-	xmlHttp.onreadystatechange = function(){ callbackRefreshMachine(xmlHttp, machine) };
-	xmlHttp.open("GET",url,true);
-	xmlHttp.send(null);
-}
-
-// Machine Refresher Callback
-function callbackRefreshMachine(xmlHttp, machine){
-	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
-		// get infos
-		var jsonListInfo = xmlHttp.responseText.split("AND");
-		var listInfo = {};
-		for(var index in jsonListInfo){
-			listInfo[index] = eval("("+jsonListInfo[index]+")");
+	$.ajax({
+		url: "ajaxMachineRefresher.php",
+		type: "GET",
+		data: {"machine": machine},
+		dataType: "text",
+		success: function(cbdata){
+			// get infos
+			var jsonListInfo = cbdata.split("AND");
+			var listInfo = {};
+			for(var index in jsonListInfo){
+				listInfo[index] = eval("("+jsonListInfo[index]+")");
+			}
+			
+			// get graphPourc
+			var graphPourc = listInfo[0];
+			
+			// get listDefaut
+			var listDefaut = listInfo[1];
+			
+			// get listPareto
+			var listPareto = listInfo[2];
+			
+			// draw graphs
+			start(machine, "both", graphPourc, listDefaut, listPareto);
 		}
-		
-		// get graphPourc
-		var graphPourc = listInfo[0];
-		
-		// get listDefaut
-		var listDefaut = listInfo[1];
-		
-		// get listPareto
-		var listPareto = listInfo[2];
-		
-		// draw graphs
-		start(machine, "both", graphPourc, listDefaut, listPareto);
-	}
-}
+	});
+};
 
 
 /******************************
@@ -537,7 +534,7 @@ function focusMenuTab(){
 		// focus tab
 		$("#" + id).addClass("active");
 	}
-}
+};
 
 
 /*********************************
@@ -553,4 +550,4 @@ function get24hGraphDate(dateOffset){
 	else{
 		return today.toDateString();
 	}
-}
+};
