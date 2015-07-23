@@ -103,7 +103,7 @@
 	// excel output
 	$fileName = 'DataRef'.$ref.'_From'.$startDate.'_'.$startTime.'_To'.$endDate.'_'.$endTime.'.xls';
 	$write = new PHPExcel_Writer_Excel5($excel);
-	$write->save("excel/test.xls");
+	$write->save("excel/temp.xls");
 	
 	echo $fileName;
 
