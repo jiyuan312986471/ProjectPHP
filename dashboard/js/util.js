@@ -246,44 +246,29 @@ function drawGraph(machine, graphPourc, listDefaut, listPareto){
 };
 
 
-/**********************
-*		AJAX PREPARATION
-**********************/
-function createXMLHttpRequest() {
-	var xmlHttp = null;
-	if (window.XMLHttpRequest) {// code for all new browsers
-		xmlHttp = new XMLHttpRequest();
-	}
-	else if (window.ActiveXObject) {// code for IE5 and IE6
-		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	return xmlHttp;
-};
-
-
 /******************
 *		AJAX STARTER
 ******************/
 function start(machine, option, graphPourc, listDefaut, listPareto){
-	var xmlHttp = createXMLHttpRequest();
-	var url = "ajaxStarter.php?machine=" + machine + "&option=" + option;
-	xmlHttp.onreadystatechange = function(){ callbackStarter(xmlHttp, machine, option, graphPourc, listDefaut, listPareto) };
-	xmlHttp.open("GET",url,true);
-	xmlHttp.send(null);
-};
-
-// Starter Callback
-function callbackStarter(xmlHttp, machine, option, graphPourc, listDefaut, listPareto) {
-	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
-		document.getElementById("graphMachine"+machine).innerHTML = xmlHttp.responseText;
-		if(option == "both"){
-			drawPourcGraph(machine, graphPourc);
-			drawParetoGraph(machine, listDefaut, listPareto);
+	$.ajax({
+		url: "ajaxStarter.php",
+		type: "GET",
+		data: {
+			"machine": machine,
+			"option": option
+		},
+		dataType: "text",
+		success: function(response){
+			document.getElementById("graphMachine"+machine).innerHTML = response;
+			if(option == "both"){
+				drawPourcGraph(machine, graphPourc);
+				drawParetoGraph(machine, listDefaut, listPareto);
+			}
+			else{
+				drawGraph(machine, graphPourc, listDefaut, listPareto);
+			}
 		}
-		else{
-			drawGraph(machine, graphPourc, listDefaut, listPareto);
-		}
-	}
+	});
 };
 
 
@@ -291,37 +276,31 @@ function callbackStarter(xmlHttp, machine, option, graphPourc, listDefaut, listP
 *		AJAX CHANGER POURCENTAGE GRAPH
 *************************************/
 function changeToGraphPourc(machine, graphPourc){
-	var xmlHttp = createXMLHttpRequest();
-	var url = "";
-	xmlHttp.onreadystatechange = function(){ callbackChangeToGraphPourc(xmlHttp, machine, graphPourc) };
-	xmlHttp.open("GET",url,true);
-	xmlHttp.send(null);
-};
-
-// Pourcentage Graph Changer Callback
-function callbackChangeToGraphPourc(xmlHttp, machine, graphPourc) {
-	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
-		// prepare graph data
-		graphPourc = eval("("+graphPourc+")");
-		
-		// clear corresponding graph on the page
-		var element = document.getElementById("pourcDefaut"+machine);
-		if(element){
-			element.innerHTML = "";
-		}
-		else{
-			element = document.getElementById("paretoDefaut"+machine);
+	$.ajax({
+		dataType: "text",
+		success: function(){
+			// prepare graph data
+			graphPourc = eval("("+graphPourc+")");
+			
+			// clear corresponding graph on the page
+			var element = document.getElementById("pourcDefaut"+machine);
 			if(element){
 				element.innerHTML = "";
 			}
+			else{
+				element = document.getElementById("paretoDefaut"+machine);
+				if(element){
+					element.innerHTML = "";
+				}
+			}
+			
+			// change element id in order to draw graph
+			element.setAttribute("id","pourcDefaut"+machine);
+			
+			// draw new graph
+			start(machine, "pourc", graphPourc, null, null);
 		}
-		
-		// change element id in order to draw graph
-		element.setAttribute("id","pourcDefaut"+machine);
-		
-		// draw new graph
-		drawPourcGraph(machine, graphPourc);
-	}
+	});
 };
 
 
@@ -330,7 +309,6 @@ function callbackChangeToGraphPourc(xmlHttp, machine, graphPourc) {
 ********************************/
 function changeToGraphPareto(machine, graphPareto){
 	$.ajax({
-		url: "",
 		dataType: "text",
 		success: function(){
 			// get graph data
