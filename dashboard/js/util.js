@@ -14,56 +14,63 @@ function drawPourcGraph(machine, graphPourcData, graphPourc){
 	];
 	
 	if(machine !== "All"){
-		new Morris.Line({
-				// ID of the element in which to draw the chart.
-				element: 'pourcDefaut' + machine,
-				
-				// Chart data records -- each entry in this array corresponds to a point on the chart.
-				data: data,
-				
-				// The name of the data record attribute that contains x-values.
-				xkey: 'nbr',
-				
-				// A list of names of data record attributes that contain y-values.
-				ykeys: ['valeur'],
-				
-				// Labels for the ykeys -- will be displayed when you hover over the chart.
-				labels: ['Pourcentage'],
-				
-				pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4','#09DCB4','#046351','#E16351','#4C221C'],
-				parseTime: false,
-				hideHover: false,
-				resize: true
-		}).on('click', function(i, row){
-			var dateOffset = i - 6;
-			
-			// send data to php page via ajax
-			$.ajax({
-				url: "get24hData.php",
-				type: "POST",
-				data: {
-					machine: machine,
-					dateOffset: dateOffset
-				},
-				dataType: "text",
-				success: function(data){
-					var listData = data.split("AND");
-					var dataGraph24h = eval("("+listData[0]+")");
-					var date = listData[1];
+		if(typeof graphPourc !== 'undefined'){
+			graphPourc.setData(data);
+			return graphPourc;
+		}
+		else{
+			var graph = new Morris.Line({
+					// ID of the element in which to draw the chart.
+					element: 'pourcDefaut' + machine,
 					
-					// activate 24h graph modal
-					var $modal24h = $("#modal24h" + machine).modal();
-					$modal24h.on('shown.bs.modal',function(){
-						// draw 24h graph in modal
-						graph24h = draw24hGraph(machine, dataGraph24h, graph24h);
-						$(this).off('shown.bs.modal');
-					});
+					// Chart data records -- each entry in this array corresponds to a point on the chart.
+					data: data,
 					
-					// set date for modal title
-					$("#date24hGraph" + machine).text(date);
-				}
+					// The name of the data record attribute that contains x-values.
+					xkey: 'nbr',
+					
+					// A list of names of data record attributes that contain y-values.
+					ykeys: ['valeur'],
+					
+					// Labels for the ykeys -- will be displayed when you hover over the chart.
+					labels: ['Pourcentage'],
+					
+					pointFillColors: ['#FF530D','#81530D','#BBD20D','#FF0000','#FF009D','#6F009D','#0953B4','#09DCB4','#046351','#E16351','#4C221C'],
+					parseTime: false,
+					hideHover: false,
+					resize: true
+			}).on('click', function(i, row){
+				var dateOffset = i - 6;
+				
+				// send data to php page via ajax
+				$.ajax({
+					url: "get24hData.php",
+					type: "POST",
+					data: {
+						machine: machine,
+						dateOffset: dateOffset
+					},
+					dataType: "text",
+					success: function(data){
+						var listData = data.split("AND");
+						var dataGraph24h = eval("("+listData[0]+")");
+						var date = listData[1];
+						
+						// activate 24h graph modal
+						var $modal24h = $("#modal24h" + machine).modal();
+						$modal24h.on('shown.bs.modal',function(){
+							// draw 24h graph in modal
+							graph24h = draw24hGraph(machine, dataGraph24h, graph24h);
+							$(this).off('shown.bs.modal');
+						});
+						
+						// set date for modal title
+						$("#date24hGraph" + machine).text(date);
+					}
+				});
 			});
-		});
+			return graph;
+		}
 	}
 	else {
 		if(typeof graphPourc !== 'undefined'){
@@ -372,66 +379,63 @@ function callbackChangeToGraphPareto(xmlHttp, machine, graphPareto) {
 *		AJAX MACHINE ALL REFRESHER
 ********************************/
 function refreshMachineAllGraph(jsonOptionMachine){
-	var xmlHttp = createXMLHttpRequest();
-	var url = "ajaxMachineAllRefresher.php?jsonOptionMachine=" + jsonOptionMachine;
-	xmlHttp.onreadystatechange = function(){ callbackRefreshMachineAllGraph(xmlHttp) };
-	xmlHttp.open("GET",url,true);
-	xmlHttp.send(null);
-};
-
-// Machine All Refresher Callback
-function callbackRefreshMachineAllGraph(xmlHttp) {
-	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) { // 4 = "loaded" 200 = OK
-		// get infos
-		var jsonListInfo = xmlHttp.responseText.split("AND");
-		var listInfo = {};
-		for(var index in jsonListInfo){
-			listInfo[index] = eval("("+jsonListInfo[index]+")");
-		}
-		
-		// get listMachine
-		var listMachine = listInfo[0];
-		
-		// get optionMachine
-		var optionMachine = listInfo[1];
-		
-		// get listMachineGraph
-		var listMachineGraph = listInfo[2];
-		
-		// for each machine
-		for(var index in listMachine){
-			// get machine
-			var machine = listMachine[index];
-			
-			// get option
-			var option = optionMachine[machine];
-			
-			// get graph
-			var graph = listMachineGraph[machine];
-			
-			// check option
-			if(option == "pourc"){
-				// draw
-				start(machine, option, graph, null, null);
+	$.ajax({
+		url: "ajaxMachineAllRefresher.php",
+		type: "GET",
+		data: {"jsonOptionMachine": jsonOptionMachine},
+		dataType: "text",
+		success: function(cbdata){
+			// get infos
+			var jsonListInfo = cbdata.split("AND");
+			var listInfo = {};
+			for(var index in jsonListInfo){
+				listInfo[index] = eval("("+jsonListInfo[index]+")");
 			}
-			else if(option == "pareto"){
-				// get listDefaut
-				var listDefaut = [];
-		    for (var defaut in graph){
-		      listDefaut.push(defaut);
-		    }
+			
+			// get listMachine
+			var listMachine = listInfo[0];
+			
+			// get optionMachine
+			var optionMachine = listInfo[1];
+			
+			// get listMachineGraph
+			var listMachineGraph = listInfo[2];
+			
+			// for each machine
+			for(var index in listMachine){
+				// get machine
+				var machine = listMachine[index];
 				
-				// get listPareto
-				var listPareto = [];
-		    for (var defaut in graph){
-		      listPareto.push(graph[defaut]);
-		    }
+				// get option
+				var option = optionMachine[machine];
 				
-				// draw
-				start(machine, option, null, listDefaut, listPareto);
+				// get graph
+				var graph = listMachineGraph[machine];
+				
+				// check option
+				if(option == "pourc"){
+					// draw
+					start(machine, option, graph, null, null);
+				}
+				else if(option == "pareto"){
+					// get listDefaut
+					var listDefaut = [];
+			    for (var defaut in graph){
+			      listDefaut.push(defaut);
+			    }
+					
+					// get listPareto
+					var listPareto = [];
+			    for (var defaut in graph){
+			      listPareto.push(graph[defaut]);
+			    }
+					
+					// draw
+					start(machine, option, null, listDefaut, listPareto);
+				}
 			}
 		}
-	}
+	});
 };
 
 
@@ -453,8 +457,8 @@ function refreshIndex(graphPourc, time){
 			
 			// wait and refresh
 			setTimeout(function(){
-					refreshIndex(graphPourc, time);
-				},time);
+				refreshIndex(graphPourc, time);
+			},time);
 		}
 	});
 }

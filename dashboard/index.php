@@ -195,7 +195,7 @@
 		
 		<script language="javascript">
 			(function($){
-				// refresh every 8s
+				// refresh
 				var time = <?php echo $refreshTime; ?> * 1000;
 				var graphPourc;
 				graphPourc = refreshIndex(graphPourc, time);

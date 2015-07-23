@@ -224,14 +224,9 @@
 		    												 });
 		    		}
 		    		
-		    		// clear prev timeout
-		    		clearTimeout(iTime);
-		    		
 		    		// refresh after change
 		    		jsonOptionMachine = JSON.stringify(optionMachine);
-		    		iTime = setTimeout(function(){
-		    			refreshMachineAllGraph(jsonOptionMachine);
-		    		}, time);
+		    		refreshMachineAllGraph(jsonOptionMachine);
 		    	}
 		    });
 			};
