@@ -834,8 +834,11 @@
   	if($machine != "All"){
   		$sql .= "AND [QuelleMachine] = '".$machine."'";
   	}
-  	$sql .= "AND DATEDIFF([second], '2015-03-01 00:00:00.000', [Date]) > 0
-  					 AND DATEDIFF([second], '2015-03-31 00:00:00.000', [Date]) < 0";
+//  	$sql .= "AND DATEDIFF([second], '2015-03-01 00:00:00.000', [Date]) > 0
+//  					 AND DATEDIFF([second], '2015-03-31 00:00:00.000', [Date]) < 0";
+  	$sql .= "AND DATEDIFF([second], '".$startTime."', [Date]) > 0
+  					 AND DATEDIFF([second], '".$endTime."', [Date]) < 0";				 
+  	
   	$stmt = sqlsrv_query($conn, $sql);
   	
   	while($row = sqlsrv_fetch_array($stmt)) {
