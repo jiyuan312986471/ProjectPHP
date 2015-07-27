@@ -781,12 +781,7 @@
 	/* Sortie	:	la list des donnee																																					*/
 	function getDataByRefAndTime($conn, $ref, $startTime, $endTime, $machine) {
 		$listData = array();
-		
-//		$sql = "SELECT * FROM [ping2].[dbo].[TeSysK_Auto]
-//  					WHERE [Ref] = '".$ref."'
-//  					AND DATEDIFF([second], '".$startTime."', [Date]) > 0
-//  					AND DATEDIFF([second], '".$endTime."', [Date]) < 0";
-  					
+				
   	$sql = "SELECT [QuelleMachine]
       						,[NumEnr]
       						,[Date]
