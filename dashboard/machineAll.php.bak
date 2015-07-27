@@ -367,8 +367,7 @@
 							data: {
 								ref: ref,
 								startTime: start,
-								endTime: end,
-								machine: <?php echo json_encode($machine); ?>
+								endTime: end
 							},
 							dataType: "text",
 							success: function(fileName){

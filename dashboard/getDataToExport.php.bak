@@ -11,7 +11,7 @@
 	$machine	 = $_POST["machine"];
 	
 	// get all data from DB
-	$listData = getDataByRefAndTime($conn, $ref, $startTime, $endTime, $machine);
+	$listData = getDataByRefAndTime($conn, $ref, $startTime, $endTime);
 	
 	// string treatment
 	$startDate = explode(" ", $startTime)[0];

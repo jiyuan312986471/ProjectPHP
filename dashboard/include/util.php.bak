@@ -831,7 +831,7 @@
      				      ,[CorrectionTravail]
   					FROM [ping2].[dbo].[TeSysK_Auto]
   					WHERE [Ref] = '".$ref."'";
-  	if($machine != "All"){
+  	if($machine == "All"){
   		$sql .= "AND [QuelleMachine] = '".$machine."'";
   	}
   	$sql .= "AND DATEDIFF([second], '2015-03-01 00:00:00.000', [Date]) > 0

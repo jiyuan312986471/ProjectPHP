@@ -316,8 +316,7 @@
 						data: {
 							ref: ref,
 							startTime: start,
-							endTime: end,
-							machine: "All"
+							endTime: end
 						},
 						dataType: "text",
 						success: function(fileName){
