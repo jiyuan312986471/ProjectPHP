@@ -4,8 +4,8 @@
 	$listMachineInfo = getListMachine($conn);
 	$listMachine = array_keys($listMachineInfo);
 	
-//	foreach($listMachine as &$machine){
-//		$machine = str_replace(" ", "", $machine);
-//	}
+	foreach($listMachine as &$machine){
+		$machine = str_replace(" ", "", $machine);
+	}
 
 ?>
