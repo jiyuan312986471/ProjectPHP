@@ -2,7 +2,6 @@
 *		DRAW GRAPHS
 ****************/
 function drawPourcGraph(machine, graphPourcData, graphPourc){
-	console.time("Time cost while drawing graph");
 	var graph24h;
 	var data = [
 		{ nbr: graphPourcData.jour[0], valeur: graphPourcData.pourc[0] },
@@ -132,7 +131,6 @@ function drawPourcGraph(machine, graphPourcData, graphPourc){
 			return graph;
 		}
 	}
-	console.timeEnd("Time cost while drawing graph");
 };
 
 function drawParetoGraph(machine, listDefaut, listPareto){
@@ -162,6 +160,8 @@ function drawParetoGraph(machine, listDefaut, listPareto){
 			
 			// Labels for the ykeys -- will be displayed when you hover over the chart.
 			labels: ['Pourcentage'],
+			
+			resize: true
 		});
 };
 
@@ -353,7 +353,9 @@ function changeToGraphPareto(machine, graphPareto){
 /********************************
 *		AJAX MACHINE ALL REFRESHER
 ********************************/
-function refreshMachineAllGraph(jsonOptionMachine){
+function refreshMachineAllGraph(jsonOptionMachine, time){
+	console.log("old Timer id: " + oldTimer);
+	console.log("-----------------------------------------------------------");
 	$.ajax({
 		url: "ajaxMachineAllRefresher.php",
 		type: "GET",
@@ -409,6 +411,11 @@ function refreshMachineAllGraph(jsonOptionMachine){
 					start(machine, option, null, listDefaut, listPareto);
 				}
 			}
+				
+			// wait and refresh
+			setTimeout(function(){
+				refreshMachineAllGraph(jsonOptionMachine, time);
+			},time);
 		}
 	});
 };

@@ -221,7 +221,7 @@
 		    			});
 		    		}
 		    		
-		    		// clear all timeouts
+		    		// clear prev timeouts
 		    		var lastId = setTimeout(null,0);
 		    		console.log("lastID: " + lastId);
 		    		while(lastId--){

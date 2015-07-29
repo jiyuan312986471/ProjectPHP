@@ -160,6 +160,8 @@ function drawParetoGraph(machine, listDefaut, listPareto){
 			
 			// Labels for the ykeys -- will be displayed when you hover over the chart.
 			labels: ['Pourcentage'],
+			
+			resize: true
 		});
 };
 
@@ -351,7 +353,8 @@ function changeToGraphPareto(machine, graphPareto){
 /********************************
 *		AJAX MACHINE ALL REFRESHER
 ********************************/
-function refreshMachineAllGraph(jsonOptionMachine){
+function refreshMachineAllGraph(jsonOptionMachine, time){
+	console.log("refreshMachineAllGraph");
 	$.ajax({
 		url: "ajaxMachineAllRefresher.php",
 		type: "GET",
@@ -407,6 +410,11 @@ function refreshMachineAllGraph(jsonOptionMachine){
 					start(machine, option, null, listDefaut, listPareto);
 				}
 			}
+				
+			// wait and refresh
+			setTimeout(function(){
+				refreshMachineAllGraph(jsonOptionMachine, time);
+			},time);
 		}
 	});
 };
