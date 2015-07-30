@@ -264,7 +264,7 @@
 				$defaut10 = 'course';
 				break;
 			
-			case 'D T1':
+			case 'DT1':
 				/* battement */
 				$defaut1 = 'bat';    
 				
@@ -296,7 +296,7 @@
 				$defaut10 = 'transil';
 				break;
 			
-			case 'D T2':
+			case 'DT2':
 				/* battement */
 				$defaut1 = 'bat';    
 				

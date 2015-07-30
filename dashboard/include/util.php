@@ -159,8 +159,8 @@
 			$graph['jour'][6] = date('D');	
 			$date = new DateTime();
 			for($i = 0; $i < 6; $i++){
-				$date->add(new DateInterval('P1D'));
-				if ($date->format('N')<8) {
+				$date -> add(new DateInterval('P1D'));
+				if($date -> format('N') < 8) {
 					$graph['jour'][$i]=$date->format('D');
 				}
 			}
