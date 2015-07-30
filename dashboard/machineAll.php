@@ -223,7 +223,6 @@
 		    		
 		    		// clear all timeouts
 		    		var lastId = setTimeout(null,0);
-		    		console.log("lastID: " + lastId);
 		    		while(lastId--){
 		    			clearTimeout(lastId);
 		    		}
@@ -383,7 +382,7 @@
 		<!-- Modals 24h Graph -->
 		<?php foreach($listMachine as $machine) { ?>
 			<div class="modal fade" id="modal24h<?php echo $machine; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
+				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

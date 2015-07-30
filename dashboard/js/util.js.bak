@@ -354,8 +354,7 @@ function changeToGraphPareto(machine, graphPareto){
 *		AJAX MACHINE ALL REFRESHER
 ********************************/
 function refreshMachineAllGraph(jsonOptionMachine, time){
-	console.log("old Timer id: " + oldTimer);
-	console.log("-----------------------------------------------------------");
+	console.log("refreshMachineAllGraph");
 	$.ajax({
 		url: "ajaxMachineAllRefresher.php",
 		type: "GET",
