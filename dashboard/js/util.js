@@ -60,6 +60,7 @@ function drawPourcGraph(machine, graphPourcData, graphPourc){
 						var $modal24h = $("#modal24h" + machine).modal();
 						$modal24h.on('shown.bs.modal',function(){
 							// draw 24h graph in modal
+							console.log(graph24h);
 							graph24h = draw24hGraph(machine, dataGraph24h, graph24h);
 							$(this).off('shown.bs.modal');
 						});
@@ -119,6 +120,7 @@ function drawPourcGraph(machine, graphPourcData, graphPourc){
 						var $modal24h = $("#modal24h" + machine).modal();
 						$modal24h.on('shown.bs.modal',function(){
 							// draw 24h graph in modal
+							console.log(graph24h);
 							graph24h = draw24hGraph(machine, dataGraph24h, graph24h);
 							$(this).off('shown.bs.modal');
 						});
