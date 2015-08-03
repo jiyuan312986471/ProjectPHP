@@ -54,7 +54,34 @@
 				
 				<!-- Graphs -->
 				<div class="row">
-					<div class="row" id="graphMachine<?php echo $machineSelected; ?>"></div>
+					<div class="row" id="graphMachine<?php echo $machineSelected; ?>">
+						
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="panel panel-success">
+										<div class="panel-heading">
+											<h4>Pourcentage Defauts <?php echo $machineSelected; ?></h4>
+										</div>
+										<div class="panel-body">
+											<div id="pourcDefaut<?php echo $machineSelected; ?>"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="panel panel-success">
+										<div class="panel-heading">
+											<h4>Pareto des Defauts <?php echo $machineSelected; ?></h4>
+										</div>
+										<div class="panel-body">
+											<div id="paretoDefaut<?php echo $machineSelected; ?>"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
 				</div>
 				
 			</div>
@@ -64,12 +91,12 @@
 		<?php include 'include/scripts.php'; ?>
 	    
 	  <script type="text/javascript">
-	  	// refresh every 8s
-	  	var time = <?php echo $refreshTime; ?> * 1000;
-	  	refreshMachine(<?php echo json_encode($machineSelected); ?>);
-		  setInterval(function(){
-		  	refreshMachine(<?php echo json_encode($machineSelected); ?>);
-		  }, time);
+	  	(function($){
+		  	// refresh every 8s
+		  	var time = <?php echo $refreshTime; ?> * 1000;
+		  	var graphPourc;
+		  	refreshMachine(<?php echo json_encode($machineSelected); ?>, graphPourc, time);
+	  	})(jQuery);
 	  </script>
 		
 		<!-- Modal Exporter -->
@@ -200,7 +227,7 @@
 		
 		<!-- Modal 24h Graph -->
 		<div class="modal fade" id="modal24h<?php echo $machineSelected; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

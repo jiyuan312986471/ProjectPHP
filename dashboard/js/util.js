@@ -135,36 +135,45 @@ function drawPourcGraph(machine, graphPourcData, graphPourc){
 	}
 };
 
-function drawParetoGraph(machine, listDefaut, listPareto){
-	new Morris.Bar({
+function drawParetoGraph(machine, listDefaut, listPareto, graphPareto){
+	var data = [
+		{ pourcentage: listDefaut[0],  value: listPareto[0] },
+		{ pourcentage: listDefaut[1],  value: listPareto[1] },
+		{ pourcentage: listDefaut[2],  value: listPareto[2] },
+		{ pourcentage: listDefaut[3],  value: listPareto[3] },
+		{ pourcentage: listDefaut[4],  value: listPareto[4] },
+		{ pourcentage: listDefaut[5],  value: listPareto[5] },
+		{ pourcentage: listDefaut[6],  value: listPareto[6] },
+		{ pourcentage: listDefaut[7],  value: listPareto[7] },
+		{ pourcentage: listDefaut[8],  value: listPareto[8] },
+		{ pourcentage: listDefaut[9],  value: listPareto[9] }
+	];
+	
+	if(typeof graphPareto !== 'undefined'){
+		graphPareto.setData(data);
+		return graphPareto;
+	}
+	else{
+		var graph = new Morris.Bar({
 			// ID of the element in which to draw the chart.
 			element: 'paretoDefaut' + machine,
-			
+				
 			// Chart data records -- each entry in this array corresponds to a point on the chart.
-			data: [
-				{ pourcentage: listDefaut[0],  value: listPareto[0] },
-				{ pourcentage: listDefaut[1],  value: listPareto[1] },
-				{ pourcentage: listDefaut[2],  value: listPareto[2] },
-				{ pourcentage: listDefaut[3],  value: listPareto[3] },
-				{ pourcentage: listDefaut[4],  value: listPareto[4] },
-				{ pourcentage: listDefaut[5],  value: listPareto[5] },
-				{ pourcentage: listDefaut[6],  value: listPareto[6] },
-				{ pourcentage: listDefaut[7],  value: listPareto[7] },
-				{ pourcentage: listDefaut[8],  value: listPareto[8] },
-				{ pourcentage: listDefaut[9],  value: listPareto[9] }
-			],
-			
+			data: data,
+				
 			// The name of the data record attribute that contains x-values.
 			xkey: 'pourcentage',
-			
+				
 			// A list of names of data record attributes that contain y-values.
 			ykeys: ['value'],
-			
+				
 			// Labels for the ykeys -- will be displayed when you hover over the chart.
 			labels: ['Pourcentage'],
-			
+				
 			resize: true
 		});
+		return graph;
+	}
 };
 
 function draw24hGraph(machine, dataGraph24h, graph24h){
@@ -253,10 +262,11 @@ function drawGraph(machine, graphPourc, listDefaut, listPareto){
 /******************
 *		AJAX STARTER
 ******************/
-function start(machine, option, graphPourc, listDefaut, listPareto){
+function start(machine, option, graphPourcData, graphPourc, listDefaut, listPareto){
 	$.ajax({
 		url: "ajaxStarter.php",
 		type: "GET",
+		async: false,
 		data: {
 			"machine": machine,
 			"option": option
@@ -265,7 +275,7 @@ function start(machine, option, graphPourc, listDefaut, listPareto){
 		success: function(response){
 			document.getElementById("graphMachine"+machine).innerHTML = response;
 			if(option == "both"){
-				drawPourcGraph(machine, graphPourc);
+				graphPourc = drawPourcGraph(machine, graphPourcData, graphPourc);
 				drawParetoGraph(machine, listDefaut, listPareto);
 			}
 			else{
@@ -273,18 +283,19 @@ function start(machine, option, graphPourc, listDefaut, listPareto){
 			}
 		}
 	});
+	return graphPourc;
 };
 
 
 /*************************************
 *		AJAX CHANGER POURCENTAGE GRAPH
 *************************************/
-function changeToGraphPourc(machine, graphPourc){
+function changeToGraphPourc(machine, graphPourcData, graphPourc){
 	$.ajax({
 		dataType: "text",
 		success: function(){
 			// prepare graph data
-			graphPourc = eval("("+graphPourc+")");
+			graphPourcData = eval("("+graphPourcData+")");
 			
 			// clear corresponding graph on the page
 			var element = document.getElementById("pourcDefaut"+machine);
@@ -302,7 +313,7 @@ function changeToGraphPourc(machine, graphPourc){
 			element.setAttribute("id","pourcDefaut"+machine);
 			
 			// draw new graph
-			start(machine, "pourc", graphPourc, null, null);
+			start(machine, "pourc", graphPourcData, graphPourc, null, null);
 		}
 	});
 };
@@ -346,7 +357,7 @@ function changeToGraphPareto(machine, graphPareto){
 			element.setAttribute("id","paretoDefaut"+machine);
 			
 			// draw new graph
-			start(machine, "pareto", null, listDefaut, listPareto);
+			start(machine, "pareto", null, null, listDefaut, listPareto);
 		}
 	});
 };
@@ -449,7 +460,7 @@ function refreshIndex(graphPourc, time){
 /******************************
 *		AJAX MACHINE REFRESHER
 ******************************/
-function refreshMachine(machine){
+function refreshMachine(machine, graphPourc, graphPareto, time){
 	$.ajax({
 		url: "ajaxMachineRefresher.php",
 		type: "GET",
@@ -464,7 +475,7 @@ function refreshMachine(machine){
 			}
 			
 			// get graphPourc
-			var graphPourc = listInfo[0];
+			var graphPourcData = listInfo[0];
 			
 			// get listDefaut
 			var listDefaut = listInfo[1];
@@ -473,7 +484,13 @@ function refreshMachine(machine){
 			var listPareto = listInfo[2];
 			
 			// draw graphs
-			start(machine, "both", graphPourc, listDefaut, listPareto);
+			graphPourc = drawPourcGraph(machine, graphPourcData, graphPourc);
+			graphPareto = drawParetoGraph(machine, listDefaut, listPareto, graphPareto);
+			
+			// wait and refresh
+			setTimeout(function(){
+				refreshMachine(machine, graphPourc, graphPareto, time);
+			},time);
 		}
 	});
 };

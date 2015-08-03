@@ -198,7 +198,7 @@
 				// refresh
 				var time = <?php echo $refreshTime; ?> * 1000;
 				var graphPourc;
-				graphPourc = refreshIndex(graphPourc, time);
+				refreshIndex(graphPourc, time);
 			})(jQuery);
 		</script>
 		

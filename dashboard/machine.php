@@ -54,7 +54,34 @@
 				
 				<!-- Graphs -->
 				<div class="row">
-					<div class="row" id="graphMachine<?php echo $machineSelected; ?>"></div>
+					<div class="row" id="graphMachine<?php echo $machineSelected; ?>">
+						
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="panel panel-success">
+										<div class="panel-heading">
+											<h4>Pourcentage Defauts <?php echo $machineSelected; ?></h4>
+										</div>
+										<div class="panel-body">
+											<div id="pourcDefaut<?php echo $machineSelected; ?>"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="panel panel-success">
+										<div class="panel-heading">
+											<h4>Pareto des Defauts <?php echo $machineSelected; ?></h4>
+										</div>
+										<div class="panel-body">
+											<div id="paretoDefaut<?php echo $machineSelected; ?>"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
 				</div>
 				
 			</div>
@@ -64,12 +91,13 @@
 		<?php include 'include/scripts.php'; ?>
 	    
 	  <script type="text/javascript">
-	  	// refresh every 8s
-	  	var time = <?php echo $refreshTime; ?> * 1000;
-	  	refreshMachine(<?php echo json_encode($machineSelected); ?>);
-		  setInterval(function(){
-		  	refreshMachine(<?php echo json_encode($machineSelected); ?>);
-		  }, time);
+	  	(function($){
+		  	// refresh every 8s
+		  	var time = <?php echo $refreshTime; ?> * 1000;
+		  	var graphPourc;
+		  	var graphPareto;
+		  	refreshMachine(<?php echo json_encode($machineSelected); ?>, graphPourc, graphPareto, time);
+	  	})(jQuery);
 	  </script>
 		
 		<!-- Modal Exporter -->
