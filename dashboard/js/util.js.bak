@@ -60,7 +60,6 @@ function drawPourcGraph(machine, graphPourcData, graphPourc){
 						var $modal24h = $("#modal24h" + machine).modal();
 						$modal24h.on('shown.bs.modal',function(){
 							// draw 24h graph in modal
-							console.log(graph24h);
 							graph24h = draw24hGraph(machine, dataGraph24h, graph24h);
 							$(this).off('shown.bs.modal');
 						});
@@ -136,7 +135,6 @@ function drawPourcGraph(machine, graphPourcData, graphPourc){
 };
 
 function drawParetoGraph(machine, listDefaut, listPareto, graphPareto){
-	console.log(graphPareto);
 	var data = [
 		{ pourcentage: listDefaut[0],  value: listPareto[0] },
 		{ pourcentage: listDefaut[1],  value: listPareto[1] },
@@ -235,7 +233,8 @@ function draw24hGraph(machine, dataGraph24h, graph24h){
 	}
 }
 
-function drawGraph(machine, graphPourc, listDefaut, listPareto){
+function drawGraph(machine, graphPourcData, graphPourc, listDefaut, listPareto, graphPareto){
+	var graph;
 	// get all active label
 	var listLabel = $("label.active");
 	
@@ -250,20 +249,21 @@ function drawGraph(machine, graphPourc, listDefaut, listPareto){
 		// check option
 		if(idLabel == "Pourcentage"+machine){
 			// draw pourcentage graph
-			drawPourcGraph(machine, graphPourc);
+			graph = drawPourcGraph(machine, graphPourcData, graphPourc);
 		}
 		else if(idLabel == "Pareto"+machine){
 			// draw pareto graph
-			drawParetoGraph(machine, listDefaut, listPareto);
+			graph = drawParetoGraph(machine, listDefaut, listPareto, graphPareto);
 		}
 	}
+	return graph;
 };
 
 
 /******************
 *		AJAX STARTER
 ******************/
-function start(machine, option, graphPourcData, graphPourc, listDefaut, listPareto){
+function start(machine, option, graphPourcData, graphPourc, listDefaut, listPareto, graphPareto){
 	$.ajax({
 		url: "ajaxStarter.php",
 		type: "GET",
@@ -275,16 +275,9 @@ function start(machine, option, graphPourcData, graphPourc, listDefaut, listPare
 		dataType: "text",
 		success: function(response){
 			document.getElementById("graphMachine"+machine).innerHTML = response;
-			if(option == "both"){
-				graphPourc = drawPourcGraph(machine, graphPourcData, graphPourc);
-				drawParetoGraph(machine, listDefaut, listPareto);
-			}
-			else{
-				drawGraph(machine, graphPourc, listDefaut, listPareto);
-			}
+			drawGraph(machine, graphPourcData, graphPourc, listDefaut, listPareto, graphPareto);
 		}
 	});
-	return graphPourc;
 };
 
 
@@ -367,7 +360,7 @@ function changeToGraphPareto(machine, graphPareto){
 /********************************
 *		AJAX MACHINE ALL REFRESHER
 ********************************/
-function refreshMachineAllGraph(jsonOptionMachine, time){
+function refreshMachineAllGraph(jsonOptionMachine, mapMachineGraph, time){
 	$.ajax({
 		url: "ajaxMachineAllRefresher.php",
 		type: "GET",
@@ -398,35 +391,39 @@ function refreshMachineAllGraph(jsonOptionMachine, time){
 				// get option
 				var option = optionMachine[machine];
 				
+				// get graph data
+				var graphData = listMachineGraph[machine];
+				
 				// get graph
-				var graph = listMachineGraph[machine];
+				var graph = mapMachineGraph.get(machine);
+				console.log(graph);
 				
 				// check option
 				if(option == "pourc"){
 					// draw
-					start(machine, option, graph, null, null);
+					start(machine, option, graphData, graph, null, null, null);
 				}
 				else if(option == "pareto"){
 					// get listDefaut
 					var listDefaut = [];
-			    for (var defaut in graph){
+			    for (var defaut in graphData){
 			      listDefaut.push(defaut);
 			    }
 					
 					// get listPareto
 					var listPareto = [];
-			    for (var defaut in graph){
+			    for (var defaut in graphData){
 			      listPareto.push(graph[defaut]);
 			    }
 					
 					// draw
-					start(machine, option, null, listDefaut, listPareto);
+					start(machine, option, null, null, listDefaut, listPareto, graph);
 				}
 			}
 				
 			// wait and refresh
 			setTimeout(function(){
-				refreshMachineAllGraph(jsonOptionMachine, time);
+				refreshMachineAllGraph(jsonOptionMachine, mapMachineGraph, time);
 			},time);
 		}
 	});

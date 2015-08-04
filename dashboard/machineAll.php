@@ -83,6 +83,11 @@
 		  		optionMachine[listMachine[index]] = listOption[index];
 		  	}
 		  </script>
+		  
+		  <!-- Graph Container -->
+		  <script language="javascript">
+		  	var listGraph = new Array();
+		  </script>
 				
       <!-- contenu -->
       <div id="page-wrapper">
@@ -150,6 +155,17 @@
 		<!-- Common Script Src Pool -->
 		<?php include 'include/scripts.php'; ?>
 		
+		<!-- Graph Container -->
+		<script language="javascript">
+			// Map: machine -> graphContainer
+			var mapMachineGraph = new Map();
+			<?php foreach($listMachine as $machine){ ?>
+				var machine = "<?php echo $machine; ?>";
+				var graph;
+				mapMachineGraph.put(machine, graph);
+			<?php }	?>
+		</script>
+		
 		<!-- MUTATION OBSERVER-->
 		<script language="javascript">
 			// refresh time
@@ -157,7 +173,7 @@
 			
 			// draw graph and refresh
 		  var jsonOptionMachine = JSON.stringify(optionMachine);
-		  refreshMachineAllGraph(jsonOptionMachine, time);
+		  refreshMachineAllGraph(jsonOptionMachine, mapMachineGraph, time);
 			
 			// prepare mutation observer
 			var MutationObserver = window.MutationObserver || window.WebKitMutationObserver ||  window.MozMutationObserver;
@@ -229,7 +245,7 @@
 		    		
 		    		// refresh after change
 		    		jsonOptionMachine = JSON.stringify(optionMachine);
-		    		refreshMachineAllGraph(jsonOptionMachine, time);
+		    		refreshMachineAllGraph(jsonOptionMachine, mapMachineGraph, time);
 		    	}
 		    });
 			};
