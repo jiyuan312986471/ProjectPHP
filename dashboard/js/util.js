@@ -426,7 +426,6 @@ function refreshMachineAllGraph(jsonOptionMachine, mapMachineGraph, time){
 				
 				// get graph
 				var graph = mapMachineGraph.get(machine);
-				console.log(graph);
 				
 				// check option
 				if(option == "pourc"){
