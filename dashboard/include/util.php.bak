@@ -768,9 +768,15 @@
 			}
 		}
 		else {
-			// prepare query
+//			// prepare query
+//			$sql = "SELECT [QuelleMachine],[NumEnr],[Date],[NumPal],[CodeDefaut]
+//							FROM [ping2].[dbo].[TeSysK_Auto]
+//	  					WHERE DAY([Date]) = DAY(DATEADD(day, ".$dateOffset.", GETDATE()))
+//	  					AND	MONTH([Date]) = MONTH(DATEADD(day, ".$dateOffset.", GETDATE()))";
+	  					
+	  	// prepare query
 			$sql = "SELECT [QuelleMachine],[NumEnr],[Date],[NumPal],[CodeDefaut]
-							FROM [ping2].[dbo].[TeSysK_Auto]
+							FROM [ping2].[dbo].[tempWeek]
 	  					WHERE DAY([Date]) = DAY(DATEADD(day, ".$dateOffset.", GETDATE()))
 	  					AND	MONTH([Date]) = MONTH(DATEADD(day, ".$dateOffset.", GETDATE()))";
 			$stmt = sqlsrv_query($conn, $sql);

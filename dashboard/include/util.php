@@ -185,7 +185,7 @@
 		// get machine data
 		$graph = getGraphNbDefaut($machine);
 		
-		// set date format
+		// move previous data
 		if($graph['jour'][6] != date('D')) {
 			for($i = 0; $i < count($graph['nb'])-1; $i++) {
 				$graph['nb'][$i] = $graph['nb'][$i+1];

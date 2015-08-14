@@ -16,7 +16,7 @@
 	// get pourcentage graph
 	$graph = getPourcGraphData("All");
 
-	// move previous data
+	// set date format
 	if($graph['jour'][6] != date('D')) {		
 		// algo with count
 		for($i = 0; $i < count($graph['pourc'])-1; $i++) {
