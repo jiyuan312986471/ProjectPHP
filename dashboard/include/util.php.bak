@@ -739,9 +739,16 @@
 		$data = array();
 		
 		if($machine != "All"){
-			// prepare query
+//			// prepare query
+//			$sql = "SELECT [QuelleMachine],[NumEnr],[Date],[NumPal],[CodeDefaut]
+//							FROM [ping2].[dbo].[TeSysK_Auto]
+//	  					WHERE [QuelleMachine] LIKE '".$machine."'
+//	  					AND DAY([Date]) = DAY(DATEADD(day, ".$dateOffset.", GETDATE()))
+//	  					AND	MONTH([Date]) = MONTH(DATEADD(day, ".$dateOffset.", GETDATE()))";
+	  	
+	  	// prepare query
 			$sql = "SELECT [QuelleMachine],[NumEnr],[Date],[NumPal],[CodeDefaut]
-							FROM [ping2].[dbo].[TeSysK_Auto]
+							FROM [ping2].[dbo].[tempWeek]
 	  					WHERE [QuelleMachine] LIKE '".$machine."'
 	  					AND DAY([Date]) = DAY(DATEADD(day, ".$dateOffset.", GETDATE()))
 	  					AND	MONTH([Date]) = MONTH(DATEADD(day, ".$dateOffset.", GETDATE()))";
