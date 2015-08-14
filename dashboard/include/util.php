@@ -105,14 +105,27 @@
 		// initialize counter
     $count = 0;
 		
+//		// get first defaut record
+//		$row = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT TOP 1 QuelleMachine,[Date],CodeDefaut,NumEnr,NumPal 
+//																									 FROM [ping2].[dbo].[TeSysK_Auto]",
+//																					 array(), array("Scrollable"=>"buffered")));
+//    
+//    // get defaut records of machine
+//		$query = sqlsrv_query($conn, "SELECT QuelleMachine,[Date],CodeDefaut,NumEnr,NumPal 
+//																	FROM [ping2].[dbo].[TeSysK_Auto] 
+//																	WHERE [CodeDefaut] > 0
+//																	AND QuelleMachine = '$machine'
+//																	AND cast(convert(char(8), [Date], 112) AS int) = cast(convert(char(8), getdate(), 112) AS int)",
+//													array(), array("Scrollable"=>"buffered"));
+													
 		// get first defaut record
 		$row = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT TOP 1 QuelleMachine,[Date],CodeDefaut,NumEnr,NumPal 
-																									 FROM [ping2].[dbo].[TeSysK_Auto]",
+																									 FROM [ping2].[dbo].[tempWeek]",
 																					 array(), array("Scrollable"=>"buffered")));
     
     // get defaut records of machine
 		$query = sqlsrv_query($conn, "SELECT QuelleMachine,[Date],CodeDefaut,NumEnr,NumPal 
-																	FROM [ping2].[dbo].[TeSysK_Auto] 
+																	FROM [ping2].[dbo].[tempWeek] 
 																	WHERE [CodeDefaut] > 0
 																	AND QuelleMachine = '$machine'
 																	AND cast(convert(char(8), [Date], 112) AS int) = cast(convert(char(8), getdate(), 112) AS int)",
@@ -133,9 +146,17 @@
 	/* Entre	: la machine et DB connection																																	*/
 	/* Sortie	: nb total																																										*/
 	function getNbTotal($conn, $machine) {
+//		// get total nb
+//		$line = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT count([CodeDefaut]) AS nombre 
+//																										FROM  [ping2].[dbo].[TeSysK_Auto] 
+//																										WHERE  [CodeDefaut] = 0
+//																										AND QuelleMachine = '$machine'
+//																										AND cast(convert(char(8), [Date], 112) AS int) = cast(convert(char(8), getdate(), 112) AS int)",
+//																						array(), array("Scrollable"=>"buffered")));
+																						
 		// get total nb
 		$line = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT count([CodeDefaut]) AS nombre 
-																										FROM  [ping2].[dbo].[TeSysK_Auto] 
+																										FROM  [ping2].[dbo].[tempWeek] 
 																										WHERE  [CodeDefaut] = 0
 																										AND QuelleMachine = '$machine'
 																										AND cast(convert(char(8), [Date], 112) AS int) = cast(convert(char(8), getdate(), 112) AS int)",
@@ -718,9 +739,16 @@
 		$data = array();
 		
 		if($machine != "All"){
-			// prepare query
+//			// prepare query
+//			$sql = "SELECT [QuelleMachine],[NumEnr],[Date],[NumPal],[CodeDefaut]
+//							FROM [ping2].[dbo].[TeSysK_Auto]
+//	  					WHERE [QuelleMachine] LIKE '".$machine."'
+//	  					AND DAY([Date]) = DAY(DATEADD(day, ".$dateOffset.", GETDATE()))
+//	  					AND	MONTH([Date]) = MONTH(DATEADD(day, ".$dateOffset.", GETDATE()))";
+	  	
+	  	// prepare query
 			$sql = "SELECT [QuelleMachine],[NumEnr],[Date],[NumPal],[CodeDefaut]
-							FROM [ping2].[dbo].[TeSysK_Auto]
+							FROM [ping2].[dbo].[tempWeek]
 	  					WHERE [QuelleMachine] LIKE '".$machine."'
 	  					AND DAY([Date]) = DAY(DATEADD(day, ".$dateOffset.", GETDATE()))
 	  					AND	MONTH([Date]) = MONTH(DATEADD(day, ".$dateOffset.", GETDATE()))";
