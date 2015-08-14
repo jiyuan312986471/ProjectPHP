@@ -18,7 +18,7 @@
 	$startTime = explode(" ", $startTime)[1];
 	$endDate = explode(" ", $endTime)[0];
 	$endTime = explode(" ", $endTime)[1];
-	if(strpos($ref, ":") > 0){
+	if(strpos($ref, "Variante") == 0){
 		$ref = explode(":", $ref)[1];
 		$ref = trim($ref);
 		$ref = str_replace("  ", "-", $ref);
