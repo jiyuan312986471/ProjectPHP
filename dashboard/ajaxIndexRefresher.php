@@ -75,7 +75,8 @@
 	$donne = sprintf("%f\t%f\t%f\t%f\t%f\t%f\t%f\n%s\t%s\t%s\t%s\t%s\t%s\t%s", 
 										$graph['pourc'][0],$graph['pourc'][1],$graph['pourc'][2],$graph['pourc'][3],$graph['pourc'][4],$graph['pourc'][5],$graph['pourc'][6],
 										$graph['jour'][0], $graph['jour'][1], $graph['jour'][2], $graph['jour'][3], $graph['jour'][4], $graph['jour'][5], $graph['jour'][6] );
-	file_put_contents('../graph.dat', $donne);
+	//file_put_contents('../graph.dat', $donne);
+	file_put_contents('graph.dat', $donne);
 	
 	// set date display format
 	foreach($graph['jour'] as &$jour){
