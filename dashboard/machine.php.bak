@@ -92,7 +92,7 @@
 	    
 	  <script type="text/javascript">
 	  	(function($){
-		  	// refresh
+		  	// refresh every 8s
 		  	var time = <?php echo $refreshTime; ?> * 1000;
 		  	var graphPourc;
 		  	var graphPareto;

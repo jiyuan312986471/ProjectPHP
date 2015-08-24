@@ -467,9 +467,7 @@ function refreshIndex(graphPourc, time){
 		url: "ajaxIndexRefresher.php",
 		type: "GET",
 		dataType: "text",
-		success: function(cbdata){
-			console.log(cbdata);
-			
+		success: function(cbdata){			
 			// get graph
 			var jsonGraph = cbdata;
 			var graphData = eval("("+jsonGraph+")");

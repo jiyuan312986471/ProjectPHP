@@ -17,7 +17,7 @@
 	$graph = getPourcGraphData("All");
 
 	// move previous data
-	if($graph['jour'][6] != date('D')) {		
+	if($graph['jour'][6] != $jour) {		
 		// algo with count
 		for($i = 0; $i < count($graph['pourc'])-1; $i++) {
 			$graph['pourc'][$i] = $graph['pourc'][$i+1];
@@ -25,7 +25,7 @@
 		
 		$graph['pourc'][6] = 0;
 		
-		$graph['jour'][6] = date('D');
+		$graph['jour'][6] = $jour;
 			
 		$date = new DateTime();
 		for($i = 0; $i < 6; $i++) {
@@ -49,7 +49,7 @@
 	$paraMachine = array( "nb" 	=> $arrayNb, "pourc"	=> $arrayPourc );
 	
 	for($i = 0; $i < $nbMachine; $i++) {
-		sscanf(nbdefaut($conn, $listMachine[$i]),  "%d %f",$paraMachine['nb'][$i], $paraMachine['pourc'][$i]);
+		sscanf(nbdefaut($conn, $listMachine[$i]), "%d %f", $paraMachine['nb'][$i], $paraMachine['pourc'][$i]);
 	}
 	
 	$sum = 0;

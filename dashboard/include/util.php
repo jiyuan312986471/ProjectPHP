@@ -76,7 +76,7 @@
 			case 'Sat':
 				return 'Sam';
 			default:
-				break;
+				return $jour;
 		}
 	}
 	
@@ -478,9 +478,9 @@
 		}
 								
 		// set date display format
-		foreach($graphPourc['jour'] as &$jour){
-			$jour = convert_j($jour);
-		}
+//		foreach($graphPourc['jour'] as &$jour){
+//			$jour = convert_j($jour);
+//		}
 								
 		return $graphPourc;
 	}
