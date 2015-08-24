@@ -468,6 +468,8 @@ function refreshIndex(graphPourc, time){
 		type: "GET",
 		dataType: "text",
 		success: function(cbdata){
+			console.log(cbdata);
+			
 			// get graph
 			var jsonGraph = cbdata;
 			var graphData = eval("("+jsonGraph+")");
